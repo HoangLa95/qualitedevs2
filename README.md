@@ -19,6 +19,7 @@ Nous allons regarder du code, beaucoup de code. Nous allons regarder ce code de 
 Idéalement, en sortant de cours, vous aurez une idée des bonnes pratiques pour développer du code de qualité : savoir reconnaître un code propre/sale et transformer un code sale en un code propre.
 
 :::{note} Au programme
+:class: dropdown
 1. Initiation à Git avec les commandes de bases.
 2. Apprendre des principes de bases pour coder proprement. 
 3. Savoir utiliser un debugger.
