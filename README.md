@@ -4,7 +4,7 @@ Page du cours de Qualité de Développement au Semestre 2 de l'IUT d'Orsay par H
 
 ## Pourquoi suivre ce cours ?
 
-:::{hint} Indice
+:::{important} Indice
 Vous êtes débutant en code et vous voulez devenir un meilleur développeur.
 :::
 
