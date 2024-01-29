@@ -18,9 +18,12 @@
 format: jb-book
 root: README
 chapters:
-  - file: cm1
-  - file: cm2
-  - file: cm3
-  - file: cm4
-  - file: cm5
-  - file: cm6
+  - title: Cours
+    - file: cm1
+    - file: cm2
+    - file: cm3
+    - file: cm4
+    - file: cm5
+    - file: cm6
+  - title: Travaux Pratiques
+    - file: tp1

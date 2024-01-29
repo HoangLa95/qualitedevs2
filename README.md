@@ -16,7 +16,7 @@ Nous allons regarder du code, beaucoup de code. Nous allons regarder ce code de 
 
 ## Objectifs du cours
 
-Idéalement, en sortant de cours, vous aurez une idée des bonnes pratiques pour développer du code de qualité : savoir reconnaître un bon/mauvais code et transformer un mauvais code en un bon code.
+Idéalement, en sortant de cours, vous aurez une idée des bonnes pratiques pour développer du code de qualité : savoir reconnaître un code propre/sale et transformer un code sale en un code propre.
 
 :::{note} Au programme
 1. Initiation à Git avec les commandes de bases.
