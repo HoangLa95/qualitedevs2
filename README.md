@@ -1,6 +1,6 @@
 # Qualité de Développement 
 
-Cours d'introduction à la Qualité de Développement (Semestre 2 de l'IUT d'Orsay, Hoang La).
+Cours d'introduction à la Qualité de Développement (Semestre 2 de l'IUT d'Orsay).
 
 ## Pourquoi suivre ce cours ?
 
