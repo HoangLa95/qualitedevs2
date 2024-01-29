@@ -1,18 +1,16 @@
 # See docs at: https://mystmd.org/guide/frontmatter
 version: 1
 project:
-  title: Fancy Title 🎩
+  title: Qualité de Développement
   # description:
-  keywords: []
-  authors: []
-  github: https://github.com/executablebooks/mystmd-quickstart
+  authors: Hoang La
   # bibliography: []
 site:
   template: book-theme
   # title:
   # logo:
   nav: []
-  actions:
-    - title: Learn More
-      url: https://mystmd.org/guide
+  #actions:
+  #  - title: Learn More
+  #    url: https://mystmd.org/guide
   domains: []
