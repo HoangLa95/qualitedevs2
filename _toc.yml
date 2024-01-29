@@ -19,6 +19,7 @@ format: jb-book
 root: README
 parts:
 - caption: Cours
+  url: https://hoangla95.github.io/qualitedevs2/Cours
   chapters:
     - file: cm1
     - file: cm2
@@ -26,5 +27,6 @@ parts:
     - file: cm4
     - file: cm5
 - caption: Travaux Pratiques
+  url: https://hoangla95.github.io/qualitedevs2/TPs
   chapters: 
     - file: tp1
