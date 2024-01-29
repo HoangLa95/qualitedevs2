@@ -17,14 +17,14 @@
 
 format: jb-book
 root: README
-sections:
-- url: https://hoangla95.github.io/qualitedevs2/Cours
-  title: "Cours"
-  file: cm1
-  file: cm2
-  file: cm3
-  file: cm4
-  file: cm5
-- url: https://hoangla95.github.io/qualitedevs2/TPs
-  title: "Travaux Pratiques"
-  file: tp1
+parts:
+- caption: Cours
+  chapters:
+    - file: cm1
+    - file: cm2
+    - file: cm3
+    - file: cm4
+    - file: cm5
+- caption: Travaux Pratiques
+  chapters: 
+    - file: tp1
