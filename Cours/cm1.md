@@ -1,4 +1,4 @@
-# Coder proprement
+# Coder proprement ?
 ```{figure} ../images/wtfm.jpg
 :alt: WTF per minute
 :align: center
@@ -28,13 +28,6 @@ Coder salement pour respecter une deadline au détriment de la productivité dan
 :::{seealso} La **SEULE** manière correcte de faire les choses
 :class: dropdown
 Coder proprement !
-:::
-
-## Comment coder proprement ?
-
-:::{note} C'est compliqué !
-:class: dropdown 
-Placeholder
 :::
 
 ## Avant de commencer à coder
