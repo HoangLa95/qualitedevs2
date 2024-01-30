@@ -43,7 +43,17 @@ VSCode
 
 ## Organisation du cours
 
-:::{note} Notation
-:class: dropdown
-Placeholder
+- 6 Cours Magistraux
+- 7 Travaux Pratiques
+
+:::{important} Objectifs du cours
+1. Initiation à Git avec les commandes de bases.
+2. Apprendre des principes de bases pour coder proprement. 
+3. Savoir utiliser un debugger.
+4. Découvrir les tests unitaires et le TDD (Test Driven Development).
+:::
+
+:::{attention} Notation
+- 7 QCMs.
+- Dépôt Git noté.
 :::
