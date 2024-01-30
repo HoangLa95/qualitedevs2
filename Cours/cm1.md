@@ -54,6 +54,8 @@ Commandes importantes à connaître git :
 - `git push`
 - `git pull`
 
+![](./images/citations.png 'image')
+
 ```{image} ./images/GitWorkflow.jpeg
 :alt: Git Workflow
 :align: center
@@ -82,3 +84,6 @@ VSCode
 - 7 QCMs.
 - Dépôt Git noté.
 :::
+
+
+[def]: ./images/GitWorkflow.jpeg
