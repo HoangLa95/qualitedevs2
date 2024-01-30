@@ -19,8 +19,16 @@ Knight Capital Group, une société de bourse qui a perdu plus de 450 millions d
 ```
 [^KCG]: [L'histoire de la faillite du Knight Capital Group](https://dougseven.com/2014/04/17/knightmare-a-devops-cautionary-tale/)
 
-### Le dilemme du développeur
+### Le faux dilemme du développeur
 
+:::{danger} Erreur à ne pas faire
+Coder salement pour respecter une deadline au détriment de la productivité dans le futur. Un code sale va toujours vous ralentir instantanément.
+:::
+
+:::{seealso} La **SEULE** manière correcte de faire les choses
+:class: dropdown
+Coder proprement !
+:::
 
 ## Comment coder proprement ?
 
