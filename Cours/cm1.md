@@ -47,21 +47,19 @@ Placeholder
 Nous arrêtons à une initialisation aux commandes de bases de Git pour stocker du code personnel et nous découvrons un peu l'aspect collaboratif de Git.
 :::
 
-Commandes importantes à connaître git :
+Commandes importantes à connaître git[^plus] :
 - `git clone`
 - `git add`
 - `git commit`
 - `git push`
 - `git pull`
 
-![](./images/citations.png 'image')
+[^plus]: Plus de commandes dans le premier TP !
 
-```{image} ./images/GitWorkflow.jpeg
+```{image} ../images/GitWorkflow.jpeg
 :alt: Git Workflow
 :align: center
 ```
-
-Plus de commandes dans le premier TP.
 
 :::{note} IDE
 :class: dropdown
@@ -84,6 +82,3 @@ VSCode
 - 7 QCMs.
 - Dépôt Git noté.
 :::
-
-
-[def]: ./images/GitWorkflow.jpeg
