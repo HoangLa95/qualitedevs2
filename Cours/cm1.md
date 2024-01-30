@@ -31,28 +31,47 @@ Placeholder
 
 ## Avant de commencer à coder
 
-- Git : version control system
-    - Un dépôt (repository)
-    - Garde le historique des commits
-- Gitlab : application web pour la gestion de projets, les participants aux projets, et la communication entre participants
-- Pourquoi utiliser Git ?
-    - Gestion des versions.
-    - Gestion des développeurs.
-    - Gestion des issues (bug, suggestions,...).
-    - Documentation de la progression du projet.
-    - Construction, test, déploiement automatiques.
+```{figure} ../images/git.png
+:alt: Git, GitHub et GitLab
+:align: center
+
+Git, GitHub et GitLab (Credits: gonullu.pardus.org.tr)
+```
+:::{note} Git
+**Version control system** qui garde un dépôt (*repository*) de notre projet et garde l'historique de notre travail.
+:::
+
+:::{note} Ce que l'on va utiliser
+**Gitlab** : une application web pour la gestion de projets et de ses participants.
+:::
+
+```{figure} ../images/why-git.png
+:alt: Pourquoi utiliser Git ?
+:align: center
+
+Pourquoi utiliser Git ? (Credits: javatpoint.com)
+```
+
+:::{hint} Quelques raisons pour utiliser Git
+- Gestion des versions.
+- Gestion des développeurs.
+- Gestion des *issues*.
+- Documentation de la progression du projet.
+- Construction, test, déploiement automatiques.
+:::
+    
 
 :::{note} Git dans ce cours
 :class: dropdown
 Nous arrêtons à une initialisation aux commandes de bases de Git pour stocker du code personnel et nous découvrons un peu l'aspect collaboratif de Git.
 :::
 
-Commandes importantes à connaître git[^plus] :
-- `git clone`
-- `git add`
-- `git commit`
-- `git push`
-- `git pull`
+Commandes importantes à connaître[^plus] :
+- `git clone <repo>` : Cloner une copie locale de votre dépôt distant.
+- `git add <file>` : Demander de suivre l'historique d'un fichier. 
+- `git commit -m <message>` : Créer un nouveau point dans l'historique de votre programme avec l'ensemble des modifications suivies.
+- `git push` : Diffuser les changements du dépôt local sur le dépôt distant.
+- `git pull` : Télécharger le dépôt distant
 
 [^plus]: Plus de commandes dans le premier TP !
 
@@ -61,13 +80,10 @@ Commandes importantes à connaître git[^plus] :
 :align: center
 ```
 
-:::{note} IDE
-:class: dropdown
-VSCode
-:::
-
 ## Organisation du cours
 
+- Langage utilisé : C++
+- IDE : VSCode
 - 6 Cours Magistraux
 - 7 Travaux Pratiques
 
