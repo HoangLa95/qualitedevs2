@@ -1,26 +1,26 @@
 # Coder proprement
+```{figure} ../images/wtfm.jpg
+:alt: WTF per minute
+:align: center
+
+La seule mesure valide de la qualité d'un code : WTFs/minutes (Credits: osnews.com)
+```
 
 ## Pourquoi coder proprement ?
 
-:::{note} Il y aura du code
-:class: dropdown
-Placeholder
-:::
+### Le coût d'un mauvais code
 
-:::{note} Un mauvais code
-:class: dropdown
-Placeholder
-:::
+```{figure} ../images/Knight_Capital_Group.png
+:alt: Knight Capital Group
+:width: 600px
+:align: center
 
-:::{note} Le coût d'un mauvais code
-:class: dropdown
-Placeholder
-:::
+Knight Capital Group, une société de bourse qui a perdu plus de 450 millions de dollars à cause d'une boucle infinie[^KCG]  (Credits: wikipedia.com)
+```
+[^KCG]: [L'histoire de la faillite du Knight Capital Group](https://dougseven.com/2014/04/17/knightmare-a-devops-cautionary-tale/)
 
-:::{note} Le dilemme du développeur
-:class: dropdown
-Placeholder
-:::
+### Le dilemme du développeur
+
 
 ## Comment coder proprement ?
 
@@ -75,9 +75,11 @@ Commandes importantes à connaître[^plus] :
 
 [^plus]: Plus de commandes dans le premier TP !
 
-```{image} ../images/GitWorkflow.jpeg
+```{figure} ../images/GitWorkflow.jpeg
 :alt: Git Workflow
 :align: center
+
+Git Workflow (Credits: bytebytego.com)
 ```
 
 ## Organisation du cours
