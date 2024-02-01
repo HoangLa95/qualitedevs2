@@ -54,7 +54,7 @@ Pourquoi utiliser Git ? (Credits: javatpoint.com)
 ```
 
 :::{hint} Quelques raisons pour utiliser Git
-- Gestion des versions.
+- [Gestion des versions](https://fr.wikipedia.org/wiki/Gestion_de_versions).
 - Gestion des développeurs.
 - Gestion des *issues*.
 - Documentation de la progression du projet.
