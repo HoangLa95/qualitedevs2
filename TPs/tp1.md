@@ -28,7 +28,7 @@ Pour créer un PAT :
 1. Aller dans votre profile en cliquant sur votre avatar puis **Edit profile**[^edit_profile].
 2. 
 
-[^edit_profile]: [](../images/edit-profile.png)
+[^edit_profile]: ![Edit Profile](../images/edit-profile.png)
 
 ### Créer votre premier projet
 
