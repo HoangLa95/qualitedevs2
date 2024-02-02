@@ -2,7 +2,7 @@
 
 :::{note} Disclaimer
 :class: dropdown
-Le tutoriel est en Français mais il est fait avec un environnement en Anglais (avec des mots clés en Anglais comme *Edit*, *Create*, ...). C'est un choix mais aussi un conseil pour vous familiariser avec l'Anglais mais aussi le langage informatique de façon générale qui est universelle(ment en Anglais). 
+Le tutoriel est en Français mais il est fait avec un environnement en Anglais (avec des mots clés en Anglais comme *Edit*, *Create*, ...). C'est un choix mais aussi un conseil pour vous familiariser avec l'Anglais mais aussi le langage informatique de façon générale qui est universel(lement en Anglais). 
 :::
 
 Avant de commencer à coder, il faut se familiariser avec les outils d'organisation de votre travail de programmation.
@@ -87,22 +87,14 @@ Maintenant, vous pouver clôner votre dépôt distant pour le télécharger vers
 - Cliquer sur le bouton **Code**[^code_button] à droite.
 - Copier le code de l'option **Clone with HTTPS**[^clone_https].
 - Ouvrir un terminal dans votre répertoire de travail.
-- Taper la commande suivante (en collant l'adresse que vous aviez copié).
+- Taper la commande suivante en collant l'adresse que vous aviez copié et en rajoutant votre login et PAT au bon endroit.
 
 ```{code} sh
-git clone https://git.iut-orsay.fr/login/monprojet.git
+git clone https://<login>:<Personal Access Token>@git.iut-orsay.fr/<login>/monprojet.git
 ```
 [^code_button]: ![Code Button](../images/code-button.png)
 
 [^clone_https]: ![Clone HTTPS](../images/clone-https.png)
-
-La commande `git clone` va vous demander un username et un mot de passe. Mettez votre username et pour le mot de passe, copier coller le PAT que vous avez créé et sauvegardé.
-
-Pour ne pas avoir à rentrer le PAT à chaque interaction avec votre dépôt distant, vous pouvez configurer votre machine locale avec la commande suivante.
-
-```{code} sh
-git config --global credential.helper cache
-```
 
 ## Travailler sur le dépôt local
 
@@ -119,12 +111,12 @@ git status
 Qu'observez-vous en tapant les commandes suivantes ?
 
 ```{code} sh
- touch toto.txt
- git status
+touch toto.txt
+git status
 ```
 :::{hint} Fichier non suivi
 :class: dropdown
-Il indique que votre répertoire de travail contient un fichier **non suivi** (*untracked*). Git est un outil de versionnage : il vous permet de garder l'historique des changements des fichiers de votre projet mais pas tous les fichiers sont forcément importants. Donc, par défaut, les fichiers que vous créer ne sont pas suivi. Seul les fichiers suivis auront leur historique gardé.
+Il indique que votre répertoire de travail contient un fichier **non suivi** (*untracked*). Git est un outil de versionnage : il vous permet de garder l'historique des changements des fichiers de votre projet mais pas tous les fichiers sont forcément importants. Donc, par défaut, les fichiers que vous créez ne sont pas suivi. Seul les fichiers suivis auront leur historique gardé.
 :::
 
 Ajouter une ligne dans `toto.txt` (par exemple `Hello World!`).
@@ -155,13 +147,13 @@ La sauvegarde a été faite. Votre version locale du projet est en avance par ra
 git push
 ```
 
-Retourner sur Gitlab et voyez que votre projet contient maintenant `toto.txt`.
+Retourner sur Gitlab et voir que votre projet contient maintenant `toto.txt`.
 
 ## Travailler sur le dépôt distant
 
 Avec le web IDE de GitLab, il est possible de travailler directement sur le dépôt distant.
 
-Les changements que nous allons faire sur le dépôt distant vont simuler les changements fait par vous-même sur un autre poste de travail ou par un collaborateur de votre projet :
+Les changements que nous allons faire sur le dépôt distant vont simuler les changements faits par vous-même sur un autre poste de travail ou par un collaborateur de votre projet :
 - Cliquer sur `toto.txt`.
 - Cliquer sur **Edit**.
 - Choisir l'option **Open in Web IDE**.
@@ -216,7 +208,7 @@ Maintenant, vérifier `git status`. Qu'est-ce qui change d'habitude ?
 Normalement, vu que nous n'avons pas suivi `tobeignored`, `git status` nous prévient en disant qu'il y a un fichier potentiellement important qui n'est pas suivi. Par contre, grâce au fichier `.gitignore`, Git se rend compte que nous avons fait le choix d'ignorer `tobeignored` et ne suivra jamais ce fichier.
 :::
 
-[Un exemple de `.gitignore`](https://github.com/github/gitignore/blob/main/Unity.gitignore) pour des projets plus complexes.
+Un exemple de [`.gitignore`](https://github.com/github/gitignore/blob/main/Unity.gitignore) pour des projets plus complexes.
 
 
 ## Pour finir...
@@ -228,7 +220,7 @@ Il faut ajouter votre intervenant dans votre projet !
 - Cliquer sur **Manage** à gauche puis **Members**[^manage_members].
 - Cliquer sur **Invite members** en haut à droite.
 - Ajouter votre intervenant avec le rôle **Maintainer** (qui lui donne presque autant de droit sur le projet que vous l'**Owner**).
-Si l'intervenant n'est pas sur votre projet, il ne pourra pas le noter et donc vous aurez 0 ! 
+- **Si l'intervenant n'est pas sur votre projet, il ne pourra pas le noter et donc vous aurez 0 !** 
 :::
 
 [^manage_members]: ![Manage Members](../images/manage-members.png)
