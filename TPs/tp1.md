@@ -116,7 +116,7 @@ git status
 ```
 :::{hint} Fichier non suivi
 :class: dropdown
-Il indique que votre répertoire de travail contient un fichier **non suivi** (*untracked*). Git est un outil de versionnage : il vous permet de garder l'historique des changements des fichiers de votre projet mais pas tous les fichiers sont forcément importants. Donc, par défaut, les fichiers que vous créez ne sont pas suivi. Seul les fichiers suivis auront leur historique gardé.
+Il indique que votre répertoire de travail contient un fichier **non suivi** (*untracked*). Git est un outil de versionnage : il vous permet de garder l'historique des changements des fichiers de votre projet mais pas tous les fichiers sont forcément importants. Donc, par défaut, les fichiers que vous créez ne sont pas suivis. Seul les fichiers suivis auront leur historique gardé.
 :::
 
 Ajouter une ligne dans `toto.txt` (par exemple `Hello World!`).
@@ -195,7 +195,7 @@ Cela vous permet d'être au courant de l'évolution de votre projet.
 
 Lors du développement, il y a beaucoup de fichiers que l'on souhaite **ignorer** en permanence dans les sauvegardes (par exemple, les fichiers générés lors de la compilation) car ils polluent inutilement le dépôt. Cela peut aussi être source de problèmes quand vous récupérez des fichiers de configurations de certaines machines et que vous essayer de les synchroniser avec d'autres (problèmes de compatibilité).
 
-La gestion de ces fichiers sont donc faites avec un fichier `.gitignore` qui est à la racine de votre projet. Dans ce fichier, vous pouvez ajouter tout ce que vous ne voulez pas suivre :
+La gestion de ces fichiers est donc faite avec un fichier `.gitignore` qui est à la racine de votre projet. Dans ce fichier, vous pouvez ajouter tout ce que vous ne voulez pas suivre :
 - Créer un fichier `tobeignored`.
 - Créer un fichier `.gitignore`.
 - Ajouter `tobeignored` dans `.gitignore`.
