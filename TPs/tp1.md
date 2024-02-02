@@ -25,46 +25,80 @@ Pour vous authentifier, utilisez vos login et mot de passe du département.
 Pour établir une connection sécurisée entre votre machine et le serveur GitLab de l'IUT, nous allons utiliser un **Personal Access Token** (PAT).
 
 Pour créer un PAT :
-1. Aller dans votre profile en cliquant sur votre avatar puis **Edit profile**[^edit_profile].
-2. 
+1. Aller dans votre profile en cliquant sur votre avatar (en haut à gauche) puis **Edit profile**[^edit_profile].
+2. Choisir **Access Tokens**[^access_token_menu] dans la barre à gauche.
+3. Ajouter un token en cliquant sur **Add new token**[^add_new_token].
+4. Ajouter un nom et une date d'expiration d'un an (le maximum possible) après la date d'aujourd'hui.
+5. Choisir tous les [scopes](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#personal-access-token-scopes).
+6. Cliquer sur **Create personal access token**.
+
+:::{important} Sauvegarder votre PAT
+Une fois que vous quittez la page de création, le PAT ne vous sera jamais rappelé.
+:::
+
+Vous pouvez créer autant de PAT que vous voulez (une par machine par exemple).
 
 [^edit_profile]: ![Edit Profile](../images/edit-profile.png)
 
-### Créer votre premier projet
+[^access_token_menu]: ![Access Token Menu](../images/access-token-menu.png)
 
-Vous pouvez maintenant créer votre premier projet (avec le nom _MonProjet_):
+[^add_new_token]: ![Add New Token](../images/add-new-token.png)
 
-<img src="ressources/new_project.png" width="75%" style="margin:auto;display:block;"/>
+### Créer votre premier projet sur le dépôt distant
 
-<!--![](/ressources/new_project.png/)-->
+Vous pouvez maintenant créer votre premier projet/dépôt (*repository*)[^create_new_project] en cliquant sur `+` en haut à gauche.
 
-Votre projet (appelé également _dépôt_ ou _repository_) est créé sur le serveur GitLab de l'IUT.
-Maintenant vous tombez sur la page par défaut d'un projet vide :
+[^create_new_project]: ![Create New Project](../images/create-new-project.png)
 
-<img src="ressources/new_project_page.png" width="75%" style="margin:auto;display:block;"/> 
+Créer un projet vide avec un nom pertinent.
 
-<!--![](ressources/warning_key.png)-->
+:::{important} MonProjet
+Dans la suite, nous allons appeler ce projet **MonProjet**. Il ne faut pas oublier de le remplacer avec le nom que vous avez choisi.
+:::
 
-Sur cette page, GitLab vous donne systématiquement le récapitulatif de quelques commandes Git à exécuter. Nous allons
-les découvrir ensemble dans les sections suivantes.
+Choisir le niveau de visibilité privé pour votre projet et l'option d'initialiser le projet avec un README.
 
-**Remarque :** Le mini-tutoriel qui suit est fait pour Linux. Il s'adapte facilement sur Mac OS.
-Pour les utilisateurs de Windows il faudrait adapter les commandes Unix à celles
-de Windows ou installer un émulateur comme [Git for Windows](https://gitforwindows.org/)
-qui permet de simuler l'utilisation de Git comme si vous étiez sous Linux.
+:::{note} README.md
+:class: dropdown
+Avoir un README en [Markdown](https://fr.wikipedia.org/wiki/Markdown) dans un projet est une pratique standard. Ce README sert comme une description du projet.  
+:::
 
-#### Prise en main de Git
+Parcourir le README et regarder le README par défaut proposé par GitLab.
 
-Tout d'abord rappelez-vous que GitLab est juste un **serveur d'hébergement** et Git est le **gestionnaire de versions** qui est utilisé au cœur de GitLab.
-Vous utilisez Git localement sur votre machine. Et vous pouvez à tout moment décider de diffuser votre programme à travers le serveur d'hébergement.
-La première chose à faire c'est de télécharger (ou cloner) une **copie** locale de votre projet depuis GitLab sur votre machine et d'établir une connexion authentifiée entre cette copie locale et la copie sur le serveur GitLab.
-Pour cela :
-```sh
-cd votre_répertoire_de_travail
-git clone git@gitlabinfo.iutmontp.univ-montp2.fr:VotreLogin/MonProjet.git
+:::{important} Linux
+Ce qui suit est fait pour Linux. Il faut adapter les commandes Unix pour Mac OS. Pour Windows, vous pouvez installer l'émulateur [Git for Windows](https://gitforwindows.org/) qui simule Git comme si vous étiez sous Linux. 
+:::
+
+### Configurer votre poste de travail local
+
+Vous avez maintenant créer votre projet sur le dépôt distant sur le serveur de l'IUT. Maintenant, pour travailler sur ce projet sur votre machine (localement), il faut d'abord le configurer.
+
+```{code} sh
+git config --global user.name "Prénom Nom"
+git config --global user.email "prenom.nom@universite-paris-saclay.fr"
 ```
 
-La commande `git clone` vous demandera le mot de passe que vous avez donné auparavant à `ssh-keygen`.
+Maintenant, vous pouver clôner votre dépôt distant pour le télécharger vers votre poste local :
+- Cliquer sur le bouton **Code**[^code_button] à droite.
+- Copier le code de l'option **Clone with HTTPS**[^clone_https].
+- Ouvrir un terminal dans votre répertoire de travail.
+- Taper la commande suivante (en collant l'adresse que vous aviez copié).
+
+```{code} sh
+git clone https://git.iut-orsay.fr/login/monprojet.git
+```
+[^code_button]: ![Code Button](../images/code-button.png)
+
+[^clone_https]: ![Clone HTTPS](../images/clone-https.png)
+
+La commande `git clone` va vous demander un username et un mot de passe. Mettez votre username et pour le mot de passe, copier coller le PAT que vous avez créé et sauvegardé.
+
+Pour ne pas avoir à rentrer le PAT à chaque interaction avec votre dépôt distant, vous pouvez configurer votre machine locale avec la commande suivante.
+
+```{code} sh
+git config --global credential.helper cache
+```
+
 Après validation de ce mot de passe, un répertoire portant le même nom (`MonProjet`) sera téléchargé sur votre machine.
 Ce répertoire est le _dépôt Git local_. La copie qui est sur GitLab est appelée _dépôt distant_. Nous allons voir ce que dépôt local contient.
 
@@ -84,32 +118,6 @@ Un message comme ceci devrait apparaître (ce sera en français si votre environ
 <img src="ressources/PremierGitStatus.png" width="75%"  style="margin:auto;display:block;"/>
 
 Il indique que votre répertoire de travail contient un fichier **non versionné** (la couleur rouge et le terme "not staged" l'indiquent). C'est normal, vous venez juste de créer ce fichier. Avant d'apprendre à sauvegarder (**versionner**) les modifications, vous allez configurer localement vos paramètres Git.
-
-#### Configuration locale de Git
-
-Maintenant que vous avez fait le tutoriel, vous pouvez correctement configurer **localement** Git sur votre machine.
-
-Ouvrez le fichier `~/.gitconfig` avec votre éditeur favori (créez le fichier si nécessaire). Renseignez votre nom, prénom et email dans la section `[user]`.
-```
-# Personnalisez les champs ci-dessous!
-[user]
-username = prenom-nom
-name = Prenom Nom
-email = prenom.nom@etu.umontpellier.fr
-```
-
-L'expérience montre que les commandes suivantes (à taper dans un terminal) peuvent aussi être utiles :
-
-```sh
-# Si vous faites git commit sans donner le message avec -m,
-# Git ouvrira l'éditeur gedit pour que vous tapiez le message
-git config --global core.editor "gedit --new-window -w"
-# Pour anticiper une erreur due aux certificats de l'IUT
-#              "server certificate verification failed"
-git config --global http.sslverify false
-```
-
-Après les avoir tapé, vous pouvez aller voir les modifications introduites dans le fichier `~/.gitconfig`.
 
 
 ### Un petit Salut le Monde qui va bien !
