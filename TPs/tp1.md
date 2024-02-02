@@ -1,5 +1,10 @@
 # TP1 : Découvrir Git et Gitlab
 
+:::{note} Disclaimer
+:class: dropdown
+Le tutoriel est en Français mais il est fait avec un environnement en Anglais (avec des mots clés en Anglais comme *Edit*, *Create*, ...). C'est un choix mais aussi un conseil pour vous familiariser avec l'Anglais mais aussi le langage informatique de façon générale qui est universelle(ment en Anglais). 
+:::
+
 Avant de commencer à coder, il faut se familiariser avec les outils d'organisation de votre travail de programmation.
 
 ## Introduction à Git et GitLab
@@ -9,7 +14,7 @@ Avant de commencer à coder, il faut se familiariser avec les outils d'organisat
 
 [GitLab](https://fr.wikipedia.org/wiki/GitLab) est une plateforme qui permet de stocker vos projets et de diffuser ce travail à tous vos postes (machine de l'IUT, machine personnelle) ainsi qu'à vos collaborateurs.
 
-### Activation de votre compte GitLab
+## Activation de votre compte GitLab
 
 En tant qu'étudiant de l'IUT d'Orsay, vous avez déjà un compte sur le [GitLab de l'IUT](https://git.iut-orsay.fr/).
 
@@ -20,7 +25,7 @@ En tant qu'étudiant de l'IUT d'Orsay, vous avez déjà un compte sur le [GitLab
 
 Pour vous authentifier, utilisez vos login et mot de passe du département.
 
-### Personal Access Token
+## Personal Access Token
 
 Pour établir une connection sécurisée entre votre machine et le serveur GitLab de l'IUT, nous allons utiliser un **Personal Access Token** (PAT).
 
@@ -44,7 +49,7 @@ Vous pouvez créer autant de PAT que vous voulez (une par machine par exemple).
 
 [^add_new_token]: ![Add New Token](../images/add-new-token.png)
 
-### Créer votre premier projet sur le dépôt distant
+## Créer votre premier projet sur le dépôt distant
 
 Vous pouvez maintenant créer votre premier projet/dépôt (*repository*)[^create_new_project] en cliquant sur `+` en haut à gauche.
 
@@ -69,7 +74,7 @@ Parcourir le README et regarder le README par défaut proposé par GitLab.
 Ce qui suit est fait pour Linux. Il faut adapter les commandes Unix pour Mac OS. Pour Windows, vous pouvez installer l'émulateur [Git for Windows](https://gitforwindows.org/) qui simule Git comme si vous étiez sous Linux. 
 :::
 
-### Configurer votre poste de travail local
+## Configurer votre poste de travail local
 
 Vous avez maintenant créer votre projet sur le dépôt distant sur le serveur de l'IUT. Maintenant, pour travailler sur ce projet sur votre machine (localement), il faut d'abord le configurer.
 
@@ -99,242 +104,131 @@ Pour ne pas avoir à rentrer le PAT à chaque interaction avec votre dépôt dis
 git config --global credential.helper cache
 ```
 
-Après validation de ce mot de passe, un répertoire portant le même nom (`MonProjet`) sera téléchargé sur votre machine.
-Ce répertoire est le _dépôt Git local_. La copie qui est sur GitLab est appelée _dépôt distant_. Nous allons voir ce que dépôt local contient.
+## Travailler sur le dépôt local
 
-```sh
- $ cd MonProjet
- $ ls
- $ git status
-```
-Observez la différence entre la commande `ls` et `git status`. La première est une commande Linux pour lister l'ensemble de fichiers dans votre répertoire, alors que la seconde montre l'état de "sauvegarde" de ces fichiers. Pour le moment, `git status` devra vous afficher le message "_rien à valider, la copie de travail est propre_" car vous n'avez pas encore effectué de modification de votre projet en local. Tapez les commandes suivantes pour voir la différence :
+Un répertoire portant le même nom (*dépôt local*) est maintenant téléchargé sur votre machine.
 
-```sh
- $ touch toto.txt
- $ git status
-```
-Un message comme ceci devrait apparaître (ce sera en français si votre environnement est en français) :
-
-<img src="ressources/PremierGitStatus.png" width="75%"  style="margin:auto;display:block;"/>
-
-Il indique que votre répertoire de travail contient un fichier **non versionné** (la couleur rouge et le terme "not staged" l'indiquent). C'est normal, vous venez juste de créer ce fichier. Avant d'apprendre à sauvegarder (**versionner**) les modifications, vous allez configurer localement vos paramètres Git.
-
-
-### Un petit Salut le Monde qui va bien !
-Faisons quelques modifications sur le fichier `toto.txt`que vous avez créé. Ajoutez-y une ligne : "Hello World !"
-Souvenez-vous, que pour le moment Git ignore ce fichier car vous ne lui avez pas demandé de _suivre son historique_.
-
-D'abord ajoutez ce fichier à l'index de suivi de votre historique :
-
-```sh
-~/MonProjet$ git add toto.txt
-```
-Cette commande indique à Git que vous voudriez suivre les modifications du fichier `toto.txt`, mais que la sauvegarde aura lieu plus tard (entre temps vous pouvez faire d'autres `git add`) !
-En tapant `git status` vous devriez obtenir quelque chose comme ceci :
-
-<img src="ressources/PremierAdd.png" width="75%" style="margin:auto;display:block;"/>
-
-Maintenant on va sauvegarder les changements de votre projet que vous avez indexés (avec plusieurs `git add` auparavant) :
-
-```sh
-~/MonProjet$ git commit -m "Création d'un fichier important pour mon travail"
+```{code} sh
+cd monprojet/
+ls
+git status
 ```
 
- En tapant `git status` vous devriez obtenir quelque chose comme ceci :
+`ls` vous permet de voir l'ensemble des fichiers dans le répertoire et `git status` montre l'état du dépôt. Pour l'instant, il devra vous indiquer qu'il n'y a rien à valider et votre copie du travail est propre (*nothing to commit, working tree clean*).
 
-<img src="ressources/PremierCommit.png" width="75%" style="margin:auto;display:block;"/>
+Qu'observez-vous en tapant les commandes suivantes ?
 
-Le message indiqué montre que tout a été sauvegardé correctement. Et que votre _version locale_ de projet est en avance par rapport à la version sur le serveur d'hébergement GitLab. Vous pouvez maintenant diffuser ces changements locaux sur le dépôt distant :
+```{code} sh
+ touch toto.txt
+ git status
+```
+:::{hint} Fichier non suivi
+:class: dropdown
+Il indique que votre répertoire de travail contient un fichier **non suivi** (*untracked*). Git est un outil de versionnage : il vous permet de garder l'historique des changements des fichiers de votre projet mais pas tous les fichiers sont forcément importants. Donc, par défaut, les fichiers que vous créer ne sont pas suivi. Seul les fichiers suivis auront leur historique gardé.
+:::
 
-```sh
-~/MonProjet$ git push -u origin master
+Ajouter une ligne dans `toto.txt` (par exemple `Hello World!`).
+
+Demander à Git de suivre `toto.txt` en faisant:
+```{code} sh
+git add toto.txt
 ```
 
-**Remarque** : ̀`git push` est un raccourci de la commande `git push origin master`. Le mot-clé `origin` indique le dépôt distant (celui sur le serveur GitLab).
-Pour le moment vous n'avez pas besoin de connaître le sens du mot-clé `master`, donc vous pouvez ignorer sa signification pour l'instant et attendre la fin de ce tutoriel.
+Vérifier `git status` encore une fois. Qu'est-ce qu'il vous indique ?
 
-Retournez sur Gitlab et voyez que votre projet contient maintenant `toto.txt`.
+Nous avons parlé d'historique des changements du projet mais comment cela fonctionne-t-il exactement ? 
 
-## À faire après chaque réalisation importante
+`git add` indique à Git que le fichier que vous avez ajouté est important (à suivre). Dans ce fichier, vous avez fait des modifications (en rajoutant `Hello World!` par exemple). Maintenant, pour créer un historique de `toto.txt`, vous devez sauvegarder ces changements.
 
-Si `fic1` et `fic2` sont deux fichiers dont vous voulez sauvegarder les changements :
-
-```sh
-~/MonProjet$ git add fic1 fic2
-~/MonProjet$ git commit -m "ça y est, je deviens un boss de Git"
-~/MonProjet$ git push
+```{code} sh
+git commit -m "Création d'un fichier important pour mon travail"
 ```
 
-Un petit résumé des commandes :
- * `git add` prépare la future sauvegarde en suivant l'ensemble de modifications locales
- * `git commit -m "message de sauvegarde"` crée un nouveau point d'historique de votre programme en y enregistrant l'ensemble de modifications suivies. Le message obligatoire doit décrire cette sauvegarde
- * `git push` diffuse l'état local (après le dernier commit) de votre projet sur le dépôt distant
+Retaper `git status` pour vérifier l'état de votre dépôt. Qu'est-ce qu'il vous indique ?
 
-## Récupération du travail depuis le dépôt distant
-Reclonons une copie de votre projet dans un autre répertoire et vérifions que l'on a bien récupéré le tout :
+:::{hint} Ready to push
+:class: dropdown
+La sauvegarde a été faite. Votre version locale du projet est en avance par rapport à la version sur le serveur GitLab. Vous pouvez donc diffuser ces changements pour synchroniser les deux versions.
+:::
 
-```sh
-~/MonProjet$ cd
-~$ mkdir AutreRepertoire
-~$ cd AutreRepertoire
-~/AutreRepertoire$ git clone git@gitlabinfo.iutmontp.univ-montp2.fr:VotreLogin/MonProjet.git
-~/AutreRepertoire$ cd MonProjet
-~/AutreRepertoire/MonProjet$ ls
-~/AutreRepertoire/MonProjet$ git status
+```{code} sh
+git push
 ```
 
-Modifiez le fichier `toto.txt` en donnant une réponse au message de salut.
+Retourner sur Gitlab et voyez que votre projet contient maintenant `toto.txt`.
 
-```sh
-~/AutreRepertoire/MonProjet$ git add toto.txt
-~/AutreRepertoire/MonProjet$ git commit -m "réponse au bonjour"
-~/AutreRepertoire/MonProjet$ git push
+## Travailler sur le dépôt distant
+
+Avec le web IDE de GitLab, il est possible de travailler directement sur le dépôt distant.
+
+Les changements que nous allons faire sur le dépôt distant vont simuler les changements fait par vous-même sur un autre poste de travail ou par un collaborateur de votre projet :
+- Cliquer sur `toto.txt`.
+- Cliquer sur **Edit**.
+- Choisir l'option **Open in Web IDE**.
+- Ajouter une deuxième ligne à ce fichier (par exemple `Hi!`).
+
+Vous pouvez voir sur la barre à gauche un `1` indiquant un changement a été effectué[^pending_changes]. Si vous cliquez dessus, vous voyez un changement concernant le fichier `toto.txt` et l'option de sauvegarder sur la branche `main` (*Commit to 'main'*).
+
+- Ajouter un message de commit et cliquer sur le bouton **Commit to 'main'**.
+- Cliquer sur **Continue** quand on vous demande si vous voulez sauvegarder sur la branche par défaut (main).
+:::{note} Branches
+:class: dropdown
+La notion de **branches** en Git permet de toujours garder une version stable d'une application/un projet. Toutes modifications sont donc faites sur d'autres branches que 'main' puis fusionnées avec la branche 'main' plus tard. Dans ce cours, nous n'allons pas aborder les branches en Git comme beaucoup d'autres utilités de Git que nous allons survoler. Les modifications sont donc faites directement sur 'main'.
+:::
+
+[^pending_changes]: ![Pending Changes](../images/pending-changes.png)
+
+## Synchronisation du dépôt local avec le dépôt distant
+
+Remettez-vous sur votre dépôt local et oublions que nous avons fait des changements sur le dépôt distant.
+
+:::{important} Commencer par synchroniser !
+:class: dropdown
+En pratique, quand vous travailler dans un projet, très souvent entre deux sessions de travail, quelqu'un d'autre a modifié un bout de code dans votre projet. Si vous commencer votre session de travail sans d'abord synchroniser votre code, vous allez vous faire face à des conflits à résoudre (par exemple si vous aller modifier les mêmes bouts de code de façons différentes). Nous allons survoler la résolution de conflits dans ce cours mais par principe, il faut l'éviter et donc toujours commencer par `git pull` !
+:::
+
+Pour synchroniser votre dépôt local avec le dépôt distant qui est cette fois celui en avance, vous devez faire :
+
+```{code} sh
+git pull
 ```
+Vous pouvez aussi voir l'historique des commits en faisant :
 
-Votre dépôt distant est à jour mais la première copie locale du projet sur laquelle vous avez travaillé initialement est **en retard** dans l'historique. Donc il faut récupérer tous les nouveaux changements depuis le dépôt distant :
-
-```sh
-~/AutreRepertoire/MonProjet$ cd ~/MonProjet
-~/MonProjet$ git pull
+```{code} sh
+git log
 ```
-Vous devriez obtenir quelque chose comme ceci :
-
-
-<img src="ressources/PremierGitPull.png" width="75%" style="margin:auto;display:block;"/>
-
-### Affichage du journal des enregistrements (`commit`)
-
-Une dernière commande utile est `git log` : elle affiche l'ensemble des enregistrements effectués (`commit`) avec leur message. Vous pouvez aussi retrouver toutes ces informations dans Gitlab dans l'onglet latéral Repository > Commit.
-
-```sh
-~/MonProjet$ git log
-commit b8ae03f953e91567427dae65b09ac758d03b3316 (HEAD -> master, origin/master)
-Author: Romain Lebreton <romain.lebreton@lirmm.fr>
-Date:   Fri Oct 4 11:11:03 2019 +0200
-
-    réponse au bonjour
-
-commit 6d5139ad99201cd36cec350695c8671a98d2a00f
-Author: Romain Lebreton <romain.lebreton@lirmm.fr>
-Date:   Fri Oct 4 11:08:16 2019 +0200
-
-    ça y est, je deviens un boss de Git
-
-commit 1be15bc5a3d3a507016620b6044229d76b027a80
-Author: Romain Lebreton <romain.lebreton@lirmm.fr>
-Date:   Fri Oct 4 11:04:05 2019 +0200
-
-    Création d'un fichier important pour mon travail
-```
-
-Vous l'aurez compris, lorsque vous avez plusieurs dépôts locaux, sur des machines potentiellement différentes, vous pouvez très bien travailler sur une de ces copies locales, sauvegarder vos changements (`git add` + `git commit`), pousser le tout sur le dépôt distant (`git push`) et récupérer le tout (`git pull`) dans les autres dépôts locaux.
-
-## Résolution des conflits
-Mais que se passe-t-il lorsque vous travaillez en parallèle sur deux dépôts locaux et que vous oubliez de les synchroniser correctement ? Simulons une telle situation :
-
- * faites une modification du fichier `toto.txt` en y ajoutant ou supprimant du texte dans le premier dépôt local
- * ensuite faites une sauvegarde des changements et diffusez sur le dépôt distant :
-	```sh
-	~/MonProjet$ git add .
-	~/MonProjet$ git commit -m "sauvegarde dans la 1ere copie"
-	~/MonProjet$ git push
-	```
- * maintenant, faites une modification différente du fichier `toto.txt` en y ajoutant ou supprimant du texte dans le deuxième dépôt local
- * faites une sauvegarde des changements :
-	```sh
-	~/AutreRepertoire/MonProjet$ git add .
-	~/AutreRepertoire/MonProjet$ git commit -m "sauvegarde dans la 2eme copie"
-	```
- * si vous essayez de pousser ce changement vous aurez un message indiquant un **conflit** car les nouveaux changements sur le dépôt distant n'ont pas été récupérés dans la deuxième copie locale; Git ne fera donc rien et attendra vos indications pour résoudre le problème
-	```sh
-	~/AutreRepertoire/MonProjet$ git push
-	To gitlabinfo.iutmontp.univ-montp2.fr:lebreton/MonProjet.git
-    ! [rejected]        master -> master (fetch first)
-    error: impossible de pousser des références vers
-	       'git@gitlabinfo.iutmontp.univ-montp2.fr:lebreton/MonProjet.git'
-	...
-	```
-
-
-Ce mécanisme de signalement de conflit est très pratique car vous n'êtes jamais à l'abri d'un oubli de synchroniser les dépôts. Une situation similaire se produit si vous avez travaillé à la maison sur un document et oubliez d'enregistrer les changements sur votre clé USB. En arrivant à l'IUT vous continuerez à travailler sur une version trop ancienne de votre document. Sauf que personne ne vous le dira et vous risquez de perdre du temps précieux avant de vous en rendre compte...
-
-Git vous suggère d'intégrer d'abord les changements distants (avec 'git pull') avant de pousser à nouveau.
-```sh
-~/AutreRepertoire/MonProjet$ git pull
-...
-Fusion automatique de toto.txt
-CONFLIT (contenu) : Conflit de fusion dans toto.txt
-La fusion automatique a échoué ; réglez les conflits et validez le résultat.
-```
-
-Pour résoudre les conflits, Git propose plusieurs solutions :
-
- * si une fusion peut avoir lieu facilement (les changements qui sont en conflit ne portent pas sur les mêmes fichiers), il vous propose de fusionner le tout. Ici cela a échoué, cf le message précédent de `git pull`.
- * si le conflit porte sur le même fichier et vous voulez fusionner l'ensemble des changements, alors il faudrait l'indiquer explicitement à Git :
-     ```sh
-     ~/AutreRepertoire/MonProjet$ git merge origin/main
-     ```
-   Avec la commande ci-dessus, Git va essayer d'intégrer l'ensemble des changements des deux historiques en un seul. Et plusieurs cas de figures sont à envisager :
-
-   1. Lorsque les deux historiques sont "compatibles", à savoir les changements du fichier `toto.txt` ne rentrent pas en conflit car ne porte pas sur les mêmes lignes du fichier, alors la fusion se fera sans aucune intervention de votre part. Vous pouvez vérifier le statut du dépôt, et vous devrez obtenir quelque chose comme ceci :
-
-       ```sh
-       ~/AutreRepertoire/MonProjet$ git status
-       Sur la branche main
-       Votre branche est en avance par rapport à 'origin/main' avec 2 commits.
-       ```
-      Notez que le dernier commit correspond à la fusion des 2 versions qui étaient en conflit.
-
-   2. Si les deux historiques sont "incompatibles", alors le fichier `toto.txt` contiendra l'ensemble de modifications issues des deux dépôts (local et distant) et ce sera à vous de corriger le tout à la main : ouvrir le fichier `toto.txt` avec un éditeur de texte, regarder l'ensemble de conflits indiqués par des chevrons `<<<<<` et remplacer les par la version qui vous convient. Une fois le conflit résolu, vous devrez sauvegarder la résolution et diffuser ces modifications :
-       ```sh
-       ~/AutreRepertoire/MonProjet$ git add toto.txt
-       ~/AutreRepertoire/MonProjet$ git commit -m "résolution du conflit"
-       ~/AutreRepertoire/MonProjet$ git push
-       ```
+Cela vous permet d'être au courant de l'évolution de votre projet.
 
 ## Ignorer les fichiers inintéressants
-La plupart du temps, lors qu'on développe il y a des fichiers qu'on souhaite **ignorer** en permanence dans les sauvegardes. Par exemple, si vous programmez en Java les fichiers '.class' ne devraient pas être versionnés pour plusieurs raisons : ils n'apportent aucune utilité à être suivi car ce sont des fichiers compilés non-destinés à la modification par le programmeur, ils polluent inutilement le dépôt... Cela peut être encore plus embêtant si vous versionnez des fichiers de configuration locale de votre machine : lorsqu'on les récupère sur une autre machine, avec un autre environnement, cela peut créer des problèmes de compatibilité.
 
-Pour gérer cela facilement, vous devez créer le fichier '.gitignore' à la racine de votre projet. Dans ce fichier, vous pouvez ajouter tout ce que vous voulez ignorer dans vos commits. Par exemple le ['.gitignore'](.gitignore) du projet que vous êtes en train de lire, permet d'ignorer 3 extensions '.class', '.o', '.log'.
+Lors du développement, il y a beaucoup de fichiers que l'on souhaite **ignorer** en permanence dans les sauvegardes (par exemple, les fichiers générés lors de la compilation) car ils polluent inutilement le dépôt. Cela peut aussi être source de problèmes quand vous récupérez des fichiers de configurations de certaines machines et que vous essayer de les synchroniser avec d'autres (problèmes de compatibilité).
 
-Lorsque vous créez ou modifiez le fichier '.gitignore', pensez à le versionner car il fait partie du dépôt ! Donc :
-```sh
-~/AutreRepertoire/MonProjet$ git add .gitignore
-~/AutreRepertoire/MonProjet$ git commit -m "màj des fichiers à ignorer"
-~/AutreRepertoire/MonProjet$ git push
-```
+La gestion de ces fichiers sont donc faites avec un fichier `.gitignore` qui est à la racine de votre projet. Dans ce fichier, vous pouvez ajouter tout ce que vous ne voulez pas suivre :
+- Créer un fichier `tobeignored`.
+- Créer un fichier `.gitignore`.
+- Ajouter `tobeignored` dans `.gitignore`.
+- Suivre, sauvegarder, et diffuser `.gitignore` sur le dépôt distant.
+
+Maintenant, vérifier `git status`. Qu'est-ce qui change d'habitude ?
+
+:::{hint} Où sont mes fichiers non suivis ?
+:class: dropdown
+Normalement, vu que nous n'avons pas suivi `tobeignored`, `git status` nous prévient en disant qu'il y a un fichier potentiellement important qui n'est pas suivi. Par contre, grâce au fichier `.gitignore`, Git se rend compte que nous avons fait le choix d'ignorer `tobeignored` et ne suivra jamais ce fichier.
+:::
+
+[Un exemple de `.gitignore`](https://github.com/github/gitignore/blob/main/Unity.gitignore) pour des projets plus complexes.
 
 
-## Un peu plus de cosmétique (optionnel)
-Dans un terminal il n'y a pas d'information supplémentaire qui affiche si vous êtes dans un dépôt Git ou pas.
-Pour faire plus joli, vous pouvez ajouter les lignes de commandes suivantes dans votre `~/.bashrc` pour afficher la branche courante:
+## Pour finir...
 
-```sh
-    parse_git_branch() {
-         git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-    }
-    export PS1="\u@\h \[\e[32m\]\w
-    \[\e[91m\]\$(parse_git_branch)\[\e[00m\]$ "
-```
-plus d'infos [ici](https://medium.com/@thucnc/how-to-show-current-git-branch-with-colors-in-bash-prompt-380d05a24745)
+Finissons ce TP avec une petite réorganisation : créer un dossier TP1 dans votre projet et bouge `toto.txt` vers ce dossier. Vous allez maintenir ce projet pendant le reste du cours en créant des dossiers séparés pour chaque TP. Est-ce que vous êtes capable maintenant de faire `add`, `commit`, `push` vous-même ?
 
-## Et ce n'est pas tout !
-Pour le moment on vous a montré les fonctionnalités de base de Git qui devraient être suffisantes pour vos TPs d'informatique. Sachez que la gestion de conflit a été survolé et plusieurs autres cas de conflits peuvent apparaître. Pour cela vos enseignants et vos moteurs de recherche seront vos amis !
+:::{important} À NE PAS OUBLIER !
+Il faut ajouter votre intervenant dans votre projet !
+- Cliquer sur **Manage** à gauche puis **Members**[^manage_members].
+- Cliquer sur **Invite members** en haut à droite.
+- Ajouter votre intervenant avec le rôle **Maintainer** (qui lui donne presque autant de droit sur le projet que vous l'**Owner**).
+Si l'intervenant n'est pas sur votre projet, il ne pourra pas le noter et donc vous aurez 0 ! 
+:::
 
-Aussi nous n'avons pas évoqué la notion de [**branche** Git](https://git-scm.com/book/fr/v1/Les-branches-avec-Git-Ce-qu-est-une-branche). En effet, il est possible dans le cadre du même projet d'avoir plusieurs branches de développement (une par grande fonctionnalité ou une par développeur). Au fur et à mesure les branches sont _fusionnées_ pour intégrer les fonctionnalités dans la branche principale : _master_.
-Pour le moment vous n'avez utilisé que cette branche, mais vous êtes encouragé à vous documenter et à apprendre par vous-mêmes l'utilisation des branches avec Git.
-
-Vous pouvez suivre un tuto plus complet sur les différents aspects de Git ici : https://fr.wikibooks.org/wiki/Git/Principes
-
-   **Remarque** : Depuis 2020-2021 sur GitLab et sur GitHub la branche par défaut ne s'appelle plus _master_ mais _main_ [pour éviter les stéréotypes raciaux sur leur plateforme](https://about.gitlab.com/blog/2021/03/10/new-git-default-branch-name/). Dans le logiciel Git installé sur votre machine, la branche par défaut continue de s'appeler _master_ pour le moment. Si après avoir initialisé un dépôt Git en local vous souhaitez utiliser le nom _main_ comme nom de la branche par défaut, il suffit de taper de faire un renommage :
-   
-```sh
-~/AutreRepertoire/MonProjet$ git switch -c main
-```
-
-# Désormais...
-
-Pour chaque nouvelle fonctionnalité programmée (par exemple pour chaque exercice de TP résolu), faites un `git add` et un `git commit`.
-À la fin de la séance n'oubliez pas de pousser l'intégralité de vos sauvegardes (vos commits) sur un dépôt distant, en l'occurrence sur le serveur GitLab de l'IUT.
-Pour chaque TD, vous pouvez créer un nouveau dépôt sur GitLab ou bien avoir un dépôt centralisé pour chaque matière et y versionner l'ensemble de travaux.
-Maintenant, c'est à vous de vous organiser !
+[^manage_members]: ![Manage Members](../images/manage-members.png)
