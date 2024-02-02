@@ -43,7 +43,7 @@ Git, GitHub et GitLab (Credits: gonullu.pardus.org.tr)
 :::
 
 :::{note} Ce que l'on va utiliser
-**Gitlab** : une application web pour la gestion de projets et de ses participants.
+**GitLab** : une application web pour la gestion de projets et de ses participants.
 :::
 
 ```{figure} ../images/why-git.png

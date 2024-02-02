@@ -1,4 +1,4 @@
-# TP1 : Découvrir Git et Gitlab
+# TP1 : Découvrir Git et GitLab
 
 :::{note} Disclaimer
 :class: dropdown
