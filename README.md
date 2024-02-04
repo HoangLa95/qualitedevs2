@@ -25,3 +25,5 @@ Idéalement, en sortant de cours, vous aurez une idée des bonnes pratiques pour
 3. Savoir utiliser un debugger.
 4. Découvrir les tests unitaires et le TDD (Test Driven Development).
 :::
+
+*Credits : Ce cours suit les principes de "Clean Code, A Handbook of Agile Software Craftmanship" de Robert C. Martin*
