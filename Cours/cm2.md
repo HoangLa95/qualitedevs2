@@ -295,6 +295,18 @@ Certains mots peuvent avoir des connotations spéciales en informatique (par exe
 
 ## Contextualiser
 
+Il y a des noms qui sont expressifs sans contexte mais ce n'est pas le cas de la plupart. Si vous voyez `firstName`, `lastName`, `street`, `houseNumber`, `city`, `state`, et `zipcode`, alors vous pouvez deviner qu'il s'agit des coordonnées d'une personne. Maintenant, si vous voyez juste `state`, qu'est-ce que ça pourrait dire ?
+
+:::{hint} Ajouter un préfixe.
+:class: dropdown
+Une solution pour contextualiser ces noms est de rajouter un préfixe come `addr` pour `address` : `addrState`.
+:::
+
+:::{hint} Créer une classe.
+:class: dropdown
+Une meilleure solution la plupart du temps (selon vos besoins) est de regrouper tous ces variables sous une structure commune : `class Address`.
+:::
+
 ## Ne pas faire de blague dans les noms
 
 [`holyHandGrenade`](https://worms.fandom.com/wiki/Holy_Hand_Grenade) pour faire `deleteItems`, sérieusement ?
