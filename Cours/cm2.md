@@ -28,8 +28,9 @@ camelCase (Credits: wikipedia.com)
 Nous allons utiliser la convention **camelCase** où la première lettre de la variable commence toujours par une minuscule et tous les mots qui suivent commencent par une majuscule.
 :::
 
-:::{seealso} Variables globales
-Les **VARIABLES_GLOBALES** doivent être en majuscule et les mots sont séparés par des `_`. 
+:::{seealso} VARIABLES_GLOBALES
+:class: dropdown
+Les variables globales doivent être en majuscule et les mots sont séparés par des underscores(`_`). 
 :::
 
 ### Utiliser des noms révélateurs d'intention
@@ -63,8 +64,8 @@ Un nom qui révèle l'intention d'une variable éclaircit énormément le code. 
 vector<vector<int>> getThem(const vector<vector<int>>& theList) {
     vector<vector<int>> list1;
     
-    for (const auto& x : theList) {
-        if (x[0] == 4) {
+    for(const auto& x : theList) {
+        if(x[0] == 4) {
             list1.push_back(x);
         }
     }
@@ -95,8 +96,8 @@ const int FLAGGED = 4;
 vector<vector<int>> getFlaggedCells(const vector<vector<int>>& gameBoard) {
     vector<vector<int>> flaggedCells;
     
-    for (const auto& cell : gameBoard) {
-        if (cell[STATUS_VALUE] == FLAGGED) {
+    for(const auto& cell : gameBoard) {
+        if(cell[STATUS_VALUE] == FLAGGED) {
             flaggedCells.push_back(cell);
         }
     }
@@ -126,8 +127,8 @@ public:
 vector<Cell> getFlaggedCells(const vector<Cell>& gameBoard) {
     vector<Cell> flaggedCells;
 
-    for (const auto& cell : gameBoard) {
-        if (cell.isFlagged()) {
+    for(const auto& cell : gameBoard) {
+        if(cell.isFlagged()) {
             flaggedCells.push_back(cell);
         }
     }
@@ -136,4 +137,47 @@ vector<Cell> getFlaggedCells(const vector<Cell>& gameBoard) {
 }
 ```
 :::
+
+### Ne pas propager la désinformation
+
+C'est quoi le problème avec les codes suivants ?
+
+```{code} cpp
+vector<Account> accountList;
+```
+
+:::{error} Problème 
+:class: dropdown
+Il ne faut pas nommer un `vector` "List" quand `list` est aussi un type de C++. Une solution possible :
+```{code} cpp
+vector<Account> accountVector;
+vector<Account> accounts;
+```
+:::
+
+```{code} cpp
+int controllerForEfficientHandlingOfStrings;
+int controllerForEfficientStorageOfStrings;
+```
+
+:::{error} Problème 
+:class: dropdown
+Il ne faut pas utiliser des noms qui sont trop similaires. En plus, avec l'auto-complétion, vous n'allez pas voir la différence.
+:::
+
+```{code} cpp
+int a = 1;
+if(O == l) {
+    a = O1;
+}
+else {
+    l = 01;
+}
+```
+:::{error} Problème 
+:class: dropdown
+Même si la coloration syntaxique permet de voir la différence entre `O` et `0`, et entre `1` et `l`. Là vous êtes juste en train de faire de l'obstruction de code... 
+:::
+
+
 ## Formatter
