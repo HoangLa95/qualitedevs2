@@ -1,4 +1,4 @@
-# Nommer et formatter
+# Comment nommer les choses ?
 
 :::{note} Disclaimer
 :class: dropdown
@@ -12,9 +12,7 @@ Tous les cours qui suivent vont vous donner une école de pensée sur le "code p
 Quand je cherche un nom de variable expressif (Credits: thecodinglove.com)
 ```
 
-## Nommer
-
-### camelCase
+## camelCase
 
 ```{figure} ../images/camelCase.png
 :alt: camelCase
@@ -36,7 +34,7 @@ Les variables globales doivent être en majuscule et les mots sont séparés par
 Une classe doit commencer par une majuscule.
 :::
 
-### Utiliser des noms révélateurs d'intention
+## Utiliser des noms révélateurs d'intention
 
 Un nom de variable (entre autre) doit répondre aux trois questions suivantes :
 1. Pourquoi elle existe ?
@@ -141,7 +139,7 @@ vector<Cell> getFlaggedCells(const vector<Cell>& gameBoard) {
 ```
 :::
 
-### Ne pas propager la désinformation
+## Ne pas propager la désinformation
 
 ```{code} cpp
 vector<Account> accountList;
@@ -180,7 +178,7 @@ else {
 Même si la coloration syntaxique permet de voir la différence entre `O` et `0`, et entre `1` et `l`. Là vous êtes juste en train de faire de l'obstruction de code... 
 :::
 
-### Utiliser des noms différents
+## Utiliser des noms différents
 
 ```{code} cpp
 void copyString(string a1, string a2, int length) {
@@ -223,7 +221,7 @@ class CustomerObject {
 Utiliser des noms avec des différences significatives.
 :::
 
-### Utiliser des noms prononçables
+## Utiliser des noms prononçables
 
 ```{code} cpp
 class DtaRcrd102 {
@@ -248,7 +246,7 @@ private:
 ```
 :::
 
-### Utiliser des noms recherchables
+## Utiliser des noms recherchables
 
 Imagine un code avec que des variables d'une seule lettre et des nombres fixés qui apparaissent partout et qu'il contient le morceau de code suivant.
 
@@ -279,5 +277,24 @@ Il est beaucoup plus facile de retrouver NUMBER_OF_TASKS_PER_DAY et de le modifi
 - Regarder le numéro de la première et de la dernière ligne de code où une variable intervient. La longueur de son nom peut croître linéairement avec le nombre de lignes de code entre les deux. 
 :::
 
+## Nom commun pour les classes, verbe pour les méthodes
 
-## Formatter
+:::{note} Lire le titre ☝️
+:class: dropdown
+Le nom d'une classe doit être un nom ou un groupe nominal (par exemple `AddressParser`) Le nom des méthodes doivent être un verbe ou un groupe verbal (par exemple `deleteAddress`).
+:::
+
+## Choisir un seul et bon mot par concept
+
+:::{note} Éviter les synonymes
+:class: dropdown
+Il ne faut pas utiliser plusieurs mots synonymes s'ils font tous la même chose (par exemple `fetch`, `retrieve`, `get` ou `controller`, `manager`, `driver`). 
+
+Certains mots peuvent avoir des connotations spéciales en informatique (par exemple `memento` correspond à un design pattern). Réutiliser les mots que vous avez vu dans le bon contexte et éviter toute possibilité d'ambiguité.
+:::
+
+## Contextualiser
+
+## Ne pas faire de blague dans les noms
+
+[`holyHandGrenade`](https://worms.fandom.com/wiki/Holy_Hand_Grenade) pour faire `deleteItems`, sérieusement ?
