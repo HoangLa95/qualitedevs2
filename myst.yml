@@ -2,7 +2,7 @@
 version: 1
 project:
   title: Qualité de Développement
-  # description:
+  description: cours inspiré par "Clean Code, A Handbook of Agile Software Craftmanship"
   authors: Hoang La
   # bibliography: []
 site:
