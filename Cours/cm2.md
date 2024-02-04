@@ -28,17 +28,20 @@ camelCase (Credits: wikipedia.com)
 Nous allons utiliser la convention **camelCase** où la première lettre de la variable commence toujours par une minuscule et tous les mots qui suivent commencent par une majuscule.
 :::
 
-:::{seealso} VARIABLES_GLOBALES
+:::{seealso} Autres conventions
 :class: dropdown
-Les variables globales doivent être en majuscule et les mots sont séparés par des underscores(`_`). 
+1. `VARIABLE_GLOBALE` :
+Les variables globales doivent être en majuscule et les mots sont séparés par des underscores(`_`).
+2. `class Object` :
+Une classe doit commencer par une majuscule.
 :::
 
 ### Utiliser des noms révélateurs d'intention
 
-Un nom de variable doit répondre aux trois questions suivantes :
-1. Pourquoi il existe ?
-2. Qu'est-ce qu'il fait ?
-3. Comment est-il utilisé ?
+Un nom de variable (entre autre) doit répondre aux trois questions suivantes :
+1. Pourquoi elle existe ?
+2. Qu'est-ce qu'elle fait ?
+3. Comment est-elle utilisée ?
 
 :::{error} Commenter un nom de variable.
 :class: dropdown
@@ -140,8 +143,6 @@ vector<Cell> getFlaggedCells(const vector<Cell>& gameBoard) {
 
 ### Ne pas propager la désinformation
 
-C'est quoi le problème avec les codes suivants ?
-
 ```{code} cpp
 vector<Account> accountList;
 ```
@@ -177,6 +178,105 @@ else {
 :::{error} Problème 
 :class: dropdown
 Même si la coloration syntaxique permet de voir la différence entre `O` et `0`, et entre `1` et `l`. Là vous êtes juste en train de faire de l'obstruction de code... 
+:::
+
+### Utiliser des noms différents
+
+```{code} cpp
+void copyString(string a1, string a2, int length) {
+    for (int i = 0; i < length; i++) {
+        a2[i] = a1[i];
+    }
+}
+```
+:::{error} Problème 
+:class: dropdown
+Éviter de rajouter des chiffres après les noms de variables pour les distinguer. Une solution simple est la suivante :
+```{code} cpp
+void copyString(string source, string destination, int length) {
+    for (int i = 0; i < length; i++) {
+        destination[i] = source[i];
+    }
+}
+```
+:::
+
+```{code} cpp
+money;
+moneyAmount;
+
+message;
+theMessage;
+
+getProductInfo();
+getProductData();
+
+class Customer {
+    //...
+};
+class CustomerObject {
+    //...
+};
+```
+:::{error} Problème 
+:class: dropdown
+Utiliser des noms avec des différences significatives.
+:::
+
+### Utiliser des noms prononçables
+
+```{code} cpp
+class DtaRcrd102 {
+private:
+    Date genymdhms;
+    Date modymdhms;
+    const string pszqint = "102";
+//...
+};
+```
+:::{error} Problème 
+:class: dropdown
+Ne pas utiliser des noms impossibles à prononcer. `genymdhms` est la date à laquelle l'objet a été *gen*(éré) et cette date est en *y*(ears), *m*(onths), *d*(ays), *h*(ours), *m*(inutes), *s*(econds). Vous ne pourriez pas communiquer à l'intérieur d'une équipe si vous n'arrivez pas à prononcer les noms de variables. Une solution pour transformer ce code :
+```{code} cpp
+class Customer {
+private:
+    Date generationTimeStamp;
+    Date modificationTimeStamp;
+    const string recordId = "102";
+//...
+};
+```
+:::
+
+### Utiliser des noms recherchables
+
+Imagine un code avec que des variables d'une seule lettre et des nombres fixés qui apparaissent partout et qu'il contient le morceau de code suivant.
+
+```{code} cpp
+for (int j=0; j<34; j++) {
+    s += t[j]*4*5;
+}
+```
+
+Maintenant, comparer-le à ce même code.
+
+```{code} cpp
+const int NUMBER_OF_TASKS = 34;
+const int WORK_DAYS_PER_WEEK = 5;
+const int NUMBER_OF_TASKS_PER_DAY = 4;
+int totalCost = 0;
+for (int j=0; j < NUMBER_OF_TASKS; j++) {
+    int dailyCostPerTask = taskCostPerDay[j] * NUMBER_OF_TASKS_PER_DAY;
+    int weeklyCostPerTask = dailyCost * WORK_DAYS_PER_WEEK;      
+    totalCost += weeklyCostPerTask;
+}
+```
+
+:::{error} Problème 
+:class: dropdown
+Il est beaucoup plus facile de retrouver NUMBER_OF_TASKS_PER_DAY et de le modifier que de retrouver tous les `4` dans le code. D'une façon générale,
+- Utiliser des variables d'une seule lettre **SEULEMENT** pour des variables locales dans des boucles/fonctions courtes.
+- Regarder le numéro de la première et de la dernière ligne de code où une variable intervient. La longueur de son nom peut croître linéairement avec le nombre de lignes de code entre les deux. 
 :::
 
 
