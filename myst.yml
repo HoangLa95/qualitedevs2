@@ -3,8 +3,9 @@ version: 1
 project:
   title: Qualité de Développement
   # description: 
-  authors: Hoang La
-    - institution: IUT d'Orsay, Université Paris-Saclay
+  authors: 
+    - name: Hoang La
+      affiliation: IUT d'Orsay, Université Paris-Saclay
   # bibliography: 
 site:
   template: book-theme
