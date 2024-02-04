@@ -1,3 +1,7 @@
+---
+title : Comment nommer les choses ?
+---
+
 # Comment nommer les choses ?
 
 :::{note} Disclaimer
@@ -309,6 +313,6 @@ Par contre, **il ne faut pas rajouter des préfixes partout quand le contexte es
 Une meilleure solution la plupart du temps (selon vos besoins) est de regrouper tous ces variables sous une structure commune : `class Address`.
 :::
 
-## Ne pas faire de blague dans les noms
+## Ne pas faire de blagues dans les noms
 
 [`holyHandGrenade`](https://worms.fandom.com/wiki/Holy_Hand_Grenade) pour faire `deleteItems`, sérieusement ?
