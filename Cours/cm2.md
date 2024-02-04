@@ -1,5 +1,6 @@
 ---
 title : Comment nommer les choses ?
+short_title : Nommer
 ---
 
 # Comment nommer les choses ?
