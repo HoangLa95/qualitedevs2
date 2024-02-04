@@ -299,7 +299,9 @@ Il y a des noms qui sont expressifs sans contexte mais ce n'est pas le cas de la
 
 :::{hint} Ajouter un préfixe.
 :class: dropdown
-Une solution pour contextualiser ces noms est de rajouter un préfixe come `addr` pour `address` : `addrState`.
+Une solution pour contextualiser ces noms est de rajouter un préfixe come `addr` pour `address` : `addrState`. 
+
+Par contre, **il ne faut pas rajouter des préfixes partout quand le contexte est clair**. Encore une fois, nous cherchons juste à enlever les ambiguités.
 :::
 
 :::{hint} Créer une classe.
