@@ -21,7 +21,7 @@ parts:
 - caption: Cours
   chapters:
     - file: Cours/cm1
-#    - file: Cours/cm2
+    - file: Cours/cm2
 #    - file: Cours/cm3
 #    - file: Cours/cm4
 #    - file: Cours/cm5
