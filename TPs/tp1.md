@@ -55,7 +55,7 @@ Vous pouvez maintenant créer votre premier projet/dépôt (*repository*)[^creat
 
 [^create_new_project]: ![Create New Project](../images/create-new-project.png)
 
-Créer un projet vide avec un nom pertinent.
+Créer un projet vide avec un nom pertinent (par exemple `qualite-dev-s2-prenom-nom`).
 
 :::{warning} Attention !
 Le projet que vous allez créer va contenir tous les TPs de ce cours. Vous n'allez pas créer un nouveau projet par TP.
@@ -75,7 +75,9 @@ Avoir un README en [Markdown](https://fr.wikipedia.org/wiki/Markdown) dans un pr
 Parcourir le README et regarder le README par défaut proposé par GitLab.
 
 :::{important} Linux
-Ce qui suit est fait pour Linux. Il faut adapter les commandes Unix pour Mac OS. Pour Windows, vous pouvez installer l'émulateur [Git for Windows](https://gitforwindows.org/) qui simule Git comme si vous étiez sous Linux. 
+Ce qui suit est fait pour Linux. Il faut adapter les commandes Unix pour Mac OS. Pour Windows, vous pouvez installer l'émulateur [Git for Windows](https://gitforwindows.org/) qui simule Git comme si vous étiez sous Linux (ou d'autres outils similaires).
+
+Si vous n'êtes pas à l'aise avec les commandes depuis le terminal sur Linux, n'oubliez pas que vous pouvez toujours utiliser un gestionnaire de fichier et votre souris comme sur Windows.
 :::
 
 ## Configurer votre poste de travail local
@@ -204,9 +206,9 @@ Cela vous permet d'être au courant de l'évolution de votre projet.
 Lors du développement, il y a beaucoup de fichiers que l'on souhaite **ignorer** en permanence dans les sauvegardes (par exemple, les fichiers générés lors de la compilation) car ils polluent inutilement le dépôt. Cela peut aussi être source de problèmes quand vous récupérez des fichiers de configurations de certaines machines et que vous essayer de les synchroniser avec d'autres (problèmes de compatibilité).
 
 La gestion de ces fichiers est donc faite avec un fichier `.gitignore` qui est à la racine de votre projet. Dans ce fichier, vous pouvez ajouter tout ce que vous ne voulez pas suivre :
-- Créer un fichier `tobeignored`.
+- Créer un fichier `tobeignored` (avec `touch` par exemple).
 - Créer un fichier `.gitignore`.
-- Ajouter le nom du fichier `tobeignored` dans `.gitignore`.
+- Ajouter le nom du fichier `tobeignored` dans `.gitignore` (avec un éditeur de texte comme `pluma` sur Debian à l'IUT par exemple).
 - Suivre, sauvegarder, et diffuser `.gitignore` sur le dépôt distant.
 
 Maintenant, vérifier `git status`. Qu'est-ce qui change d'habitude ?
