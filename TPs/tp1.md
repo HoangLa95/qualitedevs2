@@ -37,7 +37,7 @@ Pour créer un PAT :
 5. Choisir tous les [scopes](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#personal-access-token-scopes).
 6. Cliquer sur **Create personal access token**.
 
-:::{important} Sauvegarder votre PAT
+:::{important} SAUVEGARDER VOTRE PAT !!!
 Une fois que vous quittez la page de création, le PAT ne vous sera jamais rappelé.
 :::
 
@@ -95,6 +95,10 @@ git clone https://<login>:<Personal Access Token>@git.iut-orsay.fr/<login>/monpr
 [^code_button]: ![Code Button](../images/code-button.png)
 
 [^clone_https]: ![Clone HTTPS](../images/clone-https.png)
+
+:::{important} Personal Access Token
+Il faut ajouter le token lui-même, pas le nom que vous lui avez donné !
+:::
 
 ## Travailler sur le dépôt local
 
@@ -198,7 +202,7 @@ Lors du développement, il y a beaucoup de fichiers que l'on souhaite **ignorer*
 La gestion de ces fichiers est donc faite avec un fichier `.gitignore` qui est à la racine de votre projet. Dans ce fichier, vous pouvez ajouter tout ce que vous ne voulez pas suivre :
 - Créer un fichier `tobeignored`.
 - Créer un fichier `.gitignore`.
-- Ajouter `tobeignored` dans `.gitignore`.
+- Ajouter le nom du fichier `tobeignored` dans `.gitignore`.
 - Suivre, sauvegarder, et diffuser `.gitignore` sur le dépôt distant.
 
 Maintenant, vérifier `git status`. Qu'est-ce qui change d'habitude ?
