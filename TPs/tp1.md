@@ -57,6 +57,10 @@ Vous pouvez maintenant créer votre premier projet/dépôt (*repository*)[^creat
 
 Créer un projet vide avec un nom pertinent.
 
+:::{warning} Attention !
+Le projet que vous allez créer va contenir tous les TPs de ce cours. Vous n'allez pas créer un nouveau projet par TP.
+:::
+
 :::{important} MonProjet
 Dans la suite, nous allons appeler ce projet **MonProjet**. Il ne faut pas oublier de le remplacer avec le nom que vous avez choisi.
 :::
