@@ -306,7 +306,7 @@ Par contre, **il ne faut pas rajouter des préfixes partout quand le contexte es
 
 :::{hint} Créer une classe.
 :class: dropdown
-Une meilleure solution la plupart du temps (selon vos besoins) est de regrouper tous ces variables sous une structure commune : `class Address`.
+Une meilleure solution la plupart du temps (selon vos besoins) est de regrouper toutes ces variables sous une structure commune : `class Address`.
 :::
 
 ## Ne pas faire de blagues dans les noms
