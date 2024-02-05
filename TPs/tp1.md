@@ -38,7 +38,7 @@ Pour créer un PAT :
 6. Cliquer sur **Create personal access token**.
 
 :::{important} SAUVEGARDER VOTRE PAT !!!
-Une fois que vous quittez la page de création, le PAT ne vous sera jamais rappelé.
+Une fois que vous quittez la page de création, le PAT ne vous sera jamais rappelé. Vous allez devoir utiliser le PAT pour accéder à vos projets !
 :::
 
 Vous pouvez créer autant de PAT que vous voulez (une par machine par exemple).
@@ -103,7 +103,9 @@ git clone https://<login>:<Personal Access Token>@git.iut-orsay.fr/<login>/monpr
 [^clone_https]: ![Clone HTTPS](../images/clone-https.png)
 
 :::{important} Personal Access Token
-Il faut ajouter le token lui-même, pas le nom que vous lui avez donné !
+Il faut ajouter le token que vous avez sauvegardé en haut ! Pas le nom que vous lui avez donné, ou votre mot de passe ! Ce n'est pas non plus le Feed Token que vous trouvez dans la page Access Token !
+
+Si vous n'avez pas sauvegardé votre PAT, enlever (*Revoke*) celui que vous avez déjà créé et refaire la manipulation.
 :::
 
 ## Travailler sur le dépôt local
