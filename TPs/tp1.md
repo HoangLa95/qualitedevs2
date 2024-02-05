@@ -223,6 +223,12 @@ Un exemple de [`.gitignore`](https://github.com/github/gitignore/blob/main/Unity
 
 Finissons ce TP avec une petite réorganisation : créer un dossier TP1 dans votre projet et bouge `toto.txt` vers ce dossier. Vous allez maintenir ce projet pendant le reste du cours en créant des dossiers séparés pour chaque TP. Est-ce que vous êtes capable maintenant de faire `add`, `commit`, `push` vous-même ?
 
+:::{hint} `git add .`
+:class: dropdown
+Vous pouvez faire `git add .` pour suivre tous les nouveaux changements que vous avez fait.
+:::
+
+
 :::{important} À NE PAS OUBLIER !
 Il faut ajouter votre intervenant dans votre projet !
 - Cliquer sur **Manage** à gauche puis **Members**[^manage_members].
