@@ -2,7 +2,7 @@
 
 :::{warning} Utilisation d'un IDE
 :class: dropdown
-Pour vous familiariser avec les commandes Git sous Linux, nous allons apprendre à utiliser un IDE (comme VSCodium sur la version Debian de l'IUT) plus tard. Pour le moment, vous pouvez utiliser n'importe quel éditeur de texte de base (sans configuration, autocomplétion,...). Nous passerons à l'IDE quand les intervenants trouvent que vous avez bien compris comment fonctionnent le workflow de git (avec pull, add, commit, push).
+Pour vous familiariser avec les commandes Git sous Linux, nous allons apprendre à utiliser un IDE (comme VSCodium sur la version Debian de l'IUT) plus tard. Pour le moment, vous pouvez utiliser n'importe quel éditeur de texte de base (sans configuration, autocomplétion,...). Nous passerons à l'IDE quand les intervenants trouvent que vous avez bien compris comment fonctionne le workflow de git (avec pull, add, commit, push).
 :::
 
 :::{important} QCM
@@ -261,3 +261,83 @@ Un checklist pour vous aider (revenir sur le cours si vous ne comprenez pas cert
 - [ ] Convention pour les classes C++
 
 **Question 7** : Qu'avez-vous renommé ?
+
+Recompiler votre code et vérifier que le code fonctionne bien en créant un troisième compte avec une montant initial de `123.45`, puis déposer `67.89` dans le compte et enfin retirer `101.1`.
+
+**Question 8** : Combien d'argent se trouve dans le troisième compte ?
+
+## Exercice 3 : Contexte
+
+Regarder le code suivant.
+
+```{code} cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void printGrammaticallyCorrectMessage(string candidate, int count) {
+    string number;
+    string verb;
+    string pluralModifier;
+    
+    if (count == 0) {
+        number = "no";
+        verb = "are";
+        pluralModifier = "s";
+    } else if (count == 1) {
+        number = "1";
+        verb = "is";
+        pluralModifier = "";
+    } else {
+        number = to_string(count);
+        verb = "are";
+        pluralModifier = "s";
+    }
+    
+    string message = "There " + verb + " " + number + " " + candidate + pluralModifier + ".";
+    cout << message << endl;
+}
+
+int main() {
+    printGrammaticallyCorrectMessage("bicycle", 0);
+    printGrammaticallyCorrectMessage("house", 1);
+    printGrammaticallyCorrectMessage("computer", 2);
+    return 0;
+}
+```
+
+Essayer d'abord de comprendre ce que fait ce code. Tout a l'air d'être bien nommé, quel est donc le problème de ce code ?
+
+:::{hint} Contexte
+:class: dropdown
+Le nom de la fonction donne une partie du contexte des variables. Le reste du contexte doit être déduit de l'algorithme : par exemple, on se rend compte que `number`, `verb`, `pluralModifier` font partie d'un message que l'on va afficher et ces variables vont dépendre du nombre `count` d'objets `candidate`.
+
+À première vue, le contexte, la signification des variables et ce que fait la fonction reste assez opaque.
+:::
+
+- Contextualiser ce code en rajoutant une classe `GrammaticallyCorrectMessage`.
+- Dans `private:` 
+    - Les variables `number`, `verb` et `pluralModifier` doivent être des attributs privés de `GrammaticallyCorrectMessage`. Il n'y aura pas d'affection directe des attributs ici donc vous pouvez garder les mêmes noms (sans préfixer par `m`).
+    - Une fonction devrait faire seulement une chose. Séparer donc les différents cas en différentes fonctions (par exemple, `thereAreNoCandidates`, `thereIsOneCandidate`, `thereAreMultipleCandidates`) qui affectent différentes valeurs aux attributs.
+    - Maintenant, nous pouvons créer une fonction `assignValuesToMessageParts` qui appelle les fonctions correspondantes selon la valeur de `count`.
+- Dans `public:`
+    - Nous pouvons maintenant créer une fonction `createMessage` qui prend `string candidate` et `int count` en arguments et qui appelle `assignValuesToMessageParts` puis retourne le message avec la bonne formulation (sous forme de `string`).
+- Dans `main`
+    - Nous pouvons maintenant créer un message `GrammaticallyCorrectMessage message`.
+    - Il suffit d'appeler la méthode `createMessage` avec les bons arguments et de l'afficher dans le terminal avec `cout <<`. N'oublier pas d'aller à ligne avec `<< endl`.
+
+**Question 9** : Combien d'attributs et de méthodes se trouvent dans `GrammaticallyCorrectMessage` ?
+
+**Question 10** : Quels sont les types de `assignValuesToMessageParts` et de `createMessage` ?
+
+Compiler et tester votre code. 
+- Maintenant, l'intention de ce code est très explicite même sans commentaire.
+- Les variables sont bien situées dans leur contexte pour celui qui lit le code aussi bien que pour la machine qui le compile grâce à l'encapsulation à l'intérieur de la classe `GrammaticallyCorrectMessage`. 
+- Le code est bien modulable car chaque fonction ne fait qu'une seule chose. La modification d'une fonction ne changera pas le comportement des autres fonctions. 
+- Il est aussi facile de changer le code pour modifier la structure de la phrase.
+
+:::{note} Rappel
+:class: dropdown
+N'oubliez pas de maintenir votre dépôt git !
+:::
