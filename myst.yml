@@ -11,7 +11,7 @@ site:
   template: book-theme
   # title:
   # logo:
-  nav: []
+  #nav: []
   #actions:
   #  - title: Learn More
   #    url: https://mystmd.org/guide
