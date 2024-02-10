@@ -1,3 +1,6 @@
+---
+output: html_document
+---
 # Problèmes techniques
 
 ## Problème d'Internet sur Debian
