@@ -11,7 +11,7 @@ Tous les cours qui suivent vont vous donner une école de pensée sur le "code p
 
 Quand je cherche un nom de variable expressif (Credits: thecodinglove.com)
 ```
-(cm2-camel-case)=
+(cm2-camelCase)=
 ## camelCase
 
 ```{figure} ../images/camelCase.png
@@ -34,7 +34,7 @@ Les variables globales doivent être en majuscule et les mots sont séparés par
 Une classe doit commencer par une majuscule.
 :::
 
-(cm2-nom-revelateur)=
+(cm2-nomRevelateur)=
 ## Utiliser des noms révélateurs d'intention
 
 Un nom de variable (entre autre) doit répondre aux trois questions suivantes :
@@ -278,7 +278,7 @@ Il est beaucoup plus facile de retrouver NUMBER_OF_TASKS_PER_DAY et de le modifi
 - Regarder le numéro de la première et de la dernière ligne de code où une variable intervient. La longueur de son nom peut croître linéairement avec le nombre de lignes de code entre les deux. 
 :::
 
-(cm2-class-method)=
+(cm2-classMethod)=
 ## Nom commun pour les classes, verbe pour les méthodes
 
 :::{note} Lire le titre ☝️
