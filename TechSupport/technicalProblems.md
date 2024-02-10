@@ -1,4 +1,3 @@
-# Problèmes techniques
 ---
 output: html_document
 ---
@@ -20,6 +19,7 @@ output: html_document
   display: none;
 }
 ```
+# Problèmes techniques
 
 ## Problème d'Internet sur Debian
 
