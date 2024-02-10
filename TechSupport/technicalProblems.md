@@ -1,6 +1,4 @@
-# Configuration et problèmes techniques
-
-## Linux
+# Problèmes techniques
 
 ## Problème d'Internet sur Debian
 
