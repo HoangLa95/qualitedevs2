@@ -256,11 +256,10 @@ La convention utilisée pour les noms de ces méthodes sont `getNomAttribut` et 
 :::
 
 Un checklist pour vous aider (revenir sur le cours si vous ne comprenez pas certains principes) :
-- [ ] camelCase
-- [ ] Majuscule pour les noms de classes
-- [ ] Nom révélateur d'intention
+- [ ] [camelCase](#cm2-camel-case)
+- [ ] [Majuscule pour les noms de classes](#cm2-class-method)
+- [ ] [Nom révélateur d'intention](#cm2-nom-revelateur)
 - [ ] [Contexte](#cm2-contextualiser) (sauf quand inutile)
-- [ ] Convention pour les classes C++
 
 **Question 7** : Qu'avez-vous renommé ?
 
