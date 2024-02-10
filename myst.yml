@@ -16,3 +16,16 @@ site:
   #  - title: Learn More
   #    url: https://mystmd.org/guide
   domains: []
+parse:
+  myst_enable_extensions:  # default extensions to enable in the myst parser. See https://myst-parser.readthedocs.io/en/latest/using/syntax-optional.html
+    - html_image
+    - amsmath
+    - colon_fence
+    # - deflist
+    - dollarmath
+    - html_admonition
+    - linkify
+    # - replacements
+    # - smartquotes
+    - substitution
+
