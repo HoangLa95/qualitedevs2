@@ -1,5 +1,7 @@
 # Problèmes techniques
-
+---
+output: html_document
+---
 ```{css, echo=FALSE}
 .spoiler {
   visibility: hidden;
