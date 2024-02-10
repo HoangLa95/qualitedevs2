@@ -241,9 +241,11 @@ Ce code compile et marche comme il faut. Par contre, il me fait mal au coeur. Re
 
 :::{note} Membres d'une classe C++
 :class: dropdown
-Les `private` class member en C++ sont souvent préfixés avec `m` (par exemple `mBalance`). Le but de ce préfixe est de le différencier avec la variable locale utilisé dans le constructeur (ici `float b` que l'on renommerait idéalement `float balance`) que l'on utilise pour initialiser `mBalance` (avec `mBalance(balance)` dans ce cas).
+Les `private` class member en C++ sont souvent préfixés avec `m` (par exemple `mBalance`). Le but de ce préfixe est de le différencier avec la variable locale utilisé dans le constructeur (ici `float b` que l'on pourrait renommer `float balance`) que l'on utilise pour initialiser `mBalance` (avec `mBalance(balance)` dans ce cas).
 
-Cette convention n'est pas utilisé dans d'autres langages. Par exemple, dans Java et Python, on peut faire du *shadowing* où la variable locale et le membre de la classe peut avoir le même nom et la différence entre ces deux variables se font grâce à `this` (plus d'informations dans votre cours de programmation objet).
+Nous pourrions aussi renommer `float b` avec `float initialBalance` et garder `balance` comme nom d'attribut.
+
+Cette convention n'est pas forcément utilisée dans d'autres langages. Par exemple, dans Java et Python, on peut faire du *shadowing* où la variable locale et le membre de la classe peut avoir le même nom et la différence entre ces deux variables se font grâce à `this` (plus d'informations dans votre cours de programmation objet).
 :::
 
 :::{note} Getter et Setter
@@ -318,7 +320,7 @@ Le nom de la fonction donne une partie du contexte des variables. Le reste du co
 
 - Contextualiser ce code en rajoutant une classe `GrammaticallyCorrectMessage`.
 - Dans `private:` 
-    - Les variables `number`, `verb` et `pluralModifier` doivent être des attributs privés de `GrammaticallyCorrectMessage`. Il n'y aura pas d'affection directe des attributs ici donc vous pouvez garder les mêmes noms (sans préfixer par `m`).
+    - Les variables `number`, `verb` et `pluralModifier` doivent être des attributs privés de `GrammaticallyCorrectMessage`. Il n'y aura pas d'affectation directe des attributs ici donc vous pouvez garder les mêmes noms (sans préfixer par `m`).
     - Une fonction devrait faire seulement une chose. Séparer donc les différents cas en différentes fonctions (par exemple, `thereAreNoCandidates`, `thereIsOneCandidate`, `thereAreMultipleCandidates`) qui affectent différentes valeurs aux attributs.
     - Maintenant, nous pouvons créer une fonction `assignValuesToMessageParts` qui appelle les fonctions correspondantes selon la valeur de `count`.
 - Dans `public:`
