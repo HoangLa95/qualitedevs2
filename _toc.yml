@@ -29,6 +29,6 @@ parts:
   chapters: 
     - file: TPs/tp1
     - file: TPs/tp2
-- caption: Support technique
+- caption: Soutien technique
   chapters:
-    - file: technicalProblems.md
+    - file: TechSupport/technicalProblems.md
