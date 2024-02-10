@@ -11,7 +11,7 @@ Tous les cours qui suivent vont vous donner une école de pensée sur le "code p
 
 Quand je cherche un nom de variable expressif (Credits: thecodinglove.com)
 ```
-(cm2-camelCase)=
+(cm2-camel-case)=
 ## camelCase
 
 ```{figure} ../images/camelCase.png
@@ -34,7 +34,7 @@ Les variables globales doivent être en majuscule et les mots sont séparés par
 Une classe doit commencer par une majuscule.
 :::
 
-(cm2-nomRevelateur)=
+(cm2-nom-revelateur)=
 ## Utiliser des noms révélateurs d'intention
 
 Un nom de variable (entre autre) doit répondre aux trois questions suivantes :
@@ -140,6 +140,7 @@ vector<Cell> getFlaggedCells(const vector<Cell>& gameBoard) {
 ```
 :::
 
+(cm2-desinformation)=
 ## Ne pas propager la désinformation
 
 ```{code} cpp
@@ -179,6 +180,7 @@ else {
 Même si la coloration syntaxique permet de voir la différence entre `O` et `0`, et entre `1` et `l`. Là vous êtes juste en train de faire de l'obstruction de code... 
 :::
 
+(cm2-nom-different)=
 ## Utiliser des noms différents
 
 ```{code} cpp
@@ -222,6 +224,7 @@ class CustomerObject {
 Utiliser des noms avec des différences significatives.
 :::
 
+(cm2-nom-prononcable)=
 ## Utiliser des noms prononçables
 
 ```{code} cpp
@@ -247,6 +250,7 @@ private:
 ```
 :::
 
+(cm2-nom-recherchable)=
 ## Utiliser des noms recherchables
 
 Imagine un code avec que des variables d'une seule lettre et des nombres fixés qui apparaissent partout et qu'il contient le morceau de code suivant.
@@ -278,7 +282,7 @@ Il est beaucoup plus facile de retrouver NUMBER_OF_TASKS_PER_DAY et de le modifi
 - Regarder le numéro de la première et de la dernière ligne de code où une variable intervient. La longueur de son nom peut croître linéairement avec le nombre de lignes de code entre les deux. 
 :::
 
-(cm2-classMethod)=
+(cm2-class-method)=
 ## Nom commun pour les classes, verbe pour les méthodes
 
 :::{note} Lire le titre ☝️
@@ -286,6 +290,7 @@ Il est beaucoup plus facile de retrouver NUMBER_OF_TASKS_PER_DAY et de le modifi
 Le nom d'une classe doit être un nom ou un groupe nominal (par exemple `AddressParser`) Le nom des méthodes doivent être un verbe ou un groupe verbal (par exemple `deleteAddress`).
 :::
 
+(cm2-un-par-concept)=
 ## Choisir un seul et bon mot par concept
 
 :::{note} Éviter les synonymes
@@ -312,6 +317,7 @@ Par contre, **il ne faut pas rajouter des préfixes partout quand le contexte es
 Une meilleure solution la plupart du temps (selon vos besoins) est de regrouper toutes ces variables sous une structure commune : `class Address`.
 :::
 
+(cm2-blague)=
 ## Ne pas faire de blagues dans les noms
 
 [`holyHandGrenade`](https://worms.fandom.com/wiki/Holy_Hand_Grenade) pour faire `deleteItems`, sérieusement ?
