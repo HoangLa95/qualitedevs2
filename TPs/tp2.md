@@ -59,6 +59,11 @@ Enregistrer votre nouveau code et recompiler. Exécuter-le pour vérifier que to
 On appelle *magic numbers* des nombres qui apparaissent dans le code sans aucun contexte et/ou explication. Éviter les magic numbers en leur donnant des noms révélateurs d'intention. Ces nombres peuvent être utilisés localement ou bien être des variables globales, c'est à vous de décider quel est le *scope* de ces variables et donc d'utiliser les bonnes conventions de nommage.
 :::
 
+:::{important} .gitignore
+:class: dropdown
+Nous ne voulons pas suivre l'exécutable donc rajouter la ligne suivante au fichier `.gitignore` : `/TP2/magic-numbers`.
+:::
+
 :::{important} git add, commit, push
 :class: dropdown
 Il est temps de suivre (*add*) vos nouveaux fichiers, les sauvegarder (*commit*) et les diffuser (*push*) sur le dépôt distant (sur le GitLab de l'IUT). Vérifier que le changement a bien été effectué sur l'application web GitLab.
@@ -266,6 +271,11 @@ Un checklist pour vous aider (revenir sur le cours si vous ne comprenez pas cert
 Recompiler votre code et vérifier que le code fonctionne bien en créant un troisième compte avec une montant initial de `123.45`, puis déposer `67.89` dans le compte et enfin retirer `101.1`.
 
 **Question 8** : Combien d'argent se trouve dans le troisième compte ?
+
+:::{important} `.gitignore`, `add`, `commit`, `push`
+:class: dropdown
+Ne pas oublier d'ignorer l'exécutable puis de mettre à jour votre dépôt distant.
+:::
 
 ## Exercice 3 : Contexte
 
