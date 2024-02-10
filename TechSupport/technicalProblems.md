@@ -1,20 +1,20 @@
 <style type="text/css" rel="stylesheet">
 .spoiler {
     visibility: hidden;
-  }
+}
   
-  .spoiler::before {
+.spoiler::before {
     visibility: visible;
     content: "Spoiler alert! Hover me to see the answer."
-  }
+}
   
-  .spoiler:hover {
+.spoiler:hover {
     visibility: visible;
-  }
+}
   
-  .spoiler:hover::before {
-    display: none;
-  }
+.spoiler:hover::before {
+    display: none;  
+}
 </style>
 
 # Problèmes techniques
@@ -36,8 +36,5 @@ Si vous avez l'erreur **Error while fetching extensions. XHR failed** quand vous
 2. Taper **User Settings** dans la barre de recherche.
 3. Cliquer sur **Open User Settings**.
 4. Dans la barre **Search Settings**, taper **Proxy**.
-5. Dans **Http: Proxy** *(Applies to all profile)*, taper dans la barre `http://<serveur proxy>:<port>`. À l'IUT d'Orsay, le serveur est proxy.iut-orsay.fr et le port est 
-:::
-:class: spoiler
-3128.
+5. Dans **Http: Proxy** *(Applies to all profile)*, taper dans la barre `http://<serveur proxy>:<port>`. À l'IUT d'Orsay, le serveur est proxy.iut-orsay.fr et le port est <p class="spoiler">3128. </p>
 :::
