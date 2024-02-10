@@ -1,4 +1,4 @@
-<link href="../style.css"></link>
+<link href="../style.css" rel="stylesheet"></link>
 
 # Problèmes techniques
 
