@@ -293,6 +293,7 @@ Il ne faut pas utiliser plusieurs mots synonymes s'ils font tous la même chose 
 Certains mots peuvent avoir des connotations spéciales en informatique (par exemple `memento` correspond à un design pattern). Réutiliser les mots que vous avez vu dans le bon contexte et éviter toute possibilité d'ambiguité.
 :::
 
+(cm2-contextualiser)= 
 ## Contextualiser
 
 Il y a des noms qui sont expressifs sans contexte mais ce n'est pas le cas de la plupart. Si vous voyez `firstName`, `lastName`, `street`, `houseNumber`, `city`, `state`, et `zipcode`, alors vous pouvez deviner qu'il s'agit des coordonnées d'une personne. Maintenant, si vous voyez juste `state`, qu'est-ce que ça pourrait dire ?

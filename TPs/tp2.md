@@ -259,7 +259,7 @@ Un checklist pour vous aider (revenir sur le cours si vous ne comprenez pas cert
 - [ ] camelCase
 - [ ] Majuscule pour les noms de classes
 - [ ] Nom révélateur d'intention
-- [ ] Contexte (sauf quand inutile)
+- [ ] [Contexte](#cm2-contextualiser) (sauf quand inutile)
 - [ ] Convention pour les classes C++
 
 **Question 7** : Qu'avez-vous renommé ?
