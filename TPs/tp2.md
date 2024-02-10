@@ -46,7 +46,7 @@ Enregistrer et compiler le code avec `g++ -o <nom que vous allez donner à l'ex�
 
 Pouvez-vous deviner ce que fait ce code ? Comment pourrait-on améliorer les noms des variables ? Pour vous aider, essayer de renommer les variables pour répondre aux questions suivantes.
 - Que fait la fonction `b` ?
-- À quoi correspond `int a`{l=cpp} (*indice* : l'âge légal de consommation d'alcool en France est 18) ?
+- À quoi correspond `int a` (*indice* : l'âge légal de consommation d'alcool en France est 18) ?
 - À quoi correspond `float m` (*indice* : le prix moyen d'une bouteille de bière de 500 ml est 7 euros dans les restaurants à Paris) ?
 - À quoi correspond `18` et `7` (*indice* : questions précédentes) ?
 
