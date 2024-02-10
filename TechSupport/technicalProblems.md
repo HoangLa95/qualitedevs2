@@ -1,7 +1,7 @@
 ---
 output: html_document
 ---
-```{css, echo=FALSE}
+<style>
 .spoiler {
   visibility: hidden;
 }
@@ -18,7 +18,7 @@ output: html_document
 .spoiler:hover::before {
   display: none;
 }
-```
+</style>
 # Problèmes techniques
 
 ## Problème d'Internet sur Debian
