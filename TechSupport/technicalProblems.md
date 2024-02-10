@@ -16,7 +16,7 @@
   display: none;
 }
 
-.green{
+green{
     color: green;
 }
 </style>
