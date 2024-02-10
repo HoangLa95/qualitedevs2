@@ -17,4 +17,4 @@ Si vous avez l'erreur **Error while fetching extensions. XHR failed** quand vous
 2. Taper **User Settings** dans la barre de recherche.
 3. Cliquer sur **Open User Settings**.
 4. Dans la barre **Search Settings**, taper **Proxy**.
-5. Dans **Http: Proxy** *(Applies to all profile)*, taper dans la barre `http://<serveur proxy>:<port>`. À l'IUT d'Orsay, le serveur est proxy.iut-orsay.fr et le port est <p style="color : green">3128</p>.
+5. Dans **Http: Proxy** *(Applies to all profile)*, taper dans la barre `http://<serveur proxy>:<port>`. À l'IUT d'Orsay, le serveur est proxy.iut-orsay.fr et le port est <p style="color:blue">3128.</p>
