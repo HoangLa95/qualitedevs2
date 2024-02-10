@@ -30,4 +30,4 @@ parts:
     - file: TPs/tp1
     - file: TPs/tp2
 - caption: Configuration et problèmes techniques
-  file: techsupport.md
+  - file: techsupport.md
