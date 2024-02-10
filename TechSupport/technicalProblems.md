@@ -19,6 +19,7 @@ output: html_document
   display: none;
 }
 </style>
+
 # Problèmes techniques
 
 ## Problème d'Internet sur Debian
@@ -38,4 +39,4 @@ Si vous avez l'erreur **Error while fetching extensions. XHR failed** quand vous
 2. Taper **User Settings** dans la barre de recherche.
 3. Cliquer sur **Open User Settings**.
 4. Dans la barre **Search Settings**, taper **Proxy**.
-5. Dans **Http: Proxy***(Applies to all profile)*, taper dans la barre `http://<serveur proxy>:<port>`. À l'IUT d'Orsay, le serveur est [proxy.iut-orsay.fr]{.spoiler} et le port est [3128]{.spoiler}.
+5. Dans **Http: Proxy** *(Applies to all profile)*, taper dans la barre `http://<serveur proxy>:<port>`. À l'IUT d'Orsay, le serveur est <div class="spoiler">proxy.iut-orsay.fr</div> et le port est <div class="spoiler">3128</div>.
