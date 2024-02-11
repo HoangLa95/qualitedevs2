@@ -340,7 +340,7 @@ Le nom de la fonction donne une partie du contexte des variables. Le reste du co
 
 **Question 9** : Combien d'attributs et de méthodes se trouvent dans `GrammaticallyCorrectMessage` ?
 
-**Question 10** : Quels sont les types de `assignValuesToMessageParts` et de `createMessage` ?
+**Question 10** : Quels sont les types que `assignValuesToMessageParts` et `createMessage` vont retourner ?
 
 Compiler et tester votre code. 
 - Maintenant, l'intention de ce code est très explicite même sans commentaire.
