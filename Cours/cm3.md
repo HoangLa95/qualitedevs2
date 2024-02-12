@@ -103,6 +103,7 @@ Une fonction doit se lire comme un sommaire bien organisé.
 - Au même niveau d'abstraction, j'ai les différents chapitres. 
 - À l'intérieur d'un chapitre, j'ai les différentes sections. 
 - À l'intérieur d'une section, j'ai du contenu qui me parle d'une et d'une seule chose.
+
 Chaque niveau d'abstraction ici correspondrait à une fonction.
 :::
 
@@ -260,6 +261,7 @@ bool checkPassword(const string& userName, const string& password) {
 ```
 
 :::{error} Problème 
+:class: dropdown
 La fonction précédente promets "une vérification de mot de passe" qui retourne donc `true` ou `false` mais elle initialise aussi une session, ce qui voudrait dire qu'elle fait aussi autre chose que ce qu'elle promets. Il s'agit d'un effet secondaire et il faut absolument l'éviter.
 
 Dans ce cas, on pourrait renommer la fonction `checkPasswordandInitializeSession` mais elle ne ferait donc pas une seule chose.
