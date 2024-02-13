@@ -116,6 +116,18 @@ Maintenant, appliquons nos leçons sur le code précédent.
 using namespace std;
 
 class PrimeGenerator {
+public:
+    vector<int> generatePrimes(int maxValue) {
+        if (maxValue < 2)
+            return vector<int>();
+        else {
+            uncrossIntegersUpTo(maxValue);
+            crossOutMultiples();
+            putUncrossedIntegersIntoResult();
+            return result;
+        }
+    }
+    
 private:
     vector<bool> crossedOut;
     vector<int> result;
@@ -146,18 +158,6 @@ private:
         for (int i = 2; i < crossedOut.size(); i++)
             if (!crossedOut[i])
                 result.push_back(i);
-    }
-
-public:
-    vector<int> generatePrimes(int maxValue) {
-        if (maxValue < 2)
-            return vector<int>();
-        else {
-            uncrossIntegersUpTo(maxValue);
-            crossOutMultiples();
-            putUncrossedIntegersIntoResult();
-            return result;
-        }
     }
 };
 ```
