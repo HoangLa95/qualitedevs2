@@ -182,11 +182,11 @@ int main() {
 
 Il a décidé de virer le gobelin en charge et de vous employer pour améliorer et maintenir son système. Il veut toujours garder la même organisation du magasin (les classes `Item` et `Shop` doivent avoir les mêmes attributs et constructeurs). 
 
-Vous devez comprendre comment les différents items se comportent et lui expliquer leur fonctionnement. Puis, vous devez refactoriser la fonction `updateItems` selon les principes du code propre; sinon, vous risquez de partager le même sort que le gobelin.
+Vous devez comprendre comment les différents items se comportent et lui expliquer leur fonctionnement. Puis, vous devez refactoriser la fonction `updateItems` selon les principes du code propre; sinon, vous risquez de partager le même sort que le gobelin !
 
 Compiler et exécuter le code. Observer les variations de qualité des items et répondre aux questions suivantes.
 
-**Question 5** : Avant l'expiration, la qualité de `Normal Item` varie de (-x si elle diminue, +x si elle augmente) combien par jour ?
+**Question 5** : Avant l'expiration, la qualité de `Normal Item` varie de combien par jour ? (-x si elle diminue, +x si elle augmente)
 
 **Question 6** : Avant l'expiration, la qualité de `Cheese` varie de combien par jour ?
 
@@ -203,9 +203,9 @@ Compiler et exécuter le code. Observer les variations de qualité des items et 
 **Question 12** : Quelle est la spécialité de `Excalibur` ?
 
 Maintenant que vous avez compris le comportement des différents items, il faut réécrire `updateItems` avec des (sous-)méthodes auxiliaires en respectant les principes vus en cours.
-    - La fonction `updateItems` devrait faire seulement une chose, il s'agit de parcourir la liste des items et de faire `updateItem` pour chaque item.
-    - Vu qu'il y a plusieurs types d'item différents, `updateItem` devrait identifier l'item concerné et appeler la méthode correspondante (`updateNormalItem`, `updateCheese`, ...).
-    - Chaque méthode `update<nom de l'item>` devrait changer les atrributs de l'item selon le comportement que vous avez observé.
+- La fonction `updateItems` devrait faire seulement une chose, il s'agit de parcourir la liste des items et de faire `updateItem` pour chaque item.
+- Vu qu'il y a plusieurs types d'item différents, `updateItem` devrait identifier l'item concerné et appeler la méthode correspondante (`updateNormalItem`, `updateCheese`, ...).
+- Chaque méthode `update<nom de l'item>` devrait changer les atrributs de l'item selon le comportement que vous avez observé.
 
 :::{warning} Ne pas travailler sur une copie de l'objet !
 :class: dropdown
