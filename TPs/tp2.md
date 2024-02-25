@@ -126,6 +126,7 @@ Modifier votre code pour permettre du *user input*. Recompiler et tester votre c
 N'oublier pas de synchroniser vos dépôts locaux et distants de temps en temps (après chaque exercice par exemple).
 :::
 
+(tp2-ex2) =
 ## Exercice 2 : Classes et Méthodes
 
 Recopier le code suivant.
