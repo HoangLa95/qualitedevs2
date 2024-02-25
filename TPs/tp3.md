@@ -12,7 +12,7 @@ Dernier rappel `git` de ce TP : `status`, `pull`, `.gitignore`, `add`, `commit`,
 
 :::{important} IDE
 :class: dropdown
-Dernier TP sans IDE !
+Dernier TP sans IDE ! J'espère que vous avez bien compris le workflow typique de Git !
 :::
 
 ## Exercice 1 : Shape area
@@ -50,7 +50,7 @@ int main() {
 }
 ```
 
-**Question 1** : Quels sont les problèmes avec le code suivant ?
+**Question 1** : Quels sont les problèmes du code précédent ?
 
 Pour améliorer ce code, nous allons créer une classe `Shape`.
 
@@ -69,7 +69,7 @@ Il ne faut pas oublier de tester votre code régulièrement quand vous faites de
 
 ## Exercice 2 : Magasin de qualité
 
-Un magasin d'items pour aventurier vend différents items dont la qualité diminue ou augmente plus on se rapproche de la date d'expiration. Ce magasin vient de changer de propriétaire. Le nouveau propriétaire vérifie le système informatique en charge du contrôle de qualité et ne comprend absolument rien à `updateItems` dans ce code.
+Un magasin d'items pour aventuriers vend différents items dont la qualité diminue ou augmente plus on se rapproche de la date d'expiration. Ce magasin vient de changer de propriétaire. Le nouveau propriétaire vérifie le système informatique en charge du contrôle de qualité et ne comprend absolument rien à `updateItems` dans ce code.
 
 ```{code} cpp
 #include <iostream>
@@ -186,7 +186,7 @@ Vous devez comprendre comment les différents items se comportent et lui expliqu
 
 Compiler et exécuter le code. Observer les variations de qualité des items et répondre aux questions suivantes.
 
-**Question 5** : Avant l'expiration, la qualité de `Normal Item` varie de combien par jour ? (-x si elle diminue, +x si elle augmente)
+**Question 5** : Avant l'expiration, la qualité de `Normal Item` varie de combien par jour ? (-x si elle diminue, x si elle augmente)
 
 **Question 6** : Avant l'expiration, la qualité de `Cheese` varie de combien par jour ?
 
@@ -209,5 +209,5 @@ Maintenant que vous avez compris le comportement des différents items, il faut 
 
 :::{warning} Ne pas travailler sur une copie de l'objet !
 :class: dropdown
-Si vous faites `updateItem(Item item)`, alors vous allez travailler sur une copie de l'item appelé en argument. Il ne faut pas oublier de rajouter `&` (`updateItem(Item& item)`).
+Si vous faites `updateItem(Item item)`, alors vous allez travailler sur une copie de l'item appelé en argument. Il ne faut pas oublier de rajouter `&` (par exemple `updateItem(Item& item)`).
 :::

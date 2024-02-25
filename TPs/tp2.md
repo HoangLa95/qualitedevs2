@@ -126,7 +126,7 @@ Modifier votre code pour permettre du *user input*. Recompiler et tester votre c
 N'oublier pas de synchroniser vos dépôts locaux et distants de temps en temps (après chaque exercice par exemple).
 :::
 
-(tp2-ex2) =
+(tp2-ex2)=
 ## Exercice 2 : Classes et Méthodes
 
 Recopier le code suivant.
@@ -196,7 +196,7 @@ withdraw2(50.0);
 - Est-ce que ce code a du sens ? 
 - D'où vient l'erreur de comptabilité ? 
 - Est-ce que je peux facilement créer et faire des transactions avec un troisième compte ?
-- Que faut-il faire pour améliorer ce code (indice : nom de l'exercice) ?
+- Que faut-il faire pour améliorer ce code (*indice* : nom de l'exercice) ?
 
 Pour améliorer le code, nous allons créer une classe `bank_account` de la façon suivante :
 

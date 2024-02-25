@@ -64,7 +64,7 @@ Pourquoi utiliser Git ? (Credits: javatpoint.com)
 
 :::{note} Git dans ce cours
 :class: dropdown
-Nous arrêtons à une initialisation aux commandes de bases de Git pour stocker du code personnel et nous découvrons un peu l'aspect collaboratif de Git.
+Nous nous arrêtons à une initialisation aux commandes de bases de Git pour stocker du code personnel et nous découvrons un peu l'aspect collaboratif de Git.
 :::
 
 Commandes importantes à connaître[^plus] :
@@ -86,7 +86,7 @@ Git Workflow (Credits: bytebytego.com)
 ## Organisation du cours
 
 - Langage utilisé : C++
-- IDE : VSCode
+- IDE : VSCodium
 - 6 Cours Magistraux
 - 7 Travaux Pratiques
 

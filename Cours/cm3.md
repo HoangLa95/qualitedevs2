@@ -183,6 +183,7 @@ Il y a trois types de fonctions avec un seul argument.
 1. Une fonction qui pose une question.
 2. Une fonction qui transforme l'entrée et qui le retourne.
 3. Une fonction qui déclenche un évènement sans rien retourner.
+
 Éviter les fonctions à un argument qui ne sont pas dans une des catégorie précédente.
 :::
 
@@ -221,7 +222,7 @@ Circle makeCircle(double xCoordinate, double yCoordinate, double radius)
 
 :::{danger} Trois arguments 
 :class: dropdown
-Sur le même principe que précédemment, il faut que l'utilisation des fonctions à trois arguments soient bien justifiées. Si vous pouvez faire moins, il faut toujours faire moins !
+Sur le même principe que précédemment, il faut que l'utilisation des fonctions à trois arguments soit bien justifiée. Si vous pouvez faire moins, il faut toujours faire moins !
 ```{code} cpp
 Circle makeCircle(Point center, double radius)
 ```
@@ -262,14 +263,16 @@ bool checkPassword(const string& userName, const string& password) {
 
 :::{error} Problème 
 :class: dropdown
-La fonction précédente promets "une vérification de mot de passe" qui retourne donc `true` ou `false` mais elle initialise aussi une session, ce qui voudrait dire qu'elle fait aussi autre chose que ce qu'elle promets. Il s'agit d'un effet secondaire et il faut absolument l'éviter.
+La fonction précédente promets "une vérification de mot de passe" qui retourne donc `true` ou `false` mais elle initialise aussi une session, ce qui voudrait dire qu'elle fait aussi autre chose que ce qu'elle promet. Il s'agit d'un effet secondaire et il faut absolument l'éviter.
 
-Dans ce cas, on pourrait renommer la fonction `checkPasswordandInitializeSession` mais elle ne ferait donc pas une seule chose.
+Dans ce cas, une fausse solution est de renommer la fonction `checkPasswordandInitializeSession` car elle ne ferait donc pas une seule chose.
+
+La bonne solution est de faire l'initialisation de la session ailleurs, probablement dans une fonction qui appelle `checkPassword` et qui initialise la session seulement si `checkPassword` retourne vrai.
 :::
 
 ### Pas de répétitions
 
 :::{error} Le mal absolu
 :class: dropdown
-Presque toutes les principes de programmation que vous apprenez servent à éviter de la duplication de code. Bien nommer les choses, structurer le code, regrouper des éléments à l'intérieur d'une classe... Tout sert à éliminer la duplication qui est une grosse source d'incohérence et donc d'erreur en programmation.
+Presque toutes les principes de programmation que vous apprenez servent à éviter de la duplication de code. Bien nommer les choses, structurer le code, regrouper des éléments à l'intérieur d'une classe... Tout sert à éliminer la duplication qui est une grosse source d'incohérence et donc d'erreurs en programmation.
 :::
