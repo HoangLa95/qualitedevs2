@@ -56,7 +56,7 @@ Pour améliorer ce code, nous allons créer une classe `Shape`.
 
 **Question 2** : Combien d'attributs (privés) y-a-t-il dans `Shape` ?
 
-Dans `public`, nous avons besoin d'écrire un constructeur pour `Shape` (exemple de constructeur dans l'[exercice 2 du TP2](#tp2-ex2)).
+Dans `public`, nous avons besoin d'écrire un constructeur pour `Shape` (exemple de constructeur dans l'[exercice 2 du TP2](#tp2-ex2-class-example)).
 
 **Question 3** : Comment éviter d'utiliser les mêmes noms pour les arguments ?
 
