@@ -54,6 +54,7 @@ Pouvez-vous deviner ce que fait ce code ? Comment pourrait-on améliorer les nom
 
 Enregistrer votre nouveau code et recompiler. Exécuter-le pour vérifier que tout fonctionne bien. Vous pouvez aussi changer les valeurs données (`19` et `10.0`) pour tester votre code.
 
+(tp2-magic-numbers)=
 :::{note} Magic numbers
 :class: dropdown
 On appelle *magic numbers* des nombres qui apparaissent dans le code sans aucun contexte et/ou explication. Éviter les magic numbers en leur donnant des noms révélateurs d'intention. Ces nombres peuvent être utilisés localement ou bien être des variables globales, c'est à vous de décider quel est le *scope* de ces variables et donc d'utiliser les bonnes conventions de nommage.

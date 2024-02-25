@@ -60,7 +60,7 @@ Dans `public`, nous avons besoin d'écrire un constructeur pour `Shape` (exemple
 
 **Question 3** : Comment éviter d'utiliser les mêmes noms pour les arguments et les attributs de `Shape` ?
 
-**Question 4** : Combien de méthodes a-t-on besoin dans `Shape` ?
+**Question 4** : Combien de méthodes (au moins) a-t-on besoin dans `Shape` ?
 
 :::{important} Tests
 :class: dropdown
@@ -160,9 +160,9 @@ public:
 };
 
 int main() {
-    Item normalItem("Normal Item", 4, 10);
+    Item normalItem("Normal Item", 4, 6);
     Item cheese("Cheese", 4, 10);
-    Item concertTicket("Concert Ticket", 4, 10);
+    Item concertTicket("Concert Ticket", 4, 14);
     Item excalibur("Excalibur", 4, 10);
     vector<Item> itemsInStock = {normalItem, cheese, concertTicket, excalibur};
     Shop qualityShop(itemsInStock);
@@ -182,32 +182,52 @@ int main() {
 
 Il a décidé de virer le gobelin en charge et de vous employer pour améliorer et maintenir son système. Il veut toujours garder la même organisation du magasin (les classes `Item` et `Shop` doivent avoir les mêmes attributs et constructeurs). 
 
-Vous devez comprendre comment les différents items se comportent et lui expliquer leur fonctionnement. Puis, vous devez refactoriser la fonction `updateItems` selon les principes du code propre; sinon, vous risquez de partager le même sort que le gobelin !
+Vous devez comprendre comment les différents items se comportent et lui expliquer leur fonctionnement. Puis, vous devez refactoriser la fonction `updateItems` (et rajouter d'autres méthodes selon vos besoins) selon les principes du code propre; sinon, vous risquez de partager le même sort que le gobelin !
 
 Compiler et exécuter le code. Observer les variations de qualité des items et répondre aux questions suivantes.
 
-**Question 5** : Avant l'expiration, la qualité de `Normal Item` varie de combien par jour ? (-x si elle diminue, x si elle augmente)
+**Question 5** : Quelle est la valeur minimale de la qualité d'un item ?
 
-**Question 6** : Avant l'expiration, la qualité de `Cheese` varie de combien par jour ?
+**Question 6** : Quelle est la valeur maximale de la qualité d'un item ?
 
-**Question 7** : Avant l'expiration, la qualité de `Concert Ticket` varie de combien par jour ?
+**Question 7** : Avant la date d'expiration, la qualité de `Normal Item` varie de combien par jour ? (-x si elle diminue, x si elle augmente)
 
-**Question 8** : Avant l'expiration, la qualité de `Excalibur` varie de combien par jour ?
+**Question 8** : Avant la date d'expiration, la qualité de `Cheese` varie de combien par jour ?
 
-**Question 9** : À partir de la date d'expiration, la qualité de `Normal Item` varie de combien par jour ?
+**Question 9** : Avant la date d'expiration, la qualité de `Concert Ticket` varie de combien par jour ?
 
-**Question 10** : À partir de la date d'expiration, la qualité de `Cheese` varie de combien par jour ?
+**Question 10** : Avant la date d'expiration, la qualité de `Excalibur` varie de combien par jour ?
 
-**Question 11** : À partir de la date d'expiration, quelle est la qualité de `Concert Ticket` ?
+**Question 11** : Après la date d'expiration, la qualité de `Normal Item` varie de combien par jour ?
 
-**Question 12** : Quelle est la spécialité de `Excalibur` ?
+**Question 12** : Après la date d'expiration, la qualité de `Cheese` varie de combien par jour ?
+
+**Question 13** : Après la date d'expiration, quelle est la qualité de `Concert Ticket` ?
+
+**Question 14** : Quelle est la spécialité de `Excalibur` ?
 
 Maintenant que vous avez compris le comportement des différents items, il faut réécrire `updateItems` avec des (sous-)méthodes auxiliaires en respectant les principes vus en cours.
-- La fonction `updateItems` devrait faire seulement une chose, il s'agit de parcourir la liste des items et de faire `updateItem` pour chaque item.
-- Vu qu'il y a plusieurs types d'item différents, `updateItem` devrait identifier l'item concerné et appeler la méthode correspondante (`updateNormalItem`, `updateCheese`, ...).
+- La fonction `updateItems` devrait faire seulement parcourir la liste des items et de faire `updateItem` pour chaque item. Il ne faut pas oublier de remettre la qualité au niveaux autorisés (en appelant une méthode `resetQualityToWithinRange` après l'update par exemple).
+- Vu qu'il y a plusieurs types d'item différents, `updateItem` devrait identifier l'item concerné et appeler la méthode correspondante (par exemple `updateNormalItem`, `updateCheese`, ...). 
 - Chaque méthode `update<nom de l'item>` devrait changer les atrributs de l'item selon le comportement que vous avez observé.
+- Il faut remettre la qualité au niveau minimum (ou maximum) si nous avons descendu en dessous (ou dépasser) les niveaux possibles (rappeler vous qu'il faut éviter les [*magic numbers*](#tp2-magic-numbers)).
 
 :::{warning} Ne pas travailler sur une copie de l'objet !
 :class: dropdown
 Si vous faites `updateItem(Item item)`, alors vous allez travailler sur une copie de l'item appelé en argument. Il ne faut pas oublier de rajouter `&` (par exemple `updateItem(Item& item)`).
+:::
+
+**Question 15** : Combien de méthodes (au moins) doit-il y avoir dans `Shop` (sans compter les getters et setters) ?
+
+Comparer le code que vous avez obtenu au code initial. Si vous avez bien fait votre travail, vous devez voir tout de suite la différence de **qualité** entre les deux. 
+
+Maintenant que le nouveau propriétaire a compris comment fonctionne les items de son magasin, il pense qu'il est intéressant de vendre un item spécial dont la qualité diminue deux fois plus vite qu'un item normal mais après sa date d'expiration, sa qualité augmente de 4 par jour !
+
+Implémenter `"Special Item"` dans votre code et rajouter-le dans `main` avec les autres items.
+
+**Question 16** : Quelle est la qualité de l'item spécial lors du sixième jour ?
+
+:::{note} Facile à maintenir et modulable !
+:class: dropdown
+Normalement, le code est clair même sans commentaire. De plus, il devrait être facile de rajouter l'item spécial. C'est un signe que votre code est facile à maintenir et modulable !
 :::
