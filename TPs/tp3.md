@@ -60,7 +60,7 @@ Dans `public`, nous avons besoin d'écrire un constructeur pour `Shape` (exemple
 
 **Question 3** : Comment éviter d'utiliser les mêmes noms pour les arguments et les attributs de `Shape` ?
 
-**Question 4** : Combien de méthodes (au moins) a-t-on besoin dans `Shape` ?
+**Question 4** : Combien de méthodes (au moins) a-t-on besoin dans `Shape` (sans compter les getters et setters) ?
 
 :::{important} Tests
 :class: dropdown
