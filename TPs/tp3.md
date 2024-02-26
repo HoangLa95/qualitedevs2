@@ -210,7 +210,7 @@ Maintenant que vous avez compris le comportement des différents items, il faut 
 - La fonction `updateItems` devrait faire seulement parcourir la liste des items et de faire `updateItem` pour chaque item. Il ne faut pas oublier de remettre la qualité au niveaux autorisés (en appelant une méthode `resetQualityToWithinRange` après l'update par exemple).
 - Vu qu'il y a plusieurs types d'item différents, `updateItem` devrait identifier l'item concerné et appeler la méthode correspondante (par exemple `updateNormalItem`, `updateCheese`, ...). 
 - Chaque méthode `update<nom de l'item>` devrait changer les atrributs de l'item selon le comportement que vous avez observé.
-- Il faut remettre la qualité au niveau minimum (ou maximum) si nous avons descendu en dessous (ou dépasser) les niveaux possibles (rappeler vous qu'il faut éviter les [*magic numbers*](#tp2-magic-numbers)).
+- Dans `resetQualityToWithinRange`, il faut remettre la qualité au niveau minimum (ou maximum) si nous avons descendu en dessous (ou dépasser) les niveaux possibles (rappeler vous qu'il faut éviter les [*magic numbers*](#tp2-magic-numbers)).
 
 :::{warning} Ne pas travailler sur une copie de l'objet !
 :class: dropdown
