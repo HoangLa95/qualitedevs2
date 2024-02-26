@@ -223,7 +223,7 @@ Comparer le code que vous avez obtenu au code initial. Si vous avez bien fait vo
 
 Maintenant que le nouveau propriétaire a compris comment fonctionne les items de son magasin, il pense qu'il est intéressant de vendre un item spécial dont la qualité diminue deux fois plus vite qu'un item normal mais après sa date d'expiration, sa qualité augmente de 4 par jour !
 
-Implémenter `"Special Item"` dans votre code et rajouter-le dans `main` avec les autres items.
+`Special Item` commence avec une date d'expiration de 3 jours et une qualité de 4. Implémenter `"Special Item"` dans votre code et rajouter-le dans `main` avec les autres items.
 
 **Question 16** : Quelle est la qualité de l'item spécial lors du sixième jour ?
 
