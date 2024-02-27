@@ -141,7 +141,7 @@ Parameters:
     - firstArgument (FirstType): Description of firstArgument.
     - secondArgument (SecondType): Description of secondArgument.
 
-Return:
+Returns:
     ReturnType: Description of return value.
 */
 ReturnType function(FirstType firstArgument, SecondType secondArgument)
@@ -206,13 +206,13 @@ Add a CD.
 
 This function adds a CD.
 
-Parameters :
+Parameters:
     - title (string): The title of the CD.
     - author (string): The author of the CD.
     - numberOfTracks (int): The number of tracks on the CD.
     - durationInMinutes (int): The duration of the CD in minutes.
 
-Return:
+Returns:
     void : This function does not return anything.
 */
 void addCD(string title, string author, int numberOfTracks, int durationInMinutes)
@@ -226,11 +226,14 @@ La documentation peut-être redondante quand le code est déjà très explicite.
 /*
 Add a CD.
 
-Parameters :
+Parameters:
     - title (string)
     - author (string)
     - numberOfTracks (int)
     - durationInMinutes (int)
+
+Returns:
+    void
 */
 void addCD(string title, string author, int numberOfTracks, int durationInMinutes)
 ```
