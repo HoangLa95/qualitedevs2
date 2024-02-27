@@ -4,7 +4,7 @@
 :alt: Fonctions courtes
 :align: center
 
-Laisse-moi vous parler plus des fonctions courtes (Credits: programming-memes.com)
+Laisse-moi vous parler plus des fonctions courtes (Credits: programming-memes.com).
 ```
 
 ## La première règle du function club
