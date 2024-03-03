@@ -10,6 +10,7 @@ Si vous avez des problèmes d'Internet avec Firefox sur Debian à l'IUT d'Orsay,
 5. Cliquer sur **Paramètres...**.
 6. Cocher **Détection automatique des paramètres de proxy pour ce réseau**.
 
+(vscodium-proxy)=
 ## Configuration de proxy dans VSCodium
 
 Si vous avez l'erreur **Error while fetching extensions. XHR failed** quand vous allez dans **Extensions** (dans la barre à gauche), alors il faut changer les paramètres de proxy dans VSCodium.
