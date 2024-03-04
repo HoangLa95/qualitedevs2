@@ -31,6 +31,7 @@ parts:
     - file: TPs/tp1
     - file: TPs/tp2
     - file: TPs/tp3
+    - file: TPs/tp4
 - caption: Soutien technique
   chapters:
     - file: TechSupport/technicalProblems.md
