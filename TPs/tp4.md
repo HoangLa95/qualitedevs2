@@ -16,7 +16,9 @@ Si vous travaillez sur votre machine personnelle, vous pouvez aller sur [le site
 
 Pour avoir accès à Internet, changer le proxy avec l'aide du [soutien technique](#vscodium-proxy).
 
-Ouvrir le dossier contenant votre projet. Sur l'écran vous devez avoir l'*Editor* et tout à gauche, une barre verticale[^left_sidebar] avec *Explorer*, *Search*, *Source Control*, *Run and Debug* et *Extensions*.
+### Fonctionnalités de bases
+
+Ouvrir le dossier contenant votre projet. Sur l'écran vous devez avoir l'*Editor* et tout à gauche, une barre verticale avec *Explorer*, *Search*, *Source Control*, *Run and Debug* et *Extensions*.
 - **Editor** est un éditeur de texte de base avec de la coloration syntaxique. 
     - Cliquer sur le README généré par Git. Sur votre droite, vous devez voir une version miniature du code. Vous pouvez naviguer le code rapidement en cliquant directement sur la partie du code qui vous intéresse. 
     - En haut à droite, vous avez deux actions affichées, une qui permet de *Preview* le README (cette option existe pour les markdowns et permet de voir le rendu du fichier en temps réel). L'autre option permet de *Split* l'éditeur pour vous permettre d'avoir plusieurs fichiers ouverts en même temps. Vous pouvez faire du *Drag and Drop* de fichiers entre les deux fenêtres.
@@ -38,23 +40,40 @@ Ouvrir le dossier contenant votre projet. Sur l'écran vous devez avoir l'*Edito
     - Écrire un message de commit dans la barre **Message**. Cliquer sur **Commit**. Vous voyez apparaitre **Outgoing** et la branche **main**, ce qui indique que ces changements vont être effectués sur la branche *main*. Si vous cliquez sur le *Drop Down* à côté de *main*, vous devez voir l'entrée dans le *Timeline* correspondant à votre commit. Vous pouvez maintenant cliquer sur **Sync Changes** qui va synchroniser (pull puis push) votre dépôt local avec le dépôt distant.
 - **Run and Debug** sera étudié au TP suivant.
 - **Extensions** permet d'ajouter des extensions qui rajoutent des fonctionnalités à notre IDE.
+    - Installer l'extension **C/C++ Runner** de *franneck94*.
 
-[^left_sidebar]: ![Left Sidebar](../images/left-sidebar.png)
-
+### Compiler et exécuter
 
 Dans `hello-world.cpp`, écrire un code qui permet d'afficher `Hello World!` dans le terminal. Vous pouvez observer que des options d'autocomplétion vous sont proposées quand vous coder. L'autocomplétion est assez pratique pour éviter des erreurs en tapant des noms de variables/fonctions existantes.
 
 Cliquer droit sur le dossier `TP4` et choisir **Open in Integrated Terminal**. Vous devez voir apparaître un terminal en bas de l'écran. Comme d'habitude, vous pouvez toujours travailler directement dans le terminal que ce soit pour compiler, éxécuter ou pour utiliser Git.
 
-Compiler `hello-world.cpp` et nommer l'exécutable `hello-world.exe`. 
+Nous pouvons aussi utiliser l'extension **C/C++ Runner** pour compiler et exécuter le code.
+- Cliquer sur votre fichier `hello-world.cpp`. Maintenant, pour compiler ce fichier, vous pouvez faire **`Ctrl+Alt+b`**.
+- En haut à droite, maintenant, vous avez un bouton **Run**. Il faut choisir l'option **C/C++ Runner: Run File** pour exécuter votre code.
 
-:::{important} .gitignore
+### .gitignore
+
+À cause des fichiers de configurations et des fichiers générés lors de la compilation, notre projet est pollué avec des fichiers non voulus.
+
+Recopier les lignes suivantes et remplacer le contenu de votre `.gitignore`.
+```{code}
+*
+!*.*
+!*/
+.vscode/*
+/*/build/*
+```
+Les fichiers non voulus qui apparaissaient avec un `U` sont maintenant ignorés.
+
+:::{seealso} Comment ça marche ?
 :class: dropdown
-Vous devez voir apparaître l'éxécutable dans *Explorer* avec un `U`. À partir de maintenant, on ne va plus modifier `.gitignore` à chaque fois que l'on rajoute un exécutable (avant c'était pour vous rappeler de l'utilité de .gitignore). À la place, on va nommer tous les exécutables avec une extension `.exe` (comme `hello-world.exe`) et on va ignorer tous les fichiers avec l'extension `.exe` à l'intérieur des dossiers des TPs en rajoutant `/*/*.exe` à `.gitignore`. Enregistrer le changement et observer que le `U` à côté de `hello-world.exe` a disparu, cela indique que ce fichier a été ignoré par Git.
+- On commence avec `*` pour tout ignorer. 
+- L'expression `!*.*` indique qu'il ne faut pas ignorer les fichiers avec une extension (autrement dit, les fichiers sans extension comme les exécutables sont ignorés). 
+- L'expression `!*/` indique qu'il ne faut ignorer les dossiers.
+- L'expression `.vscode/*` indique qu'il faut ignorer tous les fichiers à l'intérieur de `.vscode`.
+- L'expression `/*/build/*` indique qu'il faut ignorer tous les fichiers à l'intérieur des `build` à l'intérieur des `/TP*/`.
 :::
-
-### Extension for cpp
-### Résolution des conflits
 
 ## Exercice : Commenter et Documenter
 
@@ -163,7 +182,7 @@ private:
 };
 ```
 
-### QCM
+<!-- ### QCM
 1. Le Timeline contient un journal de commit pour un fichier particulier, quelle commande Git permet d'afficher le "Timeline de tous les fichiers" ?
 - git timeline
 - git log (ok)
@@ -221,4 +240,4 @@ private:
 - 2 (ok)
 
 11. Combien de blocs de commentaires avez vous dans votre code amélioré ?
-- 4
+- 4 -->
