@@ -37,7 +37,7 @@ Pour créer un PAT :
 5. Choisir tous les [scopes](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#personal-access-token-scopes).
 6. Cliquer sur **Create personal access token**.
 
-:::{important} SAUVEGARDER VOTRE PAT !!!
+:::{important} **SAUVEGARDER VOTRE PAT !!!**
 Une fois que vous quittez la page de création, le PAT ne vous sera jamais rappelé. Vous allez devoir utiliser le PAT pour accéder à vos projets !
 :::
 
@@ -102,8 +102,16 @@ git clone https://<login>:<Personal Access Token>@git.iut-orsay.fr/<login>/monpr
 
 [^clone_https]: ![Clone HTTPS](../images/clone-https.png)
 
+Par exemple :
+```{code} sh
+git clone https://hla:1234thisIsYourPAT5678@git.iut-orsay.fr/hla/monprojet.git
+```
+
 :::{important} Personal Access Token
-Il faut ajouter le token que vous avez sauvegardé en haut ! Pas le nom que vous lui avez donné, ou votre mot de passe ! Ce n'est pas non plus le Feed Token que vous trouvez dans la page Access Token !
+Il faut ajouter le token que vous avez sauvegardé en haut ! 
+- **Pas le nom que vous lui avez donné !**
+- **Pas votre mot de passe !**
+- **Pas le Feed Token !** (que vous pouvez aussi trouver dans la page Access Token)
 
 Si vous n'avez pas sauvegardé votre PAT, enlever (*Revoke*) celui que vous avez déjà créé et refaire la manipulation.
 :::
@@ -126,9 +134,9 @@ Qu'observez-vous en tapant les commandes suivantes ?
 touch toto.txt
 git status
 ```
-:::{hint} Fichier non suivi
+:::{hint} Fichiers et modifications non suivis
 :class: dropdown
-Il indique que votre répertoire de travail contient un fichier **non suivi** (*untracked*). Git est un outil de versionnage : il vous permet de garder l'historique des changements des fichiers de votre projet mais pas tous les fichiers sont forcément importants. Donc, par défaut, les fichiers que vous créez ne sont pas suivis. Seul les fichiers suivis auront leur historique gardé.
+Il indique que votre répertoire de travail contient un nouveau fichier ou un fichier modifié **non suivi** (*untracked*). Git est un outil de versionnage : il vous permet de garder l'historique des changements des fichiers de votre projet mais pas tous les fichiers/modifications sont forcément importants. Donc, par défaut, les fichiers que vous créez/les modifications que vous faites ne sont pas suivis. Seul les fichiers/modifications suivis auront leur historique gardé.
 :::
 
 Ajouter une ligne dans `toto.txt` (par exemple `Hello World!`).
@@ -142,7 +150,9 @@ Vérifier `git status` encore une fois. Qu'est-ce qu'il vous indique ?
 
 Nous avons parlé d'historique des changements du projet mais comment cela fonctionne-t-il exactement ? 
 
-`git add` indique à Git que le fichier que vous avez ajouté est important (à suivre). Dans ce fichier, vous avez fait des modifications (en rajoutant `Hello World!` par exemple). Maintenant, pour créer un historique de `toto.txt`, vous devez sauvegarder ces changements.
+`git add` indique à Git que le fichier/la modification que vous avez ajouté est important (à suivre). Dans ce fichier, vous avez fait des modifications (en rajoutant `Hello World!` par exemple).
+
+Maintenant, pour créer un historique de `toto.txt`, vous devez sauvegarder ces changements.
 
 ```{code} sh
 git commit -m "Création d'un fichier important pour mon travail"
@@ -186,7 +196,7 @@ La notion de **branches** en Git permet de toujours garder une version stable d'
 
 Remettez-vous sur votre dépôt local et oublions que nous avons fait des changements sur le dépôt distant.
 
-:::{important} Commencer par synchroniser !
+:::{important} Commencer par `pull` !
 :class: dropdown
 En pratique, quand vous travailler dans un projet, très souvent entre deux sessions de travail, quelqu'un d'autre a modifié un bout de code dans votre projet. Si vous commencer votre session de travail sans d'abord synchroniser votre code, vous allez vous faire face à des conflits à résoudre (par exemple si vous aller modifier les mêmes bouts de code de façons différentes). Nous allons survoler la résolution de conflits dans ce cours mais par principe, il faut l'éviter et donc toujours commencer par `git pull` !
 :::
@@ -229,9 +239,14 @@ Finissons ce TP avec une petite réorganisation : créer un dossier TP1 dans vot
 
 :::{hint} `git add .`
 :class: dropdown
-Vous pouvez faire `git add .` pour suivre tous les nouveaux changements que vous avez fait.
-:::
+Vous pouvez faire `git add .` pour suivre tous les nouveaux changements que vous avez fait (quand vous avez créé/modifié plusieurs fichiers) **dans le dossier courant**.
 
+:::{warning} Garder un log compréhensible !
+Il est conseillé de faire des commits structurés, c'est-à-dire qu'il faut :
+- Écrire des messages de commit clairs.
+- Si vous faites des modifications différentes qui n'ont pas de rapport les uns avec les autres, alors il faut faire des `add` et `commit` séparés  (par groupe de modifications qui correspondent à une même "thème") au lieu de faire `git add .`. 
+:::
+:::
 
 :::{important} À NE PAS OUBLIER !
 Il faut ajouter votre intervenant dans votre projet !

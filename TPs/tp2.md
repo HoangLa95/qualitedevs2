@@ -11,7 +11,7 @@ Les réponses aux questions du TPs sont à remplir dans le QCM sur Moodle.
 
 **Question 1** : Par quoi faut-il commencer quand vous ouvrez votre dépôt local ?
 
-Créer un dossier `TP2` dans votre dépôt. Pour chaque exercice "Exercice n : <nom de l'exercice>", vous allez créer un fichier `<nom de l'exercice>.cpp`. 
+Créer un dossier `TP2` dans votre dépôt. Pour chaque exercice "Exercice n : Nom de l'exercice", vous allez créer un fichier `nom-de-l-exercice.cpp`. 
 
 ## Exercice 1 : Magic numbers
 
@@ -40,7 +40,13 @@ int main() {
 }
 ```
 
-Enregistrer et compiler le code avec `g++ -o <nom que vous allez donner à l'exécutable> <nom du fichier>.cpp` (par exemple `g++ -o magic-numbers magic-numbers.cpp`). Maintenant, exécuter `./magic-numbers`.
+Enregistrer et compiler le code avec `g++ -o <nom du fichier> <nom du fichier>.cpp` (par exemple `g++ -o magic-numbers magic-numbers.cpp`). 
+
+:::{note} Nom de l'exécutable
+Le premier `<nom du fichier>` dans la commande de compilation correspond au nom de l'exécutable. Dans ce cours, nous allons adopter la convention suivante : les exécutables n'auront pas d'extension. Nous reprenons aussi le nom du fichier `.cpp` par commodité.
+:::
+
+Maintenant, exécuter `./magic-numbers`.
 
 **Question 2** : Quel message s'affiche dans le terminal ?
 
@@ -67,7 +73,7 @@ Nous ne voulons pas suivre l'exécutable donc rajouter la ligne suivante au fich
 
 :::{important} git add, commit, push
 :class: dropdown
-Il est temps de suivre (*add*) vos nouveaux fichiers, les sauvegarder (*commit*) et les diffuser (*push*) sur le dépôt distant (sur le GitLab de l'IUT). Vérifier que le changement a bien été effectué sur l'application web GitLab.
+Il est temps de suivre (`add`) les changements, les sauvegarder (`commit -m`) avec un message explicite et les diffuser (`push`) sur le dépôt distant (sur le GitLab de l'IUT). Vérifier que le changement a bien été effectué sur l'application web GitLab.
 :::
 
 ### Simplification du code
@@ -95,6 +101,11 @@ return someCondition;
 Simplement, si la condition est vraie, alors on retourne `true` et si elle est fausse, on retourne `false`. `if (veriteDeLaCondition){return true;} else {return false;}` est redondant quand on peut simplement faire `return veriteDeLaCondition`.
 
 Simplifier le code précédent avec ce que vous venez de voir.
+
+:::{note} Rappel Git
+:class: dropdown
+Il est à nouveau temps de suivre (`add`) les nouveaux changements, les sauvegarder avec un message (`commit -m`), puis de les diffuser (`push`) sur le dépôt distant.
+:::
 
 ### User input
 
@@ -124,7 +135,7 @@ Modifier votre code pour permettre du *user input*. Recompiler et tester votre c
 
 :::{important} Synchroniser les dépôts
 :class: dropdown
-N'oublier pas de synchroniser vos dépôts locaux et distants de temps en temps (après chaque exercice par exemple).
+N'oublier pas de synchroniser (`add`, `commit`, `push`) vos dépôts locaux et distants de temps en temps (après chaque exercice par exemple).
 :::
 
 
@@ -353,5 +364,5 @@ Compiler et tester votre code.
 
 :::{note} Rappel
 :class: dropdown
-N'oubliez pas de maintenir votre dépôt git !
+N'oubliez pas de maintenir votre dépôt Git ! (Ajouter l'exécutable à `.gitignore`, `add`, `commit`, `push`)
 :::

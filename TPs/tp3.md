@@ -1,5 +1,10 @@
 # TP3 : Initiation à la refactorisation
 
+:::{hint} Que faut-il faire quand on commence un TP ?
+:class: dropdown
+`git pull` !!!
+:::
+
 :::{important} QCM
 :class: dropdown
 Les réponses aux questions du TPs sont à remplir dans le QCM sur Moodle.
@@ -7,7 +12,7 @@ Les réponses aux questions du TPs sont à remplir dans le QCM sur Moodle.
 
 :::{important} Git
 :class: dropdown
-Dernier rappel `git` de ce TP : `status`, `pull`, `.gitignore`, `add`, `commit`, `push`.
+Dernier rappel `git` de ce TP : `pull`, `.gitignore`, `add`, `commit`, `push`.
 :::
 
 :::{important} IDE
