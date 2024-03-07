@@ -262,6 +262,8 @@ Ce code compile et marche comme il faut. Par contre, il me fait mal au coeur. Re
 :class: dropdown
 Les `private` class member en C++ sont souvent préfixés avec `m` (par exemple `mBalance`). Le but de ce préfixe est de le différencier avec la variable locale utilisé dans le constructeur (ici `float b` que l'on pourrait renommer `float balance`) que l'on utilise pour initialiser `mBalance` (avec `mBalance(balance)` dans ce cas).
 
+Il existe aussi d'autres conventions comme commencer par `_` (par exemple `_balance`). L'idée d'utiliser la lettre `m` est qu'il existe aussi d'autres lettres avec d'autres significations et ces lettres peuvent être utilisées pour préfixer les noms des variables. Cette convention vient de la Notation Hongroise qui est devenu maintenant assez obsolète mais il y a des restes de cette notation qui sont encore utiles (par exemple l'utilisation de `m` ou pour prendre un autre exemple : `s` pour les variables statiques).
+
 Nous pourrions aussi renommer `float b` avec `float initialBalance` et garder `balance` comme nom d'attribut.
 
 Cette convention n'est pas forcément utilisée dans d'autres langages. Par exemple, dans Java et Python, on peut faire du *shadowing* où la variable locale et le membre de la classe peut avoir le même nom et la différence entre ces deux variables se font grâce à `this` (plus d'informations dans votre cours de programmation objet).
