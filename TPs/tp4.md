@@ -50,7 +50,7 @@ Dans `hello-world.cpp`, écrire un code qui permet d'afficher `Hello World!` dan
 Cliquer droit sur le dossier `TP4` et choisir **Open in Integrated Terminal**. Vous devez voir apparaître un terminal en bas de l'écran. Comme d'habitude, vous pouvez toujours travailler directement dans le terminal que ce soit pour compiler, éxécuter ou pour utiliser Git.
 
 Nous pouvons aussi utiliser l'extension **C/C++ Runner** pour compiler et exécuter le code.
-- Cliquer sur votre fichier `hello-world.cpp`. Maintenant, pour compiler ce fichier, vous pouvez faire **`Ctrl+Alt+b`**.
+- Cliquer sur votre fichier `hello-world.cpp`. Maintenant, pour compiler ce fichier, vous pouvez faire **`Ctrl+Alt+B`**.
 - En haut à droite, maintenant, vous avez un bouton **Run**. Il faut choisir l'option **C/C++ Runner: Run File** pour exécuter votre code.
 
 ### .gitignore
