@@ -53,6 +53,10 @@ Nous pouvons aussi utiliser l'extension **C/C++ Runner** pour compiler et exécu
 - Cliquer sur votre fichier `hello-world.cpp`. Maintenant, pour compiler ce fichier, vous pouvez faire **`Ctrl+Alt+B`**.
 - En haut à droite, maintenant, vous avez un bouton **Run**. Il faut choisir l'option **C/C++ Runner: Run File** pour exécuter votre code.
 
+:::{warning} Les boutons "Start Compilation" et "Run Executable" dans la bar en bas.
+Il faut faire attention à ne pas utiliser les boutons "Start Compilation" et "Run Executable" en bas si vous avez plusieurs fichiers de code d'exercices différents dans le même dossier.  
+:::
+
 ### .gitignore
 
 À cause des fichiers de configurations et des fichiers générés lors de la compilation, notre projet est pollué avec des fichiers non voulus.
