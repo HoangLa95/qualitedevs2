@@ -112,12 +112,13 @@ vector<vector<int>> getFlaggedCells(const vector<vector<int>>& gameBoard) {
 :class: dropdown
 ```{code} cpp
 class Cell {
-public:
-    static const int STATUS_VALUE = 0;
-    static const int FLAGGED = 4;
+private:
+    const int STATUS_VALUE = 0;
+    const int FLAGGED = 4;
 
     vector<int> values;
 
+public:
     // Constructeur
     //...
 
