@@ -34,4 +34,5 @@ parts:
     - file: TPs/tp4
 - caption: Soutien technique
   chapters:
-    - file: TechSupport/technicalProblems.md
+    - file: TechSupport/internetProblem.md
+    - file: TechSupport/vscodium.md
