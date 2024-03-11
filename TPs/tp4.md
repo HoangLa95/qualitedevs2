@@ -51,10 +51,12 @@ Cliquer droit sur le dossier `TP4` et choisir **Open in Integrated Terminal**. V
 
 Nous pouvons aussi utiliser l'extension **C/C++ Runner** pour compiler et exécuter le code.
 - Cliquer sur votre fichier `hello-world.cpp`. Maintenant, pour compiler ce fichier, vous pouvez faire **Ctrl+Alt+B**.
+:::{warning} Le bouton "Start Compilation" en bas
+Il faut faire attention à ne pas utiliser le bouton "Start Compilation" en bas si vous avez plusieurs fichiers de code d'exercices différents dans le même dossier.  
+:::
 - En haut à droite, maintenant, vous avez un bouton **Run**. Il faut choisir l'option **C/C++ Runner: Run File** pour exécuter votre code.
-
-:::{warning} Les boutons "Start Compilation" et "Run Executable" dans la bar en bas.
-Il faut faire attention à ne pas utiliser les boutons "Start Compilation" et "Run Executable" en bas si vous avez plusieurs fichiers de code d'exercices différents dans le même dossier.  
+:::{warning} Si vous n'avez pas le bouton Run en haut à droite...
+Il y a peut-être des différentes versions entre celle de l'IUT et ce que vous pouvez installer. Si vous n'avez pas de bouton *Run* en haut à droite, alors vous pouvez utiliser **Run Executable** dans la barre en bas.
 :::
 
 ### .gitignore
