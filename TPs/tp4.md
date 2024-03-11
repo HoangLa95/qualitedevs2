@@ -40,7 +40,7 @@ Ouvrir le dossier contenant votre projet. Sur l'écran vous devez avoir l'*Edito
     - Cliquer sur *Source Control*. Vous devez voir les nouveaux changements du projet. Vous pouvez suivre le nouveau fichier `hello-world.cpp` en cliquant sur le `+` qui indique **Stage Changes**. Il y a deux catégories de changements qui apparaissent : **Staged Changes** et **Changes**. *Staged Changes* correspond aux changements qui sont suivis. Maintenant, dans *Explorer* vous devez voir la lettre `A` apparaitre à côté de `hello-world.cpp` qui est une abbréviation de **Added**.
     - Écrire un message de commit dans la barre **Message**. Cliquer sur **Commit**. Vous voyez apparaitre **Outgoing** et la branche **main**, ce qui indique que ces changements vont être effectués sur la branche *main*. Si vous cliquez sur le *Drop Down* à côté de *main*, vous devez voir l'entrée dans le *Timeline* correspondant à votre commit. Vous pouvez maintenant cliquer sur **Sync Changes** qui va synchroniser (pull puis push) votre dépôt local avec le dépôt distant.
 - **Run and Debug** sera étudié au TP suivant.
-- **Extensions** permet d'ajouter des extensions qui rajoutent des fonctionnalités à notre IDE.
+- **Extensions** permet d'ajouter des extensions qui rajoutent des fonctionnalités à notre IDE. Si vous avez l'erreur "Error while fetching extensions. XHR failed", allez dans [Soutien Technique : VSCodium](#vscodium-proxy).
     - Installer l'extension **C/C++ Runner** de *franneck94*.
 
 ### Compiler et exécuter
