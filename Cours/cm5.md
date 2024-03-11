@@ -64,6 +64,7 @@ Les principes de la programmation robuste:
 - **Ils sont dangereux** : Il ne faut pas laisser l'utilisateur manipuler le code source. Autrement dit, il faut qu'il puisse faire ce dont il a besoin juste avec le code que l'on lui a fournit.
 - **Rien n'est impossible** : Un code peut évoluer. Une erreur que l'on pense être impossible peut arriver.
 
+(cm5-dont-catch-everything)=
 ## (Don't) Catch everything
 
 Il nous arrive souvent de devoir définir plusieurs blocs `catch` pour les différents types d'erreurs.

@@ -128,14 +128,28 @@ Finalement, avez-vous compris ce que fais ce code ?
 `letter` est une caractère mais on peut lui ajouter un entier parce qu'elle correspond aussi à une position dans la table ASCII des caractères. Ainsi, il est aussi possible de convertir un entier en caractère (s'il correspond à une position dans la table ASCII).
 :::
 
-<!-- ## Exercice 2 : Try Throw Catch
+## Exercice 2 : Try Throw Catch
+
+Écrire un programme qui permet à l'utilisateur de rentrer une valeur impaire positive `oddValue` depuis son clavier et qui retourne la somme des entiers naturels impairs de 1 jusqu'à `oddValue` inclus. Ce programme doit être accompagné d'une gestion d'erreur comme dans le [cours](#cm5-dont-catch-everything).
+
+Vous pouvez vous appuyer sur le code suivant pour commencer.
 
 ```{code} cpp
+#include <iostream>
 
+using namespace std;
+
+int sumOddNumbersUpTo(int oddValue) {
+    // TODO
+}
+
+int main() {
+    // TODO
+    
+    return 0;
+}
 ```
 
-## Exercice 3 : Special Case Pattern
+**Question 11** : Combien d'erreurs doit-on gérer (au moins) ?
 
-```{code} java
-
-``` -->
+**Question 12** : Quel type d'erreur (standard) devrait-on retourner ?
