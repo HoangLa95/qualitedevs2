@@ -48,7 +48,7 @@ try {
 
 :::{danger} `try` et `catch` sans `throw`
 :class: dropdown
-Il est possible de faire `try` et `catch` sans `throw` mais c'est très dangereux ! Vous risquez d'attraper une erreur qui n'est pas prévue. Dans ce cas, le comportement du code peut être obfusqué (on pense qu'une erreur prévue a été levée alors que c'est une erreur imprévue) et cela rend le code encore plus difficile à débugger.
+Il est possible de faire `try` et `catch` sans `throw` mais c'est très dangereux ! Vous risquez d'attraper une erreur qui n'est pas prévue. Dans ce cas, le comportement du code peut être obfusqué (on pense qu'une erreur prévue a été levée alors que c'est une erreur imprévue) et cela rend le code encore plus difficile à debugger.
 :::
 
 ## Programmation robuste
@@ -64,7 +64,7 @@ Les principes de la programmation robuste:
 - **Ils sont dangereux** : Il ne faut pas laisser l'utilisateur manipuler le code source. Autrement dit, il faut qu'il puisse faire ce dont il a besoin juste avec le code que l'on lui a fournit.
 - **Rien n'est impossible** : Un code peut évoluer. Une erreur que l'on pense être impossible peut arriver.
 
-## (Don't) catch everything
+## (Don't) Catch everything
 
 Il nous arrive souvent de devoir définir plusieurs blocs `catch` pour les différents types d'erreurs.
 
@@ -89,48 +89,18 @@ void performOperation(int value) {
 }
 ```
 
-Ou nous pouvons aussi attraper toutes les erreurs dans un seul bloc `catch` quand ils ont toujours le même comportement.
-
-```{code} cpp
-#include <iostream>
-#include <stdexcept>
-
-using namespace std;
-
-void performOperation(int value) {
-    try {
-        if (value < 0) 
-            throw invalid_argument("Negative value");
-        if (value == 0) 
-            throw runtime_error("Zero value"); 
-        cout << "Performing operation with value: " << value << endl;
-    } catch (...) {
-        cerr << "Error caught: " << error.what() << endl;
-    }
-}
-```
-:::{warning} (Don't) catch everything!
-:class: dropdown
-Il est important de gérer toutes les erreurs mais il faut faire attention quand vous faites `catch(...)`. 
-
-Il y a toujours le risque d'attraper une erreur non-prévue même si le message d'erreur permettrait de voir la différence entre une erreur prévue et une erreur non-prévue.
-
-Le plus gros risque ici est d'attraper une erreur de compilation et de perdre les informations utiles (comme l'endroit où l'erreur s'est produite) qui nous aide à débugger le code.
-
-Est-ce que ça veut dire qu'il ne faut jamais utiliser `catch(...)` ? Ça dépend ! `catch(...)` permet aussi d'éviter les redondances dans le code. Si le risque d'attraper une erreur de compilation est aussi grand que des pavés de code copiés collés alors il faut peut-être structurer les erreurs dont la gestion est la même sous une même classe ou repenser la structure de votre code.
-:::
-
 :::{important} Commencer par écrire le gestionnaire d'erreur.
 :class: dropdown
 Nous allons apprendre à écrire des **tests unitaires** dans le prochain cours. Il faut donc anticiper ces erreurs et écrire des tests avant de commencer à coder (principe du **Test Driven Development**).
 
 Les blocs `try-catch` sont nécessaires pour la gestion des erreurs utilisateurs. Vu leur nécessité et vu qu'ils dictent le *flot du code* (le code peut être interrompu pour rentrer dans `catch`, la gestion de l'exception), il faut commencer par mettre en place les blocs `try-catch` et suivre la structure imposée par le gestionnaire d'erreur.
-
-:::{danger} Ce principe est pour gérer les erreurs d'utilisateur, pas les erreurs de compilations !
-Rappel de l'importance d'utiliser `throw` avec le `catch` correspondant et le danger d'utiliser `catch(...)`.
-:::
 :::
 
+:::{danger} Ce principe est pour gérer les erreurs d'utilisateur, pas les erreurs de développeurs !
+:class: dropdown
+Il est important d'attraper toutes les erreurs d'utilisateur mais attraper des erreurs (non prévues) des développeurs peut rendre le code difficile à debugger. 
+C'est pour cela que l'on insiste sur l'importance d'utiliser `throw` avec le `catch` correspondant pour éviter d'attraper des erreurs imprévues.
+:::
 
 Consulter [C++ exceptions standard](https://en.cppreference.com/w/cpp/error/exception).
 
