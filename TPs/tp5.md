@@ -1,11 +1,11 @@
-# TP5 : Débugger et gestion des erreurs
+# TP5 : Debugger et gestion des erreurs
 
 :::{important} QCM
 :class: dropdown
 Les réponses aux questions du TPs sont à remplir dans le QCM sur Moodle.
 :::
 
-## Exercice 1 : Code à débugger
+## Exercice 1 : Code à debugger
 
 Recopier le code suivant.
 
@@ -75,9 +75,9 @@ L'exécution du programme est maintenant en pause, vous pouvez contrôler cette 
 
 **Question 3** : Quelle est la valeur de `encodedMessage` (avec les guillemets) ?
 
-- Le bouton **Step Over** (F10) permet de continuer l'exécution instruction par instruction.
+- Le bouton **Step Over** (F10) permet de continuer l'exécution instruction par instruction. Utiliser *Step Over* pour déduire la valeur de `encodeLetter(letter)` quand `letter: 's'`. 
 
-**Question 4** : Utiliser *Step Over* pour déduire la valeur de `encodeLetter(letter)` quand `letter: 's'`. Quelle est cette valeur ?
+**Question 4** : Quelle est cette valeur (avec les guillemets simples) ?
 
 - Le bouton **Step Into** (F11) permet de rentrer dans l'exécution ligne par ligne des (sous-)fonctions appellées (contrairement à *Step Over* qui exécute `encodeLetter(letter)` comme une seule instruction). Cliquer sur *Step Into* jusqu'à ce que vous rentrez dans l'itérateur `auto letter : message`. Vous allez tomber sur un autre fichier de code.
 
@@ -98,6 +98,10 @@ Les breakpoints marquent des pauses dans l'exécution du programme. Il est possi
 
 - **Hit Count** est un nombre qui permet d'activer le breakpoint une fois que l'exécution atteint ce *Hit Count* (en passant par ce breakpoint autant de fois). *Restart* l'exécution et ajoute un *Hit Count* de 15 à cette ligne 11 (`encodedMessage += encodeLetter(letter)`).
 
+:::{warning} Enlever l'*Expression* du breakpoint !
+Il est possible de combiner plusieurs conditions donc n'oubliez pas d'enlever la condition précédente si vous modifiez le même breakpoint.
+:::
+
 **Question 8** : Quelle est la valeur de `letter+key` dans *WATCH* quand le *Hit Count* est atteint ?
 
 - **Log Message** permet d'afficher dans le **DEBUG CONSOLE** en bas[^debug_console] un message à chaque fois que l'exécution passe par ce **logpoint** (breakpoint avec un *Log Message*). On ne l'appelle plus un breakpoint parce que l'exécution ne s'arrêtera pas au logpoint. Il se comporte comme un *print* donc vous avez l'habitude d'utiliser pour debugger avant de savoir comment utiliser un debugger. Vous pouvez aussi afficher des valeurs calculées grâce à `{}` : par exemple, `letter+key = {letter+key}` va afficher dans *DEBUG CONSOLE* "`letter+key = <valeur de letter+key>`" à chaque fois que l'exécution passe par ce logpoint.
@@ -105,6 +109,8 @@ Les breakpoints marquent des pauses dans l'exécution du programme. Il est possi
 **Question 9** : Grâce au *Log Message* `{letter+key}`, déterminer combien de fois `118` apparaît dans *DEBUG CONSOLE* ?
 
 - **Wait for Breakpoint** permet d'activer un breakpoint seulement quand un autre breakpoint a été activé. Enlever les breakpoints courants. Remettre un breakpoint à la ligne 11 avec l'*Expression* `letter+key==104`. Ajouter un autre breakpoint à la ligne 20 (correspondant à `letter += key`) avec la condition *Wait for Breakpoint* et ajouter l'autre breakpoint. Faire tourner la session de Debug et observer le comportement des breakpoints.
+
+**Question 10** : Quelle est la valeur de `letter` quand le breakpoint de la ligne 20 est activé pour la première fois ?
 
 [^debug_bar]: ![Debug Bar](../images/debug-bar.png)
 
@@ -114,6 +120,13 @@ Vous pouvez bien sûr combiner les conditions sur les breakpoints pour debugger 
 - Il est possible de cliquer droit sur un endroit du programme pour ajouter un **inline breakpoint**. Ceci peut être plus précis que mettre le breakpoint toujours en bout de ligne.
 - Vous pouvez cliquer droit sur un breakpoint pour faire **Disable Breakpoint**. C'est aussi possible de faire la section **BREAKPOINTS** de la barre à gauche en cochant ou en décochant un breakpoint (l'endroit du breakpoint est indiqué à sa droite).
 - Vous pouvez regarder la [documentation du debugger](https://code.visualstudio.com/docs/editor/debugging) pour plus d'informations.
+
+Finalement, avez-vous compris ce que fais ce code ?
+
+:::{seealso} [Caractères ASCII](https://en.cppreference.com/w/cpp/language/ascii)
+:class: dropdown
+`letter` est une caractère mais on peut lui ajouter un entier parce qu'elle correspond aussi à une position dans la table ASCII des caractères. Ainsi, il est aussi possible de convertir un entier en caractère (s'il correspond à une position dans la table ASCII).
+:::
 
 <!-- ## Exercice 2 : Try Throw Catch
 
