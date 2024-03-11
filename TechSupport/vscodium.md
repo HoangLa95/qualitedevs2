@@ -12,7 +12,7 @@ Si vous avez l'erreur **Error while fetching extensions. XHR failed** quand vous
 
 (vscodium-debugger)=
 ## C/C++ Runner Debugger setup
-Il faut changer le fichier de configuration `launch_template.json`. 
+Il faut changer le fichier de configuration `launch_template.json`. Cette manipulation du code source est pour changer la configuration par défaut du debugger de C/C++ Runner.
 
 **Pour le retrouver à travers un terminal :**
 ```{code} sh
@@ -23,7 +23,7 @@ Si `.vscode-oss` ne se trouve pas dans `~/`, vous pouvez essayer de suivre les �
 
 **À travers un navigateur :**
 - Rendez-vous sur `home` ou votre dossier personnel.
-- Appuyer sur `Ctrl+H` pour voir les dossiers cachés (les dossiers de configurations qui commencent par `.` comme `.vscode-oss` sont cachés).
+- Appuyer sur *Ctrl+H* pour voir les dossiers cachés (les dossiers de configurations qui commencent par `.` comme `.vscode-oss` sont cachés).
 - Aller dans `.vscode-oss` puis, `extensions`, `franneck94.c-cpp-runner-9.4.7-universal` et finalement `templates`.
 
 **Remplacer le contenu de `launch_template.json` par :**
