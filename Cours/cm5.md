@@ -28,8 +28,7 @@ try {
   
   //Throw an exception when encoutering user error
   throw(exception); 
-}
-catch (ExceptionType exception) {
+} catch (ExceptionType exception) {
   // Code to handle errors
 }
 ```
@@ -42,8 +41,7 @@ try {
     cout << "Access granted" << endl;
   else
     throw(age); 
-}
-catch (int age) {
+} catch (int age) {
   cerr << "Access denied: you must be at least 18 years old." << endl;
 }
 ```
@@ -83,10 +81,10 @@ void performOperation(int value) {
         if (value == 0) 
             throw runtime_error("Zero value"); 
         cout << "Performing operation with value: " << value << endl;
-    } catch (invalid_argument& e) {
-        cerr << "Invalid argument error caught: " << e.what() << endl;
-    } catch (runtime_error& e) {
-        cerr << "Runtime error caught: " << e.what() << endl;
+    } catch (invalid_argument& error) {
+        cerr << "Invalid argument error caught: " << error.what() << endl;
+    } catch (runtime_error& error) {
+        cerr << "Runtime error caught: " << error.what() << endl;
     }
 }
 ```
@@ -107,7 +105,7 @@ void performOperation(int value) {
             throw runtime_error("Zero value"); 
         cout << "Performing operation with value: " << value << endl;
     } catch (...) {
-        cerr << "Error caught: " << e.what() << endl;
+        cerr << "Error caught: " << error.what() << endl;
     }
 }
 ```
@@ -179,7 +177,7 @@ Le code suivant est en Java parce que nous allons utiliser le concept d'**interf
 try {
     MealExpenses expenses = expenseReportDAO.getMeals(employee.getID());
     total += expenses.getTotal();
-} catch(MealExpensesNotFound e) {
+} catch(MealExpensesNotFound error) {
     total += getMealPerDiem();
 }
 ```
