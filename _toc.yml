@@ -32,6 +32,7 @@ parts:
     - file: TPs/tp2
     - file: TPs/tp3
     - file: TPs/tp4
+    - file: TPs/tp5
 - caption: Soutien technique
   chapters:
     - file: TechSupport/internetProblem.md
