@@ -155,6 +155,6 @@ int main() {
 }
 ```
 
-**Question 11** : Combien d'erreurs doit-on gérer (au moins) ?
+**Question 10** : Combien d'erreurs doit-on gérer (au moins) ?
 
-**Question 12** : Quel type d'erreur (standard) devrait-on retourner ?
+**Question 11** : Quel type d'erreur (standard) devrait-on retourner ?
