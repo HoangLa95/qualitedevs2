@@ -110,7 +110,12 @@ Il est possible de combiner plusieurs conditions donc n'oubliez pas d'enlever la
 
 - **Wait for Breakpoint** permet d'activer un breakpoint seulement quand un autre breakpoint a été activé. Enlever les breakpoints courants. Remettre un breakpoint à la ligne 11 avec l'*Expression* `letter+key==104`. Ajouter un autre breakpoint à la ligne 20 (correspondant à `letter += key`) avec la condition *Wait for Breakpoint* et ajouter l'autre breakpoint. Faire tourner la session de Debug et observer le comportement des breakpoints.
 
-**Question 10** : Quelle est la valeur de `letter` quand le breakpoint de la ligne 20 est activé pour la première fois ?
+:::{warning} Si vous n'avez pas Wait for Breakpoint...
+:class: dropdown
+La version de VSCodium de l'IUT n'est pas la dernière version disponible donc si vous faites le TP à l'IUT, vous n'avez peut-être pas cette option.
+:::
+
+<!-- **Question 10** : Quelle est la valeur de `letter` quand le breakpoint de la ligne 20 est activé pour la première fois ? -->
 
 [^debug_bar]: ![Debug Bar](../images/debug-bar.png)
 
