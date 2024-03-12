@@ -3,7 +3,7 @@
 :alt: WTF per minute
 :align: center
 
-La seule mesure valide de la qualité d'un code : WTFs/minutes (Credits: osnews.com)
+Credits: osnews.com
 ```
 
 ## Pourquoi coder proprement ?

@@ -4,7 +4,7 @@
 :alt: Commentaires dans un code
 :align: center
 
-Les commentaires dans un code (Credits: Programmers Memes).
+Credits: Programmers Memes.
 ```
 ## Bons commentaires
 

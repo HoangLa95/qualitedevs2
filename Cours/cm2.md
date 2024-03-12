@@ -9,7 +9,7 @@ Tous les cours qui suivent vont vous donner une école de pensée sur le "code p
 :alt: Nom de variable expressif
 :align: center
 
-Quand je cherche un nom de variable expressif (Credits: thecodinglove.com)
+Credits: thecodinglove.com
 ```
 (cm2-camel-case)=
 ## camelCase

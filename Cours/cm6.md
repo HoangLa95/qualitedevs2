@@ -1,10 +1,10 @@
 # Comment tester le code ?
 
-```{figure} ../images/unit-testing.jpg
-:alt: Tests unitaires
+```{figure} ../images/tdd.jpg
+:alt: TDD
 :align: center
 
-Je trouve votre manque de tests unitaires pertubant (Credits: [Emanuil Slavov](https://emanuilslavov.com/on-unit-tests/)).
+Credits: imgflip.com/memegenerator
 ```
 
 ## Tests unitaires

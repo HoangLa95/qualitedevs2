@@ -4,12 +4,12 @@
 :alt: Gestion des erreurs
 :align: center
 
-Si tout le code est dans une seule procédure, alors on a besoin d'un seul gestionnaire d'erreurs (Credits: Mike Wolfe, No Longet Set).
+Credits: Mike Wolfe, No Longet Set.
 ```
-:::{danger} Si ce n'est pas clair, ce meme n'est pas un principe de code propre !
+:::{danger} Ce meme n'est pas un principe de code propre !
 :class: dropdown
-- Mon collègue : Combien est-tu prêt à parier que les étudiants suivront ce "conseil" pour gérer les erreurs ?
-- Moi : ... *ajoute un bloc "danger" dans le cours*
+- **Mon collègue** : Combien est-tu prêt à parier que les étudiants suivront ce "conseil" pour gérer les erreurs ?
+- **Moi** : ... *ajoute un bloc "danger" dans le cours*
 :::
 
 Il y a plusieurs types d'erreurs :

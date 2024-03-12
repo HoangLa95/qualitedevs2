@@ -1,10 +1,10 @@
 # Comment écrire une fonction ?
 
 ```{figure} ../images/small-functions.jpg
-:alt: Fonctions courtes
+:alt: Les fonctions courtes
 :align: center
 
-Laisse-moi vous parler plus des fonctions courtes (Credits: programming-memes.com).
+Credits: imgflip.com/memegenerator
 ```
 
 ## La première règle du function club
