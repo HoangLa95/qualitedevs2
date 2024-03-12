@@ -29,7 +29,7 @@ TEST(factorialTest, handlesSomePositiveInput) {
 Convention générale de nommage :
 
 ```{code} cpp
-functionType function();
+FunctionType function();
 
 TEST(functionTest, firstTestName) {
     // First Test
