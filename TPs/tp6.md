@@ -75,7 +75,7 @@ cmake --build build
 ```
 
 :::{important} .gitignore
-;class: dropdown
+:class: dropdown
 Corriger votre [.gitignore](#tp4-gitignore).
 :::
 
