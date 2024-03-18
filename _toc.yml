@@ -33,6 +33,7 @@ parts:
     - file: TPs/tp3
     - file: TPs/tp4
     - file: TPs/tp5
+    - file: TPs/tp6
 - caption: Soutien technique
   chapters:
     - file: TechSupport/internetProblem.md
