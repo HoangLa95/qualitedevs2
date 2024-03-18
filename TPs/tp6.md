@@ -1,4 +1,4 @@
-# TP6 : Test Driven Development
+# TP6 : Tests Driven Development
 
 :::{important} QCM
 :class: dropdown
@@ -73,6 +73,11 @@ Compiler le projet avec les commandes suivantes.
 cmake -S . -B build
 cmake --build build
 ```
+
+:::{important} .gitignore
+;class: dropdown
+Corriger votre [.gitignore](#tp4-gitignore).
+:::
 
 Avec *C++ TestMate*, vous devez voir un onglet **Testing** dans la barre à gauche. Cliquer sur *Testing*. Vous devez voir les tests unitaires et vous pouvez les faire tourner[^testing].
 
