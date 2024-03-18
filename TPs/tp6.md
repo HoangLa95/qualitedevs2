@@ -211,25 +211,25 @@ TEST(RomanToDecimalTest, IMShouldFail) {
 
 2. Pour passer ce test, il faut écrire un gestionnaire d'erreur.
 
-3. Écrire des tests pour chaque lettre romain (I, V, X, L, C, D, M).
+3. Écrire un test pour les lettres romains (I, V, X, L, C, D, M).
 
-4. Passer ces tests en remplissant `romanLetters`.
+4. Passer le test en remplissant `romanLetters`.
 
-5. Écrire des tests pour des nombres qui nécessitent pas de soustractions.
+5. Écrire un test pour des nombres qui nécessitent pas de soustractions.
 
-6. Passer ces tests.
+6. Passer ce test.
 
-7. Écrire des tests pour des nombres à deux lettres qui nécessitent une soustraction.
+7. Écrire un tests pour des nombres à deux lettres qui nécessitent une soustraction.
 
-8. Passer ces tests.
+8. Passer ce test.
 
-9. Écrire des tests pour des faux nombres à deux lettres (avec `EXPECT_NO_FATAL_FAILURE`).
+9. Écrire un tests pour des faux nombres à deux lettres (avec `EXPECT_NO_FATAL_FAILURE`).
 
-10. Passer ces tests en levant un erreur.
+10. Passer ce test en levant un erreur.
 
 11. Refactoriser en rajoutant à `romanLetters` les paires de lettres autorisées quand on détecte une soustraction à faire (IV, IX, XL, XC, CD, CM).
 
-12. Écrire d'autres tests et essayer de les passer jusqu'à ce que vous obtenez un code juste.
+12. Écrire d'autres tests et essayer de les passer jusqu'à ce que vous obtenez un code qui fonctionne.
 
 Pour vous aider, voici un tableau avec tous les nombres romains entre 1 et 1000 :
 ```{code} cpp
