@@ -59,6 +59,7 @@ Il faut faire attention à ne pas utiliser le bouton "Start Compilation" en bas 
 Il y a peut-être des différentes versions entre celle de l'IUT et ce que vous pouvez installer. Si vous n'avez pas de bouton *Run* en haut à droite, alors vous pouvez utiliser **Run Executable** dans la barre en bas.
 :::
 
+(tp4-gitignore)=
 ### .gitignore
 
 À cause des fichiers de configurations et des fichiers générés lors de la compilation, notre projet est pollué avec des fichiers non voulus.
@@ -68,8 +69,8 @@ Recopier les lignes suivantes et remplacer le contenu de votre `.gitignore`.
 *
 !*.*
 !*/
-.vscode/*
-/*/build/*
+.vscode/
+build/
 ```
 Les fichiers non voulus qui apparaissaient avec un `U` sont maintenant ignorés.
 
@@ -78,8 +79,8 @@ Les fichiers non voulus qui apparaissaient avec un `U` sont maintenant ignorés.
 - On commence avec `*` pour tout ignorer. 
 - L'expression `!*.*` indique qu'il ne faut pas ignorer les fichiers avec une extension (autrement dit, les fichiers sans extension comme les exécutables sont ignorés). 
 - L'expression `!*/` indique qu'il ne faut ignorer les dossiers.
-- L'expression `.vscode/*` indique qu'il faut ignorer tous les fichiers à l'intérieur de `.vscode`.
-- L'expression `/*/build/*` indique qu'il faut ignorer tous les fichiers à l'intérieur des `build` à l'intérieur des `/TP*/`.
+- L'expression `.vscode/` indique qu'il faut ignorer tout ce qui se trouve à l'intérieur du dossier `.vscode`.
+- L'expression `build/` indique qu'il faut ignorer tout ce qui se trouve à l'intérieur d'un dossier nommé `build`.
 :::
 
 ## Exercice : Commenter et Documenter
