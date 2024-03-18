@@ -74,9 +74,9 @@ cmake -S . -B build
 cmake --build build
 ```
 
-Avec *C++ TestMate*, vous devez voir un onglet **Testing** dans la barre à gauche. Cliquer sur *Testing*. Vous devez voir les tests unitaires et vous pouvez les faire tourner [^testing].
+Avec *C++ TestMate*, vous devez voir un onglet **Testing** dans la barre à gauche. Cliquer sur *Testing*. Vous devez voir les tests unitaires et vous pouvez les faire tourner[^testing].
 
-[^testing] : ![Testing](../images/testing.png)
+[^testing]: ![Testing](../images/testing.png)
 
 Le test passe normalement. Maintenant, voyons ce qui se passe quand un test échoue.
 - Enlever l'espace dans `"Hello World!"` dans le test `saysHelloWorld`.
