@@ -65,6 +65,7 @@ Il y a peut-être des différentes versions entre celle de l'IUT et ce que vous 
 À cause des fichiers de configurations et des fichiers générés lors de la compilation, notre projet est pollué avec des fichiers non voulus.
 
 Recopier les lignes suivantes et remplacer le contenu de votre `.gitignore`.
+(tp4-gitignore)=
 ```{code}
 *
 !*.*
