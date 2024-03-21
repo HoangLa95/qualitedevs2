@@ -146,6 +146,146 @@ Vous pouvez regarder [la documentation de Google Test](https://google.github.io/
 
 ## TDD
 
+:::{seealso} The Password Game
+:class: dropdown
+Le principe du TDD est bien illustré par [The Password Game](https://neal.fun/password-game/).
+:::
+
+### Fizz-Buzz
+
+:::{note} Disclaimer
+:class: dropdown
+L'exercice suivant est simple. Le but n'est pas de résoudre le problème algorithmique. Le but est d'apprendre à écrire des tests unitaires et le workflow du TDD.
+:::
+
+Nous voulons écrire une fonction `fizzBuzz` qui prend en entrée un entier qui retourne une chaîne de caractère selon les règles suivantes:
+1. Si l'entier est divisible par 3, alors le résultat doit contenir un `Fizz`.
+2. Si l'entier est divisible par 5, alors le résultat doit contenir un `Buzz`.
+3. Si l'entier contient un 3, alors le résultat doit contenir un `Fizz`.
+4. Si l'entier contient un 5, alors le résultat doit contenir un `Buzz`.
+5. Si l'entier ne vérifie aucune des règles précédentes, alors le résultat contient juste l'entier en question.
+6. Chaque `Fizz` et `Buzz` doivent correspondre à exactement une règle.
+7. Les `Fizz` viennent toujours avant les `Buzz`.
+8. Le résultat ne peut pas contenir plus de caractères que le minimum nécessaire pour respecter les règles. 
+
+Par exemple,
+- `1` doit retourner `"1"`.
+- `3` doit retourner `"FizzFizz"`.
+- `5` doit retourner `"BuzzBuzz"`.
+- `21` doit retourner `"Fizz"`.
+- `35` doit retourner `"FizzBuzzBuzz"`.
+- `3555` doit retourner `"FizzFizzBuzzBuzz"`.
+
+Pour commencer, nous allons ajouter `#include<string>` à `kataTDD.cpp` et la fonction suivante.
+```{code} cpp
+string fizzBuzz(int number) {
+  string result = "";
+  return result;
+}
+```
+
+Dans `kataTDD_test.cpp`, nous allons ajouter un test simple qui correspond à la règle 5[^5].
+```{code} cpp
+TEST(fizzBuzzTest, 1ShouldReturn1) {
+  EXPECT_EQ(fizzBuzz(1), "1");
+}
+```
+
+Nous pouvons compiler avec `cmake --build build` et faire tourner le test. Il échoue donc maintenant nous allons écrire le code pour faire passer le test.
+```{code} cpp
+string fizzBuzz(int number) {
+  string result = "1";
+  return result;
+}
+```
+
+Recompiler et refaire tourner le test. Il doit passer. Maintenant, nous pouvons écrire un autre test plus complexe qui vérifie la règle 5[^5].
+```{code} cpp
+TEST(fizzBuzzTest, theseShouldReturnTheSameNumbers) {
+  EXPECT_EQ(fizzBuzz(2), "2");
+  EXPECT_EQ(fizzBuzz(4), "4");
+  EXPECT_EQ(fizzBuzz(7), "7");
+  EXPECT_EQ(fizzBuzz(8), "8");
+  EXPECT_EQ(fizzBuzz(11), "11");
+  EXPECT_EQ(fizzBuzz(1111), "1111");
+  EXPECT_EQ(fizzBuzz(11111), "11111");
+}
+```
+
+:::{warning} Recompiler et tester à chaque modification
+:class: dropdown
+Ceci ne sera pas rappelé mais il faut le faire à chaque étape.
+:::
+
+Pour passer ce test, nous devons modifier le code de la façon suivante.
+```{code} cpp
+string fizzBuzz(int number) {
+  string result = to_string(number);
+  return result;
+}
+```
+
+Maintenant, vérifions la règle 3[^3] avec le test suivant.
+```{code} cpp
+TEST(fizzBuzzTest, theseShouldReturnFizzByRule1) {
+  EXPECT_EQ(fizzBuzz(6), "Fizz");
+  EXPECT_EQ(fizzBuzz(9), "Fizz");
+  EXPECT_EQ(fizzBuzz(12), "Fizz");
+  EXPECT_EQ(fizzBuzz(18), "Fizz");
+  EXPECT_EQ(fizzBuzz(21), "Fizz");
+  EXPECT_EQ(fizzBuzz(111), "Fizz");
+}
+```
+
+Ce test doit échouer. Écrivons le code correspondant.
+```{code} cpp
+string fizzBuzz(int number) {
+  string result; 
+  if (number % 3 ==0) 
+    result = "Fizz";  
+  else
+    result = to_string(number);
+  return result;
+}
+```
+
+Continuer le TDD en écrivant d'abord le test puis le code correspondant jusqu'à ce que vous vérifiez toutes les règles.
+
+:::{hint} Comment concaténer des chaînes de caractères ?
+:class: dropdown
+```{code} cpp
+string result = "Fizz";
+result += "Fizz";
+```
+La valeur de `result` est maintenant `"FizzFizz"`.
+:::
+
+:::{hint} Comment vérifier si un nombre contient un chiffre ?
+:class: dropdown
+Voici une condition pour vérifier si `number` contient `3`.
+```{code} cpp
+to_string(number).find("3")!=string::npos
+```
+:::
+
+Est-ce que votre code suit bien les principes de code propre que nous avons vu ?
+
+
+[^1]: Si l'entier est divisible par 3, alors le résultat doit contenir un `Fizz`.
+[^2]: Si l'entier est divisible par 5, alors le résultat doit contenir un `Buzz`.
+[^3]: Si l'entier contient un 3, alors le résultat doit contenir un `Fizz`.
+[^4]: Si l'entier contient un 5, alors le résultat doit contenir un `Buzz`.
+[^5]: Si l'entier ne vérifie aucune des règles précédentes, alors le résultat contient juste l'entier en question.
+[^6]: Chaque `Fizz` et `Buzz` doivent correspondre à exactement une règle.
+[^7]: Les `Fizz` viennent toujours avant les `Buzz`.
+[^8]: Le résultat ne peut pas contenir plus de caractères que le minimum nécessaire pour respecter les règles.
+
+### Les nombres romains
+
+:::{important} Bonus
+Cet exercice est devenu un bonus mais les questions du QCM sur la syntaxe de C++ sont obligatoires.  
+:::
+
 Nous allons utiliser le TDD pour écrire une fonction qui prend une chiffre romain en entrée et qui retourne le nombre correspondant en décimal.
 
 Ajouter le code suivant à votre fichier `kataTDD.cpp`.
@@ -206,7 +346,7 @@ Dans cet exercice, vous allez manipuler la classe [`string`](https://en.cpprefer
 
 **Question 5** : Comment vérifier qu'un élément n'est pas dans `unordered_map` avec `find` ?
 
-1. Commencer par écrire un test qui échoue quand on rentre une string qui n'est pas un nombre romain.
+<!-- 1. Commencer par écrire un test qui échoue quand on rentre une string qui n'est pas un nombre romain.
 ```{code} cpp
 TEST(RomanToDecimalTest, IMShouldFail) {
   RomanToDecimal romanNumeral("IM");
@@ -338,7 +478,7 @@ vector<string> values = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX",
   "CMLXXVI", "CMLXXVII", "CMLXXVIII", "CMLXXIX", "CMLXXX", "CMLXXXI", "CMLXXXII", "CMLXXXIII", "CMLXXXIV",
   "CMLXXXV", "CMLXXXVI", "CMLXXXVII", "CMLXXXVIII", "CMLXXXIX", "CMXC", "CMXCI", "CMXCII", "CMXCIII",
   "CMXCIV", "CMXCV", "CMXCVI", "CMXCVII", "CMXCVIII", "CMXCIX", "M"};
-```
+``` -->
 
 
 
