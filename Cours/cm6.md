@@ -71,6 +71,8 @@ Le workflow du TDD (Credits: Medium.com).
 5. Refactoriser le code tout en gardant les mêmes fonctionnalités (en testant constamment).
 :::
 
+Ce principe est bien illustré par [The Password Game de NEAL.FUN](https://neal.fun/password-game/) !
+
 ## Principes du test propre
 
 :::{important} Un seul concept par test
