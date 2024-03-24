@@ -154,6 +154,3 @@ Write something here on GitLab Web IDE and something else locally without pullin
 
 Add et commit la version finale puis vous pouvez finir avec `git push`. 
 
-
-
-
