@@ -26,7 +26,7 @@ camelCase (Credits: wikipedia.com)
 Nous allons utiliser la convention **camelCase** où la première lettre de la variable commence toujours par une minuscule et tous les mots qui suivent commencent par une majuscule.
 :::
 
-:::{seealso} Autres conventions
+:::{important} Variables globales et classes
 :class: dropdown
 1. `VARIABLE_GLOBALE` :
 Les variables globales doivent être en majuscule et les mots sont séparés par des underscores(`_`).
@@ -37,7 +37,7 @@ Une classe doit commencer par une majuscule.
 (cm2-nom-revelateur)=
 ## Utiliser des noms révélateurs d'intention
 
-Un nom de variable (entre autre) doit répondre aux trois questions suivantes :
+Un nom de variable (fonction, classe, ...) doit répondre aux trois questions suivantes :
 1. Pourquoi elle existe ?
 2. Qu'est-ce qu'elle fait ?
 3. Comment est-elle utilisée ?
