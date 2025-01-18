@@ -1,17 +1,19 @@
 # TP1 : Découvrir Git et GitLab
 
 :::{note} Disclaimer
+:class: dropdown
 Le tutoriel est en français, mais de nombreux mots-clés sont en Anglais. Il est essentiel de vous familiariser avec le langage informatique ainsi qu'avec les documentations techniques, qui sont majoritairement rédigées en anglais. 
 :::
 
 Avant de commencer à coder, il est important de se familiariser avec les outils permettant d'organiser votre travail de programmation.
 
-## Introduction à Git et GitLab
-
+:::{seealso} Git
 [Git](https://fr.wikipedia.org/wiki/Git) est un outil de [gestion des versions](https://fr.wikipedia.org/wiki/Gestion_de_versions) largement utilisé. Il est déjà installé sur les machines du département. Si vous travaillez sur votre propre machine personnelle, vous pouvez l'[installer gratuitement](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+:::
 
-
+:::{seealso} GitLab
 [GitLab](https://fr.wikipedia.org/wiki/GitLab) est une plateforme qui vous permet de stocker vos projets, de les synchroniser entre votre différentes machines (poste de l'IUT, ordinateur personnel) et de les partager avec vos collaborateurs.
+:::
 
 ## Activation de votre compte GitLab
 
@@ -36,21 +38,31 @@ Pour créer un PAT :
 :align: center
 ```
 
-2. Choisir **Access Tokens**[^access_token_menu] dans la barre à gauche.
-3. Ajouter un token en cliquant sur **Add new token**[^add_new_token].
-4. Ajouter un nom et une date d'expiration d'un an (le maximum possible) après la date d'aujourd'hui.
-5. Choisir tous les [scopes](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#personal-access-token-scopes).
-6. Cliquer sur **Create personal access token**.
+2. Dans le menu de gauche, cliquez sur **Access Tokens**.
 
-:::{important} **SAUVEGARDER VOTRE PAT !!!**
-Une fois que vous quittez la page de création, le PAT ne vous sera jamais rappelé. Vous allez devoir utiliser le PAT pour accéder à vos projets !
+```{image} ../images/access-token-menu.png
+:alt: Access Tokens
+:align: center
+```
+
+3. Ajouter un nouveau token en cliquant sur **Add new token**.
+
+```{image} ../images/add-new-token.png
+:alt: Add new token
+:align: center
+```
+
+4. Donnez un nom au token et définissez une date d'expiration d'un an (la durée maximale autorisée) à partir de la date d'aujourd'hui.
+5. Sélectionnez tous les [scopes](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#personal-access-token-scopes).
+6. Cliquez sur **Create personal access token**.
+
+:::{important} SAUVEGARDER VOTRE PAT !!!
+Une fois que vous quittez la page de création, le PAT ne pourra plus être affiché. Il est indispensable de le conserver, car vous en aurez besoin pour accéder à vos projets !
 :::
 
-Vous pouvez créer autant de PAT que vous voulez (une par machine par exemple).
-
-[^access_token_menu]: ![Access Token Menu](../images/access-token-menu.png)
-
-[^add_new_token]: ![Add New Token](../images/add-new-token.png)
+:::{note} Un PAT par poste de travail
+Vous devez créer un PAT distinct pour chaque poste de travail que vous utilisez. Il est possible de créer autant de PAT que nécessaire.
+:::
 
 ## Créer votre premier projet sur le dépôt distant
 
