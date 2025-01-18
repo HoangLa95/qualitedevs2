@@ -21,21 +21,21 @@ parts:
 - caption: Cours
   chapters:
     - file: Cours/cm1
-    - file: Cours/cm2
-    - file: Cours/cm3
-    - file: Cours/cm4
-    - file: Cours/cm5
-    - file: Cours/cm6
+    # - file: Cours/cm2
+    # - file: Cours/cm3
+    # - file: Cours/cm4
+    # - file: Cours/cm5
+    # - file: Cours/cm6
 - caption: Travaux Pratiques
   chapters: 
     - file: TPs/tp1
-    - file: TPs/tp2
-    - file: TPs/tp3
-    - file: TPs/tp4
-    - file: TPs/tp5
-    - file: TPs/tp6
-    - file: TPs/tp7
+    # - file: TPs/tp2
+    # - file: TPs/tp3
+    # - file: TPs/tp4
+    # - file: TPs/tp5
+    # - file: TPs/tp6
+    # - file: TPs/tp7
 - caption: Soutien technique
   chapters:
     - file: TechSupport/internetProblem.md
-    - file: TechSupport/vscodium.md
+    # - file: TechSupport/vscodium.md
