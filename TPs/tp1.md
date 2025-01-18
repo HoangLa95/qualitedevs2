@@ -52,9 +52,10 @@ Pour créer un PAT :
 :align: center
 ```
 
-4. Donnez un nom au token et définissez une date d'expiration d'un an (la durée maximale autorisée) à partir de la date d'aujourd'hui.
-5. Sélectionnez tous les [scopes](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#personal-access-token-scopes).
-6. Cliquez sur **Create personal access token**.
+4. Donnez un nom au token qui reflète le poste de travail utilisé (par exemple `IUTOrsay` si vous travaillez sur un poste à l'IUT).
+5. Définissez une date d'expiration d'un an (la durée maximale autorisée) à partir de la date d'aujourd'hui.
+6. Sélectionnez tous les [scopes](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#personal-access-token-scopes).
+7. Cliquez sur **Create personal access token**.
 
 :::{important} SAUVEGARDER VOTRE PAT !!!
 Une fois que vous quittez la page de création, le PAT ne pourra plus être affiché. Il est indispensable de le conserver, car vous en aurez besoin pour accéder à vos projets !
