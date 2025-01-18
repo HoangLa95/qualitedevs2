@@ -65,38 +65,50 @@ Une fois que vous quittez la page de création, le PAT ne pourra plus être affi
 Vous devez créer un PAT distinct pour chaque poste de travail que vous utilisez. Il est possible de créer autant de PAT que nécessaire.
 :::
 
-## Créer votre premier projet sur le dépôt distant
+## Création d'un dépôt distant
 
-Vous pouvez maintenant créer votre premier projet/dépôt (*repository*)[^create_new_project] en cliquant sur `+` en haut à gauche.
+1. Créez votre premier projet/dépôt (*repository*) en cliquant sur le bouton `+` en haut à gauche.
 
-[^create_new_project]: ![Create New Project](../images/create-new-project.png)
+```{image} ../images/create-new-project.png
+:alt: Create new project
+:align: center
+```
 
-Créer un projet vide avec un nom pertinent (par exemple `qualite-dev-s2-prenom-nom`).
+2. Créez un projet vide avec le nom `qualite-dev-s2-<prenom>-<nom>` (par exemple `qualite-dev-s2-hoang-la`).
 
 :::{warning} Attention !
-Le projet que vous allez créer va contenir tous les TPs de ce cours. Vous n'allez pas créer un nouveau projet par TP.
+Le projet que vous allez créer contiendra tous les TPs de ce cours. Vous ne devez pas créer un nouveau projet pour chaque TP.
 :::
 
-:::{important} MonProjet
-Dans la suite, nous allons appeler ce projet **MonProjet**. Il ne faut pas oublier de le remplacer avec le nom que vous avez choisi.
+:::{important} `monprojet`
+Dans la suite, nous appellerons ce projet `monprojet`. N'oubliez pas de le remplacer par le nom que vous avez choisi.
 :::
 
-Choisir le niveau de visibilité privé pour votre projet et l'option d'initialiser le projet avec un README.
+3. Sélectionnez l'option de visibilité "Privé" pour votre projet et cochez l'option pour initialiser le projet avec un README.
 
-:::{note} README.md
-:class: dropdown
-Avoir un README en [Markdown](https://fr.wikipedia.org/wiki/Markdown) dans un projet est une pratique standard. Ce README sert comme une description du projet.  
+:::{important} README.md
+Avoir un README en [Markdown](https://fr.wikipedia.org/wiki/Markdown) dans un projet est une pratique standard. Ce fichier sert de description du projet.  
 :::
 
-Parcourir le README et regarder le README par défaut proposé par GitLab.
+4. Parcourez le README par défaut proposé par GitLab.
 
 :::{important} Linux
-Ce qui suit est fait pour Linux. Il faut adapter les commandes Unix pour Mac OS. Pour Windows, vous pouvez installer l'émulateur [Git for Windows](https://gitforwindows.org/) qui simule Git comme si vous étiez sous Linux (ou d'autres outils similaires).
+Les instructions suivantes sont destinées à Linux. Vous êtes **fortement conseillé** d'utiliser Debian (une distribution open source Linux) à l'IUT.
 
-Si vous n'êtes pas à l'aise avec les commandes depuis le terminal sur Linux, n'oubliez pas que vous pouvez toujours utiliser un gestionnaire de fichier et votre souris comme sur Windows.
+Si vous n'êtes pas à l'aise avec les commandes terminal sous Linux, n'oubliez pas que vous pouvez toujours utiliser un gestionnaire de fichiers et votre souris.
 :::
 
-## Configurer votre poste de travail local
+:::{seealso} macOS
+:class: dropdown
+Les commandes Unix sous Linux et macOS sont très similaires, mais il se peut que vous deviez parfois adapter certaines d'entre elles.
+:::
+
+:::{seealso} Windows
+:class: dropdown
+Vous pouvez installer l'émulateur [Git for Windows](https://gitforwindows.org/).
+:::
+
+## Configuration du votre poste de travail
 
 Vous avez maintenant créer votre projet sur le dépôt distant sur le serveur de l'IUT. Maintenant, pour travailler sur ce projet sur votre machine (localement), il faut d'abord le configurer.
 
