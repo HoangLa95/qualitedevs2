@@ -1,36 +1,41 @@
 # TP1 : Découvrir Git et GitLab
 
 :::{note} Disclaimer
-:class: dropdown
-Le tutoriel est en Français mais il est fait avec un environnement en Anglais (avec des mots clés en Anglais comme *Edit*, *Create*, ...). C'est un choix mais aussi un conseil pour vous familiariser avec l'Anglais mais aussi le langage informatique de façon générale qui est universel(lement en Anglais). 
+Le tutoriel est en français, mais de nombreux mots-clés sont en Anglais. Il est essentiel de vous familiariser avec le langage informatique ainsi qu'avec les documentations techniques, qui sont majoritairement rédigées en anglais. 
 :::
 
-Avant de commencer à coder, il faut se familiariser avec les outils d'organisation de votre travail de programmation.
+Avant de commencer à coder, il est important de se familiariser avec les outils permettant d'organiser votre travail de programmation.
 
 ## Introduction à Git et GitLab
 
-[Git](https://fr.wikipedia.org/wiki/Git) est un outil de [gestion des versions](https://fr.wikipedia.org/wiki/Gestion_de_versions). Il est déjà installé sur les machines du département. Si vous travaillez sur votre machine personnelle, vous pouvez l'[installer vous-même](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) gratuitement.
+[Git](https://fr.wikipedia.org/wiki/Git) est un outil de [gestion des versions](https://fr.wikipedia.org/wiki/Gestion_de_versions) largement utilisé. Il est déjà installé sur les machines du département. Si vous travaillez sur votre propre machine personnelle, vous pouvez l'[installer gratuitement](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
 
-[GitLab](https://fr.wikipedia.org/wiki/GitLab) est une plateforme qui permet de stocker vos projets et de diffuser ce travail à tous vos postes (machine de l'IUT, machine personnelle) ainsi qu'à vos collaborateurs.
+[GitLab](https://fr.wikipedia.org/wiki/GitLab) est une plateforme qui vous permet de stocker vos projets, de les synchroniser entre votre différentes machines (poste de l'IUT, ordinateur personnel) et de les partager avec vos collaborateurs.
 
 ## Activation de votre compte GitLab
 
-En tant qu'étudiant de l'IUT d'Orsay, vous avez déjà un compte sur le [GitLab de l'IUT](https://git.iut-orsay.fr/).
+En tant qu'étudiant à l'IUT d'Orsay, vous disposez déjà d'un compte sur le [GitLab de l'IUT](https://git.iut-orsay.fr/).
 
 ```{image} ../images/git-iut-orsay.jpg
 :alt: git.iut-orsay.fr
 :align: center
 ```
 
-Pour vous authentifier, utilisez vos login et mot de passe du département.
+Pour vous connecter, utilisez votre identifiant et votre mot de passe du département.
 
 ## Personal Access Token
 
-Pour établir une connection sécurisée entre votre machine et le serveur GitLab de l'IUT, nous allons utiliser un **Personal Access Token** (PAT).
+Pour établir une connexion sécurisée entre votre machine et le serveur GitLab de l'IUT, nous utiliserons un **Personal Access Token** (PAT).
 
 Pour créer un PAT :
-1. Aller dans votre profile en cliquant sur votre avatar (en haut à gauche) puis **Edit profile**[^edit_profile].
+1. Accédez à votre profil en cliquant sur votre avatar (en haut à gauche) puis **Edit profile**.
+
+```{image} ../images/edit-profile.png
+:alt: Edit profile
+:align: center
+```
+
 2. Choisir **Access Tokens**[^access_token_menu] dans la barre à gauche.
 3. Ajouter un token en cliquant sur **Add new token**[^add_new_token].
 4. Ajouter un nom et une date d'expiration d'un an (le maximum possible) après la date d'aujourd'hui.
@@ -42,8 +47,6 @@ Une fois que vous quittez la page de création, le PAT ne vous sera jamais rappe
 :::
 
 Vous pouvez créer autant de PAT que vous voulez (une par machine par exemple).
-
-[^edit_profile]: ![Edit Profile](../images/edit-profile.png)
 
 [^access_token_menu]: ![Access Token Menu](../images/access-token-menu.png)
 
