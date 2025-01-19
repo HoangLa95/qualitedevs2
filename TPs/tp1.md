@@ -153,7 +153,7 @@ Vous devez ajouter le token que vous avez sauvegardé précédemment !
 Si vous n'avez pas sauvegardé votre PAT, supprimez (*Revoke*) celui que vous avez déjà créé et refaites la procédure pour en générer un nouveau.
 :::
 
-## Travailler sur le dépôt local
+## Dépôt local
 
 Un répertoire portant le même nom (*dépôt local*) a maintenant été téléchargé sur votre machine.
 
@@ -170,7 +170,7 @@ La commande `ls` vous permet d'afficher l'ensemble des fichiers dans le réperto
 2. Que constatez-vous en exécutant les commandes suivantes ?
 
 ```{code} sh
-touch toto.txt
+touch my-first-file.txt
 git status
 ```
 
@@ -181,11 +181,11 @@ Git indique que votre répertoire de travail contient un nouveau fichier ou une 
 Git est un outil de gestion de versions : il vous permet de conserver l’historique des changements des fichiers de votre projet. Cependant, tous les fichiers ou modifications ne sont pas nécessairement importants. Ainsi, par défaut, les fichiers que vous créez ou les modifications que vous effectuez ne sont pas suivis. Seuls les fichiers et modifications explicitement suivis auront leur historique enregistré.
 :::
 
-3. Ajoutez une ligne dans `toto.txt` (par exemple `Hello World!`).
+3. Ajoutez une ligne dans `my-first-file.txt` (par exemple `Hello World!`).
 
-4. Demandez à Git de suivre la modification à `toto.txt` en exécutant la commande suivante.
+4. Demandez à Git de suivre la modification à `my-first-file.txt` en exécutant la commande suivante.
 ```{code} sh
-git add toto.txt
+git add my-first-file.txt
 ```
 
 5. Exécutez à nouveau la commande `git status`. Que vous indique-t-elle ?
@@ -198,14 +198,14 @@ Une fois qu'un fichier ou une modification est suivi, il change de statut et dev
 :class: dropdown
 Si vous avez ajouté par erreur une modification ou un fichier, vous pouvez retirer (*unstage*) la modification indexée en utilisant la commande `git restore --staged <nom du fichier>`.
 
-Par exemple, exécutez `git restore --staged toto.txt`, puis vérifier l'état du dépôt avec `git status`. N'oubliez-pas de resuivre la modification en utilisant `git add`.
+Par exemple, exécutez `git restore --staged my-first-file.txt`, puis vérifier l'état du dépôt avec `git status`. N'oubliez-pas de resuivre la modification en utilisant `git add`.
 :::
 
-6. Maintenant, pour créer un historique des modifications indexées (ici, le fichier `toto.txt` avec la ligne `Hello World!`), vous devez valider (*commit*) ces changements et ajouter un message décrivant ces modifications en exécutant la commande `git commit -m "<message descriptif>"`.
+6. Maintenant, pour créer un historique des modifications indexées (ici, le fichier `my-first-file.txt` avec la ligne `Hello World!`), vous devez valider (*commit*) ces changements et ajouter un message décrivant ces modifications en exécutant la commande `git commit -m "<message de commit descriptif>"`.
 
 Par exemple,
 ```{code} sh
-git commit -m "Premier commit de toto.txt"
+git commit -m "Premier commit de my-first-file.txt"
 ```
 
 7. Réexécutez `git status` pour vérifier l'état de votre dépôt. Que vous indique-t-elle ?
@@ -223,26 +223,40 @@ git push
 
 9. Retournez sur Gitlab et vérifiez que le dépôt distant correspond bien au dépôt local.
 
-<!-- ## Travailler sur le dépôt distant
+## Dépôt distant
 
-Avec le web IDE de GitLab, il est possible de travailler directement sur le dépôt distant.
+:::{important} Web IDE de GitLab
+Avec le Web IDE de GitLab, il est possible de travailler directement sur le dépôt distant.
 
-Les changements que nous allons faire sur le dépôt distant vont simuler les changements faits par vous-même sur un autre poste de travail ou par un collaborateur de votre projet :
-- Cliquer sur `toto.txt`.
-- Cliquer sur **Edit**.
-- Choisir l'option **Open in Web IDE**.
-- Ajouter une deuxième ligne à ce fichier (par exemple `Hi!`).
-
-Vous pouvez voir sur la barre à gauche un `1` indiquant un changement a été effectué[^pending_changes]. Si vous cliquez dessus, vous voyez un changement concernant le fichier `toto.txt` et l'option de sauvegarder sur la branche `main` (*Commit to 'main'*).
-
-- Ajouter un message de commit et cliquer sur le bouton **Commit to 'main'**.
-- Cliquer sur **Continue** quand on vous demande si vous voulez sauvegarder sur la branche par défaut (main).
-:::{note} Branches
-:class: dropdown
-La notion de **branches** en Git permet de toujours garder une version stable d'une application/un projet. Toutes modifications sont donc faites sur d'autres branches que 'main' puis fusionnées avec la branche 'main' plus tard. Dans ce cours, nous n'allons pas aborder les branches en Git comme beaucoup d'autres utilités de Git que nous allons survoler. Les modifications sont donc faites directement sur 'main'.
+Les modifications que nous allons effectuer sur le dépôt distant simuleront les changements apportés par vous-même sur un autre poste de travail ou par un collaborateur de votre projet.
 :::
 
-[^pending_changes]: ![Pending Changes](../images/pending-changes.png) -->
+1. Cliquez sur `my-first-file.txt`.
+2. Cliquez sur **Edit**.
+3. Sélectionnez l'option **Open in Web IDE**.
+4. Ajoutez une deuxième ligne à ce fichier (par exemple, `Hi!`).
+
+Vous pouvez voir un `1` sur la barre à gauche, indiquant qu'un changement a été effectué. 
+
+```{image} ../images/pending-changes.png
+:alt: Pending changes
+:align: center
+```
+
+Si vous cliquez dessus, vous verrez un changement concernant le fichier `my-first-file.txt` et l'option pour sauvegarder sur la branche `main` (*Commit to 'main'*).
+
+5. Ajoutez un message de commit.
+6. Cliquez sur le bouton **Commit to 'main'**.
+7. Cliquez sur **Continue** lorsque l'on vous demande si vous souhaitez sauvegarder sur la branche par défaut (main).
+
+:::{seealso} Branches
+:class: dropdown
+La notion de **branches** en Git permet de maintenir une version stable d'une application ou d'un projet. Toutes les modifications sont donc effectuées sur des branches autres que 'main' (d'autres versions du dépôt), puis fusionnées avec cette branche plus tard.
+
+Par exemple, dans un projet, la partie IHM et la partie logique du code peuvent être séparées en deux branches distinctes, autres que 'main'. La branche principale ('main') contiendra une version stable et fonctionnelle du projet, tandis que les deux autres branches contiendront des versions en développement.
+
+Dans ce cours, nous ne couvrirons pas les branches Git, ainsi que d'autres fonctionnalités avancées de Git. Vous allez travaillez seulement sur une seule branche : 'main'.
+:::
 
 ## Synchronisation du dépôt local avec le dépôt distant
 
@@ -287,7 +301,7 @@ Un exemple de [`.gitignore`](https://github.com/github/gitignore/blob/main/Unity
 
 ## Pour finir...
 
-Finissons ce TP avec une petite réorganisation : créer un dossier TP1 dans votre projet et bouge `toto.txt` vers ce dossier. Vous allez maintenir ce projet pendant le reste du cours en créant des dossiers séparés pour chaque TP. Est-ce que vous êtes capable maintenant de faire `add`, `commit`, `push` vous-même ?
+Finissons ce TP avec une petite réorganisation : créer un dossier TP1 dans votre projet et bouge `my-first-file.txt` vers ce dossier. Vous allez maintenir ce projet pendant le reste du cours en créant des dossiers séparés pour chaque TP. Est-ce que vous êtes capable maintenant de faire `add`, `commit`, `push` vous-même ?
 
 :::{hint} `git add .`
 :class: dropdown
