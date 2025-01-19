@@ -101,7 +101,9 @@ Dans la suite, nous appellerons ce projet `monprojet`. N'oubliez pas de le rempl
 3. Sélectionnez l'option de visibilité "Privé" pour votre projet et cochez l'option pour initialiser le projet avec un README.
 
 :::{important} README.md
-Avoir un README en [Markdown](https://fr.wikipedia.org/wiki/Markdown) dans un projet est une pratique standard. Ce fichier sert de description du projet.  
+Avoir un README en [Markdown](https://fr.wikipedia.org/wiki/Markdown) dans un projet est une pratique standard. Ce fichier sert de description du projet.
+
+Le Markdown est aussi ce que je j'utilise pour ce site !
 :::
 
 4. Parcourez le README par défaut proposé par GitLab.
