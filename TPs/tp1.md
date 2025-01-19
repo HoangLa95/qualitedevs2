@@ -19,14 +19,14 @@ Avant de commencer à coder, il est important de se familiariser avec les outils
 ## Objectifs
 
 Le but de ce TP est de comprendre les points suivants :
-- [] `git clone <addresse du dépôt distant>`
-- [] `git status`
-- [] `git add <nom du fichier>`
-- [] `git commit -m "<message de commit>"`
-- [] `git push`
-- [] `git remote update`
-- [] `git pull`
-- [] `.gitignore`
+- [ ] `git clone <addresse du dépôt distant>`
+- [ ] `git status`
+- [ ] `git add <nom du fichier>`
+- [ ] `git commit -m "<message de commit>"`
+- [ ] `git push`
+- [ ] `git remote update`
+- [ ] `git pull`
+- [ ] `.gitignore`
 
 Ces points sont essentiels pour la suite donc **il faut absolument les maîtriser !**
 
