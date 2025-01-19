@@ -219,7 +219,7 @@ Par exemple, exécutez `git restore --staged my-first-file.txt`, puis vérifier 
 
 6. Maintenant, pour créer un historique des modifications indexées (ici, le fichier `my-first-file.txt` avec la ligne `Hello World!`), vous devez valider (*commit*) ces changements et ajouter un message décrivant ces modifications en exécutant la commande `git commit -m "<message de commit descriptif>"`.
 
-Par exemple,
+Par exemple :
 ```{code} sh
 git commit -m "Premier commit de my-first-file.txt"
 ```
@@ -318,7 +318,7 @@ int main() {
 
 3. Compilez le code avec `g++ -o <nom du fichier> <nom du fichier>.cpp`.
 
-Par exemple,
+Par exemple :
 ```{code} sh
 g++ -o hello-world hello-world.cpp
 ```
