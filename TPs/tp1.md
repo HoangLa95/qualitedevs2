@@ -359,13 +359,13 @@ Terminons ce TP par une petite réorganisation.
 
 1. Créez un dossier `TP1/` dans votre projet et bougez `my-first-file.txt` vers ce dossier.
 
-:::{warning} `.gitignore` à la racine !
+:::{warning} `.gitignore` à la racine du projet!
 Le fichier `.gitignore` doit rester à la racine du projet, et **non dans le dossier `TP1/`** !
 :::
 
 Vous allez maintenir ce projet pendant le reste du cours en créant des dossiers séparés pour chaque TP.
 
-2. Revenir à la racine et exécutez `git add .`
+2. Revenir à la racine du projet et exécutez `git add .`
 
 :::{important} `git add .`
 Vous pouvez utiliser `git add .` pour suivre tous les nouveaux changements effectués (lors de la création ou modification de plusieurs fichiers ou sous-dossiers) **dans le dossier courant**, d'où l'importance de revenir à la racine du projet ici.
