@@ -19,12 +19,12 @@ Avant de commencer à coder, il est important de se familiariser avec les outils
 
 Le but de ce TP est de comprendre les points suivants :
 - [ ] `git clone <addresse du dépôt distant>` ([Configuration de votre poste de travail](#configuration-de-votre-poste-de-travail))
-- [ ] `git status` ([Dépôt local](#dépôt-local))
-- [ ] `git add <nom du fichier>` ([Dépôt local](#dépôt-local))
-- [ ] `git commit -m "<message de commit>"` ([Dépôt local](#dépôt-local))
-- [ ] `git push` ([Dépôt local](#dépôt-local))
-- [ ] `git remote update` ([Synchronisation du dépôt local avec le dépôt distant](#synchronisation-du-dépôt-local-avec-le-dépôt-distant))
-- [ ] `git pull` ([Synchronisation du dépôt local avec le dépôt distant](#synchronisation-du-dépôt-local-avec-le-dépôt-distant))
+- [ ] `git status` ([Dépôt local](#d-p-t-local))
+- [ ] `git add <nom du fichier>` ([Dépôt local](#d-p-t-local))
+- [ ] `git commit -m "<message de commit>"` ([Dépôt local](#d-p-t-local))
+- [ ] `git push` ([Dépôt local](#d-p-t-local))
+- [ ] `git remote update` ([Synchronisation du dépôt local avec le dépôt distant](#synchronisation-du-d-p-t-local-avec-le-d-p-t-distant))
+- [ ] `git pull` ([Synchronisation du dépôt local avec le dépôt distant](#synchronisation-du-d-p-t-local-avec-le-d-p-t-distant))
 - [ ] `.gitignore` ([Ignorer des fichiers](#ignorer-des-fichiers))
 
 Ces points sont essentiels pour la suite donc **il faut absolument les maîtriser !**
