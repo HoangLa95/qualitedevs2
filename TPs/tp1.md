@@ -281,7 +281,7 @@ Vous pouvez également exécuter `git diff origin/main` pour voir précisément 
 
 4. Pour synchroniser votre dépôt local avec le dépôt distant (qui, cette fois, est en avance), exécutez `git pull`.
 
-5. Pour consulter l'historique des commits, exécutez `git log`.
+5. Pour consulter l'historique des commits, exécutez `git log`. Pour quitter le log, appuyer sur `q` (pour 'quit').
 
 ## Ignorer des fichiers
 
@@ -334,7 +334,7 @@ Pour afficher les fichiers cachés dans un gestionnaire de fichiers, vous pouvez
 
 6. Ajoutez le nom de l'exécutable `hello-world` dans `.gitignore`.
 
-7. Exécutez `git add`, `git commit -m <message>` et `git push` pour envoyer le fichier `.gitignore` sur le dépôt distant.
+7. Exécutez `git add`, `git commit -m "<message>"` et `git push` pour envoyer le fichier `.gitignore` sur le dépôt distant.
 
 8. Exécutez `git status`. Qu'est-ce qui change par rapport à d'habitude ?
 
@@ -345,30 +345,74 @@ Normalement, comme nous n'avons pas ajouté l'exécutable `hello-world` avec `gi
 
 ## Pour finir...
 
-Finissons ce TP avec une petite réorganisation : créer un dossier TP1 dans votre projet et bouge `my-first-file.txt` vers ce dossier. Vous allez maintenir ce projet pendant le reste du cours en créant des dossiers séparés pour chaque TP. Est-ce que vous êtes capable maintenant de faire `add`, `commit`, `push` vous-même ?
+Terminons ce TP par une petite réorganisation.
 
-:::{hint} `git add .`
+1. Créez un dossier `TP1/` dans votre projet et bougez `my-first-file.txt` vers ce dossier.
+
+:::{warning} `.gitignore` à la racine !
+Le fichier `.gitignore` doit rester à la racine du projet, et **non dans le dossier `TP1/`** !
+:::
+
+Vous allez maintenir ce projet pendant le reste du cours en créant des dossiers séparés pour chaque TP.
+
+2. Revenir à la racine et exécutez `git add .`
+
+:::{important} `git add .`
+Vous pouvez utiliser `git add .` pour suivre tous les nouveaux changements effectués (lors de la création ou modification de plusieurs fichiers ou sous-dossiers) **dans le dossier courant**, d'où l'importance de revenir à la racine du projet ici.
+:::
+
+3. Validez les modifications indexées avec `git commit`.
+
+:::{warning} J'ai oublié de mettre un message de commit...
 :class: dropdown
-Vous pouvez faire `git add .` pour suivre tous les nouveaux changements que vous avez fait (quand vous avez créé/modifié plusieurs fichiers) **dans le dossier courant**.
+Vous êtes ici parce que vous avez exécuté `git commit` sans spécifier de message avec l'option `-m` (`git commit -m "<message>"`). Git vous oblige donc à écrire un message en ouvrant la fenêtre suivante.
 
-:::{warning} Garder un log compréhensible !
-Il est conseillé de faire des commits structurés, c'est-à-dire qu'il faut :
-- Écrire des messages de commit clairs.
-- Si vous faites des modifications différentes qui n'ont pas de rapport les uns avec les autres, alors il faut faire des `add` et `commit` séparés  (par groupe de modifications qui correspondent à une même "thème") au lieu de faire `git add .`. 
+```{figure} ../images/commit-message-window.png
+:alt: Commit message window
+:align: center
+
+Ici, nous avons oublié d'ajouter un message de commit pour la suppression d'un fichier nommé `test.txt`.
+```
+
+- Écrivez votre message de commit sur la première ligne.
+- Appuyez sur `Ctrl+X` pour quitter.
+- Appuyez sur `y` pour valider les modifications du message de commit.
+- Appuyer sur `Enter` pour quitter la fenêtre.
 :::
 
-:::{important} `.gitignore`
-- On commence avec `*` pour tout ignorer. 
-- L'expression `!*.*` indique qu'il ne faut pas ignorer les fichiers avec une extension (autrement dit, les fichiers sans extension comme les exécutables sont ignorés). 
-- L'expression `!*/` indique qu'il ne faut ignorer les dossiers.
+:::{caution} Garder un log compréhensible !
+Il est recommandé de faire des commits structurés, ce qui implique de :
+- Rédiger des messages de commit clairs.
+- Si vous apportez des modifications distinctes qui ne sont pas liées, effectuez des `git add` et `git commit` séparés (par groupe de modifications ayant un thème commun) ou d'utiliser `git add .` et `git commit` dès que vous avez terminé de travailler sur une partie du projet, avant de passer à une autre.
 :::
+
+Vu que nous allons ignorer beaucoup d'exécutables dans le futur, pour éviter de modifier `.gitignore` à chaque fois, nous allons utiliser des expressions régulières pour ignorer les fichiers sans extensions (les exécutables).
+
+4. Remplacez le code du fichier `.gitignore` avec le code suivant.
+
+```{code}
+*
+!*.*
+!*/
+```
+
+:::{important} Que font ces expressions régulières ?
+- Nous commencons par utiliser `*` pour tout ignorer tous les fichiers. 
+- L'expression `!*.*` permet de ne pas ignorer les fichiers avec une extension (autrement dit, les fichiers sans extension, comme les exécutables, seront ignorés). 
+- L'expression `!*/` empêche d'ignorer les dossiers.
+:::
+
+5. Ajoutez votre encadrant à votre projet en suivant les instructions ci-dessous.
+- Cliquez sur **Manage** à gauche, puis sélectionnez **Members**.
+
+```{image} ../images/manage-members.png
+:alt: Manage members
+:align: center
+```
+
+- Cliquez sur **Invite members** en haut à droite.
+- Ajoutez votre encadrant avec le rôle **Maintainer**, qui lui donne presque autant de droit sur le projet que le rôle **Owner**.
 
 :::{important} À NE PAS OUBLIER !
-Il faut ajouter votre intervenant dans votre projet !
-- Cliquer sur **Manage** à gauche puis **Members**[^manage_members].
-- Cliquer sur **Invite members** en haut à droite.
-- Ajouter votre intervenant avec le rôle **Maintainer** (qui lui donne presque autant de droit sur le projet que vous l'**Owner**).
-- **Si l'intervenant n'est pas sur votre projet, il ne pourra pas le noter et donc vous aurez 0 !** 
+**Si l'encadrant n'est pas sur votre projet, il ne pourra pas le noter et donc vous aurez 0 !** 
 :::
-
-[^manage_members]: ![Manage Members](../images/manage-members.png)
