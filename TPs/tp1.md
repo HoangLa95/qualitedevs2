@@ -215,11 +215,7 @@ git commit -m "Premier commit de my-first-file.txt"
 La validation a été effectuée. Votre version locale du projet est maintenant en avance par rapport à la version sur le serveur GitLab. Vous pouvez donc diffuser (*push*) ces changements pour synchroniser les deux versions.
 :::
 
-8. Exécutez la commande suivante.
-
-```{code} sh
-git push
-```
+8. Exécutez `git push`.
 
 9. Retournez sur Gitlab et vérifiez que le dépôt distant correspond bien au dépôt local.
 
@@ -246,7 +242,7 @@ Vous pouvez voir un `1` sur la barre à gauche, indiquant qu'un changement a ét
 Si vous cliquez dessus, vous verrez un changement concernant le fichier `my-first-file.txt` et l'option pour sauvegarder sur la branche `main` (*Commit to 'main'*).
 
 5. Ajoutez un message de commit.
-6. Cliquez sur le bouton **Commit to 'main'**.
+6. Cliquez sur le bouton **Commit and push to 'main'**.
 7. Cliquez sur **Continue** lorsque l'on vous demande si vous souhaitez sauvegarder sur la branche par défaut (main).
 
 :::{seealso} Branches
@@ -260,24 +256,32 @@ Dans ce cours, nous ne couvrirons pas les branches Git, ainsi que d'autres fonct
 
 ## Synchronisation du dépôt local avec le dépôt distant
 
-Remettez-vous sur votre dépôt local et oublions que nous avons fait des changements sur le dépôt distant.
+Retournez sur votre dépôt local et supposons qu'un collaborateur a effectué des changements, puis les a diffusés sur le dépôt distant sans que vous en soyez informé.
 
-:::{important} Commencer par `pull` !
-:class: dropdown
-En pratique, quand vous travailler dans un projet, très souvent entre deux sessions de travail, quelqu'un d'autre a modifié un bout de code dans votre projet. Si vous commencer votre session de travail sans d'abord synchroniser votre code, vous allez vous faire face à des conflits à résoudre (par exemple si vous aller modifier les mêmes bouts de code de façons différentes). Nous allons survoler la résolution de conflits dans ce cours mais par principe, il faut l'éviter et donc toujours commencer par `git pull` !
+1. Exécutez `git status`. Que remarquez-vous d'étrange ?
+
+:::{important} `git status`
+La commande `git status` ne va pas cherchez les changements sur le dépôt distant et n'affiche que les informations sur votre dépôt local.
 :::
 
-Pour synchroniser votre dépôt local avec le dépôt distant qui est cette fois celui en avance, vous devez faire :
+2. Exécutez `git remote update`, puis `git status`. Que voyez-vous maintenant ?
 
-```{code} sh
-git pull
-```
-Vous pouvez aussi voir l'historique des commits en faisant :
+La branche 'main' sur le dépôt distant est différente de votre dépôt local. 
 
-```{code} sh
-git log
-```
-Cela vous permet d'être au courant de l'évolution de votre projet.
+3. Exécutez `git diff origin/main` pour voir les différences entre les deux dépôts.
+
+:::{important} Commencer par `git remote update && git status` !
+:class: dropdown
+En pratique, lorsque vous travaillez sur un projet, il est fréquent qu'entre deux sessions de travail, quelqu’un d’autre ait modifié une partie du code. Si vous commencez une session de travail sans vérifier l'état de vos dépôts, vous risquez de rencontrer des conflits à résoudre (par exemple, si vous modifiez les mêmes parties de code de manière différente). 
+
+Bien que nous allons parler de la résolution de conflits dans ce cours, il est préférable de les éviter. C’est pourquoi il est essentiel de toujours commencer par `git remote update && git status` !
+
+Vous pouvez également exécuter `git diff origin/main` pour voir précisément les modifications qui ont été effectuées.
+:::
+
+4. Pour synchroniser votre dépôt local avec le dépôt distant (qui, cette fois, est en avance), exécutez `git pull`.
+
+5. Pour consulter l'historique des commits, exécutez `git log`.
 
 ## Ignorer les fichiers inintéressants
 
