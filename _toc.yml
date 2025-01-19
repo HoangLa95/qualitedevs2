@@ -35,6 +35,9 @@ parts:
     # - file: TPs/tp5
     # - file: TPs/tp6
     # - file: TPs/tp7
+- caption: Practical Sessions
+  chapters: 
+    - file: PSs/ps1
 - caption: Soutien technique
   chapters:
     - file: TechSupport/internetProblem.md
