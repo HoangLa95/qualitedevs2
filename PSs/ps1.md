@@ -18,8 +18,8 @@ The goal of this session is to understand the following points:
 - [ ] `git add <filename>` ([Local repository](#local-repository))
 - [ ] `git commit -m "<commit message>"` ([Local repository](#local-repository))
 - [ ] `git push` ([Local repository](#local-repository))
-- [ ] `git remote update` ([Synchronizing the local repository with the remote repository](#synchronizing-the-local-repository-with-the-remote-repository))
-- [ ] `git pull` ([Synchronizing the local repository with the remote repository](#synchronizing-the-local-repository-with-the-remote-repository))
+- [ ] `git remote update` ([Remote repository](#remote-repository) and [Synchronizing the local repository with the remote repository](#synchronizing-the-local-repository-with-the-remote-repository))
+- [ ] `git pull` ([Remote repository](#remote-repository) and [Synchronizing the local repository with the remote repository](#synchronizing-the-local-repository-with-the-remote-repository))
 - [ ] `.gitignore` ([Ignoring files](#ignoring-files))
 
 These points are essential for the rest of the course, so **you must master them!**

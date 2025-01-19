@@ -23,8 +23,8 @@ Le but de ce TP est de comprendre les points suivants :
 - [ ] `git add <nom du fichier>` ([Dépôt local](#d-p-t-local))
 - [ ] `git commit -m "<message de commit>"` ([Dépôt local](#d-p-t-local))
 - [ ] `git push` ([Dépôt local](#d-p-t-local))
-- [ ] `git remote update` ([Synchronisation du dépôt local avec le dépôt distant](#synchronisation-du-d-p-t-local-avec-le-d-p-t-distant))
-- [ ] `git pull` ([Synchronisation du dépôt local avec le dépôt distant](#synchronisation-du-d-p-t-local-avec-le-d-p-t-distant))
+- [ ] `git remote update` ([Dépôt distant](#d-p-t-distant) et [Synchronisation du dépôt local avec le dépôt distant](#synchronisation-du-d-p-t-local-avec-le-d-p-t-distant))
+- [ ] `git pull` ([Dépôt distant](#d-p-t-distant) et [Synchronisation du dépôt local avec le dépôt distant](#synchronisation-du-d-p-t-local-avec-le-d-p-t-distant))
 - [ ] `.gitignore` ([Ignorer des fichiers](#ignorer-des-fichiers))
 
 Ces points sont essentiels pour la suite donc **il faut absolument les maîtriser !**
