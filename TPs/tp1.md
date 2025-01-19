@@ -283,25 +283,65 @@ Vous pouvez également exécuter `git diff origin/main` pour voir précisément 
 
 5. Pour consulter l'historique des commits, exécutez `git log`.
 
-## Ignorer les fichiers inintéressants
+## Ignorer des fichiers
 
-Lors du développement, il y a beaucoup de fichiers que l'on souhaite **ignorer** en permanence dans les sauvegardes (par exemple, les fichiers générés lors de la compilation) car ils polluent inutilement le dépôt. Cela peut aussi être source de problèmes quand vous récupérez des fichiers de configurations de certaines machines et que vous essayer de les synchroniser avec d'autres (problèmes de compatibilité).
+:::{important} Pourquoi ignorer des fichiers ?
+Lors du développement, certains fichiers doivent être systématiquement **ignorés** dans les sauvegardes (par exemple, les fichiers générés lors de la compilation), car ils encombrent inutilement le dépôt.
 
-La gestion de ces fichiers est donc faite avec un fichier `.gitignore` qui est à la racine de votre projet. Dans ce fichier, vous pouvez ajouter tout ce que vous ne voulez pas suivre :
-- Créer un fichier `tobeignored` (avec `touch` par exemple).
-- Créer un fichier `.gitignore`.
-- Ajouter le nom du fichier `tobeignored` dans `.gitignore` (avec un éditeur de texte comme `pluma` sur Debian à l'IUT par exemple).
-- Suivre, sauvegarder, et diffuser `.gitignore` sur le dépôt distant.
+Par exemple, un moteur de jeu complexe comme Unity peut nécessiter jusqu’à 1 Go de fichiers pour exécuter certains modules, parfois inutilisés par votre jeu. Si ces fichiers ne sont pas ignorés, vous pourriez être contraint de télécharger ou de diffuser 1 Go à chaque synchronisation de vos dépôts, alors que les fichiers spécifiques à votre jeu ne représentent que quelques Mo.
 
-Maintenant, vérifier `git status`. Qu'est-ce qui change d'habitude ?
+Les fichiers de configurations peuvent également provoquer des problèmes de compatibilité, notamment lorsque vous synchronisez des fichiers de configuration spécifiques à certaines machines avec d'autres.
+:::
+
+1. Créez un fichier `hello-world.cpp` (avec `touch hello-world.cpp` par exemple).
+
+2. Recopiez le code suivant.
+
+```{code} cpp
+#include <iostream>
+using namespace std;
+int main() {
+    cout << "Hello World!" << endl;
+    return 0;
+}
+```
+
+3. Compilez le code avec `g++ -o <nom du fichier> <nom du fichier>.cpp`.
+
+Par exemple,
+```{code} sh
+g++ -o hello-world hello-world.cpp
+```
+
+4. Exécutez l'exécutable `hello-world` avec la commande `./hello-world`.
+
+Les exécutables font partie des fichiers que nous souhaitons ignorer. 
+
+:::{important} `.gitignore`
+La gestion des fichiers ignorés se fait via un fichier `.gitignore` situé à la racine de votre projet. Dans ce fichier, vous pouvez ajouter tous les noms de fichiers et de dossiers que vous souhaitez ignorer en permanence.
+
+Un exemple de [`.gitignore`](https://github.com/github/gitignore/blob/main/Unity.gitignore) pour les projets Unity qui sont plus complexes.
+:::
+
+5. Créez le fichier `.gitignore`.
+
+:::{seealso} Pourquoi `.gitignore` commence par un `.` ?
+:class: dropdown
+Les fichiers dont les noms commencent par `.` sont des fichiers cachés (qui ne s'affichent pas quand vous utilisez un gestionnaire de fichiers). Ce sont souvent des fichiers de configurations.
+
+Pour afficher les fichiers cachés dans un gestionnaire de fichiers, vous pouvez souvent appuyer sur `Ctrl+H` (`H` comme 'Hidden').
+:::
+
+6. Ajoutez le nom de l'exécutable `hello-world` dans `.gitignore`.
+
+7. Exécutez `git add`, `git commit -m <message>` et `git push` pour envoyer le fichier `.gitignore` sur le dépôt distant.
+
+8. Exécutez `git status`. Qu'est-ce qui change par rapport à d'habitude ?
 
 :::{hint} Où sont mes fichiers non suivis ?
 :class: dropdown
-Normalement, vu que nous n'avons pas suivi `tobeignored`, `git status` nous prévient en disant qu'il y a un fichier potentiellement important qui n'est pas suivi. Par contre, grâce au fichier `.gitignore`, Git se rend compte que nous avons fait le choix d'ignorer `tobeignored` et ne suivra jamais ce fichier.
+Normalement, comme nous n'avons pas ajouté l'exécutable `hello-world` avec `git add`, `git status` nous indique qu'il y a un fichier non suivi, potentiellement important. Cependant, grâce au fichier `.gitignore`, Git reconnaît que nous avons choisi d'ignorer `hello-world` et ne suivra jamais les modifications apportées à ce fichier.
 :::
-
-Un exemple de [`.gitignore`](https://github.com/github/gitignore/blob/main/Unity.gitignore) pour des projets plus complexes.
-
 
 ## Pour finir...
 
@@ -316,6 +356,11 @@ Il est conseillé de faire des commits structurés, c'est-à-dire qu'il faut :
 - Écrire des messages de commit clairs.
 - Si vous faites des modifications différentes qui n'ont pas de rapport les uns avec les autres, alors il faut faire des `add` et `commit` séparés  (par groupe de modifications qui correspondent à une même "thème") au lieu de faire `git add .`. 
 :::
+
+:::{important} `.gitignore`
+- On commence avec `*` pour tout ignorer. 
+- L'expression `!*.*` indique qu'il ne faut pas ignorer les fichiers avec une extension (autrement dit, les fichiers sans extension comme les exécutables sont ignorés). 
+- L'expression `!*/` indique qu'il ne faut ignorer les dossiers.
 :::
 
 :::{important} À NE PAS OUBLIER !
