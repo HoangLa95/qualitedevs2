@@ -221,7 +221,7 @@ Par exemple, exécutez `git restore --staged my-first-file.txt`, puis vérifier 
 
 Par exemple :
 ```{code} sh
-git commit -m "Premier commit de my-first-file.txt"
+git commit -m "Premier commit de my-first-file.txt qui dit Hello World!"
 ```
 
 7. Réexécutez `git status` pour vérifier l'état de votre dépôt. Que vous indique-t-elle ?
