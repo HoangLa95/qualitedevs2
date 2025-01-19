@@ -1,106 +1,153 @@
-# TP1 : Découvrir Git et GitLab
+# PS1 : Discover Git and GitLab
 
-:::{note} Disclaimer
-:class: dropdown
-Le tutoriel est en Français mais il est fait avec un environnement en Anglais (avec des mots clés en Anglais comme *Edit*, *Create*, ...). C'est un choix mais aussi un conseil pour vous familiariser avec l'Anglais mais aussi le langage informatique de façon générale qui est universel(lement en Anglais). 
+Avant de commencer à coder, il est important de se familiariser avec les outils permettant d'organiser votre travail de programmation.
+
+:::{seealso} Git
+[Git](https://fr.wikipedia.org/wiki/Git) est un outil de [gestion des versions](https://fr.wikipedia.org/wiki/Gestion_de_versions) largement utilisé. Il est déjà installé sur les machines du département. Si vous travaillez sur votre propre machine personnelle, vous pouvez l'[installer gratuitement](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 :::
 
-Avant de commencer à coder, il faut se familiariser avec les outils d'organisation de votre travail de programmation.
+:::{seealso} GitLab
+[GitLab](https://fr.wikipedia.org/wiki/GitLab) est une plateforme qui vous permet de stocker vos projets, de les synchroniser entre votre différentes machines (poste de l'IUT, ordinateur personnel) et de les partager avec vos collaborateurs.
+:::
 
-## Introduction à Git et GitLab
+(tp1-objectifs)=
+## Objectifs
 
-[Git](https://fr.wikipedia.org/wiki/Git) est un outil de [gestion des versions](https://fr.wikipedia.org/wiki/Gestion_de_versions). Il est déjà installé sur les machines du département. Si vous travaillez sur votre machine personnelle, vous pouvez l'[installer vous-même](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) gratuitement.
+Le but de ce TP est de comprendre les points suivants :
+- [ ] `git clone <addresse du dépôt distant>`
+- [ ] `git status`
+- [ ] `git add <nom du fichier>`
+- [ ] `git commit -m "<message de commit>"`
+- [ ] `git push`
+- [ ] `git remote update`
+- [ ] `git pull`
+- [ ] `.gitignore`
 
-
-[GitLab](https://fr.wikipedia.org/wiki/GitLab) est une plateforme qui permet de stocker vos projets et de diffuser ce travail à tous vos postes (machine de l'IUT, machine personnelle) ainsi qu'à vos collaborateurs.
+Ces points sont essentiels pour la suite donc **il faut absolument les maîtriser !**
 
 ## Activation de votre compte GitLab
 
-En tant qu'étudiant de l'IUT d'Orsay, vous avez déjà un compte sur le [GitLab de l'IUT](https://git.iut-orsay.fr/).
+En tant qu'étudiant à l'IUT d'Orsay, vous disposez déjà d'un compte sur le [GitLab de l'IUT](https://git.iut-orsay.fr/).
 
 ```{image} ../images/git-iut-orsay.jpg
 :alt: git.iut-orsay.fr
 :align: center
 ```
 
-Pour vous authentifier, utilisez vos login et mot de passe du département.
+Pour vous connecter, utilisez votre identifiant et votre mot de passe du département.
 
 ## Personal Access Token
 
-Pour établir une connection sécurisée entre votre machine et le serveur GitLab de l'IUT, nous allons utiliser un **Personal Access Token** (PAT).
+Pour établir une connexion sécurisée entre votre machine et le serveur GitLab de l'IUT, nous utiliserons un **Personal Access Token** (PAT).
 
 Pour créer un PAT :
-1. Aller dans votre profile en cliquant sur votre avatar (en haut à gauche) puis **Edit profile**[^edit_profile].
-2. Choisir **Access Tokens**[^access_token_menu] dans la barre à gauche.
-3. Ajouter un token en cliquant sur **Add new token**[^add_new_token].
-4. Ajouter un nom et une date d'expiration d'un an (le maximum possible) après la date d'aujourd'hui.
-5. Choisir tous les [scopes](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#personal-access-token-scopes).
-6. Cliquer sur **Create personal access token**.
+1. Accédez à votre profil en cliquant sur votre avatar (en haut à gauche) puis **Edit profile**.
 
-:::{important} **SAUVEGARDER VOTRE PAT !!!**
-Une fois que vous quittez la page de création, le PAT ne vous sera jamais rappelé. Vous allez devoir utiliser le PAT pour accéder à vos projets !
-:::
-
-Vous pouvez créer autant de PAT que vous voulez (une par machine par exemple).
-
-[^edit_profile]: ![Edit Profile](../images/edit-profile.png)
-
-[^access_token_menu]: ![Access Token Menu](../images/access-token-menu.png)
-
-[^add_new_token]: ![Add New Token](../images/add-new-token.png)
-
-## Créer votre premier projet sur le dépôt distant
-
-Vous pouvez maintenant créer votre premier projet/dépôt (*repository*)[^create_new_project] en cliquant sur `+` en haut à gauche.
-
-[^create_new_project]: ![Create New Project](../images/create-new-project.png)
-
-Créer un projet vide avec un nom pertinent (par exemple `qualite-dev-s2-prenom-nom`).
-
-:::{warning} Attention !
-Le projet que vous allez créer va contenir tous les TPs de ce cours. Vous n'allez pas créer un nouveau projet par TP.
-:::
-
-:::{important} MonProjet
-Dans la suite, nous allons appeler ce projet **MonProjet**. Il ne faut pas oublier de le remplacer avec le nom que vous avez choisi.
-:::
-
-Choisir le niveau de visibilité privé pour votre projet et l'option d'initialiser le projet avec un README.
-
-:::{note} README.md
-:class: dropdown
-Avoir un README en [Markdown](https://fr.wikipedia.org/wiki/Markdown) dans un projet est une pratique standard. Ce README sert comme une description du projet.  
-:::
-
-Parcourir le README et regarder le README par défaut proposé par GitLab.
-
-:::{important} Linux
-Ce qui suit est fait pour Linux. Il faut adapter les commandes Unix pour Mac OS. Pour Windows, vous pouvez installer l'émulateur [Git for Windows](https://gitforwindows.org/) qui simule Git comme si vous étiez sous Linux (ou d'autres outils similaires).
-
-Si vous n'êtes pas à l'aise avec les commandes depuis le terminal sur Linux, n'oubliez pas que vous pouvez toujours utiliser un gestionnaire de fichier et votre souris comme sur Windows.
-:::
-
-## Configurer votre poste de travail local
-
-Vous avez maintenant créer votre projet sur le dépôt distant sur le serveur de l'IUT. Maintenant, pour travailler sur ce projet sur votre machine (localement), il faut d'abord le configurer.
-
-```{code} sh
-git config --global user.name "Prénom Nom"
-git config --global user.email "prenom.nom@universite-paris-saclay.fr"
+```{image} ../images/edit-profile.png
+:alt: Edit profile
+:align: center
 ```
 
-Maintenant, vous pouver clôner votre dépôt distant pour le télécharger vers votre poste local :
-- Cliquer sur le bouton **Code**[^code_button] à droite.
-- Copier le code de l'option **Clone with HTTPS**[^clone_https].
-- Ouvrir un terminal dans votre répertoire de travail.
-- Taper la commande suivante en collant l'adresse que vous aviez copié et en rajoutant votre login et PAT au bon endroit.
+2. Dans le menu de gauche, cliquez sur **Access Tokens**.
+
+```{image} ../images/access-token-menu.png
+:alt: Access Tokens
+:align: center
+```
+
+3. Ajouter un nouveau token en cliquant sur **Add new token**.
+
+```{image} ../images/add-new-token.png
+:alt: Add new token
+:align: center
+```
+
+4. Donnez un nom au token qui reflète le poste de travail utilisé (par exemple `IUTOrsay` si vous travaillez sur un poste à l'IUT).
+5. Définissez une date d'expiration d'un an (la durée maximale autorisée) à partir de la date d'aujourd'hui.
+6. Sélectionnez tous les [scopes](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#personal-access-token-scopes).
+7. Cliquez sur **Create personal access token**.
+
+:::{important} SAUVEGARDER VOTRE PAT !!!
+Une fois que vous quittez la page de création, le PAT ne pourra plus être affiché. Il est indispensable de le conserver, car vous en aurez besoin pour accéder à vos projets !
+:::
+
+:::{note} Un PAT par poste de travail
+Vous devez créer un PAT distinct pour chaque poste de travail que vous utilisez. Il est possible de créer autant de PAT que nécessaire.
+:::
+
+## Création d'un dépôt distant
+
+1. Créez votre premier projet/dépôt (*repository*) en cliquant sur le bouton `+` en haut à gauche.
+
+```{image} ../images/create-new-project.png
+:alt: Create new project
+:align: center
+```
+
+2. Créez un projet vide avec le nom `qualite-dev-s2-<prenom>-<nom>` (par exemple `qualite-dev-s2-hoang-la`).
+
+:::{warning} Attention !
+Le projet que vous allez créer contiendra tous les TPs de ce cours. Vous ne devez pas créer un nouveau projet pour chaque TP.
+:::
+
+:::{important} `monprojet`
+Dans la suite, nous appellerons ce projet `monprojet`. N'oubliez pas de le remplacer par le nom que vous avez choisi.
+:::
+
+3. Sélectionnez l'option de visibilité "Privé" pour votre projet et cochez l'option pour initialiser le projet avec un README.
+
+:::{important} README.md
+Avoir un README en [Markdown](https://fr.wikipedia.org/wiki/Markdown) dans un projet est une pratique standard. Ce fichier sert de description du projet.  
+:::
+
+4. Parcourez le README par défaut proposé par GitLab.
+
+:::{important} Linux
+Les instructions suivantes sont destinées à Linux. Vous êtes **fortement conseillé** d'utiliser Debian (une distribution open source Linux) à l'IUT.
+
+Si vous n'êtes pas à l'aise avec les commandes terminal sous Linux, n'oubliez pas que vous pouvez toujours utiliser un gestionnaire de fichiers et votre souris.
+:::
+
+:::{seealso} macOS
+:class: dropdown
+Les commandes Unix sous Linux et macOS sont très similaires, mais il se peut que vous deviez parfois adapter certaines d'entre elles.
+:::
+
+:::{seealso} Windows
+:class: dropdown
+Vous pouvez installer l'émulateur [Git for Windows](https://gitforwindows.org/).
+:::
+
+## Configuration de votre poste de travail
+
+Votre projet a été créé sur le serveur de l'IUT. Maintenant, pour travailler sur ce projet depuis votre poste de travail local, vous devez d'abord le configurer.
+
+```{code} sh
+git config --global user.name "<Prénom> <Nom>"
+git config --global user.email "<prenom>.<nom>@universite-paris-saclay.fr"
+```
+
+Vous pouvez maintenant cloner votre dépôt distant pour le télécharger sur votre poste local :
+1. Cliquez sur le bouton **Code** situé à droite.
+
+```{image} ../images/code-button.png
+:alt: Code
+:align: center
+```
+
+2. Copiez l'URL sous l'option **Clone with HTTPS**.
+
+```{image} ../images/clone-https.png
+:alt: Clone with HTTPS
+:align: center
+```
+
+3. Ouvrez un terminal dans votre répertoire de travail.
+4. Saisissez la commande suivante, en collant l'adresse copiée et en rajoutant votre login ainsi que votre PAT aux emplacements appropriés.
 
 ```{code} sh
 git clone https://<login>:<Personal Access Token>@git.iut-orsay.fr/<login>/monprojet.git
 ```
-[^code_button]: ![Code Button](../images/code-button.png)
-
-[^clone_https]: ![Clone HTTPS](../images/clone-https.png)
 
 Par exemple :
 ```{code} sh
@@ -108,17 +155,19 @@ git clone https://hla:1234thisIsYourPAT5678@git.iut-orsay.fr/hla/monprojet.git
 ```
 
 :::{important} Personal Access Token
-Il faut ajouter le token que vous avez sauvegardé en haut ! 
+Vous devez ajouter le token que vous avez sauvegardé précédemment ! 
 - **Pas le nom que vous lui avez donné !**
 - **Pas votre mot de passe !**
-- **Pas le Feed Token !** (que vous pouvez aussi trouver dans la page Access Token)
+- **Pas le Feed Token !** (que vous pouvez également trouver sur la page Access Token)
 
-Si vous n'avez pas sauvegardé votre PAT, enlever (*Revoke*) celui que vous avez déjà créé et refaire la manipulation.
+Si vous n'avez pas sauvegardé votre PAT, supprimez (*Revoke*) celui que vous avez déjà créé et refaites la procédure pour en générer un nouveau.
 :::
 
-## Travailler sur le dépôt local
+## Dépôt local
 
-Un répertoire portant le même nom (*dépôt local*) est maintenant téléchargé sur votre machine.
+Un répertoire portant le même nom (*dépôt local*) a maintenant été téléchargé sur votre machine.
+
+1. Exécutez les commandes suivantes.
 
 ```{code} sh
 cd monprojet/
@@ -126,134 +175,257 @@ ls
 git status
 ```
 
-`ls` vous permet de voir l'ensemble des fichiers dans le répertoire et `git status` montre l'état du dépôt. Pour l'instant, il devra vous indiquer qu'il n'y a rien à valider et votre copie du travail est propre (*nothing to commit, working tree clean*).
+La commande `ls` vous permet d'afficher l'ensemble des fichiers dans le répertoire, tandis que `git status` montre l'état du dépôt. Pour l'instant, cette dernière commande devrait indiquer qu'il n'y a rien à valider et que votre copie de travail est propre (*nothing to commit, working tree clean*).
 
-Qu'observez-vous en tapant les commandes suivantes ?
+2. Que constatez-vous en exécutant les commandes suivantes ?
 
 ```{code} sh
-touch toto.txt
+touch my-first-file.txt
 git status
 ```
+
 :::{hint} Fichiers et modifications non suivis
 :class: dropdown
-Il indique que votre répertoire de travail contient un nouveau fichier ou un fichier modifié **non suivi** (*untracked*). Git est un outil de versionnage : il vous permet de garder l'historique des changements des fichiers de votre projet mais pas tous les fichiers/modifications sont forcément importants. Donc, par défaut, les fichiers que vous créez/les modifications que vous faites ne sont pas suivis. Seul les fichiers/modifications suivis auront leur historique gardé.
+Git indique que votre répertoire de travail contient un nouveau fichier ou une modification **non suivie** (*untracked*).
+
+Git est un outil de gestion de versions : il vous permet de conserver l’historique des changements des fichiers de votre projet. Cependant, tous les fichiers ou modifications ne sont pas nécessairement importants. Ainsi, par défaut, les fichiers que vous créez ou les modifications que vous effectuez ne sont pas suivis. Seuls les fichiers et modifications explicitement suivis auront leur historique enregistré.
 :::
 
-Ajouter une ligne dans `toto.txt` (par exemple `Hello World!`).
+3. Ajoutez une ligne dans `my-first-file.txt` (par exemple `Hello World!`).
 
-Demander à Git de suivre `toto.txt` en faisant:
+4. Demandez à Git de suivre la modification à `my-first-file.txt` en exécutant la commande suivante.
 ```{code} sh
-git add toto.txt
+git add my-first-file.txt
 ```
 
-Vérifier `git status` encore une fois. Qu'est-ce qu'il vous indique ?
+5. Exécutez à nouveau la commande `git status`. Que vous indique-t-elle ?
 
-Nous avons parlé d'historique des changements du projet mais comment cela fonctionne-t-il exactement ? 
+:::{important} Modifications indexées  
+Une fois qu'un fichier ou une modification est suivi, il change de statut et devient une modification indexée (*staged change*).
+:::
 
-`git add` indique à Git que le fichier/la modification que vous avez ajouté est important (à suivre). Dans ce fichier, vous avez fait des modifications (en rajoutant `Hello World!` par exemple).
+:::{seealso} `git restore --staged`
+:class: dropdown
+Si vous avez ajouté par erreur une modification ou un fichier, vous pouvez retirer (*unstage*) la modification indexée en utilisant la commande `git restore --staged <nom du fichier>`.
 
-Maintenant, pour créer un historique de `toto.txt`, vous devez sauvegarder ces changements.
+Par exemple, exécutez `git restore --staged my-first-file.txt`, puis vérifier l'état du dépôt avec `git status`. N'oubliez-pas de resuivre la modification en utilisant `git add`.
+:::
 
+6. Maintenant, pour créer un historique des modifications indexées (ici, le fichier `my-first-file.txt` avec la ligne `Hello World!`), vous devez valider (*commit*) ces changements et ajouter un message décrivant ces modifications en exécutant la commande `git commit -m "<message de commit descriptif>"`.
+
+Par exemple,
 ```{code} sh
-git commit -m "Création d'un fichier important pour mon travail"
+git commit -m "Premier commit de my-first-file.txt"
 ```
 
-Retaper `git status` pour vérifier l'état de votre dépôt. Qu'est-ce qu'il vous indique ?
+7. Réexécutez `git status` pour vérifier l'état de votre dépôt. Que vous indique-t-elle ?
 
 :::{hint} Ready to push
 :class: dropdown
-La sauvegarde a été faite. Votre version locale du projet est en avance par rapport à la version sur le serveur GitLab. Vous pouvez donc diffuser ces changements pour synchroniser les deux versions.
+La validation a été effectuée. Votre version locale du projet est maintenant en avance par rapport à la version sur le serveur GitLab. Vous pouvez donc diffuser (*push*) ces changements pour synchroniser les deux versions.
 :::
 
-```{code} sh
-git push
-```
+8. Exécutez `git push`.
 
-Retourner sur Gitlab et voir que votre projet contient maintenant `toto.txt`.
+9. Retournez sur Gitlab et vérifiez que le dépôt distant correspond bien au dépôt local.
 
-## Travailler sur le dépôt distant
+## Dépôt distant
 
-Avec le web IDE de GitLab, il est possible de travailler directement sur le dépôt distant.
+:::{important} Web IDE de GitLab
+Avec le Web IDE de GitLab, il est possible de travailler directement sur le dépôt distant.
 
-Les changements que nous allons faire sur le dépôt distant vont simuler les changements faits par vous-même sur un autre poste de travail ou par un collaborateur de votre projet :
-- Cliquer sur `toto.txt`.
-- Cliquer sur **Edit**.
-- Choisir l'option **Open in Web IDE**.
-- Ajouter une deuxième ligne à ce fichier (par exemple `Hi!`).
+Les modifications que nous allons effectuer sur le dépôt distant simuleront les changements apportés par vous-même sur un autre poste de travail ou par un collaborateur de votre projet.
+:::
 
-Vous pouvez voir sur la barre à gauche un `1` indiquant un changement a été effectué[^pending_changes]. Si vous cliquez dessus, vous voyez un changement concernant le fichier `toto.txt` et l'option de sauvegarder sur la branche `main` (*Commit to 'main'*).
+1. Cliquez sur `my-first-file.txt`.
+2. Cliquez sur **Edit**.
+3. Sélectionnez l'option **Open in Web IDE**.
+4. Ajoutez une deuxième ligne à ce fichier (par exemple, `Hi!`).
 
-- Ajouter un message de commit et cliquer sur le bouton **Commit to 'main'**.
-- Cliquer sur **Continue** quand on vous demande si vous voulez sauvegarder sur la branche par défaut (main).
-:::{note} Branches
+Vous pouvez voir un `1` sur la barre à gauche, indiquant qu'un changement a été effectué. 
+Si vous cliquez dessus, vous verrez un changement concernant le fichier `my-first-file.txt` et l'option pour sauvegarder et diffuser sur la branche `main` (*Commit and push to 'main'*).
+
+5. Ajoutez un message de commit.
+6. Cliquez sur le bouton **Commit and push to 'main'**.
+7. Cliquez sur **Continue** lorsque l'on vous demande si vous souhaitez sauvegarder sur la branche par défaut (main).
+
+:::{seealso} Branches
 :class: dropdown
-La notion de **branches** en Git permet de toujours garder une version stable d'une application/un projet. Toutes modifications sont donc faites sur d'autres branches que 'main' puis fusionnées avec la branche 'main' plus tard. Dans ce cours, nous n'allons pas aborder les branches en Git comme beaucoup d'autres utilités de Git que nous allons survoler. Les modifications sont donc faites directement sur 'main'.
-:::
+La notion de **branches** en Git permet de maintenir une version stable d'une application ou d'un projet. Toutes les modifications sont donc effectuées sur des branches autres que 'main' (d'autres versions du dépôt), puis fusionnées avec cette branche plus tard.
 
-[^pending_changes]: ![Pending Changes](../images/pending-changes.png)
+Par exemple, dans un projet, la partie IHM et la partie logique du code peuvent être séparées en deux branches distinctes, autres que 'main'. La branche principale ('main') contiendra une version stable et fonctionnelle du projet, tandis que les deux autres branches contiendront des versions en développement.
+
+Dans ce cours, nous ne couvrirons pas les branches Git, ainsi que d'autres fonctionnalités avancées de Git. Vous allez travailler seulement sur une seule branche : 'main'.
+:::
 
 ## Synchronisation du dépôt local avec le dépôt distant
 
-Remettez-vous sur votre dépôt local et oublions que nous avons fait des changements sur le dépôt distant.
+Retournez sur votre dépôt local et supposons qu'un collaborateur a effectué des changements, puis les a diffusés sur le dépôt distant sans que vous en soyez informé.
 
-:::{important} Commencer par `pull` !
-:class: dropdown
-En pratique, quand vous travailler dans un projet, très souvent entre deux sessions de travail, quelqu'un d'autre a modifié un bout de code dans votre projet. Si vous commencer votre session de travail sans d'abord synchroniser votre code, vous allez vous faire face à des conflits à résoudre (par exemple si vous aller modifier les mêmes bouts de code de façons différentes). Nous allons survoler la résolution de conflits dans ce cours mais par principe, il faut l'éviter et donc toujours commencer par `git pull` !
+1. Exécutez `git status`. Que remarquez-vous d'étrange ?
+
+:::{important} `git status`
+La commande `git status` ne va pas cherchez les changements sur le dépôt distant et n'affiche que les informations sur votre dépôt local.
 :::
 
-Pour synchroniser votre dépôt local avec le dépôt distant qui est cette fois celui en avance, vous devez faire :
+2. Exécutez `git remote update`, puis `git status`. Que voyez-vous maintenant ?
 
-```{code} sh
-git pull
+La branche 'main' sur le dépôt distant est différente de votre dépôt local. 
+
+3. Exécutez `git diff origin/main` pour voir les différences entre les deux dépôts.
+
+:::{important} Commencez par `git remote update && git status` !
+:class: dropdown
+En pratique, lorsque vous travaillez sur un projet, il est fréquent qu'entre deux sessions de travail, quelqu’un d’autre ait modifié une partie du code. Si vous commencez une session de travail sans vérifier l'état de vos dépôts, vous risquez de rencontrer des conflits à résoudre (par exemple, si vous modifiez les mêmes parties de code de manière différente). 
+
+Bien que nous allons parler de la résolution de conflits dans ce cours, il est préférable de les éviter. C’est pourquoi il est essentiel de toujours commencer par `git remote update && git status` !
+
+Vous pouvez également exécuter `git diff origin/main` pour voir précisément les modifications qui ont été effectuées.
+:::
+
+4. Pour synchroniser votre dépôt local avec le dépôt distant (qui, cette fois, est en avance), exécutez `git pull`.
+
+5. Pour consulter l'historique des commits, exécutez `git log`. Pour quitter le log, appuyer sur `q` (pour 'quit').
+
+## Ignorer des fichiers
+
+:::{important} Pourquoi ignorer des fichiers ?
+Lors du développement, certains fichiers doivent être systématiquement **ignorés** dans les sauvegardes (par exemple, les fichiers générés lors de la compilation), car ils encombrent inutilement le dépôt.
+
+Par exemple, un moteur de jeu complexe comme Unity peut nécessiter jusqu’à 1 Go de fichiers pour exécuter certains modules, parfois inutilisés par votre jeu. Si ces fichiers ne sont pas ignorés, vous pourriez être contraint de télécharger ou de diffuser 1 Go à chaque synchronisation de vos dépôts, alors que les fichiers spécifiques à votre jeu ne représentent que quelques Mo.
+
+Les fichiers de configurations peuvent également provoquer des problèmes de compatibilité, notamment lorsque vous synchronisez des fichiers de configuration spécifiques à certaines machines avec d'autres.
+:::
+
+1. Créez un fichier `hello-world.cpp` (avec `touch hello-world.cpp` par exemple).
+
+2. Recopiez le code suivant.
+
+```{code} cpp
+#include <iostream>
+using namespace std;
+int main() {
+    cout << "Hello World!" << endl;
+    return 0;
+}
 ```
-Vous pouvez aussi voir l'historique des commits en faisant :
 
+3. Compilez le code avec `g++ -o <nom du fichier> <nom du fichier>.cpp`.
+
+Par exemple,
 ```{code} sh
-git log
+g++ -o hello-world hello-world.cpp
 ```
-Cela vous permet d'être au courant de l'évolution de votre projet.
 
-## Ignorer les fichiers inintéressants
+4. Exécutez l'exécutable `hello-world` avec la commande `./hello-world`.
 
-Lors du développement, il y a beaucoup de fichiers que l'on souhaite **ignorer** en permanence dans les sauvegardes (par exemple, les fichiers générés lors de la compilation) car ils polluent inutilement le dépôt. Cela peut aussi être source de problèmes quand vous récupérez des fichiers de configurations de certaines machines et que vous essayer de les synchroniser avec d'autres (problèmes de compatibilité).
+Les exécutables font partie des fichiers que nous souhaitons ignorer. 
 
-La gestion de ces fichiers est donc faite avec un fichier `.gitignore` qui est à la racine de votre projet. Dans ce fichier, vous pouvez ajouter tout ce que vous ne voulez pas suivre :
-- Créer un fichier `tobeignored` (avec `touch` par exemple).
-- Créer un fichier `.gitignore`.
-- Ajouter le nom du fichier `tobeignored` dans `.gitignore` (avec un éditeur de texte comme `pluma` sur Debian à l'IUT par exemple).
-- Suivre, sauvegarder, et diffuser `.gitignore` sur le dépôt distant.
+:::{important} `.gitignore`
+La gestion des fichiers ignorés se fait via un fichier `.gitignore` situé à la racine de votre projet. Dans ce fichier, vous pouvez ajouter tous les noms de fichiers et de dossiers que vous souhaitez ignorer en permanence.
 
-Maintenant, vérifier `git status`. Qu'est-ce qui change d'habitude ?
+Un exemple de [`.gitignore`](https://github.com/github/gitignore/blob/main/Unity.gitignore) pour les projets Unity qui sont plus complexes.
+:::
+
+5. Créez le fichier `.gitignore`.
+
+:::{seealso} Pourquoi `.gitignore` commence par un `.` ?
+:class: dropdown
+Les fichiers dont les noms commencent par `.` sont des fichiers cachés (qui ne s'affichent pas quand vous utilisez un gestionnaire de fichiers). Ce sont souvent des fichiers de configurations.
+
+Pour afficher les fichiers cachés dans un gestionnaire de fichiers, vous pouvez souvent appuyer sur `Ctrl+H` (`H` comme 'Hidden').
+:::
+
+6. Ajoutez le nom de l'exécutable `hello-world` dans `.gitignore`.
+
+7. Exécutez `git add`, `git commit -m "<message>"` et `git push` pour envoyer le fichier `.gitignore` sur le dépôt distant.
+
+8. Exécutez `git status`. Qu'est-ce qui change par rapport à d'habitude ?
 
 :::{hint} Où sont mes fichiers non suivis ?
 :class: dropdown
-Normalement, vu que nous n'avons pas suivi `tobeignored`, `git status` nous prévient en disant qu'il y a un fichier potentiellement important qui n'est pas suivi. Par contre, grâce au fichier `.gitignore`, Git se rend compte que nous avons fait le choix d'ignorer `tobeignored` et ne suivra jamais ce fichier.
+Normalement, comme nous n'avons pas ajouté l'exécutable `hello-world` avec `git add`, `git status` nous indique qu'il y a un fichier non suivi, potentiellement important. Cependant, grâce au fichier `.gitignore`, Git reconnaît que nous avons choisi d'ignorer `hello-world` et ne suivra jamais les modifications apportées à ce fichier.
 :::
-
-Un exemple de [`.gitignore`](https://github.com/github/gitignore/blob/main/Unity.gitignore) pour des projets plus complexes.
-
 
 ## Pour finir...
 
-Finissons ce TP avec une petite réorganisation : créer un dossier TP1 dans votre projet et bouge `toto.txt` vers ce dossier. Vous allez maintenir ce projet pendant le reste du cours en créant des dossiers séparés pour chaque TP. Est-ce que vous êtes capable maintenant de faire `add`, `commit`, `push` vous-même ?
+Terminons ce TP par une petite réorganisation.
 
-:::{hint} `git add .`
+1. Créez un dossier `TP1/` dans votre projet et bougez `my-first-file.txt` vers ce dossier.
+
+:::{warning} `.gitignore` à la racine !
+Le fichier `.gitignore` doit rester à la racine du projet, et **non dans le dossier `TP1/`** !
+:::
+
+Vous allez maintenir ce projet pendant le reste du cours en créant des dossiers séparés pour chaque TP.
+
+2. Revenir à la racine et exécutez `git add .`
+
+:::{important} `git add .`
+Vous pouvez utiliser `git add .` pour suivre tous les nouveaux changements effectués (lors de la création ou modification de plusieurs fichiers ou sous-dossiers) **dans le dossier courant**, d'où l'importance de revenir à la racine du projet ici.
+:::
+
+3. Validez les modifications indexées avec `git commit`.
+
+:::{warning} J'ai oublié de mettre un message de commit...
 :class: dropdown
-Vous pouvez faire `git add .` pour suivre tous les nouveaux changements que vous avez fait (quand vous avez créé/modifié plusieurs fichiers) **dans le dossier courant**.
+Vous êtes ici parce que vous avez exécuté `git commit` sans spécifier de message avec l'option `-m` (`git commit -m "<message>"`). Git vous oblige donc à écrire un message en ouvrant la fenêtre suivante.
 
-:::{warning} Garder un log compréhensible !
-Il est conseillé de faire des commits structurés, c'est-à-dire qu'il faut :
-- Écrire des messages de commit clairs.
-- Si vous faites des modifications différentes qui n'ont pas de rapport les uns avec les autres, alors il faut faire des `add` et `commit` séparés  (par groupe de modifications qui correspondent à une même "thème") au lieu de faire `git add .`. 
+```{figure} ../images/commit-message-window.png
+:alt: Commit message window
+:align: center
+
+Ici, nous avons oublié d'ajouter un message de commit pour la suppression d'un fichier nommé `test.txt`.
+```
+
+- Écrivez votre message de commit sur la première ligne.
+- Appuyez sur `Ctrl+X` pour quitter.
+- Appuyez sur `y` pour valider les modifications du message de commit.
+- Appuyer sur `Enter` pour quitter la fenêtre.
 :::
+
+:::{caution} Garder un log compréhensible !
+Il est recommandé de faire des commits structurés, ce qui implique de :
+- Rédiger des messages de commit clairs.
+- Si vous apportez des modifications distinctes qui ne sont pas liées, effectuez des `git add` et `git commit` séparés (par groupe de modifications ayant un thème commun) ou d'utiliser `git add .` et `git commit` dès que vous avez terminé de travailler sur une partie du projet, avant de passer à une autre.
 :::
+
+Vu que nous allons ignorer beaucoup d'exécutables dans le futur, pour éviter de modifier `.gitignore` à chaque fois, nous allons utiliser des expressions régulières pour ignorer les fichiers sans extensions (les exécutables).
+
+4. Remplacez le code du fichier `.gitignore` avec le code suivant.
+
+```{code}
+*
+!*.*
+!*/
+```
+
+:::{important} Que font ces expressions régulières ?
+- Nous commencons par utiliser `*` pour tout ignorer tous les fichiers. 
+- L'expression `!*.*` permet de ne pas ignorer les fichiers avec une extension (autrement dit, les fichiers sans extension, comme les exécutables, seront ignorés). 
+- L'expression `!*/` empêche d'ignorer les dossiers.
+:::
+
+5. Ajoutez votre encadrant à votre projet en suivant les instructions ci-dessous.
+- Cliquez sur **Manage** à gauche, puis sélectionnez **Members**.
+
+```{image} ../images/manage-members.png
+:alt: Manage members
+:align: center
+```
+
+- Cliquez sur **Invite members** en haut à droite.
+- Ajoutez votre encadrant avec le rôle **Maintainer**, qui lui donne presque autant de droit sur le projet que le rôle **Owner**.
 
 :::{important} À NE PAS OUBLIER !
-Il faut ajouter votre intervenant dans votre projet !
-- Cliquer sur **Manage** à gauche puis **Members**[^manage_members].
-- Cliquer sur **Invite members** en haut à droite.
-- Ajouter votre intervenant avec le rôle **Maintainer** (qui lui donne presque autant de droit sur le projet que vous l'**Owner**).
-- **Si l'intervenant n'est pas sur votre projet, il ne pourra pas le noter et donc vous aurez 0 !** 
+**Si l'encadrant(e) n'est pas ajouté(e) à votre projet, il (elle) ne pourra pas l'évaluer, et vous obtiendrez une note de 0 !** 
 :::
 
-[^manage_members]: ![Manage Members](../images/manage-members.png)
+6. Revenez aux [objectifs](#tp1-objectifs) et cochez les points que vous avez maîtrisés. Pratiquez les commandes et les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
+
+:::{seealso} `git rm`
+:class: dropdown
+Vous pouvez également utiliser `git rm <nom du fichier>` pour supprimer un fichier qui est déjà synchronisé sur les deux dépôts.
+
+Un fichier qui se trouve uniquement sur le dépôt local peut être supprimé simplement via un gestionnaire de fichiers ou avec la commande `rm` (sans `git`). Si vous avez déjà ajouté (`git add`) ce fichier aux modifications indexées (*staged changes*), vous pouvez le retirer grâce à `git restore --staged <nom du fichier>`.
+:::
