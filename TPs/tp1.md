@@ -15,6 +15,21 @@ Avant de commencer à coder, il est important de se familiariser avec les outils
 [GitLab](https://fr.wikipedia.org/wiki/GitLab) est une plateforme qui vous permet de stocker vos projets, de les synchroniser entre votre différentes machines (poste de l'IUT, ordinateur personnel) et de les partager avec vos collaborateurs.
 :::
 
+(tp1-objectifs)=
+## Objectifs
+
+Le but de ce TP est de comprendre les points suivants :
+[] `git clone <addresse du dépôt distant>`
+[] `git status`
+[] `git add <nom du fichier>`
+[] `git commit -m "<message de commit>"`
+[] `git push`
+[] `git remote update`
+[] `git pull`
+[] `.gitignore`
+
+Ces points sont essentiels pour la suite donc **il faut absolument les maîtriser !**
+
 ## Activation de votre compte GitLab
 
 En tant qu'étudiant à l'IUT d'Orsay, vous disposez déjà d'un compte sur le [GitLab de l'IUT](https://git.iut-orsay.fr/).
@@ -108,7 +123,7 @@ Les commandes Unix sous Linux et macOS sont très similaires, mais il se peut qu
 Vous pouvez installer l'émulateur [Git for Windows](https://gitforwindows.org/).
 :::
 
-## Configuration du votre poste de travail
+## Configuration de votre poste de travail
 
 Votre projet a été créé sur le serveur de l'IUT. Maintenant, pour travailler sur ce projet depuis votre poste de travail local, vous devez d'abord le configurer.
 
@@ -194,7 +209,7 @@ git add my-first-file.txt
 Une fois qu'un fichier ou une modification est suivi, il change de statut et devient une modification indexée (*staged change*).
 :::
 
-:::{seealso} git restore --staged
+:::{seealso} `git restore --staged`
 :class: dropdown
 Si vous avez ajouté par erreur une modification ou un fichier, vous pouvez retirer (*unstage*) la modification indexée en utilisant la commande `git restore --staged <nom du fichier>`.
 
@@ -233,13 +248,7 @@ Les modifications que nous allons effectuer sur le dépôt distant simuleront le
 4. Ajoutez une deuxième ligne à ce fichier (par exemple, `Hi!`).
 
 Vous pouvez voir un `1` sur la barre à gauche, indiquant qu'un changement a été effectué. 
-
-```{image} ../images/pending-changes.png
-:alt: Pending changes
-:align: center
-```
-
-Si vous cliquez dessus, vous verrez un changement concernant le fichier `my-first-file.txt` et l'option pour sauvegarder sur la branche `main` (*Commit to 'main'*).
+Si vous cliquez dessus, vous verrez un changement concernant le fichier `my-first-file.txt` et l'option pour sauvegarder et diffuser sur la branche `main` (*Commit and push to 'main'*).
 
 5. Ajoutez un message de commit.
 6. Cliquez sur le bouton **Commit and push to 'main'**.
@@ -251,7 +260,7 @@ La notion de **branches** en Git permet de maintenir une version stable d'une ap
 
 Par exemple, dans un projet, la partie IHM et la partie logique du code peuvent être séparées en deux branches distinctes, autres que 'main'. La branche principale ('main') contiendra une version stable et fonctionnelle du projet, tandis que les deux autres branches contiendront des versions en développement.
 
-Dans ce cours, nous ne couvrirons pas les branches Git, ainsi que d'autres fonctionnalités avancées de Git. Vous allez travaillez seulement sur une seule branche : 'main'.
+Dans ce cours, nous ne couvrirons pas les branches Git, ainsi que d'autres fonctionnalités avancées de Git. Vous allez travailler seulement sur une seule branche : 'main'.
 :::
 
 ## Synchronisation du dépôt local avec le dépôt distant
@@ -270,7 +279,7 @@ La branche 'main' sur le dépôt distant est différente de votre dépôt local.
 
 3. Exécutez `git diff origin/main` pour voir les différences entre les deux dépôts.
 
-:::{important} Commencer par `git remote update && git status` !
+:::{important} Commencez par `git remote update && git status` !
 :class: dropdown
 En pratique, lorsque vous travaillez sur un projet, il est fréquent qu'entre deux sessions de travail, quelqu’un d’autre ait modifié une partie du code. Si vous commencez une session de travail sans vérifier l'état de vos dépôts, vous risquez de rencontrer des conflits à résoudre (par exemple, si vous modifiez les mêmes parties de code de manière différente). 
 
@@ -414,5 +423,14 @@ Vu que nous allons ignorer beaucoup d'exécutables dans le futur, pour éviter d
 - Ajoutez votre encadrant avec le rôle **Maintainer**, qui lui donne presque autant de droit sur le projet que le rôle **Owner**.
 
 :::{important} À NE PAS OUBLIER !
-**Si l'encadrant n'est pas sur votre projet, il ne pourra pas le noter et donc vous aurez 0 !** 
+**Si l'encadrant(e) n'est pas ajouté(e) à votre projet, il (elle) ne pourra pas l'évaluer, et vous obtiendrez une note de 0 !** 
+:::
+
+6. Revenez aux [objectifs](#tp1-objectifs) et cochez les points que vous avez maîtrisés. Pratiquez les commandes et les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
+
+:::{seealso} `git rm`
+:class: dropdown
+Vous pouvez également utiliser `git rm <nom du fichier>` pour supprimer un fichier qui est déjà synchronisé sur les deux dépôts.
+
+Un fichier qui se trouve uniquement sur le dépôt local peut être supprimé simplement via un gestionnaire de fichiers ou avec la commande `rm` (sans `git`). Si vous avez déjà ajouté (`git add`) ce fichier aux modifications indexées (*staged changes*), vous pouvez le retirer grâce à `git restore --staged <nom du fichier>`.
 :::
