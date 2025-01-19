@@ -155,7 +155,9 @@ Si vous n'avez pas sauvegardé votre PAT, supprimez (*Revoke*) celui que vous av
 
 ## Travailler sur le dépôt local
 
-Un répertoire portant le même nom (*dépôt local*) est maintenant téléchargé sur votre machine.
+Un répertoire portant le même nom (*dépôt local*) a maintenant été téléchargé sur votre machine.
+
+1. Exécutez les commandes suivantes.
 
 ```{code} sh
 cd monprojet/
@@ -163,52 +165,65 @@ ls
 git status
 ```
 
-`ls` vous permet de voir l'ensemble des fichiers dans le répertoire et `git status` montre l'état du dépôt. Pour l'instant, il devra vous indiquer qu'il n'y a rien à valider et votre copie du travail est propre (*nothing to commit, working tree clean*).
+La commande `ls` vous permet d'afficher l'ensemble des fichiers dans le répertoire, tandis que `git status` montre l'état du dépôt. Pour l'instant, cette dernière commande devrait indiquer qu'il n'y a rien à valider et que votre copie de travail est propre (*nothing to commit, working tree clean*).
 
-Qu'observez-vous en tapant les commandes suivantes ?
+2. Que constatez-vous en exécutant les commandes suivantes ?
 
 ```{code} sh
 touch toto.txt
 git status
 ```
+
 :::{hint} Fichiers et modifications non suivis
 :class: dropdown
-Il indique que votre répertoire de travail contient un nouveau fichier ou un fichier modifié **non suivi** (*untracked*). Git est un outil de versionnage : il vous permet de garder l'historique des changements des fichiers de votre projet mais pas tous les fichiers/modifications sont forcément importants. Donc, par défaut, les fichiers que vous créez/les modifications que vous faites ne sont pas suivis. Seul les fichiers/modifications suivis auront leur historique gardé.
+Git indique que votre répertoire de travail contient un nouveau fichier ou une modification **non suivie** (*untracked*).
+
+Git est un outil de gestion de versions : il vous permet de conserver l’historique des changements des fichiers de votre projet. Cependant, tous les fichiers ou modifications ne sont pas nécessairement importants. Ainsi, par défaut, les fichiers que vous créez ou les modifications que vous effectuez ne sont pas suivis. Seuls les fichiers et modifications explicitement suivis auront leur historique enregistré.
 :::
 
-Ajouter une ligne dans `toto.txt` (par exemple `Hello World!`).
+3. Ajoutez une ligne dans `toto.txt` (par exemple `Hello World!`).
 
-Demander à Git de suivre `toto.txt` en faisant:
+4. Demandez à Git de suivre la modification à `toto.txt` en exécutant la commande suivante.
 ```{code} sh
 git add toto.txt
 ```
 
-Vérifier `git status` encore une fois. Qu'est-ce qu'il vous indique ?
+5. Exécutez à nouveau la commande `git status`. Que vous indique-t-elle ?
 
-Nous avons parlé d'historique des changements du projet mais comment cela fonctionne-t-il exactement ? 
+:::{important} Modifications indexées  
+Une fois qu'un fichier ou une modification est suivi, il change de statut et devient une modification indexée (*staged change*).
+:::
 
-`git add` indique à Git que le fichier/la modification que vous avez ajouté est important (à suivre). Dans ce fichier, vous avez fait des modifications (en rajoutant `Hello World!` par exemple).
+:::{seealso} git restore --staged
+:class: dropdown
+Si vous avez ajouté par erreur une modification ou un fichier, vous pouvez retirer (*unstage*) la modification indexée en utilisant la commande `git restore --staged <nom du fichier>`.
 
-Maintenant, pour créer un historique de `toto.txt`, vous devez sauvegarder ces changements.
+Par exemple, exécutez `git restore --staged toto.txt`, puis vérifier l'état du dépôt avec `git status`. N'oubliez-pas de resuivre la modification en utilisant `git add`.
+:::
 
+6. Maintenant, pour créer un historique des modifications indexées (ici, le fichier `toto.txt` avec la ligne `Hello World!`), vous devez valider (*commit*) ces changements et ajouter un message décrivant ces modifications en exécutant la commande `git commit -m "<message descriptif>"`.
+
+Par exemple,
 ```{code} sh
-git commit -m "Création d'un fichier important pour mon travail"
+git commit -m "Premier commit de toto.txt"
 ```
 
-Retaper `git status` pour vérifier l'état de votre dépôt. Qu'est-ce qu'il vous indique ?
+7. Réexécutez `git status` pour vérifier l'état de votre dépôt. Que vous indique-t-elle ?
 
 :::{hint} Ready to push
 :class: dropdown
-La sauvegarde a été faite. Votre version locale du projet est en avance par rapport à la version sur le serveur GitLab. Vous pouvez donc diffuser ces changements pour synchroniser les deux versions.
+La validation a été effectuée. Votre version locale du projet est maintenant en avance par rapport à la version sur le serveur GitLab. Vous pouvez donc diffuser (*push*) ces changements pour synchroniser les deux versions.
 :::
+
+8. Exécutez la commande suivante.
 
 ```{code} sh
 git push
 ```
 
-Retourner sur Gitlab et voir que votre projet contient maintenant `toto.txt`.
+9. Retournez sur Gitlab et vérifiez que le dépôt distant correspond bien au dépôt local.
 
-## Travailler sur le dépôt distant
+<!-- ## Travailler sur le dépôt distant
 
 Avec le web IDE de GitLab, il est possible de travailler directement sur le dépôt distant.
 
@@ -227,7 +242,7 @@ Vous pouvez voir sur la barre à gauche un `1` indiquant un changement a été e
 La notion de **branches** en Git permet de toujours garder une version stable d'une application/un projet. Toutes modifications sont donc faites sur d'autres branches que 'main' puis fusionnées avec la branche 'main' plus tard. Dans ce cours, nous n'allons pas aborder les branches en Git comme beaucoup d'autres utilités de Git que nous allons survoler. Les modifications sont donc faites directement sur 'main'.
 :::
 
-[^pending_changes]: ![Pending Changes](../images/pending-changes.png)
+[^pending_changes]: ![Pending Changes](../images/pending-changes.png) -->
 
 ## Synchronisation du dépôt local avec le dépôt distant
 
