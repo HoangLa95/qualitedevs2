@@ -15,18 +15,17 @@ Avant de commencer à coder, il est important de se familiariser avec les outils
 [GitLab](https://fr.wikipedia.org/wiki/GitLab) est une plateforme qui vous permet de stocker vos projets, de les synchroniser entre votre différentes machines (poste de l'IUT, ordinateur personnel) et de les partager avec vos collaborateurs.
 :::
 
-(tp1-objectifs)=
 ## Objectifs
 
 Le but de ce TP est de comprendre les points suivants :
-- [ ] `git clone <addresse du dépôt distant>`
-- [ ] `git status`
-- [ ] `git add <nom du fichier>`
-- [ ] `git commit -m "<message de commit>"`
-- [ ] `git push`
-- [ ] `git remote update`
-- [ ] `git pull`
-- [ ] `.gitignore`
+- [ ] `git clone <addresse du dépôt distant>` ([Configuration de votre poste de travail](#configuration-de-votre-poste-de-travail))
+- [ ] `git status` ([Dépôt local](#dépôt-local))
+- [ ] `git add <nom du fichier>` ([Dépôt local](#dépôt-local))
+- [ ] `git commit -m "<message de commit>"` ([Dépôt local](#dépôt-local))
+- [ ] `git push` ([Dépôt local](#dépôt-local))
+- [ ] `git remote update` ([Synchronisation du dépôt local avec le dépôt distant](#synchronisation-du-dépôt-local-avec-le-dépôt-distant))
+- [ ] `git pull` ([Synchronisation du dépôt local avec le dépôt distant](#synchronisation-du-dépôt-local-avec-le-dépôt-distant))
+- [ ] `.gitignore` ([Ignorer des fichiers](#ignorer-des-fichiers))
 
 Ces points sont essentiels pour la suite donc **il faut absolument les maîtriser !**
 
@@ -426,7 +425,7 @@ Vu que nous allons ignorer beaucoup d'exécutables dans le futur, pour éviter d
 **Si l'encadrant(e) n'est pas ajouté(e) à votre projet, il (elle) ne pourra pas l'évaluer, et vous obtiendrez une note de 0 !** 
 :::
 
-6. Revenez aux [objectifs](#tp1-objectifs) et cochez les points que vous avez maîtrisés. Pratiquez les commandes et les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
+6. Revenez aux [objectifs](#objectifs) et cochez les points que vous avez maîtrisés. Pratiquez les commandes et les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
 
 :::{seealso} `git rm`
 :class: dropdown
