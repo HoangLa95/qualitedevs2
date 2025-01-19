@@ -18,7 +18,7 @@ Avant de commencer à coder, il est important de se familiariser avec les outils
 ## Objectifs
 
 Le but de ce TP est de comprendre les points suivants :
-- [ ] `git clone <addresse du dépôt distant>` ([Configuration de votre poste de travail](#configuration-de-votre-poste-de-travail))
+- [ ] `git clone <addresse du dépôt distant avec PAT>` ([Personal Access Token](#personal-access-token) et [Configuration de votre poste de travail](#configuration-de-votre-poste-de-travail))
 - [ ] `git status` ([Dépôt local](#d-p-t-local))
 - [ ] `git add <nom du fichier>` ([Dépôt local](#d-p-t-local))
 - [ ] `git commit -m "<message de commit>"` ([Dépôt local](#d-p-t-local))
