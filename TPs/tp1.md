@@ -110,25 +110,34 @@ Vous pouvez installer l'émulateur [Git for Windows](https://gitforwindows.org/)
 
 ## Configuration du votre poste de travail
 
-Vous avez maintenant créer votre projet sur le dépôt distant sur le serveur de l'IUT. Maintenant, pour travailler sur ce projet sur votre machine (localement), il faut d'abord le configurer.
+Votre projet a été créé sur le serveur de l'IUT. Maintenant, pour travailler sur ce projet depuis votre poste de travail local, vous devez d'abord le configurer.
 
 ```{code} sh
-git config --global user.name "Prénom Nom"
-git config --global user.email "prenom.nom@universite-paris-saclay.fr"
+git config --global user.name "<Prénom> <Nom>"
+git config --global user.email "<prenom>.<nom>@universite-paris-saclay.fr"
 ```
 
-Maintenant, vous pouver clôner votre dépôt distant pour le télécharger vers votre poste local :
-- Cliquer sur le bouton **Code**[^code_button] à droite.
-- Copier le code de l'option **Clone with HTTPS**[^clone_https].
-- Ouvrir un terminal dans votre répertoire de travail.
-- Taper la commande suivante en collant l'adresse que vous aviez copié et en rajoutant votre login et PAT au bon endroit.
+Vous pouvez maintenant cloner votre dépôt distant pour le télécharger sur votre poste local :
+1. Cliquez sur le bouton **Code** situé à droite.
+
+```{image} ../images/code-button.png
+:alt: Code
+:align: center
+```
+
+2. Copiez l'URL sous l'option **Clone with HTTPS**.
+
+```{image} ../images/clone-https.png
+:alt: Clone with HTTPS
+:align: center
+```
+
+3. Ouvrez un terminal dans votre répertoire de travail.
+4. Saisissez la commande suivante, en collant l'adresse copiée et en rajoutant votre login ainsi que votre PAT aux emplacements appropriés.
 
 ```{code} sh
 git clone https://<login>:<Personal Access Token>@git.iut-orsay.fr/<login>/monprojet.git
 ```
-[^code_button]: ![Code Button](../images/code-button.png)
-
-[^clone_https]: ![Clone HTTPS](../images/clone-https.png)
 
 Par exemple :
 ```{code} sh
@@ -136,12 +145,12 @@ git clone https://hla:1234thisIsYourPAT5678@git.iut-orsay.fr/hla/monprojet.git
 ```
 
 :::{important} Personal Access Token
-Il faut ajouter le token que vous avez sauvegardé en haut ! 
+Vous devez ajouter le token que vous avez sauvegardé précédemment ! 
 - **Pas le nom que vous lui avez donné !**
 - **Pas votre mot de passe !**
-- **Pas le Feed Token !** (que vous pouvez aussi trouver dans la page Access Token)
+- **Pas le Feed Token !** (que vous pouvez également trouver sur la page Access Token)
 
-Si vous n'avez pas sauvegardé votre PAT, enlever (*Revoke*) celui que vous avez déjà créé et refaire la manipulation.
+Si vous n'avez pas sauvegardé votre PAT, supprimez (*Revoke*) celui que vous avez déjà créé et refaites la procédure pour en générer un nouveau.
 :::
 
 ## Travailler sur le dépôt local
