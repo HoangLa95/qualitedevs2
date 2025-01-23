@@ -98,6 +98,6 @@ Git Workflow (Credits: bytebytego.com)
 :::
 
 :::{attention} Notation
-- 7 QCMs.
+- 8 QCMs.
 - Dépôt Git noté.
 :::
