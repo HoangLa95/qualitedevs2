@@ -73,7 +73,7 @@ Besoins additionels :
 :alt: Flux de travail centralisé
 :align: center
 
-Un flux de travail centralisé qui garde un dépôt (*repository*) commun pour le développement en équipe
+Un flux de travail centralisé qui garde un dépôt partagé (*shared repository*) commun pour le développement en équipe
 Credits: [Git](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows)
 ```
 
@@ -99,10 +99,10 @@ Nous nous limitons à une initialisation aux commandes de bases de Git pour stoc
 :::
 
 :::{important} Principe de Git et une platforme web comme GitLab
-- Le **répertoire de travail** (*Working directory*) : endroit où nous modifions nos fichiers.
+- **Répertoire de travail** (*Working directory*) : endroit où nous modifions nos fichiers.
 - **Zone de suivi** (*Staging area*) : endroit temporaire pour les modifications suivies (*Staged changes*).
 - **Dépôt local** (*Local repository*) : endroit contenant le code avec les modifications validés (*Committed changes*).
-- **Dépôt distant** (*Remote repository*) : Serveur distant contenant le code.
+- **Dépôt distant** (*Remote repository*) : serveur distant contenant le code.
 
 Les différentes zones sont présentes pour gérer le versionnage !
 :::
