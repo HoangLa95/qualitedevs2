@@ -1,87 +1,127 @@
 # Développer proprement ?
 
-```{figure} ../images/wtfm.jpg
-:alt: WTF per minute
-:align: center
-
-Credits: osnews.com
-```
-
 ## Qualité du code
 
-### Le coût d'un mauvais code
+### Le coût d'un code de mauvaise qualité
 
-```{figure} ../images/Knight_Capital_Group.png
+```{figure} ../images/knight-capital-group.png
 :alt: Knight Capital Group
 :width: 600px
 :align: center
 
-Knight Capital Group, une société de bourse qui a perdu plus de 450 millions de dollars à cause d'une boucle infinie[^KCG]  (Credits: [wikipedia.com](https://dougseven.com/2014/04/17/knightmare-a-devops-cautionary-tale/))
+Knight Capital Group, une société de bourse qui a perdu plus de 440 millions de dollars à cause d'une boucle infinie.  (Credits: [Wikipedia](https://fr.wikipedia.org/wiki/Knight_Capital_Group))
 ```
 
 ### Le faux dilemme du développeur
 
-:::{danger} Erreur à ne pas faire
-Coder salement pour respecter une deadline au détriment de la productivité dans le futur. Un code sale va toujours vous ralentir instantanément.
+:::{danger} Dilemme
+Je dois écrire un code qui ne doit pas être maintenu ou réutilisé et la deadline arrive bientôt.
+
+Est-ce que 
+- [ ] je perds mon temps à coder proprement ?
+- [X] je code n'importe comment tant que ça fait l'affaire ?
 :::
 
-:::{seealso} La **SEULE** manière correcte de faire les choses
+:::{warning} Problèmes
 :class: dropdown
-Coder proprement !
+- En tant que développeur, votre code doit souvent être maintenu et réutilisé.
+- Avec de bonnes habitudes, la "perte de temps" est minimale pour un gain de temps maximal lors du développement.
+- Même au cours d’une session de travail, un code sale peut entraîner d’énormes pertes de temps si vous devez le modifier.
 :::
+
+### Comment mesurer la qualité d'un code ?
+
+```{figure} ../images/wtfm.jpg
+:alt: WTF per minute
+:align: center
+
+Credits: [Osnews](https://www.osnews.com/story/19266/wtfsm/)
+```
+
+:::{important} Objectifs
+:class: dropdown
+- Lisible et cohérent.
+- Facile à débugger.
+- Facile à tester.
+- Efficace par rapport à la demande.
+- Évolutif si nécessaire.
+:::
+
+Plus dans les prochains amphis !
 
 ## Qualité du développement
 
-```{figure} ../images/git.png
+### Développer seul et en équipe ?
+
+En dehors de la qualité du code, quels sont les besoins de base du développement en solo et en équipe ?
+
+:::{important} Développement en solo
+:class: dropdown
+- Un planning (cf. cours de gestion).
+- Un environnement de développement convenable (variable selon le projet).
+- **L'historique des versions du projet** (ce cours).
+:::
+
+:::{important} Développement en équipe
+:class: dropdown
+Besoins additionels :
+- Une communication claire et régulière (cf. cours de gestion).
+- Le partage du code sans conflit (futur cours de qualité de développement).
+:::
+
+```{figure} ../images/centralized-workflow.png
+:alt: Flux de travail centralisé
+:align: center
+
+Un flux de travail centralisé qui garde un dépôt (*repository*) commun pour le développement en équipe
+Credits: [Git](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows)
+```
+
+### Git
+
+```{figure} ../images/git.jpeg
 :alt: Git, GitHub et GitLab
 :align: center
 
-Git, GitHub et GitLab (Credits: gonullu.pardus.org.tr)
+Git, Bitbucket, GitHub et GitLab (Credits: [Linkedin/PawanV](https://www.linkedin.com/pulse/demystifying-git-vs-github-atlassian-bitbucket-gitlab-pawan-verma))
 ```
+
 :::{note} Git
-**Version control system** qui garde un dépôt (*repository*) de notre projet et garde l'historique de notre travail.
+Git est un logiciel de [**gestion de versions**]((https://fr.wikipedia.org/wiki/Gestion_de_versions)) qui garde un dépôt (*repository*) de notre projet et l'historique des différentes versions de notre travail.
 :::
 
-:::{note} Ce que l'on va utiliser
-**GitLab** : une application web pour la gestion de projets et de ses participants.
+:::{note} Bitbucket, GitHub et GitLab
+Des applications web pour héberger des dépôts et faciliter le développement en équipe.
 :::
 
-```{figure} ../images/why-git.png
-:alt: Pourquoi utiliser Git ?
+:::{note} Dans ce cours
+Nous nous limitons à une initialisation aux commandes de bases de Git pour stocker du code personnel et découvrons brièvement l'aspect collaboratif de GitLab.
+:::
+
+:::{important} Principe de Git et une platforme web comme GitLab
+- Le **répertoire de travail** (*Working directory*) : endroit où nous modifions nos fichiers.
+- **Zone de suivi** (*Staging area*) : endroit temporaire pour les modifications suivies (*Staged changes*).
+- **Dépôt local** (*Local repository*) : endroit contenant le code avec les modifications validés (*Committed changes*).
+- **Dépôt distant** (*Remote repository*) : Serveur distant contenant le code.
+
+Les différentes zones sont présentes pour gérer le versionnage !
+:::
+
+:::{tip} Quelques commandes de bases à connaître
+- `git add` permet de suivre une modification (faire passer une modification du répertoire de travail au zone de suivi).
+- `git commit` permet de valider les modifications suivies en ajoutant un message descriptif qui sera enregistré dans l'historique du projet (faire passer les modifications suivies de la zone de suivi au dépôt local).
+- `git push` permet de diffuser les modifications validées du dépôt local au dépôt distant.
+- `git pull` permet de récupérer les modifications du dépôt distant sur le répertoire de travail local.
+
+```{figure} ../images/git-workflow.jpeg
+:alt: Comment fonctionne Git et GitLab ?
 :align: center
 
-Pourquoi utiliser Git ? (Credits: javatpoint.com)
+Comment fonctionne Git et GitLab ? (Credits: [Bytebytego](https://x.com/bytebytego/status/1648197336861130753?mx=2))
 ```
 
-:::{hint} Quelques raisons pour utiliser Git
-- [Gestion des versions](https://fr.wikipedia.org/wiki/Gestion_de_versions).
-- Gestion des développeurs.
-- Gestion des *issues*.
-- Documentation de la progression du projet.
-- Construction, test, déploiement automatiques.
+Plus de commandes dans les TPs !
 :::
-    
-
-:::{note} Git dans ce cours
-:class: dropdown
-Nous nous arrêtons à une initialisation aux commandes de bases de Git pour stocker du code personnel et nous découvrons un peu l'aspect collaboratif de Git.
-:::
-
-Commandes importantes à connaître[^plus] :
-- `git clone <repo>` : Cloner une copie locale de votre dépôt distant.
-- `git add <file>` : Demander de suivre l'historique d'un fichier. 
-- `git commit -m <message>` : Créer un nouveau point dans l'historique de votre programme avec l'ensemble des modifications suivies.
-- `git push` : Diffuser les changements du dépôt local sur le dépôt distant.
-- `git pull` : Télécharger le dépôt distant
-
-[^plus]: Plus de commandes dans le premier TP !
-
-```{figure} ../images/GitWorkflow.jpeg
-:alt: Git Workflow
-:align: center
-
-Git Workflow (Credits: bytebytego.com)
-```
 
 ## Organisation du cours
 
@@ -91,8 +131,8 @@ Git Workflow (Credits: bytebytego.com)
 - 7 Travaux Pratiques
 
 :::{important} Objectifs du cours
-- Initiation à Git et GitLab.
-- Apprendre les principes de bases pour coder proprement. 
+- Savoir utiliser les commandes de bases de Git, un outil de gestion de versions.
+- Connaître les principes de base du code propre.
 - Savoir utiliser un debugger.
 - Découvrir les tests unitaires et le TDD (Test Driven Development).
 :::
