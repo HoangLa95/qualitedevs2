@@ -72,6 +72,7 @@ Pour créer un PAT :
 7. Cliquez sur **Create personal access token**.
 
 :::{important} SAUVEGARDER VOTRE PAT !!!
+Regardez votre token et sauvegardez-le !
 Une fois que vous quittez la page de création, le PAT ne pourra plus être affiché. Il est indispensable de le conserver, car vous en aurez besoin pour accéder à vos projets !
 :::
 
@@ -152,8 +153,12 @@ Vous pouvez maintenant cloner votre dépôt distant pour le télécharger sur vo
 4. Saisissez la commande suivante, en collant l'adresse copiée et en rajoutant votre login ainsi que votre PAT aux emplacements appropriés.
 
 ```{code} sh
-git clone https://<login>:<Personal Access Token>@git.iut-orsay.fr/<login>/monprojet.git
+git clone https://<votre login>:<Personal Access Token>@git.iut-orsay.fr/<login du créateur du projet>/<nom du projet>.git
 ```
+
+:::{note} Les deux logins
+Ici, vous êtes le créateur du projet donc les deux logins sont les mêmes. Par contre, en équipe, les deux logins peuvent être différents.
+:::
 
 Par exemple :
 ```{code} sh

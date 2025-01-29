@@ -68,6 +68,7 @@ To create a PAT:
 7. Click on **Create personal access token**.
 
 :::{important} SAVE YOUR PAT !!! 
+Look at your token and save it !
 Once you leave the creation page, the PAT will no longer be visible. It is essential to save it, as you will need it to access your projects!
 :::
 
@@ -148,8 +149,12 @@ You can now clone your remote repository to download it to your local workstatio
 4. Enter the following command, pasting the copied address and adding your login and PAT in the appropriate places.
 
 ```{code} sh
-git clone https://<login>:<Personal Access Token>@git.iut-orsay.fr/<login>/monprojet.git
+git clone https://<your login>:<Personal Access Token>@git.iut-orsay.fr/<login of the creator of the project>/<project name>.git
 ```
+
+:::{note} The two logins
+Here, you are the creator of the project so the two logins are the same. However, when working with a team, the logins can differ.
+:::
 
 For example:
 ```{code} sh
