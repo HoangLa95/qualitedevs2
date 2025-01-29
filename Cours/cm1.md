@@ -1,4 +1,5 @@
-# Coder proprement ?
+# Développer proprement ?
+
 ```{figure} ../images/wtfm.jpg
 :alt: WTF per minute
 :align: center
@@ -6,7 +7,7 @@
 Credits: osnews.com
 ```
 
-## Pourquoi coder proprement ?
+## Qualité du code
 
 ### Le coût d'un mauvais code
 
@@ -15,9 +16,8 @@ Credits: osnews.com
 :width: 600px
 :align: center
 
-Knight Capital Group, une société de bourse qui a perdu plus de 450 millions de dollars à cause d'une boucle infinie[^KCG]  (Credits: wikipedia.com)
+Knight Capital Group, une société de bourse qui a perdu plus de 450 millions de dollars à cause d'une boucle infinie[^KCG]  (Credits: [wikipedia.com](https://dougseven.com/2014/04/17/knightmare-a-devops-cautionary-tale/))
 ```
-[^KCG]: [L'histoire de la faillite du Knight Capital Group](https://dougseven.com/2014/04/17/knightmare-a-devops-cautionary-tale/)
 
 ### Le faux dilemme du développeur
 
@@ -30,7 +30,7 @@ Coder salement pour respecter une deadline au détriment de la productivité dan
 Coder proprement !
 :::
 
-## Avant de commencer à coder
+## Qualité du développement
 
 ```{figure} ../images/git.png
 :alt: Git, GitHub et GitLab
@@ -91,10 +91,10 @@ Git Workflow (Credits: bytebytego.com)
 - 7 Travaux Pratiques
 
 :::{important} Objectifs du cours
-1. Initiation à Git avec les commandes de bases.
-2. Apprendre des principes de bases pour coder proprement. 
-3. Savoir utiliser un debugger.
-4. Découvrir les tests unitaires et le TDD (Test Driven Development).
+- Initiation à Git et GitLab.
+- Apprendre les principes de bases pour coder proprement. 
+- Savoir utiliser un debugger.
+- Découvrir les tests unitaires et le TDD (Test Driven Development).
 :::
 
 :::{attention} Notation
