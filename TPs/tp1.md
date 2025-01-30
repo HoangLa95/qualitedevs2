@@ -316,7 +316,7 @@ Vous pouvez également exécuter `git diff origin/main` pour voir précisément 
 ## Ignorer des fichiers
 
 :::{important} Pourquoi ignorer des fichiers ?
-Lors du développement, certains fichiers doivent être systématiquement **ignorés** dans les sauvegardes (par exemple, les fichiers générés lors de la compilation), car ils encombrent inutilement le dépôt.
+Lors du développement, certains fichiers doivent être systématiquement **ignorés** (par exemple, les fichiers générés lors de la compilation), car ils encombrent inutilement le dépôt.
 
 Par exemple, un moteur de jeu complexe comme Unity peut nécessiter jusqu’à 1 Go de fichiers pour exécuter certains modules, parfois inutilisés par votre jeu. Si ces fichiers ne sont pas ignorés, vous pourriez être contraint de télécharger ou de diffuser 1 Go à chaque synchronisation de vos dépôts, alors que les fichiers spécifiques à votre jeu ne représentent que quelques Mo.
 
@@ -385,7 +385,7 @@ Le fichier `.gitignore` doit rester à la racine du projet, et **non dans le dos
 
 Vous allez maintenir ce projet pendant le reste du cours en créant des dossiers séparés pour chaque TP.
 
-2. Revenir à la racine du projet et exécutez `git add .`
+2. Revenez à la racine du projet et exécutez `git add .`
 
 :::{important} `git add .`
 Vous pouvez utiliser `git add .` pour suivre tous les nouveaux changements effectués (lors de la création ou modification de plusieurs fichiers ou sous-dossiers) **dans le dossier courant**, d'où l'importance de revenir à la racine du projet ici.

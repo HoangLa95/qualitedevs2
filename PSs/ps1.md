@@ -312,7 +312,7 @@ You can also run `git diff origin/main` to see exactly what changes have been ma
 ## Ignoring files
 
 :::{important} Why should we ignore some files?
-During development, certain files must be systematically **ignored** in backups (for example, files generated during compilation) because they unnecessarily clutter the repository.
+During development, certain files must be systematically **ignored** (for example, files generated during compilation) because they unnecessarily clutter the repository.
 
 For instance, a complex game engine like Unity might require up to 1 GB of files to run certain modules, sometimes unused by your game. If these files are not ignored, you could be forced to push or pull 1 GB every time you sync your repositories, while the files specific to your game are only a few MB.
 
