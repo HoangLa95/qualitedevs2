@@ -356,7 +356,7 @@ An example of a [`.gitignore`](https://github.com/github/gitignore/blob/main/Uni
 :class: dropdown
 Files whose names start with a `.` are hidden files (they do not appear when using a file manager). These are often configuration files.
 
-To display hidden files in a file manager, you can usually press `Ctrl+H` (`H` for 'Hidden').
+To display hidden files in a file manager, you can usually press `Ctrl+h` (`h` for 'hidden').
 :::
 
 6. Add the name of the executable `hello-world` in `.gitignore`.
@@ -402,7 +402,7 @@ Here, we forgot to add a commit message for the deletion of a file named `test.t
 ```
 
 - Write your commit message on the first line.
-- Press `Ctrl+X` to exit.
+- Press `Ctrl+x` to exit.
 - Press `y` to confirm the changes.
 - Press `Enter` to quit the window.
 :::
