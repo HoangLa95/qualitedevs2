@@ -72,12 +72,12 @@ Pour créer un PAT :
 7. Cliquez sur **Create personal access token**.
 
 :::{important} SAUVEGARDER VOTRE PAT !!!
-Regardez votre token et sauvegardez-le !
+Regardez votre token et sauvegardez-le comme un mot de passe !
 Une fois que vous quittez la page de création, le PAT ne pourra plus être affiché. Il est indispensable de le conserver, car vous en aurez besoin pour accéder à vos projets !
 :::
 
 :::{note} Un PAT par poste de travail
-Vous devez créer un PAT distinct pour chaque poste de travail que vous utilisez. Il est possible de créer autant de PAT que nécessaire.
+Il est recommandé de créer un PAT distinct pour chaque poste de travail utilisé. Vous pouvez en générer autant que nécessaire. 
 :::
 
 ## Création d'un dépôt distant

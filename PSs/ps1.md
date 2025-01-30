@@ -68,12 +68,12 @@ To create a PAT:
 7. Click on **Create personal access token**.
 
 :::{important} SAVE YOUR PAT !!! 
-Look at your token and save it !
+Look at your token and save it like a password!
 Once you leave the creation page, the PAT will no longer be visible. It is essential to save it, as you will need it to access your projects!
 :::
 
 :::{note} One PAT per workstation
-You need to create a distinct PAT for each workstation you use. It is possible to create as many PATs as necessary.
+It is recommended to create a distinct PAT for each workstation you use. You can generate as many PATs as necessary.
 :::
 
 ## Creating a remote repository
