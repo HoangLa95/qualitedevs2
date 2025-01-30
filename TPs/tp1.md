@@ -104,7 +104,7 @@ Dans la suite, nous appellerons ce projet `monprojet`. N'oubliez pas de le rempl
 :::{important} README.md
 Avoir un README en [Markdown](https://fr.wikipedia.org/wiki/Markdown) dans un projet est une pratique standard. Ce fichier sert de description du projet.
 
-Le Markdown est aussi ce que je j'utilise pour ce site !
+Le Markdown est aussi ce que j'utilise pour ce site !
 :::
 
 4. Parcourez le README par défaut proposé par GitLab.
@@ -226,18 +226,18 @@ git add my-first-file.txt
 
 5. Exécutez à nouveau la commande `git status`. Que vous indique-t-elle ?
 
-:::{important} Modifications indexées  
-Une fois qu'un fichier ou une modification est suivi, il change de statut et devient une modification indexée (*staged change*).
+:::{important} Modifications suivis  
+Une fois qu'un fichier ou une modification est suivi, il change de statut et devient une modification suivie (*staged change*).
 :::
 
 :::{seealso} `git restore --staged`
 :class: dropdown
-Si vous avez ajouté par erreur une modification ou un fichier, vous pouvez retirer (*unstage*) la modification indexée en utilisant la commande `git restore --staged <nom du fichier>`.
+Si vous avez ajouté par erreur une modification ou un fichier, vous pouvez retirer (*unstage*) la modification suivie en utilisant la commande `git restore --staged <nom du fichier>`.
 
 Par exemple, exécutez `git restore --staged my-first-file.txt`, puis vérifier l'état du dépôt avec `git status`. N'oubliez-pas de resuivre la modification en utilisant `git add`.
 :::
 
-6. Maintenant, pour créer un historique des modifications indexées (ici, le fichier `my-first-file.txt` avec la ligne `Hello World!`), vous devez valider (*commit*) ces changements et ajouter un message décrivant ces modifications en exécutant la commande `git commit -m "<message de commit descriptif>"`.
+6. Maintenant, pour créer un historique des modifications suivies (ici, le fichier `my-first-file.txt` avec la ligne `Hello World!`), vous devez valider (*commit*) ces changements et ajouter un message décrivant ces modifications en exécutant la commande `git commit -m "<message de commit descriptif>"`.
 
 Par exemple :
 ```{code} sh
@@ -291,7 +291,7 @@ Retournez sur votre dépôt local et supposons qu'un collaborateur a effectué d
 1. Exécutez `git status`. Que remarquez-vous d'étrange ?
 
 :::{important} `git status`
-La commande `git status` ne va pas cherchez les changements sur le dépôt distant et n'affiche que les informations sur votre dépôt local.
+La commande `git status` ne va pas chercher les changements sur le dépôt distant et n'affiche que les informations sur votre dépôt local.
 :::
 
 2. Exécutez `git remote update`, puis `git status`. Que voyez-vous maintenant ?
@@ -359,7 +359,7 @@ Un exemple de [`.gitignore`](https://github.com/github/gitignore/blob/main/Unity
 :class: dropdown
 Les fichiers dont les noms commencent par `.` sont des fichiers cachés (qui ne s'affichent pas quand vous utilisez un gestionnaire de fichiers). Ce sont souvent des fichiers de configurations.
 
-Pour afficher les fichiers cachés dans un gestionnaire de fichiers, vous pouvez souvent appuyer sur `Ctrl+H` (`H` comme 'Hidden').
+Pour afficher les fichiers cachés dans un gestionnaire de fichiers, vous pouvez souvent appuyer sur `Ctrl+h` (`h` comme 'hidden').
 :::
 
 6. Ajoutez le nom de l'exécutable `hello-world` dans `.gitignore`.
@@ -391,7 +391,7 @@ Vous allez maintenir ce projet pendant le reste du cours en créant des dossiers
 Vous pouvez utiliser `git add .` pour suivre tous les nouveaux changements effectués (lors de la création ou modification de plusieurs fichiers ou sous-dossiers) **dans le dossier courant**, d'où l'importance de revenir à la racine du projet ici.
 :::
 
-3. Validez les modifications indexées avec `git commit`.
+3. Validez les modifications suivies avec `git commit`.
 
 :::{warning} J'ai oublié de mettre un message de commit...
 :class: dropdown
@@ -405,9 +405,9 @@ Ici, nous avons oublié d'ajouter un message de commit pour la suppression d'un 
 ```
 
 - Écrivez votre message de commit sur la première ligne.
-- Appuyez sur `Ctrl+X` pour quitter.
+- Appuyez sur `Ctrl+x` pour quitter.
 - Appuyez sur `y` pour valider les modifications du message de commit.
-- Appuyer sur `Enter` pour quitter la fenêtre.
+- Appuyez sur `Enter` pour quitter la fenêtre.
 :::
 
 :::{caution} Garder un log compréhensible !
@@ -427,7 +427,7 @@ Vu que nous allons ignorer beaucoup d'exécutables dans le futur, pour éviter d
 ```
 
 :::{important} Que font ces expressions régulières ?
-- Nous commencons par utiliser `*` pour tout ignorer tous les fichiers. 
+- Nous commencons par utiliser `*` pour tout ignorer. 
 - L'expression `!*.*` permet de ne pas ignorer les fichiers avec une extension (autrement dit, les fichiers sans extension, comme les exécutables, seront ignorés). 
 - L'expression `!*/` empêche d'ignorer les dossiers.
 :::
@@ -453,5 +453,5 @@ Vu que nous allons ignorer beaucoup d'exécutables dans le futur, pour éviter d
 :class: dropdown
 Vous pouvez également utiliser `git rm <nom du fichier>` pour supprimer un fichier qui est déjà synchronisé sur les deux dépôts.
 
-Un fichier qui se trouve uniquement sur le dépôt local peut être supprimé simplement via un gestionnaire de fichiers ou avec la commande `rm` (sans `git`). Si vous avez déjà ajouté (`git add`) ce fichier aux modifications indexées (*staged changes*), vous pouvez le retirer grâce à `git restore --staged <nom du fichier>`.
+Un fichier qui se trouve uniquement sur le dépôt local peut être supprimé simplement via un gestionnaire de fichiers ou avec la commande `rm` (sans `git`). Si vous avez déjà ajouté (`git add`) ce fichier aux modifications suivies (*staged changes*), vous pouvez le retirer grâce à `git restore --staged <nom du fichier>`.
 :::

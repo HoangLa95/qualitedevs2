@@ -66,7 +66,7 @@ En dehors de la qualité du code, quels sont les besoins de base du développeme
 :class: dropdown
 Besoins additionels :
 - Une communication claire et régulière (cf. cours de gestion).
-- Le partage du code sans conflit (futur cours de qualité de développement).
+- Le partage du code sans conflit (initation dans ce cours).
 :::
 
 ```{figure} ../images/centralized-workflow.png
@@ -87,7 +87,7 @@ Git, Bitbucket, GitHub et GitLab (Credits: [Linkedin/PawanV](https://www.linkedi
 ```
 
 :::{note} Git
-Git est un logiciel de [**gestion de versions**]((https://fr.wikipedia.org/wiki/Gestion_de_versions)) qui garde un dépôt (*repository*) de notre projet et l'historique des différentes versions de notre travail.
+Git est un logiciel de [**gestion de versions**](https://fr.wikipedia.org/wiki/Gestion_de_versions) qui garde un dépôt (*repository*) de notre projet et l'historique des différentes versions de notre travail.
 :::
 
 :::{note} Bitbucket, GitHub et GitLab
@@ -101,14 +101,14 @@ Nous nous limitons à une initialisation aux commandes de bases de Git pour stoc
 :::{important} Principe de Git et une platforme web comme GitLab
 - **Répertoire de travail** (*Working directory*) : endroit où nous modifions nos fichiers.
 - **Zone de suivi** (*Staging area*) : endroit temporaire pour les modifications suivies (*Staged changes*).
-- **Dépôt local** (*Local repository*) : endroit contenant le code avec les modifications validés (*Committed changes*).
+- **Dépôt local** (*Local repository*) : endroit contenant le code avec les modifications validées (*Committed changes*).
 - **Dépôt distant** (*Remote repository*) : serveur distant contenant le code.
 
 Les différentes zones sont présentes pour gérer le versionnage !
 :::
 
 :::{tip} Quelques commandes de bases à connaître
-- `git add` permet de suivre une modification (faire passer une modification du répertoire de travail au zone de suivi).
+- `git add` permet de suivre une modification (faire passer une modification du répertoire de travail à la zone de suivi).
 - `git commit` permet de valider les modifications suivies en ajoutant un message descriptif qui sera enregistré dans l'historique du projet (faire passer les modifications suivies de la zone de suivi au dépôt local).
 - `git push` permet de diffuser les modifications validées du dépôt local au dépôt distant.
 - `git pull` permet de récupérer les modifications du dépôt distant sur le répertoire de travail local.
