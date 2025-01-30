@@ -131,7 +131,22 @@ Votre projet a été créé sur le serveur de l'IUT. Maintenant, pour travailler
 
 ```{code} sh
 git config --global user.name "<Prénom> <Nom>"
-git config --global user.email "<prenom>.<nom>@universite-paris-saclay.fr"
+git config --global user.email "<Email universitaire>"
+```
+
+Par exemple :
+```{code} sh
+git config --global user.name "Hoang La"
+```
+
+Puis :
+```{code} sh
+git config --global user.email "hoang.la@universite-paris-saclay.fr"
+```
+
+Ou :
+```{code} sh
+git config --global user.email "hoang.la-tmp@universite-paris-saclay.fr"
 ```
 
 Vous pouvez maintenant cloner votre dépôt distant pour le télécharger sur votre poste local :

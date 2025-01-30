@@ -126,8 +126,23 @@ You can install the emulator [Git for Windows](https://gitforwindows.org/).
 Your project has been created on the IUT server. Now, to work on this project from your local workstation, you need to configure it first.
 
 ```{code} sh
-git config --global user.name "<Prénom> <Nom>"
-git config --global user.email "<prenom>.<nom>@universite-paris-saclay.fr"
+git config --global user.name "<Firstname> <Lastname>"
+git config --global user.email "<University email>"
+```
+
+For example :
+```{code} sh
+git config --global user.name "Hoang La"
+```
+
+Then :
+```{code} sh
+git config --global user.email "hoang.la@universite-paris-saclay.fr"
+```
+
+Or :
+```{code} sh
+git config --global user.email "hoang.la-tmp@universite-paris-saclay.fr"
 ```
 
 You can now clone your remote repository to download it to your local workstation:
