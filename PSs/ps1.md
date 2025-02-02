@@ -37,7 +37,13 @@ To log in, use your department username and password.
 
 ## Personal Access Token
 
-To establish a secure connection between your machine and the GitLab server of the IUT, we will use a **Personal Access Token** (PAT).
+To establish a secure connection between your machine and the GitLab server at the IUT, we will use a **Personal Access Token** (PAT), which replaces the old password system.
+
+:::{note} Personal Access Token vs. Password  
+In practice, the PAT functions as a "specific password" for your projects.  
+It helps limit the risks to your account in case of compromise: the exposure of a PAT is less critical than the exposure of your main password.  
+The advantages of the PAT will be explained in more detail later.  
+:::
 
 To create a PAT:
 
@@ -63,17 +69,40 @@ To create a PAT:
 ```
 
 4. Give the token a name that indicates the workstation being used (for example, `IUTOrsay` if you're working on a machine at the IUT).
-5. Set an expiration date of one year (the maximum allowed) from today's date.
-6. Select all the [scopes](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#personal-access-token-scopes).
-7. Click on **Create personal access token**.
 
-:::{important} SAVE YOUR PAT !!! 
-Look at your token and save it like a password!
-Once you leave the creation page, the PAT will no longer be visible. It is essential to save it, as you will need it to access your projects!
+:::{note} One PAT per workstation  
+You can generate as many PATs as needed, unlike a password.  
+Therefore, you can create a PAT for each project, project type, or workstation, etc.
+
+Git's general recommendation is to create a separate PAT for each workstation used.  
+If one workstation is compromised, the others will remain unaffected.  
+You can consider all workstations at the IUT as equivalent, so one PAT for every workstation at the IUT should suffice.
+
+If you plan to work on your personal machine later, it is recommended to create a new PAT.  
 :::
 
-:::{note} One PAT per workstation
-It is recommended to create a distinct PAT for each workstation you use. You can generate as many PATs as necessary.
+5. Set an expiration date of one year (the maximum allowed) from today's date.
+
+:::{seealso} Expiration Date  
+:class: dropdown  
+Just as it is recommended to change your password regularly, the expiration date of the PAT requires generating a new one at regular intervals.  
+:::
+
+6. Select all the [scopes](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#personal-access-token-scopes).
+
+:::{seealso} Scope  
+:class: dropdown  
+The benefit of limiting the scopes of a PAT is that in case of an attack, the attacker will only be able to perform actions allowed by those scopes, thus reducing the risk of compromise.  
+:::
+
+7. Click on **Create personal access token**.
+
+:::{important} Save Your PAT!!!  
+Look at your token and save it securely, for example, in a *password manager*.  
+Once you leave the creation page, the PAT can no longer be displayed.
+
+The PAT is then used to clone the remote repository locally.  
+It is not advisable to create a new PAT each time you clone a project, as this could quickly become a waste of time.  
 :::
 
 ## Creating a remote repository
@@ -95,7 +124,9 @@ The project you are going to create will contain all the practical sessions assi
 In the following, we will refer to this project as `monprojet`. Don't forget to replace it with the name you have chosen.
 :::
 
-3. Select the "Private" visibility option for your project and check the option to initialize the project with a README.
+3. For the project URL, choose your short login in **Users** and the default URL provided.
+
+4. Select the "Private" visibility option for your project and check the option to initialize the project with a README.
 
 :::{important} README.md
 Having a README in [Markdown](https://en.wikipedia.org/wiki/README) in a project is a standard practice. This file serves as the project's description.  
@@ -103,7 +134,16 @@ Having a README in [Markdown](https://en.wikipedia.org/wiki/README) in a project
 Markdown is also what I use for this website!
 :::
 
-4. Browse through the default README proposed by GitLab.
+5. Click on **Create Project**.
+
+6. If you see the following messages, you can ignore them by clicking **Don't show again** for the SSH key and `X` for Auto DevOps.
+
+```{image} ../images/ssh-key.png
+:alt: SSH Key and Auto DevOps pipeline
+:align: center
+```
+
+7. Browse through the default README proposed by GitLab.
 
 :::{important} Linux
 The following instructions are intended for Linux. You are **strongly advised** to use Debian (an open-source Linux distribution) at the IUT.
@@ -124,6 +164,8 @@ You can install the emulator [Git for Windows](https://gitforwindows.org/).
 ## Configuring your workstation
 
 Your project has been created on the IUT server. Now, to work on this project from your local workstation, you need to configure it first.
+
+1. Copy the following lines of code into a terminal.
 
 ```{code} sh
 git config --global user.name "<Firstname> <Lastname>"
@@ -146,25 +188,26 @@ git config --global user.email "hoang.la-tmp@universite-paris-saclay.fr"
 ```
 
 You can now clone your remote repository to download it to your local workstation:
-1. Click on the **Code** button on the right.
+2. Click on the **Code** button on the right.
 
 ```{image} ../images/code-button.png
 :alt: Code
 :align: center
 ```
 
-2. Copy the URL under the **Clone with HTTPS** option.
+3. Copy the URL under the **Clone with HTTPS** option.
 
 ```{image} ../images/clone-https.png
 :alt: Clone with HTTPS
 :align: center
 ```
 
-3. Open a terminal in your working directory.
-4. Enter the following command, pasting the copied address and adding your login and PAT in the appropriate places.
+4. Navigate to your preferred working directory (and open a terminal).
+
+5. Enter the following command, pasting the copied address and adding your login and PAT in the appropriate places.
 
 ```{code} sh
-git clone https://<your login>:<Personal Access Token>@git.iut-orsay.fr/<login of the creator of the project>/<project name>.git
+git clone https://<your short login>:<Personal Access Token>@git.iut-orsay.fr/<login of the creator of the project>/<project name>.git
 ```
 
 :::{note} The two logins
@@ -173,7 +216,7 @@ Here, you are the creator of the project so the two logins are the same. However
 
 For example:
 ```{code} sh
-git clone https://hla:1234thisIsYourPAT5678@git.iut-orsay.fr/hla/monprojet.git
+git clone https://hla:glpat-1234thisIsYourPAT5678@git.iut-orsay.fr/hla/monprojet.git
 ```
 
 :::{important} Personal Access Token
@@ -182,6 +225,7 @@ You must add the token that you saved earlier!
 - **Not your password!**
 - **Not the Feed Token!** (which you can also find on the Access Token page)
 If you haven't saved your PAT, revoke the one you've already created and repeat the process to generate a new one.
+The benefit of cloning the project directly with the PAT is to avoid having to provide the PAT (which serves as a password) to the server with every exchange of information.
 :::
 
 ## Local repository
@@ -280,6 +324,15 @@ For example, in a project, the user interface (UI) and the logic part of the cod
 In this course, we will not cover Git branches or other advanced Git features. You will only work on a single branch: 'main'.
 :::
 
+:::{important} Using the Web IDE
+**For now**, it is recommended not to use the Web IDE unless explicitly mentioned.
+
+It is essential to learn how to use Git via the command line in order to fully understand its fundamental commands.  
+Additionally, this will allow you to use Git on any workstation (even offline), without relying on a specific environment with Git integration.
+
+After a few practice sessions with Git and the terminal, we will explore an IDE with Git integration, such as this Web IDE.  
+:::
+
 ## Synchronizing the local repository with the remote repository
 
 Go back to your local repository and let's assume that a collaborator made changes and then pushed them to the remote repository without you being notified.
@@ -292,7 +345,10 @@ The `git status` command does not know about changes from the remote repository 
 
 2. Run `git remote update`, then `git status`. What do you see now?
 
-The 'main' branch on the remote repository is different from your local repository. 
+:::{hint} `git remote update`  
+:class: dropdown  
+`git remote update` updates the information about the remote repository. Now, `git status` is able to compare the local repository with the remote repository.  
+:::
 
 3. Run `git diff origin/main` to see the differences between the two repositories.
 
@@ -321,7 +377,7 @@ Configuration files can also cause compatibility issues, especially when syncing
 
 1. Create a file `hello-world.cpp` (for example, with `touch hello-world.cpp`).
 
-2. Copy the following code.
+2. Open `hello-world.cpp` in your favorite code editor and copy the following code.
 
 ```{code} cpp
 #include <iostream>
@@ -331,6 +387,11 @@ int main() {
     return 0;
 }
 ```
+
+:::{important} Code Editor  
+You are free to use the editor and environment of your choice for now.  
+However, it is recommended not to use Git integration **for now**, if your environment offers it, for the same reasons as before.  
+:::
 
 3. Compile the code with `g++ -o <filename> <filename>.cpp`.
 
@@ -409,7 +470,11 @@ Here, we forgot to add a commit message for the deletion of a file named `test.t
 
 :::{caution} Keep a readable log!
 It is recommended to make structured commits, which involves:
-- Writing clear commit messages.
+- Write clear commit messages. For example, the first commit of a file can be accompanied by a succinct message like `<file name> first commit`. An addition to a file can be described as `Added <thing added>`, while an error fix can be indicated by `Fixed <error>`.  
+You can, of course, add more details if you feel it's necessary.
+
+It’s not necessary to write detailed narratives, but your commit messages should be clear enough to help you easily navigate your history. You will be assessed on your ability to maintain a structured and understandable history of your work.
+
 - If you make distinct, unrelated changes, perform separate `git add` and `git commit` for each group of changes with a common theme, or use `git add .` and `git commit` once you have finished working on a part of the project before moving on to another.
 :::
 
@@ -429,7 +494,9 @@ Since we will be ignoring many executables in the future, to avoid modifying `.g
 - The expression `!*/` prevents ignoring subfolders.
 :::
 
-5. Add your supervisor to your project by following the instructions below.
+5. Run `add`, `commit`, and `push` to synchronize your repositories.
+
+6. Add your supervisor to your project by following the instructions below.
 - Click on **Manage** on the left, then select **Members**.
 
 ```{image} ../images/manage-members.png
@@ -444,7 +511,7 @@ Since we will be ignoring many executables in the future, to avoid modifying `.g
 **If your supervisor is not added to your project, they will not be able to evaluate it, and you will receive a grade of 0!**
 :::
 
-6. Go back to the [objectives](#objectives) and check the points you have mastered. Practice the commands and points you have not fully understood yet. Call your supervisor over if necessary.
+7. Go back to the [objectives](#objectives) and check the points you have mastered. Practice the commands and points you have not fully understood yet. Call your supervisor over if necessary.
 
 :::{seealso} `git rm`
 :class: dropdown
