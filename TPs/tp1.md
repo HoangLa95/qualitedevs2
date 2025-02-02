@@ -42,7 +42,13 @@ Pour vous connecter, utilisez votre identifiant et votre mot de passe du départ
 
 ## Personal Access Token
 
-Pour établir une connexion sécurisée entre votre machine et le serveur GitLab de l'IUT, nous utiliserons un **Personal Access Token** (PAT).
+Pour établir une connexion sécurisée entre votre machine et le serveur GitLab de l'IUT, nous utiliserons un **Personal Access Token** (PAT) qui remplace l'ancien système de mot de passe.
+
+:::{note} Personal Access Token vs. Mot de Passe
+En pratique, le PAT fonctionne comme un "mot de passe spécifique" pour vos projets. 
+Il permet de limiter les risques pour votre compte en cas de compromission : l'exposition d'un PAT est moins critique que celle de votre mot de passe principal.
+Les avantages du PAT seront expliqués plus en détail par la suite.
+:::
 
 Pour créer un PAT :
 1. Accédez à votre profil en cliquant sur votre avatar (en haut à gauche) puis **Edit profile**.
@@ -67,17 +73,40 @@ Pour créer un PAT :
 ```
 
 4. Donnez un nom au token qui reflète le poste de travail utilisé (par exemple `IUTOrsay` si vous travaillez sur un poste à l'IUT).
-5. Définissez une date d'expiration d'un an (la durée maximale autorisée) à partir de la date d'aujourd'hui.
-6. Sélectionnez tous les [scopes](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#personal-access-token-scopes).
-7. Cliquez sur **Create personal access token**.
-
-:::{important} SAUVEGARDER VOTRE PAT !!!
-Regardez votre token et sauvegardez-le comme un mot de passe !
-Une fois que vous quittez la page de création, le PAT ne pourra plus être affiché. Il est indispensable de le conserver, car vous en aurez besoin pour accéder à vos projets !
-:::
 
 :::{note} Un PAT par poste de travail
-Il est recommandé de créer un PAT distinct pour chaque poste de travail utilisé. Vous pouvez en générer autant que nécessaire. 
+Vous pouvez en générer autant que nécessaire, contrairement au mot de passe.
+Vous pouvez donc créer un PAT par projet, par type de projet, par poste de travail, ...
+
+La recommandation générale de Git est de créer un PAT distinct pour chaque poste de travail utilisé.
+Si un poste se fait attaquer, les autres postes ne seront pas compromis.
+Vous pouvez considérer toutes les postes à l'IUT comme équivalente donc un seul PAT devrait suffire.
+
+Si vous allez travailler sur votre machine personnelle plus tard, il est recommandé de créer un nouveau PAT.
+:::
+
+5. Définissez une date d'expiration d'un an (la durée maximale autorisée) à partir de la date d'aujourd'hui.
+
+:::{seealso} Date d'expiration
+:class: dropdown
+De la même manière qu’il est recommandé de changer régulièrement son mot de passe, la date d’expiration du PAT impose d’en générer un nouveau à intervalles réguliers.
+:::
+
+6. Sélectionnez tous les [scopes](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#personal-access-token-scopes).
+
+:::{seealso} Scope
+:class: dropdown
+L’intérêt de limiter les scopes d’un PAT est qu’en cas d’attaque, le pirate ne pourra effectuer que les actions autorisées par ces scopes, réduisant ainsi les risques de compromission.
+:::
+
+7. Cliquez sur **Create personal access token**.
+
+:::{important} Sauvegardez votre PAT !!!
+Regardez votre token et sauvegardez-le de façon sécurisée avec un *password manager* par exemple.
+Une fois que vous quittez la page de création, le PAT ne pourra plus être affiché.
+
+Le PAT est ensuite utilisé pour cloner le dépôt distant en local. 
+Il n'est pas conseillé de créer un nouveau PAT à chaque clonage de projet, car cela pourrait rapidement devenir une perte de temps.
 :::
 
 ## Création d'un dépôt distant
@@ -99,7 +128,9 @@ Le projet que vous allez créer contiendra tous les TPs de ce cours. Vous ne dev
 Dans la suite, nous appellerons ce projet `monprojet`. N'oubliez pas de le remplacer par le nom que vous avez choisi.
 :::
 
-3. Sélectionnez l'option de visibilité "Privé" pour votre projet et cochez l'option pour initialiser le projet avec un README.
+3. Pour l'URL du projet, choisissez votre login court **Users** et l'URL proposé par défaut.
+
+4. Sélectionnez l'option de visibilité "Privé" pour votre projet et cochez l'option pour initialiser le projet avec un README.
 
 :::{important} README.md
 Avoir un README en [Markdown](https://fr.wikipedia.org/wiki/Markdown) dans un projet est une pratique standard. Ce fichier sert de description du projet.
@@ -107,7 +138,16 @@ Avoir un README en [Markdown](https://fr.wikipedia.org/wiki/Markdown) dans un pr
 Le Markdown est aussi ce que j'utilise pour ce site !
 :::
 
-4. Parcourez le README par défaut proposé par GitLab.
+5. Cliquez sur **Create Project**.
+
+6. Si vous voyez les messages suivantes, vous pouvez les ignorer en cliquant sur **Don't show again** pour SSH key et `X` pour Auto DevOps.
+
+```{image} ../images/ssh-key.png
+:alt: SSH Key et Auto DevOps pipeline
+:align: center
+```
+
+7. Parcourez le README par défaut proposé par GitLab.
 
 :::{important} Linux
 Les instructions suivantes sont destinées à Linux. Vous êtes **fortement conseillé** d'utiliser Debian (une distribution open source Linux) à l'IUT.
@@ -128,6 +168,8 @@ Vous pouvez installer l'émulateur [Git for Windows](https://gitforwindows.org/)
 ## Configuration de votre poste de travail
 
 Votre projet a été créé sur le serveur de l'IUT. Maintenant, pour travailler sur ce projet depuis votre poste de travail local, vous devez d'abord le configurer.
+
+1. Recopiez les lignes de code suivantes dans un terminal.
 
 ```{code} sh
 git config --global user.name "<Prénom> <Nom>"
@@ -150,25 +192,26 @@ git config --global user.email "hoang.la-tmp@universite-paris-saclay.fr"
 ```
 
 Vous pouvez maintenant cloner votre dépôt distant pour le télécharger sur votre poste local :
-1. Cliquez sur le bouton **Code** situé à droite.
+2. Cliquez sur le bouton **Code** situé à droite.
 
 ```{image} ../images/code-button.png
 :alt: Code
 :align: center
 ```
 
-2. Copiez l'URL sous l'option **Clone with HTTPS**.
+3. Copiez l'URL sous l'option **Clone with HTTPS**.
 
 ```{image} ../images/clone-https.png
 :alt: Clone with HTTPS
 :align: center
 ```
 
-3. Ouvrez un terminal dans votre répertoire de travail.
-4. Saisissez la commande suivante, en collant l'adresse copiée et en rajoutant votre login ainsi que votre PAT aux emplacements appropriés.
+4. Placez dans votre répertoire de travail préféré (et ouvrez un terminal).
+
+5. Saisissez la commande suivante, en collant l'adresse copiée et en rajoutant votre login ainsi que votre PAT aux emplacements appropriés.
 
 ```{code} sh
-git clone https://<votre login>:<Personal Access Token>@git.iut-orsay.fr/<login du créateur du projet>/<nom du projet>.git
+git clone https://<votre login court>:<Personal Access Token>@git.iut-orsay.fr/<login du créateur du projet>/<nom du projet>.git
 ```
 
 :::{note} Les deux logins
@@ -177,7 +220,7 @@ Ici, vous êtes le créateur du projet donc les deux logins sont les mêmes. Par
 
 Par exemple :
 ```{code} sh
-git clone https://hla:1234thisIsYourPAT5678@git.iut-orsay.fr/hla/monprojet.git
+git clone https://hla:glpat-1234thisIsYourPAT5678@git.iut-orsay.fr/hla/monprojet.git
 ```
 
 :::{important} Personal Access Token
@@ -187,6 +230,7 @@ Vous devez ajouter le token que vous avez sauvegardé précédemment !
 - **Pas le Feed Token !** (que vous pouvez également trouver sur la page Access Token)
 
 Si vous n'avez pas sauvegardé votre PAT, supprimez (*Revoke*) celui que vous avez déjà créé et refaites la procédure pour en générer un nouveau.
+L’intérêt de cloner le projet avec le PAT directement est d’éviter de redonner le PAT (qui sert de mot de passe) au serveur à chaque échange d’informations.
 :::
 
 ## Dépôt local
@@ -296,7 +340,10 @@ La commande `git status` ne va pas chercher les changements sur le dépôt dista
 
 2. Exécutez `git remote update`, puis `git status`. Que voyez-vous maintenant ?
 
-La branche 'main' sur le dépôt distant est différente de votre dépôt local. 
+:::{hint} `git remote update`
+:class: dropdown
+`git remote update` met à jour les informations sur le dépôt distant. Maintenant, `git status` est capable de comparer le dépôt local et le dépôt distant.
+:::
 
 3. Exécutez `git diff origin/main` pour voir les différences entre les deux dépôts.
 
@@ -325,7 +372,7 @@ Les fichiers de configurations peuvent également provoquer des problèmes de co
 
 1. Créez un fichier `hello-world.cpp` (avec `touch hello-world.cpp` par exemple).
 
-2. Recopiez le code suivant.
+2. Ouvrez votre éditeur préféré et recopiez le code suivant.
 
 ```{code} cpp
 #include <iostream>
@@ -335,6 +382,16 @@ int main() {
     return 0;
 }
 ```
+
+:::{important} Éditeur de code
+Vous êtes libre d'utiliser l'éditeur et l'environnement de votre choix pour le moment.
+Cependant, il est recommandé de ne pas utiliser l'intégration Git **pour l'instant**, si votre environnement la propose.
+
+Il est essentiel d'apprendre à utiliser Git en ligne de commande afin de bien comprendre ses commandes fondamentales. 
+De plus, cela vous permettra d'utiliser Git sur n'importe quel poste de travail, sans dépendre d'un environnement spécifique intégrant Git.
+
+Après quelques séances d'entraînement avec Git et le terminal, nous découvrirons un IDE offrant une intégration Git.
+:::
 
 3. Compilez le code avec `g++ -o <nom du fichier> <nom du fichier>.cpp`.
 
@@ -412,7 +469,11 @@ Ici, nous avons oublié d'ajouter un message de commit pour la suppression d'un 
 
 :::{caution} Garder un log compréhensible !
 Il est recommandé de faire des commits structurés, ce qui implique de :
-- Rédiger des messages de commit clairs.
+- Rédiger des messages de commit clairs. Par exemple, le premier commit d'un fichier peut être accompagné d'un message succinct comme `<nom du fichier> premier commit`. Un ajout dans un fichier peut être décrit par `Ajout de <chose ajoutée>`, tandis qu'une correction d'erreur peut être indiquée par `Correction de <erreur>`.
+Vous pouvez bien sûr ajouter plus de détails si vous le jugez nécessaire.
+
+Il n'est pas nécessaire d'écrire des récits, mais vos messages de commit doivent être suffisamment clairs pour vous permettre de vous repérer facilement dans votre historique. Vous serez évalué sur votre capacité à maintenir un historique structuré et compréhensible de votre travail.
+
 - Si vous apportez des modifications distinctes qui ne sont pas liées, effectuez des `git add` et `git commit` séparés (par groupe de modifications ayant un thème commun) ou d'utiliser `git add .` et `git commit` dès que vous avez terminé de travailler sur une partie du projet, avant de passer à une autre.
 :::
 
@@ -432,7 +493,9 @@ Vu que nous allons ignorer beaucoup d'exécutables dans le futur, pour éviter d
 - L'expression `!*/` empêche d'ignorer les dossiers.
 :::
 
-5. Ajoutez votre encadrant à votre projet en suivant les instructions ci-dessous.
+5. Exécutez `add`, `commit` et `push` pour synchroniser vos dépôts.
+
+6. Ajoutez votre encadrant à votre projet en suivant les instructions ci-dessous.
 - Cliquez sur **Manage** à gauche, puis sélectionnez **Members**.
 
 ```{image} ../images/manage-members.png
@@ -447,7 +510,7 @@ Vu que nous allons ignorer beaucoup d'exécutables dans le futur, pour éviter d
 **Si l'encadrant(e) n'est pas ajouté(e) à votre projet, il (elle) ne pourra pas l'évaluer, et vous obtiendrez une note de 0 !** 
 :::
 
-6. Revenez aux [objectifs](#objectifs) et cochez les points que vous avez maîtrisés. Pratiquez les commandes et les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
+7. Revenez aux [objectifs](#objectifs) et cochez les points que vous avez maîtrisés. Pratiquez les commandes et les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
 
 :::{seealso} `git rm`
 :class: dropdown

@@ -85,7 +85,7 @@ It is recommended to create a distinct PAT for each workstation you use. You can
 :align: center
 ```
 
-2. Create an empty project with the name `qualite-dev-s2-<first name>-<last name>` (for example `qualite-dev-s2-hoang-la`).
+2. Create a blank project with the name `qualite-dev-s2-<first name>-<last name>` (for example `qualite-dev-s2-hoang-la`).
 
 :::{warning} Warning!
 The project you are going to create will contain all the practical sessions assignments for this course. You should not create a new project for each session.
