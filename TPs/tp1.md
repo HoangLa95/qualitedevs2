@@ -233,6 +233,16 @@ Si vous n'avez pas sauvegardé votre PAT, supprimez (*Revoke*) celui que vous av
 L’intérêt de cloner le projet avec le PAT directement est d’éviter de redonner le PAT (qui sert de mot de passe) au serveur à chaque échange d’informations.
 :::
 
+:::{note} PAT expiré ou perdu
+:class: dropdown
+Si votre PAT est expiré ou perdu, vous pouvez exécuter la même commande en remplaçant `clone` par `remote set-url origin`, plutôt que de recloner le projet.
+
+Par exemple :
+```
+git remote set-url origin https://hla:glpat-1234thisIsYourNewPAT5678@git.iut-orsay.fr/hla/monprojet.git
+```
+:::
+
 ## Dépôt local
 
 Un répertoire portant le même nom (*dépôt local*) a maintenant été téléchargé sur votre machine.
