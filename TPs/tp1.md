@@ -80,7 +80,7 @@ Vous pouvez donc créer un PAT par projet, par type de projet, par poste de trav
 
 La recommandation générale de Git est de créer un PAT distinct pour chaque poste de travail utilisé.
 Si un poste se fait attaquer, les autres postes ne seront pas compromis.
-Vous pouvez considérer toutes les postes à l'IUT comme équivalente donc un seul PAT devrait suffire.
+Vous pouvez considérer toutes les postes à l'IUT comme équivalente donc un seul PAT pour toutes les machines de l'IUT devrait suffire.
 
 Si vous allez travailler sur votre machine personnelle plus tard, il est recommandé de créer un nouveau PAT.
 :::
@@ -206,7 +206,7 @@ Vous pouvez maintenant cloner votre dépôt distant pour le télécharger sur vo
 :align: center
 ```
 
-4. Placez dans votre répertoire de travail préféré (et ouvrez un terminal).
+4. Placez-vous dans votre répertoire de travail préféré (et ouvrez un terminal).
 
 5. Saisissez la commande suivante, en collant l'adresse copiée et en rajoutant votre login ainsi que votre PAT aux emplacements appropriés.
 
@@ -328,6 +328,15 @@ Par exemple, dans un projet, la partie IHM et la partie logique du code peuvent 
 Dans ce cours, nous ne couvrirons pas les branches Git, ainsi que d'autres fonctionnalités avancées de Git. Vous allez travailler seulement sur une seule branche : 'main'.
 :::
 
+:::{important} Utilisation du Web IDE
+**Pour le moment**, il est recommandé de ne pas utiliser le Web IDE sauf quand il est mentionné de façon explicite.
+
+Il est essentiel d'apprendre à utiliser Git en ligne de commande afin de bien comprendre ses commandes fondamentales. 
+De plus, cela vous permettra d'utiliser Git sur n'importe quel poste de travail (même hors-ligne), sans dépendre d'un environnement spécifique intégrant Git.
+
+Après quelques séances d'entraînement avec Git et le terminal, nous découvrirons un IDE offrant une intégration Git comme ce Web IDE.
+:::
+
 ## Synchronisation du dépôt local avec le dépôt distant
 
 Retournez sur votre dépôt local et supposons qu'un collaborateur a effectué des changements, puis les a diffusés sur le dépôt distant sans que vous en soyez informé.
@@ -372,7 +381,7 @@ Les fichiers de configurations peuvent également provoquer des problèmes de co
 
 1. Créez un fichier `hello-world.cpp` (avec `touch hello-world.cpp` par exemple).
 
-2. Ouvrez votre éditeur préféré et recopiez le code suivant.
+2. Ouvrez `hello-world.cpp` dans votre éditeur de code préféré et recopiez le code suivant.
 
 ```{code} cpp
 #include <iostream>
@@ -385,12 +394,7 @@ int main() {
 
 :::{important} Éditeur de code
 Vous êtes libre d'utiliser l'éditeur et l'environnement de votre choix pour le moment.
-Cependant, il est recommandé de ne pas utiliser l'intégration Git **pour l'instant**, si votre environnement la propose.
-
-Il est essentiel d'apprendre à utiliser Git en ligne de commande afin de bien comprendre ses commandes fondamentales. 
-De plus, cela vous permettra d'utiliser Git sur n'importe quel poste de travail, sans dépendre d'un environnement spécifique intégrant Git.
-
-Après quelques séances d'entraînement avec Git et le terminal, nous découvrirons un IDE offrant une intégration Git.
+Cependant, il est recommandé de ne pas utiliser l'intégration Git **pour l'instant**, si votre environnement la propose, pour les mêmes raisons qu'avant.
 :::
 
 3. Compilez le code avec `g++ -o <nom du fichier> <nom du fichier>.cpp`.
