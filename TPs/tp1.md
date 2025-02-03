@@ -370,12 +370,18 @@ La commande `git status` ne va pas chercher les changements sur le dépôt dista
 :class: dropdown
 En pratique, lorsque vous travaillez sur un projet, il est fréquent qu'entre deux sessions de travail, quelqu’un d’autre ait modifié une partie du code. Si vous commencez une session de travail sans vérifier l'état de vos dépôts, vous risquez de rencontrer des conflits à résoudre (par exemple, si vous modifiez les mêmes parties de code de manière différente). 
 
-Bien que nous allons parler de la résolution de conflits dans ce cours, il est préférable de les éviter. C’est pourquoi il est essentiel de toujours commencer par `git remote update && git status` !
+Bien que nous allons parler de la résolution de conflits dans ce cours, il est préférable de les éviter. C’est pourquoi il est essentiel de toujours commencer par `git remote update && git status` avant de décider ce qu'il faut faire !
 
 Vous pouvez également exécuter `git diff origin/main` pour voir précisément les modifications qui ont été effectuées.
 :::
 
 4. Pour synchroniser votre dépôt local avec le dépôt distant (qui, cette fois, est en avance), exécutez `git pull`.
+
+::: {warning}
+Si le dépôt distant contient une version incorrecte du projet...
+:class: dropdown
+Dans ce cas, il n’est pas toujours souhaitable d’exécuter `git pull`. Nous verrons comment gérer cette situation dans les prochains TPs.
+:::
 
 5. Pour consulter l'historique des commits, exécutez `git log`. Pour quitter le log, appuyer sur `q` (pour 'quit').
 
@@ -402,9 +408,12 @@ int main() {
 }
 ```
 
-:::{important} Éditeur de code
+:::{warning} Éditeur de code
 Vous êtes libre d'utiliser l'éditeur et l'environnement de votre choix pour le moment.
 Cependant, il est recommandé de ne pas utiliser l'intégration Git **pour l'instant**, si votre environnement la propose, pour les mêmes raisons qu'avant.
+Il faut toutefois veiller à ce que l’éditeur utilisé ne génère pas de fichiers à ignorer.
+Si c’est le cas, les noms des dossiers et fichiers concernés doivent être ajoutés au fichier `.gitignore`, qui sera abordé plus en détail ci-dessous.
+Attention : un fichier déjà synchronisé avant d’être ajouté à `.gitignore` restera présent dans le dépôt distant.
 :::
 
 3. Compilez le code avec `g++ -o <nom du fichier> <nom du fichier>.cpp`.
@@ -419,7 +428,7 @@ g++ -o hello-world hello-world.cpp
 Les exécutables font partie des fichiers que nous souhaitons ignorer. 
 
 :::{important} `.gitignore`
-La gestion des fichiers ignorés se fait via un fichier `.gitignore` situé à la racine de votre projet. Dans ce fichier, vous pouvez ajouter tous les noms de fichiers et de dossiers que vous souhaitez ignorer en permanence.
+La gestion des fichiers ignorés se fait via un fichier `.gitignore` situé à la racine de votre projet. Dans ce fichier, vous pouvez ajouter tous les noms de fichiers et de dossiers que vous souhaitez ignorer en permanence. La présence d’un fichier `.gitignore` est essentielle dans un projet Git. Même avec un IDE minimaliste, certains fichiers de configuration inutiles peuvent être générés et doivent être ignorés. Il est donc indispensable de créer un `.gitignore` pour chaque nouveau projet.
 
 Un exemple de [`.gitignore`](https://github.com/github/gitignore/blob/main/Unity.gitignore) pour les projets Unity qui sont plus complexes.
 :::
