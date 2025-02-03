@@ -129,8 +129,8 @@ C'est un morceau de code du jeu **Démineur** (*Minesweeper*) dans lequel est le
 ```{code} cpp
 class Cell {
 private:
-    const int STATUS_VALUE = 0;
-    const int FLAGGED = 4;
+    const int mStatusValue = 0;
+    const int mFlagged = 4;
 
     vector<int> values;
 
@@ -139,7 +139,7 @@ public:
     //...
 
     bool isFlagged() {
-        return values[STATUS_VALUE] == FLAGGED;
+        return values[mStatusValue] == mFlagged;
     }
 };
 
