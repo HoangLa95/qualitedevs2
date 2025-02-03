@@ -367,12 +367,18 @@ The `git status` command does not know about changes from the remote repository 
 :class: dropdown
 In practice, when working on a project, it is common that someone else has modified part of the code between two work sessions. If you start a work session without checking the state of your repositories, you may face conflicts to resolve (for example, if you both modify the same parts of the code but differently).
 
-Although we will discuss conflict resolution in this course, it is best to avoid them. That is why it is essential to always start with `git remote update && git status`!
+Although we will discuss conflict resolution in this course, it is best to avoid them. That is why it is essential to always start with `git remote update && git status` before deciding what to do!
 
 You can also run `git diff origin/main` to see exactly what changes have been made.
 :::
 
 4. To synchronize your local repository with the remote repository (which, this time, is ahead), run `git pull`.
+
+::: {warning}
+If the remote repository contains an incorrect version of the project...
+:class: dropdown
+In this case, it is not always desirable to run `git pull`. We will see how to handle this situation in the upcoming PSs.
+:::
 
 5. To view the commit history, run `git log`. To exit the log, press `q` (for 'quit').
 
@@ -399,9 +405,13 @@ int main() {
 }
 ```
 
-:::{important} Code Editor  
+:::{warning} Code Editor  
 You are free to use the editor and environment of your choice for now.  
-However, it is recommended not to use Git integration **for now**, if your environment offers it, for the same reasons as before.  
+However, it is recommended not to use Git integration **for now**, if your environment offers it, for the same reasons as before.
+
+You should, however, ensure that the editor in use does not generate files that need to be ignored.  
+If this is the case, the names of the relevant folders and files should be added to the `.gitignore` file, which will be discussed in more detail below.  
+Warning: A file that was already synchronized before being added to `.gitignore` will remain present in the remote repository.
 :::
 
 3. Compile the code with `g++ -o <filename> <filename>.cpp`.
@@ -418,6 +428,8 @@ Executables are among the files that we want to ignore.
 
 :::{important} `.gitignore`
 The management of ignored files is handled via a `.gitignore` file located at the root of your project. In this file, you can add the names of files and folders you want to ignore permanently.
+
+The presence of a `.gitignore` file is essential in a Git project. Even with a minimalist IDE, certain unnecessary configuration files may be generated and should be ignored. Therefore, it is crucial to create a `.gitignore` for each new project.
 
 An example of a [`.gitignore`](https://github.com/github/gitignore/blob/main/Unity.gitignore) for Unity projects, which tend to be more complex.
 :::

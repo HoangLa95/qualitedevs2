@@ -411,6 +411,7 @@ int main() {
 :::{warning} Éditeur de code
 Vous êtes libre d'utiliser l'éditeur et l'environnement de votre choix pour le moment.
 Cependant, il est recommandé de ne pas utiliser l'intégration Git **pour l'instant**, si votre environnement la propose, pour les mêmes raisons qu'avant.
+
 Il faut toutefois veiller à ce que l’éditeur utilisé ne génère pas de fichiers à ignorer.
 Si c’est le cas, les noms des dossiers et fichiers concernés doivent être ajoutés au fichier `.gitignore`, qui sera abordé plus en détail ci-dessous.
 Attention : un fichier déjà synchronisé avant d’être ajouté à `.gitignore` restera présent dans le dépôt distant.
@@ -428,7 +429,9 @@ g++ -o hello-world hello-world.cpp
 Les exécutables font partie des fichiers que nous souhaitons ignorer. 
 
 :::{important} `.gitignore`
-La gestion des fichiers ignorés se fait via un fichier `.gitignore` situé à la racine de votre projet. Dans ce fichier, vous pouvez ajouter tous les noms de fichiers et de dossiers que vous souhaitez ignorer en permanence. La présence d’un fichier `.gitignore` est essentielle dans un projet Git. Même avec un IDE minimaliste, certains fichiers de configuration inutiles peuvent être générés et doivent être ignorés. Il est donc indispensable de créer un `.gitignore` pour chaque nouveau projet.
+La gestion des fichiers ignorés se fait via un fichier `.gitignore` situé à la racine de votre projet. Dans ce fichier, vous pouvez ajouter tous les noms de fichiers et de dossiers que vous souhaitez ignorer en permanence. 
+
+La présence d’un fichier `.gitignore` est essentielle dans un projet Git. Même avec un IDE minimaliste, certains fichiers de configuration inutiles peuvent être générés et doivent être ignorés. Il est donc indispensable de créer un `.gitignore` pour chaque nouveau projet.
 
 Un exemple de [`.gitignore`](https://github.com/github/gitignore/blob/main/Unity.gitignore) pour les projets Unity qui sont plus complexes.
 :::
