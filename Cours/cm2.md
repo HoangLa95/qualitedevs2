@@ -9,7 +9,7 @@ Tous les cours à venir vous proposeront une approche structurée du concept de 
 :alt: Nom de variable expressif
 :align: center
 
-Credits: thecodinglove.com
+Credits: [the_coding_love](https://thecodinglove.com/when-im-searching-for-a-meaningful-variable-name)
 ```
 
 (cm2-camel-case)=
