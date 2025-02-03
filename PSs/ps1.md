@@ -224,13 +224,14 @@ You must add the token that you saved earlier!
 - **Not the name you gave it!**
 - **Not your password!**
 - **Not the Feed Token!** (which you can also find on the Access Token page)
+
 If you haven't saved your PAT, revoke the one you've already created and repeat the process to generate a new one.
 The benefit of cloning the project directly with the PAT is to avoid having to provide the PAT (which serves as a password) to the server with every exchange of information.
 :::
 
 :::{note} Expired or Lost PAT
 :class: dropdown
-If your PAT is expired or lost, you can execute the same command by replacing `clone` with `remote set-url origin`, rather than recloning the project.
+If your PAT is expired or lost, you can execute the same command on your already cloned project by replacing `clone` with `remote set-url origin`, rather than recloning the project.
 
 For example:
 ```

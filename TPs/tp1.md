@@ -235,7 +235,7 @@ L’intérêt de cloner le projet avec le PAT directement est d’éviter de red
 
 :::{note} PAT expiré ou perdu
 :class: dropdown
-Si votre PAT est expiré ou perdu, vous pouvez exécuter la même commande en remplaçant `clone` par `remote set-url origin`, plutôt que de recloner le projet.
+Si votre PAT est expiré ou perdu, vous pouvez exécuter la même commande sur votre projet déjà cloné en remplaçant `clone` par `remote set-url origin`, plutôt que de recloner le projet.
 
 Par exemple :
 ```
