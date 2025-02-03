@@ -2,7 +2,7 @@
 
 :::{note} Disclaimer
 :class: dropdown
-Tous les cours qui suivent vont vous donner une école de pensée sur le "code propre". Ce ne sont pas des règles absolues. Cependant, il faut maîtriser les règles avant de les enfreindre. Donc, pour le moment, **ces règles sont absolues**.
+Tous les cours à venir vous proposeront une approche structurée du concept de "code propre". Il ne s'agit pas de règles immuables, mais avant de pouvoir s'en affranchir, il est essentiel de les maîtriser. Ainsi, pour l’instant, **ces règles sont incontournables**.
 :::
 
 ```{figure} ../images/searching_meaningful_variable_name.png
@@ -11,6 +11,7 @@ Tous les cours qui suivent vont vous donner une école de pensée sur le "code p
 
 Credits: thecodinglove.com
 ```
+
 (cm2-camel-case)=
 ## camelCase
 
@@ -18,38 +19,49 @@ Credits: thecodinglove.com
 :alt: camelCase
 :align: center
 
-camelCase (Credits: wikipedia.com)
+camelCase (Credits: [Wikipedia](https://fr.wikipedia.org/wiki/Camel_case))
 ```
 
 :::{note} camelCase
 :class: dropdown
-Nous allons utiliser la convention **camelCase** où la première lettre de la variable commence toujours par une minuscule et tous les mots qui suivent commencent par une majuscule.
+Nous adopterons la convention **camelCase**, selon laquelle le premier mot d’une variable commence par une minuscule, tandis que chaque mot suivant débute par une majuscule.
+:::
+
+:::{seealso} Autres conventions
+:class: dropdown
+Il existe de nombreuses autres conventions de nommage, mais l’une des plus courantes après **camelCase** est **snake_case**, qui sépare les mots en minuscules à l’aide de underscores (`_`).
 :::
 
 :::{important} Variables globales et classes
-:class: dropdown
 1. `VARIABLE_GLOBALE` :
-Les variables globales doivent être en majuscule et les mots sont séparés par des underscores(`_`).
+Les variables globales doivent être écrites en majuscules, avec les mots séparés par des underscores (`_`).
 2. `class Object` :
-Une classe doit commencer par une majuscule.
+Une classe doit toujours commencer par une majuscule.
+:::
+
+:::{important} Noms de fichiers
+Nous allons utiliser le **kebab-case** (`my-first-file.txt`, `hello-world.cpp`, ...) pour les noms de fichier, car c'est la convention la plus standard pour la plupart des ecosystèmes.
 :::
 
 (cm2-nom-revelateur)=
-## Utiliser des noms révélateurs d'intention
+## Noms révélateurs d'intention
 
+:::{important} Principes de base
 Un nom de variable (fonction, classe, ...) doit répondre aux trois questions suivantes :
 1. Pourquoi elle existe ?
 2. Qu'est-ce qu'elle fait ?
 3. Comment est-elle utilisée ?
+:::
 
 :::{error} Commenter un nom de variable.
 :class: dropdown
-Si un nom a besoin d'un commentaire alors ce nom n'est pas révélateur d'intention.
+Si un nom nécessite un commentaire pour être compris, c'est qu'il ne reflète pas clairement son intention.
 :::
 
 ```{code} cpp
 int d; // temps écoulé en jours
 ```
+
 :::{hint} Quel nom choisir dans ce cas-ci ?
 :class: dropdown
 ```{code} cpp
@@ -60,7 +72,8 @@ int fileAgeInDays;
 ```
 :::
 
-Un nom qui révèle l'intention d'une variable éclaircit énormément le code. Que fait le code suivant ? 
+Un nom de variable explicite améliore grandement la lisibilité du code. 
+Prenons un exemple où nous nous contentons de renommer les variables. Que fait le code suivant ?
 
 ```{code} cpp
 vector<vector<int>> getThem(const vector<vector<int>>& theList) {
@@ -75,6 +88,7 @@ vector<vector<int>> getThem(const vector<vector<int>>& theList) {
     return list1;
 }
 ```
+
 :::{error} Problèmes avec ce code.
 :class: dropdown
 1. Que trouve-t-on dans `theList` ?
@@ -83,14 +97,6 @@ vector<vector<int>> getThem(const vector<vector<int>>& theList) {
 4. Que fais-je avec la liste retourné ?
 :::
 
-:::{hint} Minesweeper[^minesweeper]
-:class: dropdown
-C'est un morceau de code du jeu *Minesweeper* dans lequel `theList` est le plateau de jeu, chaque case est représenté par un `vector`, `x[0]` est le statut de la case, `4` est la présence d'un drapeau. 
-:::
-
-[^minesweeper]: ![Minesweeper](../images/minesweeper.png)
-
-Une première réécriture :
 ```{code} cpp
 const int STATUS_VALUE = 0;
 const int FLAGGED = 4;
@@ -107,6 +113,16 @@ vector<vector<int>> getFlaggedCells(const vector<vector<int>>& gameBoard) {
     return flaggedCells;
 }
 ```
+
+:::{hint} Indice
+:class: dropdown
+C'est un morceau de code du jeu **Démineur** (*Minesweeper*) dans lequel est le plateau de jeu est un `vector` qui contient des cellules représentés par des `vector<int>` où `STATUS_VALUE` est l'indice contenant le statut de la cellule et `4` correspond à la présence d'un drapeau. 
+
+```{image} ../images/minesweeper.png
+:alt: Démineur
+:align: center
+```
+:::
 
 :::{seealso} Pour aller plus loin.
 :class: dropdown
@@ -142,7 +158,7 @@ vector<Cell> getFlaggedCells(const vector<Cell>& gameBoard) {
 :::
 
 (cm2-desinformation)=
-## Ne pas propager la désinformation
+## La désinformation
 
 ```{code} cpp
 vector<Account> accountList;
@@ -178,11 +194,11 @@ else {
 ```
 :::{error} Problème 
 :class: dropdown
-Même si la coloration syntaxique permet de voir la différence entre `O` et `0`, et entre `1` et `l`. Là vous êtes juste en train de faire de l'obstruction de code... 
+Même si la coloration syntaxique permet de distinguer `O` de `0` et `1` de `l`, utiliser ces caractères similaires complique inutilement la lecture du code. Cela revient simplement à rendre le code volontairement obscur...
 :::
 
 (cm2-nom-different)=
-## Utiliser des noms différents
+## Noms différents
 
 ```{code} cpp
 void copyString(string a1, string a2, int length) {
@@ -193,7 +209,7 @@ void copyString(string a1, string a2, int length) {
 ```
 :::{error} Problème 
 :class: dropdown
-Éviter de rajouter des chiffres après les noms de variables pour les distinguer. Une solution simple est la suivante :
+Évitez d’ajouter des chiffres à la fin des noms de variables pour les différencier. Une alternative plus claire consiste à utiliser des noms explicites qui reflètent leur rôle distinct. Par exemple :
 ```{code} cpp
 void copyString(string source, string destination, int length) {
     for (int i = 0; i < length; i++) {
@@ -222,17 +238,17 @@ class CustomerObject {
 ```
 :::{error} Problème 
 :class: dropdown
-Utiliser des noms avec des différences significatives.
+Utilisez des noms avec des différences significatives.
 :::
 
 (cm2-nom-prononcable)=
-## Utiliser des noms prononçables
+## Noms prononçables
 
 ```{code} cpp
 class DtaRcrd102 {
 private:
-    Date genymdhms;
-    Date modymdhms;
+    string genymdhms;
+    string modymdhms;
     const string pszqint = "102";
 //...
 };
@@ -243,8 +259,8 @@ Ne pas utiliser des noms impossibles à prononcer. `genymdhms` est la date à la
 ```{code} cpp
 class Customer {
 private:
-    Date generationTimeStamp;
-    Date modificationTimeStamp;
+    string generationTimeStamp; // Format : yyyy-mm-dd hh:mm:ss
+    string modificationTimeStamp; // Format : yyyy-mm-dd hh:mm:ss
     const string recordId = "102";
 //...
 };
@@ -252,7 +268,7 @@ private:
 :::
 
 (cm2-nom-recherchable)=
-## Utiliser des noms recherchables
+## Noms recherchables
 
 Imagine un code avec que des variables d'une seule lettre et des nombres fixés qui apparaissent partout et qu'il contient le morceau de code suivant.
 
@@ -262,10 +278,10 @@ for (int j=0; j<34; j++) {
 }
 ```
 
-Maintenant, comparer-le à ce même code.
+Maintenant, comparez-le à ce même code.
 
 ```{code} cpp
-const int NUMBER_OF_TASKS = 34;
+const int NUMBER_OF_TASK_TYPES = 34;
 const int WORK_DAYS_PER_WEEK = 5;
 const int NUMBER_OF_TASKS_PER_DAY = 4;
 int totalCost = 0;
@@ -278,47 +294,51 @@ for (int j=0; j < NUMBER_OF_TASKS; j++) {
 
 :::{error} Problème 
 :class: dropdown
-Il est beaucoup plus facile de retrouver NUMBER_OF_TASKS_PER_DAY et de le modifier que de retrouver tous les `4` dans le code. D'une façon générale,
-- Utiliser des variables d'une seule lettre **SEULEMENT** pour des variables locales dans des boucles/fonctions courtes.
-- Regarder le numéro de la première et de la dernière ligne de code où une variable intervient. La longueur de son nom peut croître linéairement avec le nombre de lignes de code entre les deux. 
+Il est bien plus facile de localiser et de modifier une variable nommée `NUMBER_OF_TASKS_PER_DAY` que de rechercher tous les `4` dans le code. De manière générale :
+- Utilisez des variables d'une seule lettre **UNIQUEMENT** pour des variables locales dans des boucles ou des fonctions courtes.
+- Considérez le numéro de la première et de la dernière ligne où une variable est utilisée. La longueur de son nom peut augmenter proportionnellement au nombre de lignes de code entre ces deux références.
 :::
 
 (cm2-class-method)=
 ## Nom commun pour les classes, verbe pour les méthodes
 
-:::{note} Lire le titre ☝️
+:::{note} Lisez le titre ☝️
 :class: dropdown
-Le nom d'une classe doit être un nom ou un groupe nominal (par exemple `AddressParser`) Le nom des méthodes doivent être un verbe ou un groupe verbal (par exemple `deleteAddress`).
+Le nom d'une classe doit correspondre à un nom ou à un groupe nominal (par exemple, `AddressParser`). En revanche, les noms de méthodes doivent être des verbes ou des groupes verbaux (par exemple, `deleteAddress`).
 :::
 
 (cm2-un-par-concept)=
-## Choisir un seul et bon mot par concept
+## Un seul mot par concept
 
-:::{note} Éviter les synonymes
+:::{note} Évitez les synonymes
 :class: dropdown
-Il ne faut pas utiliser plusieurs mots synonymes s'ils font tous la même chose (par exemple `fetch`, `retrieve`, `get` ou `controller`, `manager`, `driver`). 
+Il est préférable de ne pas utiliser plusieurs mots synonymes qui accomplissent la même tâche (par exemple, `fetch`, `retrieve`, `get`, ou `controller`, `manager`, `driver`). 
 
-Certains mots peuvent avoir des connotations spéciales en informatique (par exemple `memento` correspond à un design pattern). Réutiliser les mots que vous avez vu dans le bon contexte et éviter toute possibilité d'ambiguité.
+Certaines expressions ont des significations particulières en informatique (par exemple, `memento` fait référence à un design pattern). Il est donc important de réutiliser ces termes dans le bon contexte afin d'éviter toute ambiguïté.
 :::
 
 (cm2-contextualiser)= 
-## Contextualiser
+## Contextualisation
 
-Il y a des noms qui sont expressifs sans contexte mais ce n'est pas le cas de la plupart. Si vous voyez `firstName`, `lastName`, `street`, `houseNumber`, `city`, `state`, et `zipcode`, alors vous pouvez deviner qu'il s'agit des coordonnées d'une personne. Maintenant, si vous voyez juste `state`, qu'est-ce que ça pourrait dire ?
+Certaines variables ont des noms suffisamment explicites pour être comprises sans contexte, mais ce n’est pas le cas de la plupart. Par exemple, des noms comme `firstName`, `lastName`, `street`, `houseNumber`, `city`, `state`, et `zipcode` suggèrent clairement qu’ils font référence aux coordonnées d’une personne. 
+
+En revanche, tout seul, un nom comme `state` est beaucoup plus ambigu : il pourrait désigner l’état civil d’une personne, un état d’un objet dans le code, ou encore un état géographique, selon le contexte.
 
 :::{hint} Ajouter un préfixe.
 :class: dropdown
-Une solution pour contextualiser ces noms est de rajouter un préfixe come `addr` pour `address` : `addrState`. 
+Une solution pour clarifier le contexte des noms de variables est d'ajouter un préfixe, comme `address` (si le contexte de `address` est clair), par exemple : `addressState`. 
 
-Par contre, **il ne faut pas rajouter des préfixes partout quand le contexte est clair**. Encore une fois, nous cherchons juste à enlever les ambiguités.
+Cependant, **il ne faut pas ajouter des préfixes de manière systématique lorsque le contexte est déjà clair**. L'objectif reste de lever toute ambiguïté, pas de rendre le code excessivement verbeux.
 :::
 
 :::{hint} Créer une classe.
 :class: dropdown
-Une meilleure solution la plupart du temps (selon vos besoins) est de regrouper toutes ces variables sous une structure commune : `class Address`.
+Dans la plupart des cas, une solution plus efficace consiste à regrouper ces variables sous une structure commune, comme une classe : `class Address`. Cela permet de donner un contexte clair non seulement au programmeur, mais aussi à la machine.
 :::
 
 (cm2-blague)=
-## Ne pas faire de blagues dans les noms
+## (Ne pas) faire de blagues dans les noms
 
 [`holyHandGrenade`](https://worms.fandom.com/wiki/Holy_Hand_Grenade) pour faire `deleteItems`, sérieusement ?
+
+Bien sûr ! Tant que les bonnes pratiques sont respectées, un peu d'humour ne tue personne.
