@@ -335,7 +335,7 @@ For example, in a project, the user interface (UI) and the logic part of the cod
 In this course, we will not cover Git branches or other advanced Git features. You will only work on a single branch: 'main'.
 :::
 
-:::{important} Using the Web IDE
+:::{warning} Using the Web IDE
 **For now**, it is recommended not to use the Web IDE unless explicitly mentioned.
 
 It is essential to learn how to use Git via the command line in order to fully understand its fundamental commands.  
@@ -374,8 +374,7 @@ You can also run `git diff origin/main` to see exactly what changes have been ma
 
 4. To synchronize your local repository with the remote repository (which, this time, is ahead), run `git pull`.
 
-::: {warning}
-If the remote repository contains an incorrect version of the project...
+::: {warning} If the remote repository contains an incorrect version of the project...
 :class: dropdown
 In this case, it is not always desirable to run `git pull`. We will see how to handle this situation in the upcoming PSs.
 :::

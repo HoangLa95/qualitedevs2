@@ -338,7 +338,7 @@ Par exemple, dans un projet, la partie IHM et la partie logique du code peuvent 
 Dans ce cours, nous ne couvrirons pas les branches Git, ainsi que d'autres fonctionnalités avancées de Git. Vous allez travailler seulement sur une seule branche : 'main'.
 :::
 
-:::{important} Utilisation du Web IDE
+:::{warning} Utilisation du Web IDE
 **Pour le moment**, il est recommandé de ne pas utiliser le Web IDE sauf quand il est mentionné de façon explicite.
 
 Il est essentiel d'apprendre à utiliser Git en ligne de commande afin de bien comprendre ses commandes fondamentales. 
@@ -377,8 +377,7 @@ Vous pouvez également exécuter `git diff origin/main` pour voir précisément 
 
 4. Pour synchroniser votre dépôt local avec le dépôt distant (qui, cette fois, est en avance), exécutez `git pull`.
 
-::: {warning}
-Si le dépôt distant contient une version incorrecte du projet...
+::: {warning} Si le dépôt distant contient une version incorrecte du projet...
 :class: dropdown
 Dans ce cas, il n’est pas toujours souhaitable d’exécuter `git pull`. Nous verrons comment gérer cette situation dans les prochains TPs.
 :::
