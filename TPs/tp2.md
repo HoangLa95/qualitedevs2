@@ -15,6 +15,7 @@ Au début du TPX, créez un dossier nommé `TPX` dans votre dépôt.
 Pour chaque exercice intitulé **"Exercice n : Nom de l'exercice"**, créez un fichier `nom-de-l-exercice.cpp` (convention **kebab-case**) et ajoutez-y le code fourni. 
 :::
 
+(tp2-objectifs)=
 ## Objectifs
 
 Le but de ce TP est de comprendre les points suivants :
@@ -398,7 +399,8 @@ b(double b1, t t1) : mB1(b1), mT(t1) {
 Si vous avez des doutes, n'hésitez pas à revenir sur le [cours](../Cours/cm2.md).
 
 Si vous pensez avoir correctement renommé les éléments, rappelez-vous qu'un bon programmeur devrait être capable d'écrire ce même code correctement dès le départ. Bien sûr, il peut toujours revenir sur son code pour l'améliorer, mais le niveau de code présenté dans cet exercice est tout simplement inacceptable. 
-Le temps que vous avez passé à comprendre et à améliorer ce code, à son niveau actuel, est du temps perdu en pratique si vous avez codé de manière négligée. D'ailleurs, j'ai passé plus de temps à rendre ce code fonctionnel, mais visuellement désastreux, qu'à l'écrire correctement dès le début.
+À la fin de ce cours, vous devez être capable de bien nommer les éléments dès le départ.
+D'ailleurs, j'ai passé plus de temps à rendre ce code fonctionnel, mais visuellement désastreux, qu'à l'écrire correctement dès le début.
 Des noms incohérents et flous rendent le code difficile à comprendre et remettent en question sa logique.
 
 J'espère que cet exercice vous a convaincu de l'importance de coder de manière propre 😊.
@@ -421,4 +423,4 @@ J'espère que cet exercice vous a convaincu de l'importance de coder de manière
 Avez-vous oublié de maintenir vos dépôts ?
 :::
 
-Revenez aux [objectifs](#objectifs) et cochez les points que vous avez maîtrisés. Revenez sur les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
+Revenez aux [objectifs](#tp2-objectifs) et cochez les points que vous avez maîtrisés. Revenez sur les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
