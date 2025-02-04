@@ -39,6 +39,7 @@ Les variables globales doivent être écrites en majuscules, avec les mots sépa
 Une classe doit toujours commencer par une majuscule.
 :::
 
+(cm2-kebab-case)=
 :::{important} Noms de fichiers
 Nous allons utiliser le **kebab-case** (`my-first-file.txt`, `hello-world.cpp`, ...) pour les noms de fichier, car c'est la convention la plus standard pour la plupart des ecosystèmes.
 :::
