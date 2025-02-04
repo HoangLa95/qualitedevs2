@@ -1,301 +1,33 @@
 # TP2 : Comment renommer les choses ?
 
-:::{warning} Utilisation d'un IDE
-:class: dropdown
-Pour vous familiariser avec les commandes Git sous Linux, nous allons apprendre à utiliser un IDE (comme VSCodium sur la version Debian de l'IUT) plus tard. Pour le moment, vous pouvez utiliser n'importe quel éditeur de texte de base (sans configuration, autocomplétion,...). Nous passerons à l'IDE quand les intervenants trouvent que vous avez bien compris comment fonctionne le workflow de git (avec pull, add, commit, push).
+:::{important} Git
+À partir de maintenant, des rappels occasionnels vous seront donnés pour maintenir votre dépôt, mais vous devez être autonome avec Git.  
+Petit rappel : voici un flux de travail typique que vous suivrez :  
+- Exécutez `git remote update` et `git status` pour vérifier l’état de vos dépôts.  
+- Utilisez `git pull` si votre dépôt distant a des modifications plus récentes.  
+- Au moins à la fin de chaque exercice, pensez à `git add`, `git commit` et `git push` pour sauvegarder votre travail.  
+
+N’hésitez pas à revenir au TP1 en cas de doute. La qualité de votre historique Git sera évaluée.  
 :::
 
-:::{important} QCM
-Les réponses aux questions du TPs sont à remplir dans le QCM sur Moodle.
+:::{important} Organisation des TPs et exercices
+Au début du TPX, créez un dossier nommé `TPX` dans votre dépôt.  
+Pour chaque exercice intitulé **"Exercice n : Nom de l'exercice"**, créez un fichier `nom-de-l-exercice.cpp` (convention **kebab-case**) et ajoutez-y le code fourni. 
 :::
 
-**Question 1** : Par quoi faut-il commencer quand vous ouvrez votre dépôt local ?
+## Objectifs
 
-Créer un dossier `TP2` dans votre dépôt. Pour chaque exercice "Exercice n : Nom de l'exercice", vous allez créer un fichier `nom-de-l-exercice.cpp`. 
+Le but de ce TP est de comprendre les points suivants :
+- [ ] [Travailler avec Git](tp1.md)
+- [ ] [Magic numbers](#tp2-magic-numbers)
+- [ ] [User input](#user-input)
+- [ ] [Membres d'une classe C++](#tp2-membres-classe)
+- [ ] [Getter et setter](#tp2-getter-setter)
+- [ ] [Constructeur d'une classe](#tp2-constructor)
+- [ ] [camelCase](#cm2-camel-case) et [kebab-case](#cm2-kebab-case)
+- [ ] [Noms révélateur d'intention](#cm2-nom-revelateur)
 
 ## Exercice 1 : Magic numbers
-
-Recopier le code suivant dans votre fichier `magic-numbers.cpp`.
-
-```{code} cpp
-#include <iostream>
-using namespace std;
-
-bool b(int a, float m) {
-    if (a >= 18 && m >= 7) {
-        return true;
-    }
-    return false;
-}
-
-int main() {
-    int a = 19;
-    float m = 10.0;
-    if (b(a, m)) {
-        cout << "You can buy beer!" << endl;
-    } else {
-        cout << "Sorry, you cannot buy beer." << endl;
-    }
-    return 0;
-}
-```
-
-Enregistrer et compiler le code avec `g++ -o <nom du fichier> <nom du fichier>.cpp` (par exemple `g++ -o magic-numbers magic-numbers.cpp`). 
-
-:::{note} Nom de l'exécutable
-Le premier `<nom du fichier>` dans la commande de compilation correspond au nom de l'exécutable. Dans ce cours, nous allons adopter la convention suivante : les exécutables n'auront pas d'extension. Nous reprenons aussi le nom du fichier `.cpp` par commodité.
-:::
-
-Maintenant, exécuter `./magic-numbers`.
-
-**Question 2** : Quel message s'affiche dans le terminal ?
-
-Pouvez-vous deviner ce que fait ce code ? Comment pourrait-on améliorer les noms des variables ? Pour vous aider, essayer de renommer les variables pour répondre aux questions suivantes.
-- Que fait la fonction `b` ?
-- À quoi correspond `int a` (*indice* : l'âge légal de consommation d'alcool en France est 18) ?
-- À quoi correspond `float m` (*indice* : le prix moyen d'une bouteille de bière de 500 ml est 7 euros dans les restaurants à Paris) ?
-- À quoi correspond `18` et `7` (*indice* : questions précédentes) ?
-
-**Question 3** : Qu'avez-vous renommé ?
-
-Enregistrer votre nouveau code et recompiler. Exécuter-le pour vérifier que tout fonctionne bien. Vous pouvez aussi changer les valeurs données (`19` et `10.0`) pour tester votre code.
-
-(tp2-magic-numbers)=
-:::{note} Magic numbers
-:class: dropdown
-On appelle *magic numbers* des nombres qui apparaissent dans le code sans aucun contexte et/ou explication. Éviter les magic numbers en leur donnant des noms révélateurs d'intention. Ces nombres peuvent être utilisés localement ou bien être des variables globales, c'est à vous de décider quel est le *scope* de ces variables et donc d'utiliser les bonnes conventions de nommage.
-:::
-
-:::{important} .gitignore
-:class: dropdown
-Nous ne voulons pas suivre l'exécutable donc rajouter la ligne suivante au fichier `.gitignore` : `/TP2/magic-numbers`.
-:::
-
-:::{important} git add, commit, push
-:class: dropdown
-Il est temps de suivre (`add`) les changements, les sauvegarder (`commit -m`) avec un message explicite et les diffuser (`push`) sur le dépôt distant (sur le GitLab de l'IUT). Vérifier que le changement a bien été effectué sur l'application web GitLab.
-:::
-
-### Simplification du code
-
-Quand vous avez un code de la forme suivante :
-
-```{code} cpp
-if (someCondition) {
-    return true;
-}
-return false;
-```
-ou
-```{code} cpp
-if (someCondition) {
-    return true;
-} else {
-    return false;
-}
-```
-Il suffit de remplacer ce code par :
-```{code} cpp
-return someCondition;
-```
-Simplement, si la condition est vraie, alors on retourne `true` et si elle est fausse, on retourne `false`. `if (veriteDeLaCondition){return true;} else {return false;}` est redondant quand on peut simplement faire `return veriteDeLaCondition`.
-
-Simplifier le code précédent avec ce que vous venez de voir.
-
-:::{note} Rappel Git
-:class: dropdown
-Il est à nouveau temps de suivre (`add`) les nouveaux changements, les sauvegarder avec un message (`commit -m`), puis de les diffuser (`push`) sur le dépôt distant.
-:::
-
-### User input
-
-Pour éviter de recompiler le code à chaque fois que vous modifier les variables `a` et `m`, nous pouvons demander à l'utilisateur de rentrer les valeurs lors de l'exécution. Par exemple :
-
-```{code} cpp
-int main() {
-    int a;
-    float m;
-
-    cout << "Enter your age: ";
-    cin >> a;
-
-    cout << "Enter the amount of money you have: ";
-    cin >> m;
-
-    if (b(a, m)) {
-        cout << "You can buy beer!" << endl;
-    } else {
-        cout << "Sorry, you cannot buy beer." << endl;
-    }
-    return 0;
-}
-```
-
-Modifier votre code pour permettre du *user input*. Recompiler et tester votre code.
-
-:::{important} Synchroniser les dépôts
-:class: dropdown
-N'oublier pas de synchroniser (`add`, `commit`, `push`) vos dépôts locaux et distants de temps en temps (après chaque exercice par exemple).
-:::
-
-
-## Exercice 2 : Classes et Méthodes
-
-Recopier le code suivant.
-
-```{code} cpp
-#include <iostream>
-using namespace std;
-
-float account_balance1 = 0.0;
-float account_balance2 = 100.0;
-
-void deposit1(float x) {
-    account_balance1 += x;
-}
-
-void deposit2(float x) {
-    account_balance1 += x;
-}
-
-void withdraw1(float x) {
-    if (x <= account_balance1) {
-        account_balance1 -= x;
-    } else {
-        cout << "Insufficient funds!" << endl;
-    }
-}
-
-void withdraw2(float x) {
-    if (x <= account_balance2) {
-        account_balance2 -= x;
-    } else {
-        cout << "Insufficient funds!" << endl;
-    }
-}
-
-float get1() {
-    return account_balance1;
-}
-
-float get2() {
-    return account_balance2;
-}
-
-int main() {
-    deposit1(100.0);
-    withdraw1(50.0);
-    withdraw2(50.0);
-    cout << "First Account Balance: " << get1() << endl;
-    cout << "Second Account Balance: " << get2() << endl;
-    return 0;
-}
-```
-
-**Question 4** : Quel est le compte avec le plus d'argent après ces transactions ?
-
-Remplacer les anciennes transactions avec les suivantes :
-
-```{code} cpp
-deposit1(100.0);
-withdraw1(50.0);
-deposit2(100.0);
-withdraw2(50.0);
-```
-
-**Question 5** : Maintenant, quel est le compte avec le plus d'argent ?
-
-- Est-ce que ce code a du sens ? 
-- D'où vient l'erreur de comptabilité ? 
-- Est-ce que je peux facilement créer et faire des transactions avec un troisième compte ?
-- Que faut-il faire pour améliorer ce code (*indice* : nom de l'exercice) ?
-
-Pour améliorer le code, nous allons créer une classe `bank_account` de la façon suivante :
-
-(tp2-ex2-class-example)=
-```{code} cpp
-#include <iostream>
-using namespace std;
-
-class bank_account {
-public:
-    bank_account(float b) : balance(b) {}
-
-    void ba_deposit(float x) {
-        balance += x;
-    }
-
-    void ba_withdraw(float x) {
-        if (x <= balance) {
-            balance -= x;
-        } else {
-            cout << "Insufficient funds!" << endl;
-        }
-    }
-
-    float ba_get() {
-        return balance;
-    }
-
-private:
-    float balance;
-};
-
-int main() {
-    bank_account first_account(0.0);
-    bank_account second_account(100.0);
-    first_account.ba_deposit(100.0);
-    first_account.ba_withdraw(50.0);
-    second_account.ba_deposit(100.0);
-    second_account.ba_withdraw(50.0);
-    cout << "First Account Balance: " << first_account.ba_get() << endl;
-    cout << "Second Account Balance: " << second_account.ba_get() << endl;
-    return 0;
-}
-```
-
-**Question 6** : Maintenant, quel est le compte avec le plus d'argent ?
-
-Ce code compile et marche comme il faut. Par contre, il me fait mal au coeur. Renommer cette atrocité. 
-
-:::{note} Membres d'une classe C++
-:class: dropdown
-Les `private` class member en C++ sont souvent préfixés avec `m` (par exemple `mBalance`). Le but de ce préfixe est de le différencier avec la variable locale utilisé dans le constructeur (ici `float b` que l'on pourrait renommer `float balance`) que l'on utilise pour initialiser `mBalance` (avec `mBalance(balance)` dans ce cas).
-
-Il existe aussi d'autres conventions comme commencer par `_` (par exemple `_balance`). L'idée d'utiliser la lettre `m` est qu'il existe aussi d'autres lettres avec d'autres significations et ces lettres peuvent être utilisées pour préfixer les noms des variables. Cette convention vient de la Notation Hongroise qui est devenu maintenant assez obsolète mais il y a des restes de cette notation qui sont encore utiles (par exemple l'utilisation de `m` ou pour prendre un autre exemple : `s` pour les variables statiques).
-
-Nous pourrions aussi renommer `float b` avec `float initialBalance` et garder `balance` comme nom d'attribut.
-
-Cette convention n'est pas forcément utilisée dans d'autres langages. Par exemple, dans Java et Python, on peut faire du *shadowing* où la variable locale et le membre de la classe peut avoir le même nom et la différence entre ces deux variables se font grâce à `this` (plus d'informations dans votre cours de programmation objet).
-:::
-
-:::{note} Getter et Setter
-:class: dropdown
-L'**encapsulation** est importante pour cacher les données *sensitives* de votre objet. Il est donc important de déclarer les attributs de votre classe comme `private`. Conséquemment, il faut utiliser des méthodes `get` (pour récupérer) et `set` (pour modifier) ces attributs.
-
-La convention utilisée pour les noms de ces méthodes sont `getNomAttribut` et `setNomAttribut`.
-:::
-
-Un checklist pour vous aider (revenir sur le cours si vous ne comprenez pas certains principes) :
-- [ ] [camelCase](#cm2-camel-case)
-- [ ] [Majuscule pour les noms de classes](#cm2-class-method)
-- [ ] [Nom révélateur d'intention](#cm2-nom-revelateur)
-- [ ] [Contexte](#cm2-contextualiser) (sauf quand inutile)
-
-**Question 7** : Qu'avez-vous renommé ?
-
-Recompiler votre code et vérifier que le code fonctionne bien en créant un troisième compte avec une montant initial de `123.45`, puis déposer `67.89` dans le compte et enfin retirer `101.1`.
-
-**Question 8** : Combien d'argent se trouve dans le troisième compte ?
-
-:::{important} `.gitignore`, `add`, `commit`, `push`
-:class: dropdown
-Ne pas oublier d'ignorer l'exécutable puis de mettre à jour votre dépôt distant.
-:::
-
-## Exercice 3 : Contexte
-
-Regarder le code suivant.
 
 ```{code} cpp
 #include <iostream>
@@ -303,68 +35,390 @@ Regarder le code suivant.
 
 using namespace std;
 
-void printGrammaticallyCorrectMessage(string candidate, int count) {
-    string number;
-    string verb;
-    string pluralModifier;
-    
-    if (count == 0) {
-        number = "no";
-        verb = "are";
-        pluralModifier = "s";
-    } else if (count == 1) {
-        number = "1";
-        verb = "is";
-        pluralModifier = "";
-    } else {
-        number = to_string(count);
-        verb = "are";
-        pluralModifier = "s";
+double calculateDiscountAmount(double originalPrice, double discountPercentage) {
+    return originalPrice * discountPercentage;
+}
+
+bool qualifiesForDiscount(double originalPrice) {
+    return originalPrice >= 10;
+}
+
+double calculateDiscountPercentage(double originalPrice, bool isStudent, bool isLoyalCustomer) {
+    double discountPercentage = 0.0;
+
+    if (qualifiesForDiscount(originalPrice)) {
+        if (isStudent) {
+            discountPercentage += 10; 
+        }
+        if (isLoyalCustomer) {
+            discountPercentage += 10;
+        }
     }
-    
-    string message = "There " + verb + " " + number + " " + candidate + pluralModifier + ".";
-    cout << message << endl;
+
+    return discountPercentage;
+}
+
+double redeemStudentPoints(double discountAmount){
+    return discountAmount*(100-10)/100;
+}
+
+double redeemLoyaltyPoints(double discountAmount){
+    return discountAmount*(100-2*10)/100;
 }
 
 int main() {
-    printGrammaticallyCorrectMessage("bicycle", 0);
-    printGrammaticallyCorrectMessage("house", 1);
-    printGrammaticallyCorrectMessage("computer", 2);
+    double originalPrice = 100;
+    bool isStudent = true;
+    bool isLoyalCustomer = true;
+
+    cout << "Original price: " << originalPrice << " euros." << endl;
+
+    double discountPercentage = calculateDiscountPercentage(originalPrice, isStudent, isLoyalCustomer);
+    double discountAmount = calculateDiscountAmount(originalPrice, discountPercentage);
+    double finalPrice = originalPrice - discountAmount;
+    cout << "Final price with student and loyalty discounts: " << finalPrice << " euros." << endl;
+
+    double rewardPoints = 0.0;
+    if (isStudent){
+        rewardPoints = redeemStudentPoints(discountAmount);
+    } else if (isLoyalCustomer){
+        rewardPoints = redeemLoyaltyPoints(discountAmount);
+    }
+    cout << "Your reward points: " << rewardPoints << endl;
+
     return 0;
 }
 ```
 
-Essayer d'abord de comprendre ce que fait ce code. Tout a l'air d'être bien nommé, quel est donc le problème de ce code ?
+1. Enregistrez puis compilez le code (avec `g++ -o magic-numbers magic-numbers.cpp`). 
 
-:::{hint} Contexte
-:class: dropdown
-Le nom de la fonction donne une partie du contexte des variables. Le reste du contexte doit être déduit de l'algorithme : par exemple, on se rend compte que `number`, `verb`, `pluralModifier` font partie d'un message que l'on va afficher et ces variables vont dépendre du nombre `count` d'objets `candidate`.
-
-À première vue, le contexte, la signification des variables et ce que fait la fonction reste assez opaque.
+:::{important} Nom de l'exécutable
+Le premier `<nom du fichier>` dans la commande de compilation correspond au nom de l'exécutable.  
+Dans ce cours, nous utiliserons toujours le même nom que le fichier `.cpp` pour l'exécutable.
 :::
 
-- Contextualiser ce code en rajoutant une classe `GrammaticallyCorrectMessage`.
-- Dans `private:` 
-    - Les variables `number`, `verb` et `pluralModifier` doivent être des attributs privés de `GrammaticallyCorrectMessage`. Il n'y aura pas d'affectation directe des attributs ici donc vous pouvez garder les mêmes noms (sans préfixer par `m`).
-    - Une fonction devrait faire seulement une chose. Séparer donc les différents cas en différentes fonctions (par exemple, `thereAreNoCandidates`, `thereIsOneCandidate`, `thereAreMultipleCandidates`) qui affectent différentes valeurs aux attributs.
-    - Maintenant, nous pouvons créer une fonction `assignValuesToMessageParts` qui appelle les fonctions correspondantes selon la valeur de `count`.
-- Dans `public:`
-    - Nous pouvons maintenant créer une fonction `createMessage` qui prend `string candidate` et `int count` en arguments et qui appelle `assignValuesToMessageParts` puis retourne le message avec la bonne formulation (sous forme de `string`).
-- Dans `main`
-    - Nous pouvons maintenant créer un message `GrammaticallyCorrectMessage message`.
-    - Il suffit d'appeler la méthode `createMessage` avec les bons arguments et de l'afficher dans le terminal avec `cout <<`. N'oublier pas d'aller à ligne avec `<< endl`.
+2. Exécutez `./magic-numbers`.
 
-**Question 9** : Combien d'attributs et de méthodes se trouvent dans `GrammaticallyCorrectMessage` ?
+3. Comprenez-vous ce que fait ce code ?
 
-**Question 10** : Quels sont les types que `assignValuesToMessageParts` et `createMessage` vont retourner ?
-
-Compiler et tester votre code. 
-- Maintenant, l'intention de ce code est très explicite même sans commentaire.
-- Les variables sont bien situées dans leur contexte pour celui qui lit le code aussi bien que pour la machine qui le compile grâce à l'encapsulation à l'intérieur de la classe `GrammaticallyCorrectMessage`. 
-- Le code est bien modulable car chaque fonction ne fait qu'une seule chose. La modification d'une fonction ne changera pas le comportement des autres fonctions. 
-- Il est aussi facile de changer le code pour modifier la structure de la phrase.
-
-:::{note} Rappel
+:::{hint} Indices
 :class: dropdown
-N'oubliez pas de maintenir votre dépôt Git ! (Ajouter l'exécutable à `.gitignore`, `add`, `commit`, `push`)
+Un client achète un produit au prix de `originalPrice`.  
+Il peut bénéficier de réductions s'il est étudiant ou client fidèle, et les réductions obtenues permettent également de calculer des points de récompense.  
+
+Les règles sont les suivantes :  
+
+- Une réduction ne s'applique que si `originalPrice` dépasse 10 euros.  
+- Un étudiant bénéficie d'une réduction de 10 %.  
+- Un client fidèle bénéficie également d'une réduction de 10 %.  
+- Si le client est à la fois étudiant et fidèle, les réductions s'additionnent pour atteindre 20 %.  
+- Avec `originalPrice = 100` euros, la réduction totale est donc de 20 euros.  
+- Les points de récompense sont calculés en appliquant un pourcentage à cette réduction :  
+    - $\frac{100 - \text{réduction étudiant}}{100}$ (soit 90 % ici) donne 18 points.  
+    - $\frac{100 - 2 \times \text{réduction client fidèle}}{100}$ (soit 80 % ici) donne 16 points.  
+- La réduction étudiante étant toujours plus avantageuse, elle est appliquée en priorité.  
+- Ainsi, dans cet exemple, le client reçoit **18 points**. 
 :::
+
+4. Bien que les noms des éléments soient appropriés, ce code n'est pas propre. En voyez-vous les raisons ?
+
+(tp2-magic-numbers)=
+:::{hint} Magic numbers
+:class: dropdown
+On appelle *magic numbers* des nombres utilisés directement dans le code.
+Souvent, ces nombres apparaissent sans justification claire. 
+Dans cet exemple, bien que la signification de certains nombres soit déductible grâce aux autres éléments bien nommés, il est préférable de les éviter. 
+
+Certains nombres magiques peuvent être acceptables, comme `100` pour les pourcentages, `0` pour initialiser une variable ou `1` pour un incrément.
+Toutefois, la majorité d'entre eux devrait être évitée.
+
+Ici, le nombre `10` apparaît plusieurs fois, mais sa signification varie selon le contexte. Imaginons que nous voulions modifier le seuil d'éligibilité pour une réduction, ajuster les pourcentages de réduction ou modifier les formules de récompenses. Le risque d'erreur devient alors considérable. De plus, il est difficile de repérer et de modifier les bonnes valeurs sans devoir replonger dans l'ensemble du code pour en comprendre la logique.
+
+La solution consiste à attribuer des noms explicites à ces nombres magiques en fonction de leur portée, qu'ils soient locaux ou globaux. 
+Il est essentiel d'adopter les bonnes conventions de nommage abordées en cours afin d'éviter les nombres magiques.
+:::
+
+5. Renommez les magic numbers.
+
+:::{hint} Avez-vous accompli votre tâche de manière satisfaisante ?
+:class: dropdown
+Une façon simple de vérifier si vous avez correctement appliqué les conventions de nommage est d'essayer de modifier un seul paramètre à la fois (par exemple, le pourcentage de réduction étudiant, réduction client, etc.).
+
+- Auriez-vous pu faire cette modification dans un code similaire de 10 000 lignes en utilisant une recherche (`Ctrl+f`) ?
+- Avez-vous réussi à modifier une seule variable (une seule ligne dans le code) ?
+
+Dans le cas contraire, renommez-les.
+:::
+
+### User input
+
+Pour éviter de recompiler le code à chaque fois que vous modifiez `originalPrice`, `isStudent` et `isLoyalCustomer`, nous pouvons récupérer les valeurs par clavier lors de l'exécution.
+
+6. Remplacez les lignes suivantes par le code qui suit.
+
+```{code} cpp
+double originalPrice = 100;
+bool isStudent = true;
+bool isLoyalCustomer = true;
+```
+
+```{code} cpp
+double originalPrice;
+cout << "Enter the original price: ";
+cin >> originalPrice;
+
+bool isStudent;
+cout << "Are you a student? (1:Yes, 0:No) ";
+cin >> isStudent;
+
+bool isLoyalCustomer;
+cout << "Do you have a loyalty card? (1:Yes, 0:No) ";
+cin >> isLoyalCustomer;
+```
+
+7. Testez votre code et répondez aux questions du Quiz.
+
+:::{important} Git
+:class: dropdown
+Avez-vous pensé à maintenir vos dépôts ?
+:::
+
+
+## Exercice 2 : Classes et méthodes
+
+:::{important} Coder en anglais
+Il est fortement conseillé de coder en anglais.  
+Cela signifie qu'il est important de faire l'effort d'utiliser des noms en anglais lors du renommage des objets.  
+Pour vous aider, tout le vocabulaire nécessaire est fourni en anglais.
+:::
+
+```{code} cpp
+#include <iostream>
+using namespace std;
+
+double b1 = 0.0;
+double b2 = 100.0;
+
+void d1(double x) {
+    b1 += x;
+}
+
+void d2(double x) {
+    b1 += x;
+}
+
+void w1(double x) {
+    if (x + 4 <= b1) {
+        b1 -= (x + 4);
+    } else {
+        cout << "Insufficient funds!" << endl;
+    }
+}
+
+void w2(double x) {
+    if (x + 2 <= b2) {
+        b2 -= (x + 2);
+    } else {
+        cout << "Insufficient funds!" << endl;
+    }
+}
+
+int main() {
+    d1(100.0);
+    w1(50.0);
+    w2(50.0);
+    cout << "First account balance: " << b1 << endl;
+    cout << "Second account balance: " << b2 << endl;
+    return 0;
+}
+```
+1. Comprenez-vous ce que fait ce code ?
+
+:::{hint} Indices
+:class: dropdown
+- Il existe deux comptes (*account*) avec deux types différents : le type `1` que nous allons appeler "Basic" et le type `2`, appelé "Standard".
+- Le premier compte `b1` possède un solde (*balance*) initial de `0.0` euro, tandis que le deuxième compte `b2` a un solde initial de `100.0` euros.
+- Il est possible de déposer (*deposit*) une somme (*amount*) `x` sur chacun des comptes, respectivement via `d1` pour le premier compte et `d2` pour le second.
+- L'argent peut être retiré (*withdraw*) avec `w1` pour le premier compte et `w2` pour le second.
+- Lors d'un retrait, le compte de type `1` (Basic) applique un frais de retrait (*withdrawal fee*) de 4 euros, tandis que le compte de type `2` (Standard) applique un frais de 2 euros.
+:::
+
+2. **Quiz** : Lequel des deux comptes dispose du solde le plus élevé après ces transactions ?
+
+3. Remplacez les transactions précédentes par les suivantes :
+
+```{code} cpp
+d1(100.0);
+w1(50.0);
+d2(100.0);
+w2(50.0);
+```
+
+4. **Quiz** : Maintenant, quel est le compte qui dispose du solde le plus élevé ?
+
+:::{warning} Avez-vous reperé l'erreur ?
+:class: dropdown
+- Le code est-il logique ? 
+- Quelle est l'origine de l'erreur comptable ? 
+- Est-il facile d'ajouter et de réaliser des transactions avec un troisième compte ?
+- Quelles améliorations peuvent être apportées à ce code ?
+:::
+
+5. Pour améliorer ce code, nous allons le réécrire de la manière suivante :
+
+(tp2-ex2-class-example)=
+```{code} cpp
+#include <iostream>
+using namespace std;
+
+enum t {B, S};
+
+class b {
+private:
+    double mB1;
+    t mT;
+    double mF;
+
+public:
+    b(double b1, t t1) : mB1(b1), mT(t1) {
+        switch(t1){
+            case B:
+                mF = 4;
+                break;
+            case S: 
+                mF = 2;
+                break;
+        }
+    }
+
+    void d(double x) {
+        mB1 += x;
+    }
+
+    void w(double x) {
+        if (x + mF <= mB1) {
+            mB1 -= (x + mF);
+        } else {
+            cout << "Insufficient funds!" << endl;
+        }
+    }
+
+    double getB1() {
+        return mB1;
+    }
+
+    string tToString(){
+        switch(mT){
+            case B: return "Basic";
+            case S: return "Standard";
+            default: return "Unknown";
+        }
+    }
+};
+
+int main() {
+    b a1(0.0,B);
+    b a2(100.0,S);
+    a1.d(100.0);
+    a1.w(50.0);
+    a2.d(100.0);
+    a2.w(50.0);
+    cout << "First account type: " << a1.tToString() << " and balance: " << a1.getB1() << endl;
+    cout << "Second account type: " << a2.tToString() << " and balance: " << a2.getB1() << endl;
+    return 0;
+}
+```
+(tp2-membres-classe)=
+:::{important} Membres d'une classe C++
+Les membres `private` d'une classe en C++ sont souvent préfixés avec `m` (par exemple, `mB1`, `mT` et `mF`). 
+Ce préfixe permet de les distinguer des variables locales utilisées dans le constructeur (ici, `double b1`), qui servent à initialiser `mB1` (avec `mB1(b1)`).
+Il existe d'autres conventions, comme utiliser le préfixe `_` (par exemple, `_b1`).
+
+Cependant, cette convention n'est pas systématique dans d'autres langages. 
+Par exemple, en Java et en Python, on peut faire du *shadowing*, où la variable locale et le membre de la classe peuvent partager le même nom, et la distinction se fait grâce à `this` (plus d'informations à ce sujet dans votre cours de Développement Orientée Objet).
+
+Dans ce cours, nous adopterons le préfixe `m`.
+:::
+
+(tp2-getter-setter)=
+:::{important} Getter et Setter
+L'**encapsulation** est essentielle pour protéger les données sensibles de votre objet. 
+Il est donc important de déclarer les attributs de votre classe en tant que `private`. 
+En conséquence, il est nécessaire d'utiliser des méthodes `get` (pour accéder) et `set` (pour modifier) ces attributs.
+
+La convention recommandée pour le nommage de ces méthodes est `getNomAttribut` et `setNomAttribut` (sans le préfixe `m`).
+:::
+
+6. Comprenez-vous ce que fait ce code ?
+
+(tp2-constructor)=
+:::{hint} Indices
+:class: dropdown
+- L'objet `t` de type `enum` peut prendre les valeurs `B` (pour "Basic") ou `S` (pour "Standard").
+- La classe `b` représente un compte bancaire (*bank account*).
+- Elle possède les attributs suivants :
+    - `mB1`, qui représente son solde (*balance*).
+    - `mT`, qui indique son type (Basic ou Standard).
+    - `mF`, qui est son frais de retrait (*withdrawal fee*).
+
+Le code suivant est le constructeur de la classe :
+```{code} cpp
+b(double b1, t t1) : mB1(b1), mT(t1) {
+    switch(t1){
+        case B:
+            mF = 4;
+            break;
+        case S: 
+            mF = 2;
+            break;
+    }
+}
+```
+
+- Un objet de la classe `b` est construit avec deux arguments : `double b1`, qui est son solde initial, et `t t1`, qui définit le type du compte (*account type*).
+- Le `switch(t1)` permet de gérer les différents types de comptes.
+    - Si `t1 == B`, le frais de retrait est de 4 euros.
+    - Si `t1 == S`, le frais de retrait est de 2 euros.
+- La méthode `tToString()` permet d'afficher les types sous forme de chaînes de caractères correspondantes.
+:::
+
+7. **Quiz** : Cette fois, quel est le compte qui dispose du solde le plus élevé ?
+
+8. Ce code compile et fonctionne comme il se doit, mais il est une véritable atrocité pour les yeux. Il me fait mal au cœur. Il est impératif de renommer ces horreurs.
+
+:::{hint} Avez-vous accompli votre tâche ?
+:class: dropdown
+- Avez-vous correctement appliqué la convention **camelCase** ?
+- Avez-vous respecté les conventions de nommage pour les classes et les méthodes ? (Les noms des objets `enum` doivent également commencer par une majuscule.)
+- Avez-vous suivi les conventions concernant l'utilisation du préfixe `m` et des getters et setters ?
+- Y a-t-il encore des variables, méthodes ou objets dont le nom se résume à une seule lettre ?
+- Des nombres sans signification figurent-ils encore dans les noms ?
+- Les noms que vous avez choisis sont-ils suffisamment révélateurs de l'intention derrière chaque variable, méthode ou objet ?
+
+Si vous avez des doutes, n'hésitez pas à revenir sur le [cours](../Cours/cm2.md).
+
+Si vous pensez avoir correctement renommé les éléments, rappelez-vous qu'un bon programmeur devrait être capable d'écrire ce même code correctement dès le départ. Bien sûr, il peut toujours revenir sur son code pour l'améliorer, mais le niveau de code présenté dans cet exercice est tout simplement inacceptable. 
+Le temps que vous avez passé à comprendre et à améliorer ce code, à son niveau actuel, est du temps perdu en pratique si vous avez codé de manière négligée. D'ailleurs, j'ai passé plus de temps à rendre ce code fonctionnel, mais visuellement désastreux, qu'à l'écrire correctement dès le début.
+Des noms incohérents et flous rendent le code difficile à comprendre et remettent en question sa logique.
+
+J'espère que cet exercice vous a convaincu de l'importance de coder de manière propre 😊.
+:::
+
+9. Recompilez et testez votre code.
+
+10. Ajoutez un troisième type "Premium" avec un frais de retrait de 1 euro.
+
+11. Dans la fonction `int main()`, remplacez le code existant par les instructions suivantes :
+- Créez trois comptes avec les trois types différents (Basic, Standard et Premium), chacun ayant un solde initial de 100,0 euros.
+- Effectuez un dépôt de 50 euros sur chaque compte.
+- Effectuez un retrait de 148 euros de chaque compte.
+- Affichez les informations (types et soldes) des trois comptes.
+
+12. **Quiz** : Quel est le solde de chaque compte ?
+
+:::{important} Git
+:class: dropdown
+Avez-vous oublié de maintenir vos dépôts ?
+:::
+
+Revenez aux [objectifs](#objectifs) et cochez les points que vous avez maîtrisés. Revenez sur les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
