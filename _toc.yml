@@ -29,7 +29,7 @@ parts:
 - caption: Travaux Pratiques
   chapters: 
     - file: TPs/tp1
-    # - file: TPs/tp2
+    - file: TPs/tp2
     # - file: TPs/tp3
     # - file: TPs/tp4
     # - file: TPs/tp5
