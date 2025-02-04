@@ -36,10 +36,6 @@ Le but de ce TP est de comprendre les points suivants :
 
 using namespace std;
 
-double calculateDiscountAmount(double originalPrice, double discountPercentage) {
-    return originalPrice * discountPercentage;
-}
-
 bool qualifiesForDiscount(double originalPrice) {
     return originalPrice >= 10;
 }
@@ -59,12 +55,33 @@ double calculateDiscountPercentage(double originalPrice, bool isStudent, bool is
     return discountPercentage;
 }
 
+double calculateDiscountAmount(double originalPrice, double discountPercentage) {
+    return originalPrice * discountPercentage;
+}
+
+double calculateFinalPrice(double originalPrice, bool isStudent, bool isLoyalCustomer){
+    double discountPercentage = calculateDiscountPercentage(originalPrice, isStudent, isLoyalCustomer);
+    double discountAmount = calculateDiscountAmount(originalPrice, discountPercentage);
+    double finalPrice = originalPrice - discountAmount;
+    return finalPrice;
+}
+
 double redeemStudentPoints(double discountAmount){
     return discountAmount*(100-10)/100;
 }
 
 double redeemLoyaltyPoints(double discountAmount){
     return discountAmount*(100-2*10)/100;
+}
+
+double calculateRewardPoints(double discountAmount, bool isStudent, bool isLoyalCustomer){
+    double rewardPoints = 0.0;
+    if (isStudent){
+        rewardPoints = redeemStudentPoints(discountAmount);
+    } else if (isLoyalCustomer){
+        rewardPoints = redeemLoyaltyPoints(discountAmount);
+    }
+    return rewardPoints;
 }
 
 int main() {
@@ -74,18 +91,11 @@ int main() {
 
     cout << "Original price: " << originalPrice << " euros." << endl;
 
-    double discountPercentage = calculateDiscountPercentage(originalPrice, isStudent, isLoyalCustomer);
-    double discountAmount = calculateDiscountAmount(originalPrice, discountPercentage);
-    double finalPrice = originalPrice - discountAmount;
+    double finalPrice = calculateFinalPrice(originalPrice,isStudent,isLoyalCustomer);
     cout << "Final price with student and loyalty discounts: " << finalPrice << " euros." << endl;
 
-    double rewardPoints = 0.0;
-    if (isStudent){
-        rewardPoints = redeemStudentPoints(discountAmount);
-    } else if (isLoyalCustomer){
-        rewardPoints = redeemLoyaltyPoints(discountAmount);
-    }
-    cout << "Your reward points: " << rewardPoints << endl;
+    double discountAmount = originalPrice - finalPrice;
+    cout << "Your reward points: " << calculateRewardPoints(discountAmount,isStudent,isLoyalCustomer) << endl;
 
     return 0;
 }
