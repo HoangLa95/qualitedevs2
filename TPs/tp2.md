@@ -193,7 +193,7 @@ cout << "Do you have a loyalty card? (1:Yes, 0:No) ";
 cin >> isLoyalCustomer;
 ```
 
-7. Testez votre code et répondez aux questions du Quiz.
+7. Testez votre code et répondez aux questions du **Quiz**.
 
 :::{important} Git
 :class: dropdown
