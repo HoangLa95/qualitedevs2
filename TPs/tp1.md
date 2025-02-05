@@ -444,7 +444,7 @@ Les fichiers dont les noms commencent par `.` sont des fichiers cachés (qui ne 
 Pour afficher les fichiers cachés dans un gestionnaire de fichiers, vous pouvez souvent appuyer sur `Ctrl+h` (`h` comme 'hidden').
 :::
 
-6. Ajoutez le nom de l'exécutable `hello-world` dans `.gitignore`.
+6. Écrivez le nom de l'exécutable `hello-world` dans `.gitignore`.
 
 7. Exécutez `git add`, `git commit -m "<message>"` et `git push` pour envoyer le fichier `.gitignore` sur le dépôt distant.
 

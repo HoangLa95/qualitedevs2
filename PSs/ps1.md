@@ -442,7 +442,7 @@ Files whose names start with a `.` are hidden files (they do not appear when usi
 To display hidden files in a file manager, you can usually press `Ctrl+h` (`h` for 'hidden').
 :::
 
-6. Add the name of the executable `hello-world` in `.gitignore`.
+6. Write the name of the executable `hello-world` in `.gitignore`.
 
 7. Run `git add`, `git commit -m "<message>"`, and `git push` to send the `.gitignore` file to the remote repository.
 
