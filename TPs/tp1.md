@@ -459,7 +459,7 @@ Normalement, comme nous n'avons pas ajouté l'exécutable `hello-world` avec `gi
 
 Terminons ce TP par une petite réorganisation.
 
-1. Créez un dossier `TP1/` dans votre projet et bougez `my-first-file.txt` vers ce dossier.
+1. Créez un dossier `TP1/` dans votre projet et bougez tout sauf `.gitignore` vers ce dossier.
 
 :::{warning} `.gitignore` à la racine du projet!
 Le fichier `.gitignore` doit rester à la racine du projet, et **non dans le dossier `TP1/`** !

@@ -457,7 +457,7 @@ Normally, since we didn't add the executable `hello-world` with `git add`, `git 
 
 Let's finish this lab with a little reorganization.
 
-1. Create a folder `PS1/` in your project and move `my-first-file.txt` to this folder.
+1. Create a folder `PS1/` in your project and move everything except for `.gitignore` to this folder.
 
 :::{warning} `.gitignore` remains at the root of the project!
 The `.gitignore` file should remain at the root of the project, and **not in the `PS1/` folder!**
