@@ -576,7 +576,7 @@ Les mêmes fichiers sont normalement sur votre dépôt local (sinon vous pouvez 
 
 :::{seealso} `git rm`
 :class: dropdown
-Vous pouvez utiliser `git rm <nom du fichier>` pour supprimer un fichier qui est déjà synchronisé sur les deux dépôts.
+Vous pouvez utiliser `git rm <nom du fichier>` pour supprimer un fichier qui est déjà synchronisé sur les deux dépôts. `git rm` fonctionne similairement à `git add` mais pour supprimer des fichiers. Vous pouvez ensuite faire `git commit` et `git push` comme d'habitude pour diffuser ces changements (délétions).
 
 Un fichier qui se trouve uniquement sur le dépôt local peut être supprimé simplement via un gestionnaire de fichiers ou avec la commande `rm` (sans `git`). Si vous avez déjà ajouté (`git add`) ce fichier aux modifications suivies (*staged changes*), vous pouvez le retirer grâce à `git restore --staged <nom du fichier>`.
 :::
