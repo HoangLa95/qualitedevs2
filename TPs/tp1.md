@@ -586,7 +586,7 @@ Vous pouvez même tout combiner pour ignorer à la fois les fichiers sans extens
 
 **Et rien d'autres !**
 
-Votre répertoire de travail peut contenir des exécutables mais assurez-vous que votre dépôt distant sur GitLab est propre.
+Votre répertoire de travail peut contenir des exécutables et d'autres fichiers indésirables mais assurez-vous que votre dépôt distant sur GitLab est propre.
 :::
 
 :::{seealso} Si des fichiers indésirables traînent dans votre dépôt distant...

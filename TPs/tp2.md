@@ -432,11 +432,12 @@ Revenez aux [objectifs](#tp2-objectifs) et cochez les points que vous avez maît
 
 :::{important} Git
 :class: dropdown
-À la fin de ce TP, votre dépôt distant devrait ressembler à ce qui suit :
-- La racine doit contenir les dossiers `TP1/` et `TP2/` et les fichiers `.gitignore` et `README.md`.
-- Le dossier `TP1/` doit contenir `hello-world.cpp` et `my-first-file.txt`.
-- Le dossier `TP2/` doit contenir `classes-et-methodes.cpp` et `magic-numbers.cpp`
-Votre répertoire de travail peut contenir des fichiers ignorés mais il faut bien vérifier que votre dépôt sur GitLab est propre, c'est lui qui sera noté à la fin du cours !
+À la fin de ce TP, votre dépôt distant devrait être structuré comme suit :
+- À la racine, vous trouverez les dossiers `TP1/` et `TP2/`, ainsi que les fichiers `.gitignore` et `README.md`.
+- Le dossier `TP1/` doit contenir les fichiers `hello-world.cpp` et `my-first-file.txt`.
+- Le dossier `TP2/` doit contenir les fichiers `classes-et-methodes.cpp` et `magic-numbers.cpp`
 
-Si ce n'est pas le cas, revenez à [la fin du TP1](#tp1-pour-finir) où des instructions ont été rajoutées pour vous aider à nettoyer votre dépôt distant.
+Votre répertoire de travail peut contenir des fichiers ignorés, mais veillez à vérifier que votre dépôt sur GitLab est propre, car c'est lui qui sera évalué à la fin du cours !
+
+Si ce n'est pas le cas, retournez à [la fin du TP1](#tp1-pour-finir), où des instructions supplémentaires ont été ajoutées pour vous aider à nettoyer votre dépôt distant.
 :::
