@@ -446,6 +446,11 @@ Pour afficher les fichiers cachés dans un gestionnaire de fichiers, vous pouvez
 
 6. Écrivez le nom de l'exécutable `hello-world` dans `.gitignore`.
 
+:::{seealso} Si votre éditeur a généré d'autres fichiers à ignorer...
+:class: dropdown
+Dans ce cas-ci, il faut rajouter les noms de ces fichiers dans `.gitignore`.
+:::
+
 7. Exécutez `git add`, `git commit -m "<message>"` et `git push` pour envoyer le fichier `.gitignore` sur le dépôt distant.
 
 8. Exécutez `git status`. Qu'est-ce qui change par rapport à d'habitude ?
@@ -506,7 +511,7 @@ Vu que nous allons ignorer beaucoup d'exécutables dans le futur, pour éviter d
 
 4. Remplacez le code du fichier `.gitignore` avec le code suivant.
 
-```{code}
+```{code} sh
 *
 !*.*
 !*/
@@ -516,6 +521,25 @@ Vu que nous allons ignorer beaucoup d'exécutables dans le futur, pour éviter d
 - Nous commencons par utiliser `*` pour tout ignorer. 
 - L'expression `!*.*` permet de ne pas ignorer les fichiers avec une extension (autrement dit, les fichiers sans extension, comme les exécutables, seront ignorés). 
 - L'expression `!*/` empêche d'ignorer les dossiers.
+:::
+
+:::{seealso} Mais j'ai besoin d'ignorer d'autres types de fichiers...
+:class: dropdown
+Vous avez peut-être utilisé un éditeur qui génère d'autres types de fichiers à ignorer (autre que les fichiers sans extension que nous ignorons avec le code en haut).
+
+Par exemple, si des fichiers `.o` ou `.exe` ont été généré et vous voulez les ignorer tous dans le futur, alors vous pouvez utilisez le code suivant dans `.gitignore` à la place de ce qui a été proposé en haut :
+```{code} sh
+**/*.exe
+**/*.o
+```
+- `**/` implique que la racine et tous les dossiers, les sous-dossiers, ... seront vérifiés.
+- `*.exe` et `*.o` vont ignorer les fichiers avec les extensions `.exe` et `.o`.
+
+Autre exemple, si votre éditeur a généré un dossier `build/`, alors vous pouvez faire :
+```{code} sh
+**/build/
+```
+pour ignorer tout ce qui se trouve à l'intérieur d'un dossier nommé `build`.
 :::
 
 5. Exécutez `add`, `commit` et `push` pour synchroniser vos dépôts.
@@ -537,9 +561,22 @@ Vu que nous allons ignorer beaucoup d'exécutables dans le futur, pour éviter d
 
 7. Revenez aux [objectifs](#objectifs) et cochez les points que vous avez maîtrisés. Pratiquez les commandes et les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
 
+:::{important} Votre dépôt à la fin du TP
+À la fin du TP, votre dépôt distant devrait ressembler à ce qui suit :
+- À la racine, le dossier `TP1/` et les fichiers `.gitignore` et `README.md`.
+- Dans le dossier `TP1/`, les fichiers `my-first-file.txt` et `hello-world.cpp`.
+Et rien d'autres !
+Votre dépôt local (ou plus exactement votre répertoire de travail) peut contenir des exécutables.
+:::
+
+:::{seealso} Si vous avez des fichiers non voulus qui trainent sur le dépôt distant...
+:class: dropdown
+Les mêmes fichiers sont normalement sur votre dépôt local (sinon vous pouvez d'abord synchroniser vos dépôts). Vous pouvez les supprimer ensuite grâce à `git rm` et synchroniser les dépôts.
+:::
+
 :::{seealso} `git rm`
 :class: dropdown
-Vous pouvez également utiliser `git rm <nom du fichier>` pour supprimer un fichier qui est déjà synchronisé sur les deux dépôts.
+Vous pouvez utiliser `git rm <nom du fichier>` pour supprimer un fichier qui est déjà synchronisé sur les deux dépôts.
 
 Un fichier qui se trouve uniquement sur le dépôt local peut être supprimé simplement via un gestionnaire de fichiers ou avec la commande `rm` (sans `git`). Si vous avez déjà ajouté (`git add`) ce fichier aux modifications suivies (*staged changes*), vous pouvez le retirer grâce à `git restore --staged <nom du fichier>`.
 :::
