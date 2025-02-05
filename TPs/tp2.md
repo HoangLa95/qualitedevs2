@@ -31,7 +31,7 @@ Le but de ce TP est de comprendre les points suivants :
 - [ ] [Membres d'une classe C++](#tp2-membres-classe)
 - [ ] [Getter et setter](#tp2-getter-setter)
 - [ ] [Constructeur d'une classe](#tp2-constructor)
-- [ ] [camelCase](#cm2-camel-case) et [kebab-case](#cm2-kebab-case)
+- [ ] [Les différentes conventions de nommage](#cm2-camel-case)
 - [ ] [Noms révélateur d'intention](#cm2-nom-revelateur)
 
 ## Exercice 1 : Magic numbers

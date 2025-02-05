@@ -27,21 +27,21 @@ camelCase (Credits: [Wikipedia](https://fr.wikipedia.org/wiki/Camel_case))
 Nous adopterons la convention **camelCase**, selon laquelle le premier mot d’une variable commence par une minuscule, tandis que chaque mot suivant débute par une majuscule.
 :::
 
-:::{seealso} Autres conventions
+:::{seealso} snake_case
 :class: dropdown
 Il existe de nombreuses autres conventions de nommage, mais l’une des plus courantes après **camelCase** est **snake_case**, qui sépare les mots en minuscules à l’aide de underscores (`_`).
 :::
 
 :::{important} Variables globales et classes
 1. `VARIABLE_GLOBALE` :
-Les variables globales doivent être écrites en majuscules, avec les mots séparés par des underscores (`_`).
+Les variables globales doivent utiliser la convention **UPPER_SNAKE_CASE** (aussi appelé **SCREAMING_SNAKE_CASE**). Les noms de variables globales doivent être écrites en majuscules, avec les mots séparés par des underscores (`_`).
 2. `class Object` :
-Une classe doit toujours commencer par une majuscule.
+Le nom d'une classe utilise **CamelCase** qui est **camelCase** mais avec une majuscule au début.
 :::
 
 (cm2-kebab-case)=
 :::{important} Noms de fichiers
-Nous allons utiliser le **kebab-case** (`my-first-file.txt`, `hello-world.cpp`, ...) pour les noms de fichier, car c'est la convention la plus standard pour la plupart des ecosystèmes.
+Nous allons utiliser le **kebab-case** (`my-first-file.txt`, `hello-world.cpp`, ...) pour les noms de fichier, car c'est la convention la plus standard pour la plupart des écosystèmes.
 :::
 
 (cm2-nom-revelateur)=
