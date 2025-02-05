@@ -38,6 +38,7 @@ parts:
 - caption: Practical Sessions
   chapters: 
     - file: PSs/ps1
+    - file: PSs/ps2
 - caption: Soutien technique
   chapters:
     - file: TechSupport/internetProblem.md
