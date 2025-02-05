@@ -444,6 +444,11 @@ To display hidden files in a file manager, you can usually press `Ctrl+h` (`h` f
 
 6. Write the name of the executable `hello-world` in `.gitignore`.
 
+:::{seealso} If your editor has generated other files to ignore...  
+:class: dropdown
+In this case, you need to add the names of these files to `.gitignore`.
+:::
+
 7. Run `git add`, `git commit -m "<message>"`, and `git push` to send the `.gitignore` file to the remote repository.
 
 8. Run `git status`. What changes compared to usual?
@@ -453,6 +458,7 @@ To display hidden files in a file manager, you can usually press `Ctrl+h` (`h` f
 Normally, since we didn't add the executable `hello-world` with `git add`, `git status` indicates that there is an untracked file that might be important. However, thanks to the `.gitignore` file, Git recognizes that we've chosen to ignore `hello-world` and will never track changes to this file.
 :::
 
+(ps1-to-finish)=
 ## To finish...
 
 Let's finish this lab with a little reorganization.
@@ -485,9 +491,16 @@ Here, we forgot to add a commit message for the deletion of a file named `test.t
 ```
 
 - Write your commit message on the first line.
+
+If you are using the **Nano** editor (which looks like the screen above):
 - Press `Ctrl+x` to exit.
 - Press `y` to confirm the changes.
 - Press `Enter` to quit the window.
+
+If you are using the **Vim** editor (Debian default editor at the IUT):  
+- Press `Esc` to exit insert mode.  
+- Type `:wq` to save the message and quit the window.  
+- Press `Enter` to execute the `:wq` command.
 :::
 
 :::{caution} Keep a readable log!
@@ -516,6 +529,35 @@ Since we will be ignoring many executables in the future, to avoid modifying `.g
 - The expression `!*/` prevents ignoring subfolders.
 :::
 
+:::{seealso} I need to ignore other types of files...
+:class: dropdown
+You may have used an editor that generates other types of files to ignore, in addition to the extensionless files we have already excluded with the code above.
+
+For example, if `.o` or `.exe` files have been generated and you want to ignore them in the future, add the following lines to your `.gitignore` file, instead of the ones suggested earlier:
+```{code} sh
+**/*.exe
+**/*.o
+```
+- `**/` means the search applies to the root as well as all folders and subfolders.
+- `*.exe` and `*.o` will ignore all files with these extensions.
+
+Another example: if your editor has generated a `build/` folder, you can add the following line:
+```{code} sh
+**/build/
+```
+This will exclude all content within folders named `build`, regardless of their location in the project.
+
+You can even combine everything to ignore extensionless files, `.o` files, `.exe` files, and `build/` folders (and their contents) with the following expressions for your `.gitignore`:
+```{code} sh
+*
+!*.*
+!*/
+**/*.exe
+**/*.o
+**/build/
+```
+:::
+
 5. Run `add`, `commit`, and `push` to synchronize your repositories.
 
 6. Add your supervisor to your project by following the instructions below.
@@ -535,9 +577,24 @@ Since we will be ignoring many executables in the future, to avoid modifying `.g
 
 7. Go back to the [objectives](#objectives) and check the points you have mastered. Practice the commands and points you have not fully understood yet. Call your supervisor over if necessary.
 
-:::{seealso} `git rm`
-:class: dropdown
-You can also use `git rm <filename>` to delete a file that is already synchronized across both repositories.
+:::{important} Your remote repository at the end of the session  
+At the end of the session, your remote repository should look like this:  
+- At the root, the `PS1/` folder and the `.gitignore` and `README.md` files.  
+- Inside the `PS1/` folder, the `my-first-file.txt` and `hello-world.cpp` files.  
 
-A file that only exists in the local repository can be deleted using a file manager or with the `rm` command (without `git`). If you have already added (`git add`) this file to the staged changes, you can remove it using `git restore --staged <filename>`.
+**And nothing else!**
+
+Your working directory may contain executables and other unwanted files, but make sure that your remote repository on GitLab is clean.
+:::
+
+:::{seealso} If unwanted files are lingering in your remote repository...  
+:class: dropdown  
+The same files are likely in your local repository (if not, you can first synchronize your repositories). You can then delete them with `git rm` and synchronize the repositories again.
+:::
+
+:::{seealso} `git rm`  
+:class: dropdown  
+You can use `git rm <filename>` to remove a file that has already been synchronized in both repositories. `git rm` works similarly to `git add`, but for deleting files. Afterward, you can perform a `git commit` followed by a `git push`, as usual, to push these changes (deletions).
+
+A file that is only in the local repository can be deleted simply through a file manager or with the `rm` command (without `git`). If you have already added (`git add`) this file to staged changes, you can unstage it using `git restore --staged <file name>`.
 :::
