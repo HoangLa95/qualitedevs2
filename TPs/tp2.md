@@ -428,9 +428,15 @@ J'espère que cet exercice vous a convaincu de l'importance de coder de manière
 
 12. **Quiz** : Quel est le solde de chaque compte ?
 
+Revenez aux [objectifs](#tp2-objectifs) et cochez les points que vous avez maîtrisés. Revenez sur les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
+
 :::{important} Git
 :class: dropdown
-Avez-vous oublié de maintenir vos dépôts ?
-:::
+À la fin de ce TP, votre dépôt distant devrait ressembler à ce qui suit :
+- La racine doit contenir les dossiers `TP1/` et `TP2/` et les fichiers `.gitignore` et `README.md`.
+- Le dossier `TP1/` doit contenir `hello-world.cpp` et `my-first-file.txt`.
+- Le dossier `TP2/` doit contenir `classes-et-methodes.cpp` et `magic-numbers.cpp`
+Votre répertoire de travail peut contenir des fichiers ignorés mais il faut bien vérifier que votre dépôt sur GitLab est propre, c'est lui qui sera noté à la fin du cours !
 
-Revenez aux [objectifs](#tp2-objectifs) et cochez les points que vous avez maîtrisés. Revenez sur les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
+Si ce n'est pas le cas, revenez à [la fin du TP1](#tp1-pour-finir) où des instructions ont été rajoutées pour vous aider à nettoyer votre dépôt distant.
+:::

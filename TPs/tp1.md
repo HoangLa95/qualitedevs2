@@ -460,6 +460,7 @@ Dans ce cas-ci, il faut rajouter les noms de ces fichiers dans `.gitignore`.
 Normalement, comme nous n'avons pas ajouté l'exécutable `hello-world` avec `git add`, `git status` nous indique qu'il y a un fichier non suivi, potentiellement important. Cependant, grâce au fichier `.gitignore`, Git reconnaît que nous avons choisi d'ignorer `hello-world` et ne suivra jamais les modifications apportées à ce fichier.
 :::
 
+(tp1-pour-finir)=
 ## Pour finir...
 
 Terminons ce TP par une petite réorganisation.
