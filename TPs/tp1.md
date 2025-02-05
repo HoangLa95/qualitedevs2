@@ -499,7 +499,7 @@ Si vous êtes sur l'éditeur **Nano** (qui ressemble à l'écran au-dessus) :
 - Appuyez sur `y` pour valider les modifications du message de commit.
 - Appuyez sur `Enter` pour quitter la fenêtre.
 
-Si vous êtes sur l'éditeur **Vim** (éditeur de Debian à l'IUT) :
+Si vous êtes sur l'éditeur **Vim** (éditeur par défaut de Debian à l'IUT) :
 - Appuyez sur `Esc` pour sortir du mode insertion.
 - Écrivez `:wq` pour enregistrer le message et quitter la fenêtre.
 - Appuyez sur `Enter` pour exécuter la commande `:wq`. 
