@@ -155,7 +155,7 @@ La solution consiste à attribuer des noms explicites à ces nombres magiques en
 Il est essentiel d'adopter les bonnes conventions de nommage abordées en cours afin d'éviter les nombres magiques.
 :::
 
-5. Renommez les magic numbers.
+5. Nommez les magic numbers.
 
 :::{hint} Avez-vous accompli votre tâche de manière satisfaisante ?
 :class: dropdown
@@ -341,14 +341,13 @@ int main() {
 ```
 (tp2-membres-classe)=
 :::{important} Membres d'une classe C++
-Les membres `private` d'une classe en C++ sont souvent préfixés avec `m` (par exemple, `mB1`, `mT` et `mF`). 
-Ce préfixe permet de les distinguer des variables locales utilisées dans le constructeur (ici, `double b1`), qui servent à initialiser `mB1` (avec `mB1(b1)`).
-Il existe d'autres conventions, comme utiliser le préfixe `_` (par exemple, `_b1`).
+Les membres `private` d'une classe en C++ sont fréquemment préfixés par `m` (par exemple, `mB1`, `mT` et `mF`). Ce préfixe permet de les différencier des variables locales utilisées dans le constructeur (par exemple, `double b1`), qui servent à initialiser les membres comme `mB1` (avec `mB1(b1)`).
 
-Cependant, cette convention n'est pas systématique dans d'autres langages. 
-Par exemple, en Java et en Python, on peut faire du *shadowing*, où la variable locale et le membre de la classe peuvent partager le même nom, et la distinction se fait grâce à `this` (plus d'informations à ce sujet dans votre cours de Développement Orientée Objet).
+Il existe d'autres conventions, comme l'utilisation du préfixe `_` (par exemple, `_b1`).
 
-Dans ce cours, nous adopterons le préfixe `m`.
+Cependant, cette pratique n'est pas systématique. Par exemple, il est possible de faire du *shadowing*, où une variable locale et un membre de la classe partagent le même nom. Dans ce cas, la distinction se fait en utilisant `this->variable` pour désigner l'attribut de la classe, et simplement `variable` pour la variable locale (plus de détails à ce sujet dans votre cours de Développement Orienté Objet).
+
+Dans ce cours, nous adopterons la convention du préfixe `m` afin de clarifier la distinction entre les membres de la classe et les autres variables.
 :::
 
 (tp2-getter-setter)=
