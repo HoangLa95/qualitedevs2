@@ -15,6 +15,12 @@ Au début du TPX, créez un dossier nommé `TPX` dans votre dépôt.
 Pour chaque exercice intitulé **"Exercice n : Nom de l'exercice"**, créez un fichier `nom-de-l-exercice.cpp` (convention **kebab-case**) et ajoutez-y le code fourni. 
 :::
 
+:::{important} Coder en anglais
+Il est fortement conseillé de coder en anglais.  
+Cela signifie qu'il est important de faire l'effort d'utiliser des noms en anglais lors du renommage des objets.  
+Pour vous aider, tout le vocabulaire nécessaire est fourni en anglais.
+:::
+
 (tp2-objectifs)=
 ## Objectifs
 
@@ -196,12 +202,6 @@ Avez-vous pensé à maintenir vos dépôts ?
 
 
 ## Exercice 2 : Classes et méthodes
-
-:::{important} Coder en anglais
-Il est fortement conseillé de coder en anglais.  
-Cela signifie qu'il est important de faire l'effort d'utiliser des noms en anglais lors du renommage des objets.  
-Pour vous aider, tout le vocabulaire nécessaire est fourni en anglais.
-:::
 
 ```{code} cpp
 #include <iostream>
