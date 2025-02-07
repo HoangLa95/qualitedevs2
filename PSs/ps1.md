@@ -440,6 +440,7 @@ An example of a [`.gitignore`](https://github.com/github/gitignore/blob/main/Uni
 Files whose names start with a `.` are hidden files (they do not appear when using a file manager). These are often configuration files.
 
 To display hidden files in a file manager, you can usually press `Ctrl+h` (`h` for 'hidden').
+The `.git` directory you see in your project contains Git's internal configuration files. It is important not to modify this folder, as it manages the tracking and history of your repository. Additionally, this folder is natively ignored by Git.
 :::
 
 6. Write the name of the executable `hello-world` in `.gitignore`.
@@ -463,9 +464,10 @@ Normally, since we didn't add the executable `hello-world` with `git add`, `git 
 
 Let's finish this lab with a little reorganization.
 
-1. Create a folder `PS1/` in your project and move everything except for `.gitignore` and `README.md` to this folder.
+1. Create a folder `PS1/` in your project and move everything except for `.git`, `.gitignore`, and `README.md` to this folder.
 
-:::{warning} `.gitignore` remains at the root of the project!
+:::{warning} `.git` and `.gitignore` remain at the root of the project!
+You should **never touch** the `.git` folder.
 The `.gitignore` file should remain at the root of the project, and **not in the `PS1/` folder!**
 :::
 
@@ -579,7 +581,7 @@ You can even combine everything to ignore extensionless files, `.o` files, `.exe
 
 :::{important} Your remote repository at the end of the session  
 At the end of the session, your remote repository should look like this:  
-- At the root, the `PS1/` folder and the `.gitignore` and `README.md` files.  
+- At the root, the `PS1/` folder and the `.gitignore` and `README.md` files. You can also see the configuration folder `.git` if you are displaying hidden folders.  
 - Inside the `PS1/` folder, the `my-first-file.txt` and `hello-world.cpp` files.  
 
 **And nothing else!**

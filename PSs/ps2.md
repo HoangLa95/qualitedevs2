@@ -56,7 +56,7 @@ double calculateDiscountPercentage(double originalPrice, bool isStudent, bool is
 }
 
 double calculateDiscountAmount(double originalPrice, double discountPercentage) {
-    return originalPrice * discountPercentage;
+    return originalPrice * discountPercentage/100;
 }
 
 double calculateFinalPrice(double originalPrice, bool isStudent, bool isLoyalCustomer){
@@ -85,9 +85,9 @@ double calculateRewardPoints(double discountAmount, bool isStudent, bool isLoyal
 }
 
 int main() {
-    double originalPrice = 100;
-    bool isStudent = true;
-    bool isLoyalCustomer = true;
+    const double originalPrice = 100;
+    const bool isStudent = true;
+    const bool isLoyalCustomer = true;
 
     cout << "Original price: " << originalPrice << " euros." << endl;
 
@@ -168,24 +168,35 @@ To avoid recompiling the code every time you modify `originalPrice`, `isStudent`
 6. Replace the following lines with the code below.
 
 ```{code} cpp
-double originalPrice = 100;
-bool isStudent = true;
-bool isLoyalCustomer = true;
+const double originalPrice = 100;
+const bool isStudent = true;
+const bool isLoyalCustomer = true;
 ```
 
 ```{code} cpp
-double originalPrice;
+double userOriginalPrice;
 cout << "Enter the original price: ";
-cin >> originalPrice;
+cin >> userOriginalPrice;
+const double& originalPrice = userOriginalPrice;
 
-bool isStudent;
+bool userIsStudent;
 cout << "Are you a student? (1:Yes, 0:No) ";
-cin >> isStudent;
+cin >> userIsStudent;
+const bool& isStudent = userIsStudent;
 
-bool isLoyalCustomer;
+bool userIsLoyalCustomer;
 cout << "Do you have a loyalty card? (1:Yes, 0:No) ";
-cin >> isLoyalCustomer;
+cin >> userIsLoyalCustomer;
+const bool& isLoyalCustomer = userIsLoyalCustomer;
 ```
+
+:::{note} `const`
+:class: dropdown
+Using `const <type>&` for user inputs ensures that these values cannot be accidentally modified in the code, thus preventing unexpected errors. The reference here avoids making copies of variable values, which is especially important when working with objects that consume a lot of memory.
+
+In general, using `const` in front of immutable variables makes the code clearer by explicitly indicating that these values should not be modified, which makes the program easier to maintain and understand.
+**Have you correctly used `const` in your code ?**
+:::
 
 7. Test your code and answer the questions in the **Quiz**.
 
@@ -349,6 +360,7 @@ In this course, we will adopt the `m` prefix convention to clarify the distincti
 **Encapsulation** is essential for protecting the sensitive data of your object.  
 Therefore, it is important to declare the attributes of your class as `private`.  
 As a result, it is necessary to use `get` (to access) and `set` (to modify) methods for these attributes.
+These methods should not be defined systematically. Only define `get` methods for attributes that need to be accessed, and `set` methods for attributes that are allowed to be modified from outside the class.
 
 The recommended naming convention for these methods is `getAttributeName` and `setAttributeName` (without the `m` prefix).  
 :::
@@ -430,7 +442,7 @@ Return to the [objectives](#ps2-objectives) and check the points you have master
 :::{important} Git
 :class: dropdown
 At the end of this assignment, your remote repository should be structured as follows:
-- At the root, you will find the folders `PS1/` and `PS2/`, along with the files `.gitignore` and `README.md`.
+- At the root, you will find the folders `PS1/` and `PS2/`, along with the files `.gitignore` and `README.md`. You can also see the configuration folder `.git` if you are displaying hidden folders.
 - The `PS1/` folder should contain the files `hello-world.cpp` and `my-first-file.txt`.
 - The `PS2/` folder should contain the files `classes-and-methods.cpp` and `magic-numbers.cpp`.
 
