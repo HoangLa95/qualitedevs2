@@ -10,6 +10,13 @@ A quick reminder: here's a typical workflow you'll follow:
 Don't hesitate to revisit PS1 if you're unsure. The quality of your Git history will be evaluated.  
 :::
 
+:::{important} Conflict resolution  
+:class: dropdown  
+You have not yet learned how to resolve merge conflicts (divergent branches) in Git, which occur when there are multiple versions of the same file in different repositories and you attempt to synchronize them.  
+If you encounter difficulties, call your supervisor over.  
+Once this skill is mastered, you will be on your own in managing conflicts.  
+:::
+
 :::{important} Organization of PSs and exercises
 At the beginning of PSX, create a folder named `PSX` in your repository.  
 For each exercise titled **"Exercise n: Name of the exercise"**, create a file named `name-of-the-exercise.cpp` (using the **kebab-case** convention) and add the provided code to it.  

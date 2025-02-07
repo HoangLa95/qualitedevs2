@@ -10,6 +10,13 @@ Before starting to code, it is important to familiarize yourself with the tools 
 [GitLab](https://en.wikipedia.org/wiki/GitLab) is a platform that uses Git to allow you to store your projects, synchronize them between your different machines (IUT computers, personal computer), and share them with your collaborators.
 :::
 
+:::{important} Conflict resolution  
+:class: dropdown  
+You have not yet learned how to resolve merge conflicts (divergent branches) in Git, which occur when there are multiple versions of the same file in different repositories and you attempt to synchronize them.  
+If you encounter difficulties, call your supervisor over.  
+Once this skill is mastered, you will be on your own in managing conflicts.  
+:::
+
 ## Objectives
 
 The goal of this session is to understand the following points:
