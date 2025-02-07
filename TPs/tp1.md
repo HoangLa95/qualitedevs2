@@ -2,7 +2,7 @@
 
 :::{note} Disclaimer
 :class: dropdown
-Le tutoriel est en français, mais de nombreux mots-clés sont en Anglais. Il est essentiel de vous familiariser avec le langage informatique ainsi qu'avec les documentations techniques, qui sont majoritairement rédigées en anglais. 
+Le tutoriel est en français, mais de nombreux mots-clés sont en anglais. Il est essentiel de vous familiariser avec le langage informatique ainsi qu'avec les documentations techniques, qui sont majoritairement rédigées en anglais. 
 :::
 
 Avant de commencer à coder, il est important de se familiariser avec les outils permettant d'organiser votre travail de programmation.
@@ -13,6 +13,13 @@ Avant de commencer à coder, il est important de se familiariser avec les outils
 
 :::{seealso} GitLab
 [GitLab](https://fr.wikipedia.org/wiki/GitLab) est une plateforme qui utilise Git pour vous permettre de stocker vos projets, de les synchroniser entre votre différentes machines (poste de l'IUT, ordinateur personnel) et de les partager avec vos collaborateurs.
+:::
+
+:::{important} Résolution de conflits
+:class: dropdown
+Vous n'avez pas encore appris à résoudre les conflits de fusion (branches divergentes) sur Git, qui surviennent lorsqu'il existe plusieurs versions d'un même fichier dans différents dépôts et que vous tentez de les synchroniser.
+En cas de difficulté, appelez votre encadrant.
+Une fois cette compétence maîtrisée, vous serez autonome dans la gestion des conflits.
 :::
 
 ## Objectifs

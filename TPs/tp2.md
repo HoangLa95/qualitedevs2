@@ -10,6 +10,13 @@ Petit rappel : voici un flux de travail typique que vous suivrez :
 N’hésitez pas à revenir au TP1 en cas de doute. La qualité de votre historique Git sera évaluée.  
 :::
 
+:::{important} Résolution de conflits
+:class: dropdown
+Vous n'avez pas encore appris à résoudre les conflits de fusion (branches divergentes) sur Git, qui surviennent lorsqu'il existe plusieurs versions d'un même fichier dans différents dépôts et que vous tentez de les synchroniser.
+En cas de difficulté, appelez votre encadrant.
+Une fois cette compétence maîtrisée, vous serez autonome dans la gestion des conflits.
+:::
+
 :::{important} Organisation des TPs et exercices
 Au début du TPX, créez un dossier nommé `TPX` dans votre dépôt.  
 Pour chaque exercice intitulé **"Exercice n : Nom de l'exercice"**, créez un fichier `nom-de-l-exercice.cpp` (convention **kebab-case**) et ajoutez-y le code fourni. 
