@@ -203,12 +203,13 @@ cin >> userIsLoyalCustomer;
 const bool& isLoyalCustomer = userIsLoyalCustomer;
 ```
 
-:::{note} `const` pour les users inputs
+:::{note} `const`
 :class: dropdown
 L'utilisation de `const <type>&` après les entrées utilisateur permet de garantir que ces valeurs ne pourront pas être modifiées accidentellement dans le code, ce qui évite des erreurs imprévues.
 La référence ici évite de faire des copies des valeurs de variables, ceci est surtout important quand nous travaillons avec des objets qui prennent beaucoup de mémoire.
 
 De façon générale, l'usage de `const` devant les variables immutables permet de rendre le code plus clair en indiquant explicitement que ces valeurs ne doivent pas être modifiées, ce qui facilite la maintenance et la compréhension du programme.
+**Avez-vous bien utilisé les `const` dans votre code ?**
 :::
 
 7. Testez votre code et répondez aux questions du **Quiz**.
