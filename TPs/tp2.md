@@ -444,7 +444,7 @@ Revenez aux [objectifs](#tp2-objectifs) et cochez les points que vous avez maît
 :::{important} Git
 :class: dropdown
 À la fin de ce TP, votre dépôt distant devrait être structuré comme suit :
-- À la racine, vous trouverez les dossiers `TP1/` et `TP2/`, ainsi que les fichiers `.gitignore` et `README.md`.
+- À la racine, vous trouverez les dossiers `TP1/` et `TP2/`, ainsi que les fichiers `.gitignore` et `README.md`. Vous pouvez aussi voir le dossier de configuration `.git` si vous affichez les dossiers cachés.
 - Le dossier `TP1/` doit contenir les fichiers `hello-world.cpp` et `my-first-file.txt`.
 - Le dossier `TP2/` doit contenir les fichiers `classes-et-methodes.cpp` et `magic-numbers.cpp`
 

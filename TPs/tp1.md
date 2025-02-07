@@ -442,6 +442,9 @@ Un exemple de [`.gitignore`](https://github.com/github/gitignore/blob/main/Unity
 Les fichiers dont les noms commencent par `.` sont des fichiers cachés (qui ne s'affichent pas quand vous utilisez un gestionnaire de fichiers). Ce sont souvent des fichiers de configurations.
 
 Pour afficher les fichiers cachés dans un gestionnaire de fichiers, vous pouvez souvent appuyer sur `Ctrl+h` (`h` comme 'hidden').
+Le répertoire `.git` que vous voyez dans votre projet contient les fichiers de configuration internes de Git.
+Il est important de ne pas modifier ce dossier, car il gère le suivi et l'historique de votre dépôt.
+Par ailleurs, ce dossier est ignoré par Git de manière native.
 :::
 
 6. Écrivez le nom de l'exécutable `hello-world` dans `.gitignore`.
@@ -465,9 +468,10 @@ Normalement, comme nous n'avons pas ajouté l'exécutable `hello-world` avec `gi
 
 Terminons ce TP par une petite réorganisation.
 
-1. Créez un dossier `TP1/` dans votre projet et bougez tout sauf `.gitignore` et `README.md` vers ce dossier.
+1. Créez un dossier `TP1/` dans votre projet et bougez tout sauf `.git`, `.gitignore` et `README.md` vers ce dossier.
 
-:::{warning} `.gitignore` à la racine du projet!
+:::{warning} `.git` et `.gitignore` à la racine du projet!
+Il ne faut **jamais toucher** au dossier `.git`.
 Le fichier `.gitignore` doit rester à la racine du projet, et **non dans le dossier `TP1/`** !
 :::
 
@@ -581,7 +585,7 @@ Vous pouvez même tout combiner pour ignorer à la fois les fichiers sans extens
 
 :::{important} Votre dépôt distant à la fin du TP
 À la fin du TP, votre dépôt distant devrait ressembler à ceci :
-- À la racine, le dossier `TP1/` ainsi que les fichiers `.gitignore` et `README.md`.
+- À la racine, le dossier `TP1/` ainsi que les fichiers `.gitignore` et `README.md`. Vous pouvez aussi voir le dossier de configuration `.git` si vous affichez les dossiers cachés.
 - Dans le dossier `TP1/`, les fichiers `my-first-file.txt` et `hello-world.cpp`.
 
 **Et rien d'autres !**
