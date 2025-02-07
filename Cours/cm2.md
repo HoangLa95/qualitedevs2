@@ -34,7 +34,12 @@ Il existe de nombreuses autres conventions de nommage, mais l’une des plus cou
 
 :::{important} Variables globales et classes
 1. `VARIABLE_GLOBALE` :
-Les variables globales doivent utiliser la convention **UPPER_SNAKE_CASE** (aussi appelé **SCREAMING_SNAKE_CASE**). Les noms de variables globales doivent être écrites en majuscules, avec les mots séparés par des underscores (`_`).
+Les variables globales doivent utiliser la convention **UPPER_SNAKE_CASE** (aussi appelé **SCREAMING_SNAKE_CASE**). Les noms de variables globales doivent être écrites en majuscules, avec les mots séparés par des underscores (`_`). 
+De manière générale, il est recommandé d'éviter l'utilisation de véritables variables globales, c'est-à-dire de variables mutables. 
+Toute variable susceptible de changer de valeur devrait avoir une portée (*scope*) limitée. 
+Les "variables globales" sont généralement des constantes définies avec `const <type> VARIABLE_GLOBALE`.
+
+
 2. `class Object` :
 Le nom d'une classe utilise **CamelCase** qui est **camelCase** mais avec une majuscule au début.
 :::
