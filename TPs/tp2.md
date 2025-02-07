@@ -180,22 +180,26 @@ const bool isLoyalCustomer = true;
 ```
 
 ```{code} cpp
-const double originalPrice;
+double userOriginalPrice;
 cout << "Enter the original price: ";
-cin >> originalPrice;
+cin >> userOriginalPrice;
+const double& originalPrice = userOriginalPrice;
 
-const bool isStudent;
+bool userIsStudent;
 cout << "Are you a student? (1:Yes, 0:No) ";
-cin >> isStudent;
+cin >> userIsStudent;
+const bool& isStudent = userIsStudent;
 
-const bool isLoyalCustomer;
+bool userIsLoyalCustomer;
 cout << "Do you have a loyalty card? (1:Yes, 0:No) ";
-cin >> isLoyalCustomer;
+cin >> userIsLoyalCustomer;
+const bool& isLoyalCustomer = userIsLoyalCustomer;
 ```
 
-:::{note} `const` pour les tests/users inputs
+:::{note} `const` pour les users inputs
 :class: dropdown
-L'utilisation de `const` devant les entrées utilisateur ou de test permet de garantir que la valeur de la variable ne pourra pas être modifiée accidentellement dans le code, ce qui évite des erreurs imprévues.
+L'utilisation de `const <type>&` après les entrées utilisateur permet de garantir que ces valeurs ne pourront pas être modifiées accidentellement dans le code, ce qui évite des erreurs imprévues.
+La référence ici évite de faire des copies des valeurs de variables, ceci est surtout important quand nous travaillons avec des objets qui prennent beaucoup de mémoire.
 
 De façon générale, l'usage de `const` devant les variables immutables permet de rendre le code plus clair en indiquant explicitement que ces valeurs ne doivent pas être modifiées, ce qui facilite la maintenance et la compréhension du programme.
 :::
@@ -362,7 +366,7 @@ Dans ce cours, nous adopterons la convention du préfixe `m` afin de clarifier l
 L'**encapsulation** est essentielle pour protéger les données sensibles de votre objet. 
 Il est donc important de déclarer les attributs de votre classe en tant que `private`. 
 En conséquence, il est nécessaire d'utiliser des méthodes `get` (pour accéder) et `set` (pour modifier) ces attributs.
-Ces méthodes ne doivent pas être définies systématiquement. Définissez uniquement les méthodes `get` pour les attributs auxquels on doit accéder, et les méthodes `set` pour les attributs que l'on autorise à modifier depuis l'extérieur de la classe.
+Ces méthodes ne doivent pas être définies systématiquement. Définissez uniquement les méthodes `get` pour les attributs auxquels nous devons accéder, et les méthodes `set` pour les attributs que nous autorisons à modifier depuis l'extérieur de la classe.
 
 La convention recommandée pour le nommage de ces méthodes est `getNomAttribut` et `setNomAttribut` (sans le préfixe `m`).
 :::
