@@ -354,12 +354,13 @@ int main() {
 (ps2-class-members)=
 :::{important} C++ Class Members  
 Private members of a class in C++ are often prefixed with `m` (e.g., `mB1`, `mT`, and `mF`). This prefix helps distinguish them from local variables used in the constructor (e.g., `double b1`), which are used to initialize members like `mB1` (with `mB1(b1)`).
-
 Other conventions exist, such as using the `_` prefix (e.g., `_b1`).
 
-However, this practice is not always systematic. For example, it is possible to use *shadowing*, where a local variable and a class member share the same name. In this case, the distinction is made by using `this->variable` to refer to the class attribute and simply `variable` for the local variable (more details on this in your Object-Oriented Development course).
+However, this practice is not always systematic. For example, it is possible to use *shadowing*, where a local variable and a class member share the same name. In this case, the distinction is made by using `this->variable` to refer to the class attribute and simply `variable` for the local variable.
+In Java, shadowing is the most popular convention (more details on this in your Object-Oriented Development course).
 
-In this course, we will adopt the `m` prefix convention to clarify the distinction between class members and other variables.  
+In this course, we will adopt the prefix convention (either `m`, or `_`) to clarify the distinction between class members and other variables.  
+You must stay consistent in your repo, **do not mix `m` and `_`**.
 :::
 
 (ps2-getter-setter)=  

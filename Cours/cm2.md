@@ -37,7 +37,7 @@ Il existe de nombreuses autres conventions de nommage, mais l’une des plus cou
 Les variables globales doivent utiliser la convention **UPPER_SNAKE_CASE** (aussi appelé **SCREAMING_SNAKE_CASE**). Les noms de variables globales doivent être écrites en majuscules, avec les mots séparés par des underscores (`_`). 
 De manière générale, il est recommandé d'éviter l'utilisation de véritables variables globales, c'est-à-dire de variables mutables. 
 Toute variable susceptible de changer de valeur devrait avoir une portée (*scope*) limitée (locale) et utiliser la convention camelCase. 
-Les "variables globales" sont généralement des constantes définies avec `const <type> VARIABLE_GLOBALE`.
+Les "variables globales" sont donc des constantes définies avec `const <type> VARIABLE_GLOBALE`.
 L'autre usage de la convention UPPER_SNAKE_CASE est pour les variables statiques et constantes à l'intérieur d'une classe.
 Par exemple :
 ```{code} cpp

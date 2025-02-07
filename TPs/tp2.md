@@ -361,12 +361,13 @@ int main() {
 (tp2-membres-classe)=
 :::{important} Membres d'une classe C++
 Les membres `private` d'une classe en C++ sont fréquemment préfixés par `m` (par exemple, `mB1`, `mT` et `mF`). Ce préfixe permet de les différencier des variables locales utilisées dans le constructeur (par exemple, `double b1`), qui servent à initialiser les membres comme `mB1` (avec `mB1(b1)`).
-
 Il existe d'autres conventions, comme l'utilisation du préfixe `_` (par exemple, `_b1`).
 
-Cependant, cette pratique n'est pas systématique. Par exemple, il est possible de faire du *shadowing*, où une variable locale et un membre de la classe partagent le même nom. Dans ce cas, la distinction se fait en utilisant `this->variable` pour désigner l'attribut de la classe, et simplement `variable` pour la variable locale (plus de détails à ce sujet dans votre cours de Développement Orienté Objet).
+Cependant, cette pratique n'est pas systématique. Par exemple, il est possible de faire du *shadowing*, où une variable locale et un membre de la classe partagent le même nom. Dans ce cas, la distinction se fait en utilisant `this->variable` pour désigner l'attribut de la classe, et simplement `variable` pour la variable locale.
+En Java, le shadowing est la convention la plus utilisée (plus de détails à ce sujet dans votre cours de Développement Orienté Objet).
 
-Dans ce cours, nous adopterons la convention du préfixe `m` afin de clarifier la distinction entre les membres de la classe et les autres variables.
+Dans ce cours, nous adopterons la convention du préfixe (soit `m`, soit `_`) afin de clarifier la distinction entre les membres de la classe et les autres variables.
+Il faut rester cohérent sur tout le dépôt, **il ne faut pas mélanger `m` et `_`**.
 :::
 
 (tp2-getter-setter)=
