@@ -326,11 +326,11 @@ public:
         }
     }
 
-    double getB1() {
+    double getB1() const {
         return mB1;
     }
 
-    string tToString(){
+    string tToString() const {
         switch(mT){
             case B: return "Basic";
             case S: return "Standard";
