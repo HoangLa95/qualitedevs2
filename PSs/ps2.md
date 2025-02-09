@@ -213,7 +213,7 @@ Have you remembered to maintain your repositories?
 :::
 
 
-## Exercise 2 : Classes-and-methods
+## Exercise 2 : Classes and methods
 
 ```{code} cpp
 #include <iostream>
