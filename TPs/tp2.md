@@ -446,7 +446,7 @@ J'espère que cet exercice vous a convaincu de l'importance de coder de manière
 - Effectuez un retrait de 148 euros de chaque compte.
 - Affichez les informations (types et soldes) des trois comptes.
 
-12. **Quiz** : Quel est le solde de chaque compte ?
+12. **Quiz** : Quelle est la somme des soldes des trois comptes ?
 
 Revenez aux [objectifs](#tp2-objectifs) et cochez les points que vous avez maîtrisés. Revenez sur les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
 

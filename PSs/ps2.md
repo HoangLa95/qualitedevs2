@@ -410,8 +410,6 @@ b(double b1, t t1) : mB1(b1), mT(t1) {
 
 8. This code compiles and works as it should, but it is a real eyesore. It hurts me physically to look at it. It is essential to rename these horrors.
 
-Here's the translation of the provided text:
-
 :::{hint} Did you complete your task?
 :class: dropdown
 - Did you correctly apply the **camelCase** convention?
@@ -441,9 +439,7 @@ I hope this exercise has convinced you of the importance of clean coding 😊.
 - Make a withdrawal of 148 euros from each account.
 - Display the information (types and balances) of the three accounts.
 
-12. **Quiz**: What is the balance of each account?
-
-Here is the translation of the provided text:
+12. **Quiz**: What is the sum of the balances of all three accounts?
 
 Return to the [objectives](#ps2-objectives) and check the points you have mastered. Review the points you haven't fully understood yet. Call your supervisor if needed.
 
