@@ -1,179 +1,167 @@
-# Comment gérer les erreurs ?
+# Comment tester le code ?
 
-```{figure} ../images/error-meme.jpg
-:alt: Gestion des erreurs
+```{figure} ../images/tdd.jpg
+:alt: TDD
 :align: center
 
-Credits: Mike Wolfe, No Longet Set.
-```
-:::{danger} Ce meme n'est pas un principe de code propre !
-:class: dropdown
-- **Mon collègue** : Combien est-tu prêt à parier que les étudiants suivront ce "conseil" pour gérer les erreurs ?
-- **Moi** : ... *ajoute un bloc "danger" dans le cours*
-:::
-
-Il y a plusieurs types d'erreurs :
-- **Erreur à la compilation** (cf. votre cours d'Anglais et votre ami Google).
-- **Erreur à l'éxécution**.
-    - **Erreur côté développeur** (cf. TP5 et votre cours d'IHM).
-    - **Erreur côté utilisateur** (ce cours).
-
-## try, throw, catch
-
-**Syntaxe d'un gestionnaire d'erreurs** :
-```{code} cpp
-try {
-  //Code to try
-  //...
-  
-  //Throw an exception when encoutering user error
-  throw(exception); 
-} catch (ExceptionType exception) {
-  // Code to handle errors
-}
+Credits: imgflip.com/memegenerator
 ```
 
-Example :
-```{code} cpp
-try {
-  int age = 17;
-  if (age >=18)
-    cout << "Access granted" << endl;
-  else
-    throw(age); 
-} catch (int age) {
-  cerr << "Access denied: you must be at least 18 years old." << endl;
-}
-```
+## Tests unitaires
 
-:::{danger} `try` et `catch` sans `throw`
-:class: dropdown
-Il est possible de faire `try` et `catch` sans `throw` mais c'est très dangereux ! Vous risquez d'attraper une erreur qui n'est pas prévue. Dans ce cas, le comportement du code peut être obfusqué (on pense qu'une erreur prévue a été levée alors que c'est une erreur imprévue) et cela rend le code encore plus difficile à debugger.
-:::
-
-## Programmation robuste
-
-:::{note} Robustesse
-:class: dropdown
-La robustesse d'un programme est sa capacité de gérer des erreurs et de permettre aux utilisateurs et développeurs d'identifier les problèmes et de les corriger. La robustesse concerne aussi la conception du programme et non seulement l'écriture des gestionnaires d'erreurs.
-:::
-
-Les principes de la programmation robuste:
-- **Être paranoïaque** : L'utilisateur est là pour casser notre code, il faut anticiper ses actions.
-- **Ils sont stupides** : Il faut écrire les messages d'erreur de telle sorte que l'utilisateur puisse corriger les erreurs lui-même.
-- **Ils sont dangereux** : Il ne faut pas laisser l'utilisateur manipuler le code source. Autrement dit, il faut qu'il puisse faire ce dont il a besoin juste avec le code que l'on lui a fournit.
-- **Rien n'est impossible** : Un code peut évoluer. Une erreur que l'on pense être impossible peut arriver.
-
-(cm5-dont-catch-everything)=
-## (Don't) Catch everything
-
-Il nous arrive souvent de devoir définir plusieurs blocs `catch` pour les différents types d'erreurs.
+Nous allons utiliser le framework **Google Test**.
 
 ```{code} cpp
-#include <iostream>
-#include <stdexcept>
+int factorial(int number);
 
-using namespace std;
+TEST(factorialTest, handlesZeroInput) {
+    EXPECT_EQ(factorial(0), 1);
+}
 
-void performOperation(int value) {
-    try {
-        if (value < 0) 
-            throw invalid_argument("Negative value");
-        if (value == 0) 
-            throw runtime_error("Zero value"); 
-        cout << "Performing operation with value: " << value << endl;
-    } catch (invalid_argument& error) {
-        cerr << "Invalid argument error caught: " << error.what() << endl;
-    } catch (runtime_error& error) {
-        cerr << "Runtime error caught: " << error.what() << endl;
-    }
+TEST(factorialTest, handlesSomePositiveInput) {
+    EXPECT_EQ(factorial(1), 1);
+    EXPECT_EQ(factorial(2), 2);
+    EXPECT_EQ(factorial(3), 6);
+    EXPECT_EQ(factorial(8), 40320);
 }
 ```
 
-:::{important} Commencer par écrire le gestionnaire d'erreur.
-:class: dropdown
-Nous allons apprendre à écrire des **tests unitaires** dans le prochain cours. Il faut donc anticiper ces erreurs et écrire des tests avant de commencer à coder (principe du **Test Driven Development**).
+Convention générale de nommage :
 
-Les blocs `try-catch` sont nécessaires pour la gestion des erreurs utilisateurs. Vu leur nécessité et vu qu'ils dictent le *flot du code* (le code peut être interrompu pour rentrer dans `catch`, la gestion de l'exception), il faut commencer par mettre en place les blocs `try-catch` et suivre la structure imposée par le gestionnaire d'erreur.
-:::
+```{code} cpp
+FunctionType function();
 
-:::{danger} Ce principe est pour gérer les erreurs d'utilisateur, pas les erreurs de développeurs !
-:class: dropdown
-Il est important d'attraper toutes les erreurs d'utilisateur mais attraper des erreurs (non prévues) des développeurs peut rendre le code difficile à debugger. 
-C'est pour cela que l'on insiste sur l'importance d'utiliser `throw` avec le `catch` correspondant pour éviter d'attraper des erreurs imprévues.
-:::
+TEST(functionTest, firstTestName) {
+    // First Test
+}
 
-Consulter [C++ exceptions standard](https://en.cppreference.com/w/cpp/error/exception).
-
-## Gestion des erreurs dans Java
-
-Votre cours de Développement Orienté Objet est en Java donc voici quelques principes de gestions d'erreurs qui sont liés à Java et le DOO.
-
-:::{important} Ne pas utiliser des Checked Exceptions
-:class: dropdown
-Dans Java, il y a un concept de **checked exceptions** où nous pouvons gérer des erreurs de compilation. Cela requiert la déclaration du type d'erreur levé dans la signature de la fonction.
-
-Il y a une raison pourquoi ce concept n'existe pas en C++ qui permet quand même d'écrire des programmes robustes. Imaginons que vous avez écrit des fonctions plus abstraites qui appellent des fonctions de plus en plus concrètes et lors de la fonction de plus bas niveau, vous avez une *checked exception*, il faudra alourdir le code en rajoutant dans la signature de toutes les fonctions précédentes le type de l'exception qui peut être levée.
-
-Je ne vais même pas vous montrer un exemple de ça.
-:::
-
-```{code} java
-public void registerItem(Item item) {
-    if (item != null) {
-        ItemRegistry registry = peristentStore.getItemRegistry();
-        if (registry != null) {
-            Item existing = registry.getItem(item.getID());
-            if (existing.getBillingPeriod().hasRetailOwner()) {
-                existing.register(item);
-            }
-        }
-    }
+TEST(functionTest, secondTestName) {
+    // Second test
 }
 ```
 
-:::{danger} `null`, c'est nul !
+Plus de détails dans le TP6 et [la documentation de Google Test](https://google.github.io/googletest/).
+
+## Test Driven Development (TDD)
+
+:::{important} Développment piloté par les Tests
 :class: dropdown
-Il ne faut pas autoriser des fonctions à retourner `null` ! Vous allez passer votre temps à vérifier si un objet est `null`. Cela rend le code illisible et si vous oubliez de vérifier si un objet est `null`, plus rien ne marche. **Est-ce que vous avez remarqué que l'on n'a pas vérifié si `existing` est `null` ?**
+Le **TDD** est une méthode de développement qui consiste en des cycles de développement très courts. Le principe de cette méthode est d'écrire un test qui impose un comportement au code puis produire le code correspondant et est écrit d'abord puis le code correspondant, puis un autre test et ainsi de suite. 
 :::
 
-## Special Case Pattern
-
-:::{important} Disclaimer
-:class: dropdown
-Le code suivant est en Java parce que nous allons utiliser le concept d'**interface** que vous allez voir en programmation objet (cours en Java). Nous n'allons pas rentrer dans les détails de la notion d'interface, juste dans la façon dont ça pourrait être utilisée pour gérer les cas spéciaux dans un code.
+:::{important} Les trois lois du TDD :
+- Écrivez un test qui échoue avant d’écrire le code correspondant.
+- Écrivez un seul test à la fois.
+- Écrivez le minimum de code qui satisfait le test courant.
 :::
 
-```{code} java
-try {
-    MealExpenses expenses = expenseReportDAO.getMeals(employee.getID());
-    total += expenses.getTotal();
-} catch(MealExpensesNotFound error) {
-    total += getMealPerDiem();
+```{figure} ../images/test-driven-development.png
+:alt: Test Driven Development
+:align: center
+
+Le workflow du TDD (Credits: Medium.com).
+```
+
+:::{note} Le cycle de développement
+:class: dropdown
+1. Écrire un seul test.
+2. Vérifier que le test échoue (le code correspondant n'existe pas).
+3. Écrire juste assez de code pour que le test réussisse.
+4. Vérifier que ce test et tous les tests précédents passent.
+5. Refactoriser le code tout en gardant les mêmes fonctionnalités (en testant constamment).
+:::
+
+Ce principe est bien illustré par [The Password Game de NEAL.FUN](https://neal.fun/password-game/) !
+
+## Principes du test propre
+
+:::{important} Un seul concept par test
+:class: dropdown
+Un test doit tester un seul concept. Souvent, un test consiste en une seule assertion à tester.
+:::
+
+Les cinq règles du code propre **F.I.R.S.T.**:
+- **Fast**
+- **Independent**
+- **Repeatable**
+- **Self-Validating**
+- **Timely**
+
+```{code} cpp
+// Don't run unless you have some time to kill.
+TEST(parseFileTest, testWithReallyBigFile)
+```
+
+:::{danger} not Fast
+:class: dropdown
+Un test rapide est un test qui peut être exécuter rapidement. Si un test est lent, alors ce test ne sera pas souvent exécuté. Si un test n'est pas exécuté, alors ce n'est pas un test.
+:::
+
+```{code} cpp
+int GLOBAL_VARIABLE = 10;
+
+int identityFunction(int value);
+
+TEST(identityFunctionTest, incrementValue) {
+    GLOBAL_VARIABLE++;
+    EXPECT_EQ(identityFunction(GLOBAL_VARIABLE),11);
+}
+
+TEST(identityFunctionTest, checkValue) {
+    EXPECT_EQ(identityFunction(GLOBAL_VARIABLE), 10);
 }
 ```
 
-:::{important} Gestion d'un cas spécial
+:::{danger} not Independent
 :class: dropdown
-Dans le code précédent, un employé part en mission et lors de son retour, on vérifie ses dépenses en repas. Si on ne trouve pas de dépenses, on lève une exception et rajoute la somme allouée par jour au total.
-
-La présence de `try-catch` ici n'est pas nécessaire pour la logique du code parce que c'est plus un cas spécial qu'une erreur. Dans ce cas, on voudrait bien simplifier le code de la façon suivante.
-```{code} java
-MealExpenses expenses = expenseReportDAO.getMeals(employee.getID());
-total += expenses.getTotal();
-```
-Il faut juste faire en sorte que `expenseReportDAO.getMeals()` retourne toujours un objet `MealExpenses`.
+Un test ne doit pas dépendre d'un autre test. Les tests doivent pouvoir être exécutés dans n'importe quel ordre. Si un test qui ne passe pas entraîne d'autres tests à échouer alors on ne pourra pas cerner le problème du code. 
 :::
 
-**Solution**:
+```{code} cpp
+#include <chrono>
 
-```{code} java
-public class PerDiemMealExpenses implements MealExpenses {
-    public int getTotal() {
-        // return the per diem default
-    }
+SomeType someFunction(chrono::weekday day);
+
+TEST(someFunctionTest, isTrueOnMondayOnly) {
+    auto currentTime = chrono::system_clock::now();
+    auto currentDay = chrono::weekday(currentTime);
+    if (currentDay == chrono::Monday)
+        EXPECT_TRUE(someFunction(currentDay));
+    else
+        EXPECT_FALSE(someFunction(currentDay));
 }
-
-MealExpenses expenses = expenseReportDAO.getMeals(employee.getID());
-total += expenses.getTotal();
 ```
+
+:::{danger} not Repeatable
+:class: dropdown
+Un test doit pouvoir être répété dans n'importe quel environnement et il testera toujours le même concept. Si le comportement du test change (parfois il passe, parfois il échoue), alors nous ne pouvons pas cerner le problème du code.
+:::
+
+```{code} cpp
+void produceComplexLog(ArgumentType argument);
+
+TEST(produceComplexLogTest, checkLogOnSomeArgument) {
+    ArgumentType someArgument;
+    // Code defining someArgument
+    // ...
+
+    produceComplexLog(someArgument);
+}
+```
+
+:::{danger} not Self-Validating
+:class: dropdown
+Un test est booléen. Soit il passe, soit il échoue. Un test qui passe "à moitié" n'est pas un test. Cela implique que le test doit contenir des assertions (booléennes).
+:::
+
+```{figure} ../images/timely.jpg
+:alt: Timely TDD meme
+:align: center
+
+Credits: imgflip.com/memegenerator
+```
+
+:::{danger} not Timely
+:class: dropdown
+On fait souvent l'erreur de commencer par coder avant d'écrire les tests unitaires. Puis, on se concentre seulement sur l'écriture des tests qui vont passer avec le code que l'on a déjà écrit et on a du mal à trouver d'autres tests. Ce manque de recul vient du fait que l'on a fait des choix d'implémentations qui restreint notre vision des choses. Si on arrive à trouver un test qui ne passe pas, souvent on doit repenser une grande partie du programme. **Écrire le test avant de coder** permet de bien choisir une implémentation qui répondrait à ce qui attendu.  
+:::

@@ -1,4 +1,4 @@
-# TP6 : Tests Driven Development
+# TP6 : How to write unit tests?
 
 :::{important} QCM
 :class: dropdown

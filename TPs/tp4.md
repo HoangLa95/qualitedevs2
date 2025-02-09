@@ -1,4 +1,4 @@
-# TP4 : Découvrir un IDE
+# TP4 : Découvrir un IDE, résolution conflit, debug et commentaire
 
 :::{important} QCM
 :class: dropdown

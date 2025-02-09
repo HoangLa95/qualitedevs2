@@ -1,3 +1,5 @@
+# Rappel Git dans IDE et debug
+
 # Quand est-ce qu'il faut commenter ?
 
 ```{figure} ../images/comments.jpeg
