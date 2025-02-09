@@ -158,7 +158,7 @@ Another member should add some content here, then you should add different conte
 
 2. Synchronisez votre dépôt local avec le dépôt distant.
 
-### Merge simple
+#### Merge simple
 
 Nous allons commencer par un exemple où le même fichier a été modifié de manière différente, mais les modifications concernent des sections de code distinctes et peuvent être fusionnées sans conflit.
 
@@ -187,7 +187,7 @@ Vous pouvez vérifier que `conflict.md` contient bien les deux modifications.
 
 9. Finissez la résolution avec `git push`.
 
-### Merge avec conflits
+#### Merge avec conflits
 
 Dans l'exemple précédent, nous avons vu une fusion où les modifications apportées aux deux versions du même fichier ne se chevauchaient pas, ce qui a permis à Git de fusionner automatiquement les changements.
 
