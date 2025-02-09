@@ -39,6 +39,9 @@ parts:
   chapters: 
     - file: PSs/ps1
     - file: PSs/ps2
+- caption: Projet SAÉ 1256
+  chapters:
+    - file: SAE/prep.md
 - caption: Soutien technique
   chapters:
     - file: TechSupport/internetProblem.md
