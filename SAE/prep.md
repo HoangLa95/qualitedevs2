@@ -1,4 +1,4 @@
-# Préparation au projet SAÉ 1256 : Développement d'une application
+# Préparation au projet : Développement d'une application
 
 Cette séance est dédiée à la préparation de votre projet SAÉ 1256, qui consiste en la création d'une application. Le projet intègre trois ressources principales : Qualité de développement (R203), IHM (R202) et DOO (R201).
 
@@ -28,17 +28,16 @@ Formez vos groupes de travail sur Moodle en respectant les instructions indiqué
 ### Création du dépôt
 
 Une fois que votre groupe est formé, le dépôt Git pour le projet doit être créé par un seul membre du groupe. 
+Deadline pour la création du dépôt : **vendredi 21/02 à 23h59**.
 
 :::{important} Nom du dépôt
 Le dépôt Git doit être nommé `s2-sae-dev-app-<numéro du groupe>` (par exemple : `s2-sae-dev-app-ab1`).
 :::
 
-:::{important} Inviter les membres et les professeurs.
+:::{important} Invitez les membres et les professeurs.
 Il faut inviter les autres membres du groupe ainsi que M. La (La Hoang *hla*), M. Ravenet (Ravenet Brian *bravene*) et M. Martin (Martin Jean-Claude *jmarti15*) en tant que **Maintainer**.
 Il n'est pas nécessaire d'ajouter les encadrants des séances à votre dépôt.
 ::: 
-
-Deadline pour la création du dépôt : **vendredi 21/02 à 23h59**.
 
 :::{note} README
 Le fichier README de votre dépôt Git doit contenir les noms des membres du groupe et toute information pertinente concernant le projet.
@@ -122,6 +121,7 @@ Si le dépôt de votre équipe n'est pas encore créé, vous pouvez créer un d�
 :::
 
 :::{note} Qu'est-ce qu'un conflit ?
+:note: dropdown
 Il arrive parfois d'oublier de synchroniser les dépôts local et distant avant de commencer à travailler, ce qui entraîne par exemple des modifications sur un fichier obsolète. 
 Lors du push de vos modifications, Git détecte les différences et vous demande de choisir comment fusionner les deux versions.
 Des conflits peuvent également survenir lorsque plusieurs personnes modifient le même fichier simultanément.
