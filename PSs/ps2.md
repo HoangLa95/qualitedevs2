@@ -373,6 +373,17 @@ These methods should not be defined systematically. Only define `get` methods fo
 The recommended naming convention for these methods is `getAttributeName` and `setAttributeName` (without the `m` prefix).  
 :::
 
+::: {note} `const` method in a class  
+:class: dropdown  
+A `const` method is a member function of a class that, by placing the `const` keyword at the end of its declaration, guarantees that it does not modify the attributes of the object. This particularly applies to getters, which are often defined as follows:
+
+```{code} cpp
+<attributeType> getAttribute const {
+    return mAttribute;
+}
+```  
+:::
+
 6. Do you understand what this code does?
 
 (ps2-constructor)=

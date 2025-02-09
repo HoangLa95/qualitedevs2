@@ -333,11 +333,11 @@ public:
         }
     }
 
-    double getB1() {
+    double getB1() const {
         return mB1;
     }
 
-    string tToString(){
+    string tToString() const {
         switch(mT){
             case B: return "Basic";
             case S: return "Standard";
@@ -378,6 +378,17 @@ En conséquence, il est nécessaire d'utiliser des méthodes `get` (pour accéde
 Ces méthodes ne doivent pas être définies systématiquement. Définissez uniquement les méthodes `get` pour les attributs auxquels nous devons accéder, et les méthodes `set` pour les attributs que nous autorisons à modifier depuis l'extérieur de la classe.
 
 La convention recommandée pour le nommage de ces méthodes est `getNomAttribut` et `setNomAttribut` (sans le préfixe `m`).
+:::
+
+:::{note} Méthode `const` dans une classe
+:class: dropdown
+Une méthode const est une fonction membre d'une classe qui, par le mot-clé const placé à la fin de sa déclaration, garantit qu'elle ne modifie pas les attributs de l'objet. Cela s'applique notamment aux getters, qui sont souvent définis de la manière suivante :
+
+```{code} cpp
+<attributeType> getAttribute const {
+    return mAttribute;
+}
+``` 
 :::
 
 6. Comprenez-vous ce que fait ce code ?
