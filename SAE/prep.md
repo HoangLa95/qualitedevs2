@@ -14,7 +14,7 @@ Vous devez prendre connaissance du sujet du projet qui se trouve sur [Moodle](ht
 :::
 
 S'il y a des éléments techniques du sujet que vous n'avez pas encore vu, pas de panique, c'est normal puisque nous débutons le semestre. 
-Vous aurez l'occasion de le découvrir prochainement.
+Vous aurez l'occasion de les découvrir prochainement.
 Si vous avez des questions spécifiques sur le sujet, réservez-les pour le premier amphi avec M. La, M. Ravenet et M. Martin.
 
 ## Constitution des groupes de travail
