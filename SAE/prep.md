@@ -106,7 +106,7 @@ Vous n’avez pas encore vu les branches Git, donc voici une règle simple pour 
 
 Lorsque vous commencerez à écrire des tests : **si un code ne passe pas un test, ne le push pas non plus**.
 
-Si vous avez besoin d’aide pour déboguer, **commentez la partie du code problématique en expliquant le bug**, puis poussez ces commentaires.
+Si vous avez besoin d’aide pour déboguer, **commentez la partie du code problématique en expliquant le bug**, puis push ces commentaires.
 
 Même lorsque vous maîtriserez les branches Git, il restera essentiel de ne pas push de bugs sur la branche principale. Utilisez une branche de développement et décrivez clairement le problème en commentaire.
 
