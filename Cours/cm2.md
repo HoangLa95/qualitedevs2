@@ -107,7 +107,7 @@ vector<vector<int>> getThem(const vector<vector<int>>& theList) {
 1. Que trouve-t-on dans `theList` ?
 2. Quel rôle joue l'index `0` de `x` dans `theList` ?
 3. Quel rôle joue la valeur `4` ?
-4. Que fais-je avec la liste retourné ?
+4. Que fais-je avec la liste retournée ?
 :::
 
 ```{code} cpp
@@ -129,7 +129,7 @@ vector<vector<int>> getFlaggedCells(const vector<vector<int>>& gameBoard) {
 
 :::{hint} Indice
 :class: dropdown
-C'est un morceau de code du jeu **Démineur** (*Minesweeper*) dans lequel est le plateau de jeu est un `vector` qui contient des cellules représentés par des `vector<int>` où `STATUS_VALUE` est l'indice contenant le statut de la cellule et `4` correspond à la présence d'un drapeau. 
+C'est un morceau de code du jeu **Démineur** (*Minesweeper*) dans lequel le plateau de jeu est un `vector` qui contient des cellules représentés par des `vector<int>` où `STATUS_VALUE` est l'indice contenant le statut de la cellule et `4` correspond à la présence d'un drapeau. 
 
 ```{image} ../images/minesweeper.png
 :alt: Démineur

@@ -385,7 +385,7 @@ La convention recommandée pour le nommage de ces méthodes est `getNomAttribut`
 Une méthode const est une fonction membre d'une classe qui, par le mot-clé const placé à la fin de sa déclaration, garantit qu'elle ne modifie pas les attributs de l'objet. Cela s'applique notamment aux getters, qui sont souvent définis de la manière suivante :
 
 ```{code} cpp
-<attributeType> getAttribute const {
+<attributeType> getAttribute() const {
     return mAttribute;
 }
 ``` 
