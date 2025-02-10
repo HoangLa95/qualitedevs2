@@ -378,7 +378,7 @@ The recommended naming convention for these methods is `getAttributeName` and `s
 A `const` method is a member function of a class that, by placing the `const` keyword at the end of its declaration, guarantees that it does not modify the attributes of the object. This particularly applies to getters, which are often defined as follows:
 
 ```{code} cpp
-<attributeType> getAttribute const {
+<attributeType> getAttribute() const {
     return mAttribute;
 }
 ```  
@@ -425,7 +425,7 @@ b(double b1, t t1) : mB1(b1), mT(t1) {
 :class: dropdown
 - Did you correctly apply the **camelCase** convention?
 - Did you follow the naming conventions for classes and methods? (The names of `enum` objects should also start with a capital letter.)
-- Did you follow the conventions for using the `m` prefix and for getters and setters?
+- Did you follow the conventions for using the `m` (or `_`) prefix and for getters and setters?
 - Are there still variables, methods, or objects with names that consist of a single letter?
 - Do meaningless numbers still appear in the names?
 - Are the names you chose sufficiently descriptive of the intent behind each variable, method, or object?

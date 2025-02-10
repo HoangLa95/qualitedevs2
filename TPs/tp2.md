@@ -432,7 +432,7 @@ b(double b1, t t1) : mB1(b1), mT(t1) {
 :class: dropdown
 - Avez-vous correctement appliqué la convention **camelCase** ?
 - Avez-vous respecté les conventions de nommage pour les classes et les méthodes ? (Les noms des objets `enum` doivent également commencer par une majuscule.)
-- Avez-vous suivi les conventions concernant l'utilisation du préfixe `m` et des getters et setters ?
+- Avez-vous suivi les conventions concernant l'utilisation du préfixe `m` (ou `_`) et des getters et setters ?
 - Y a-t-il encore des variables, méthodes ou objets dont le nom se résume à une seule lettre ?
 - Des nombres sans signification figurent-ils encore dans les noms ?
 - Les noms que vous avez choisis sont-ils suffisamment révélateurs de l'intention derrière chaque variable, méthode ou objet ?
