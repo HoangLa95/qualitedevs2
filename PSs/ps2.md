@@ -199,7 +199,10 @@ const bool& isLoyalCustomer = userIsLoyalCustomer;
 
 :::{note} `const`
 :class: dropdown
-Using `const <type>&` for user inputs ensures that these values cannot be accidentally modified in the code, thus preventing unexpected errors. The reference here avoids making copies of variable values, which is especially important when working with objects that consume a lot of memory.
+Using `const <type>&` for user inputs ensures that these values cannot be accidentally modified in the code, thus preventing unexpected errors. 
+The reference (`&`) avoids making copies of variable values, which is especially important when working with objects that consume a lot of memory.
+Here, it is not necessary to use a reference since `double` and `bool` are small types and have negligible memory overhead. 
+This is mainly to provide an example using `&`.
 
 In general, using `const` in front of immutable variables makes the code clearer by explicitly indicating that these values should not be modified, which makes the program easier to maintain and understand.
 **Have you correctly used `const` in your code ?**
