@@ -205,7 +205,7 @@ const bool& isLoyalCustomer = userIsLoyalCustomer;
 
 :::{note} `const`
 :class: dropdown
-L'utilisation de `const <type>&` après les entrées utilisateur permet de garantir que ces valeurs ne pourront pas être modifiées accidentellement dans le code, ce qui évite des erreurs imprévues.
+L'utilisation de `const <type>&` après les entrées utilisateur permet de garantir que ces valeurs (qui restent constantes tout le long de l'exécution) ne pourront pas être modifiées accidentellement dans le code, ce qui évite des erreurs imprévues.
 La référence (`&`) évite de faire des copies des valeurs de variables, ceci est surtout important quand nous travaillons avec des objets qui prennent beaucoup de mémoire.
 Ici, l'utilisation d'une référence n'est pas nécessaire, car les types `double` et `bool` sont peu gourmands en mémoire. C'est principalement pour vous montrer un exemple d'usage de `&`.
 
