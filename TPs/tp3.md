@@ -1,238 +1,122 @@
 # TP3 : Initiation à la refactorisation
 
-:::{hint} Que faut-il faire quand on commence un TP ?
-:class: dropdown
-`git pull` !!!
-:::
-
-:::{important} QCM
-:class: dropdown
-Les réponses aux questions du TPs sont à remplir dans le QCM sur Moodle.
-:::
-
-:::{important} Git
-:class: dropdown
-Dernier rappel `git` de ce TP : `pull`, `.gitignore`, `add`, `commit`, `push`.
-:::
-
-:::{important} IDE
-:class: dropdown
-Dernier TP sans IDE ! J'espère que vous avez bien compris le workflow typique de Git !
-:::
-
-## Exercice 1 : Shape area
+## Exercice 1 : Short functions
 
 ```{code} cpp
 #include <iostream>
-#include <cmath>
+#include <vector>
+#include <string>
+#include <algorithm>
 
 using namespace std;
 
-double getArea(const string& shape, double width, double height, double radius) {
-    if (shape == "circle")
-        return M_PI * radius * radius;
-    else if (shape == "square")
-        return width * width;
-    else if (shape == "rectangle")
-        return width * height;
-    else {
-        cerr << "Invalid shape!" << endl;
-        return -1;
+class Product {
+private:
+    string mName;
+    double mPrice;
+    int mQuantity;
+
+public:
+    Product(string name, double price, int quantity) 
+        : mName(name), mPrice(price), mQuantity(quantity) {}
+
+    string getName() const { 
+        return mName; 
     }
+
+    double getPrice() const { 
+        return mPrice; 
+    }
+
+    int getQuantity() const { 
+        return mQuantity; 
+    }
+};
+
+void displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice() {
+    vector<Product> products;
+    products.push_back(Product("Laptop", 1000, 5));
+    products.push_back(Product("Smartphone", 700, 0));
+    products.push_back(Product("Tablet", 500, 2));
+    products.push_back(Product("Headphones", 150, 10));
+    products.push_back(Product("Smartwatch", 200, 0));
+
+    // Getting available products
+    vector<Product> availableProducts;
+    for (const Product& product : products) {
+        if (product.getQuantity() > 0) {
+            availableProducts.push_back(product);
+        }
+    }
+
+    // Sorting available products by non-decreasing price
+    sort(availableProducts.begin(), availableProducts.end(), [](const Product& leftHandSideProduct, const Product& rightHandSideProduct){return leftHandSideProduct.getPrice() < rightHandSideProduct.getPrice();});
+
+    // Calculating the total price of available products
+    double totalPrice = 0;
+    for (const Product& product : availableProducts) {
+        totalPrice += product.getPrice() * product.getQuantity();
+    }
+
+    // Output results
+    cout << "Sorted Available Products (by non-decreasing price):" << endl;
+    for (const Product& product : availableProducts) {
+        cout << "Name: " << product.getName() 
+             << " - Price: " << product.getPrice() 
+             << " - Quantity: " << product.getQuantity() << endl;
+    }
+    cout << "Total Price of Available Products: " << totalPrice << endl;
 }
 
 int main() {
-    double circleArea = getArea("circle", 0, 0, 5);
-    cout << "Area of circle: " << circleArea << endl;
-
-    double squareArea = getArea("square", 4, 0, 0);
-    cout << "Area of square: " << squareArea << endl;
-
-    double rectangleArea = getArea("rectangle", 3, 5, 0);
-    cout << "Area of rectangle: " << rectangleArea << endl;
-
+    displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice();
     return 0;
 }
 ```
 
-**Question 1** : Quels sont les problèmes du code précédent ?
-
-Pour améliorer ce code, nous allons créer une classe `Shape`.
-
-**Question 2** : Combien d'attributs (privés) y-a-t-il dans `Shape` ?
-
-Dans `public`, nous avons besoin d'écrire un constructeur pour `Shape` (exemple de constructeur dans l'[exercice 2 du TP2](#tp2-ex2-class-example)).
-
-**Question 3** : Comment éviter d'utiliser les mêmes noms pour les arguments et les attributs de `Shape` ?
-
-**Question 4** : Combien de méthodes (au moins) a-t-on besoin dans `Shape` (sans compter les getters et setters) ?
-
-:::{important} Tests
-:class: dropdown
-Il ne faut pas oublier de tester votre code régulièrement quand vous faites de la refactorisation. Il faut que les résultats retournés soient les mêmes !
-:::
-
-## Exercice 2 : Magasin de qualité
-
-Un magasin d'items pour aventuriers vend différents items dont la qualité diminue ou augmente plus on se rapproche de la date d'expiration. Ce magasin vient de changer de propriétaire. Le nouveau propriétaire vérifie le système informatique en charge du contrôle de qualité et ne comprend absolument rien à `updateItems` dans ce code.
+## Exercice 2 : Classify it
 
 ```{code} cpp
 #include <iostream>
-#include <string>
 #include <vector>
 
 using namespace std;
 
-class Item {
-private:
-    string mName;
-    int mExpiresIn;
-    int mQuality;
+double calculateAverage(const vector<double>& scores) {
+    double sum = 0;
+    for (double score : scores) {
+        sum += score;
+    }
+    return sum / scores.size();
+}
 
-public:
-    Item(string name, int expiresIn, int quality) : mName(name), mExpiresIn(expiresIn), mQuality(quality) {}
-
-    string getName() {
-    	return mName;
+void printScores(const string& studentName, int studentID, const vector<double>& scores) {
+    cout << endl << "Scores for " << studentName << " (ID: " << studentID << "): ";
+    for (size_t i = 0; i < scores.size(); i++) {
+        cout << "[" << i+1 << "] " << scores[i] << " ";
     }
-    
-    int getExpiresIn() {
-    	return mExpiresIn;
-    }
-    
-    int getQuality() {
-    	return mQuality;
-    }
-    
-    void setQuality(int quality) {
-    	mQuality = quality;
-    }
-    
-    void setExpiresIn(int expiresIn) {
-    	mExpiresIn = expiresIn;
-    }
-};
-
-class Shop {
-private:
-    vector<Item> & items;
-    
-public:
-    Shop(vector<Item> & itemsInStock) : items(itemsInStock) {}
-    
-    vector<Item> getItems() {
-    	return items;
-    }
-    
-    void updateItems(){
-    	for (int i = 0; i < items.size(); i++) {
-    	    if (items[i].getName() != "Cheese" && items[i].getName() != "Concert Ticket") {
-    	        if (items[i].getQuality() > 0) {
-    	            if (items[i].getName() != "Excalibur") {
-    	                items[i].setQuality(items[i].getQuality() - 1);
-    	            }
-    	        }
-    	    } else {
-    	        if (items[i].getQuality() < 20) {
-    	            items[i].setQuality(items[i].getQuality() + 1);
-    	            if (items[i].getName() == "Concert Ticket") {
-    	            	items[i].setQuality(items[i].getQuality() + 1);
-    	            }
-    	        }
-    	    }
-    	    if (items[i].getName() != "Excalibur") {
-    	        items[i].setExpiresIn(items[i].getExpiresIn() - 1);
-    	    }
-    	    if (items[i].getExpiresIn() < 0) {
-    	        if (items[i].getName() != "Cheese") {
-    	            if (items[i].getName() != "Concert Ticket"){
-    	                if (items[i].getQuality() > 0){
-    	                    if (items[i].getName() != "Excalibur") {
-    	                        items[i].setQuality(items[i].getQuality() - 1);
-    	                    }
-    	                }
-    	            } else {
-    	                items[i].setQuality(0);
-    	            }
-    	        } else {
-    	            if (items[i].getQuality() < 20) {
-    	                items[i].setQuality(items[i].getQuality() + 1);
-    	            }
-    	        }
-    	    }
-    	}
-    }
-};
+    cout << endl << "Average: " << calculateAverage(scores) << endl;
+}
 
 int main() {
-    Item normalItem("Normal Item", 4, 6);
-    Item cheese("Cheese", 4, 10);
-    Item concertTicket("Concert Ticket", 4, 14);
-    Item excalibur("Excalibur", 4, 10);
-    vector<Item> itemsInStock = {normalItem, cheese, concertTicket, excalibur};
-    Shop qualityShop(itemsInStock);
-    int workingDays = 6;
-    
-    for (int i = 0; i < workingDays; i++) {
-        cout << "Day " << i+1 << endl;
-    	qualityShop.updateItems();
-    	for (int j = 0; j < qualityShop.getItems().size(); j++) {
-            cout << qualityShop.getItems()[j].getName() << ": Quality(" << qualityShop.getItems()[j].getQuality() << "), expires in " << qualityShop.getItems()[j].getExpiresIn() << " days." << endl;
-    	}
-    }
+    string studentName;
+    int studentID;
+    vector<double> scores;
+
+    studentID = 12345;
+    studentName = "Alice";
+
+    scores.push_back(11);
+    scores.push_back(12.5);
+    scores.push_back(14.75);
+    scores.push_back(19);
+
+    printScores(studentName, studentID, scores);
 
     return 0;
 }
 ```
 
-Il a décidé de virer le gobelin en charge et de vous employer pour améliorer et maintenir son système. Il veut toujours garder la même organisation du magasin (les classes `Item` et `Shop` doivent avoir les mêmes attributs et constructeurs). 
-
-Vous devez comprendre comment les différents items se comportent et lui expliquer leur fonctionnement. Puis, vous devez refactoriser la fonction `updateItems` (et rajouter d'autres méthodes selon vos besoins) selon les principes du code propre; sinon, vous risquez de partager le même sort que le gobelin !
-
-Compiler et exécuter le code. Observer les variations de qualité des items et répondre aux questions suivantes.
-
-**Question 5** : Quelle est la valeur minimale de la qualité d'un item ?
-
-**Question 6** : Quelle est la valeur maximale de la qualité d'un item ?
-
-**Question 7** : Avant la date d'expiration, la qualité de `Normal Item` varie de combien par jour ? (-x si elle diminue, x si elle augmente)
-
-**Question 8** : Avant la date d'expiration, la qualité de `Cheese` varie de combien par jour ?
-
-**Question 9** : Avant la date d'expiration, la qualité de `Concert Ticket` varie de combien par jour ?
-
-**Question 10** : Avant la date d'expiration, la qualité de `Excalibur` varie de combien par jour ?
-
-**Question 11** : Après la date d'expiration, la qualité de `Normal Item` varie de combien par jour ?
-
-**Question 12** : Après la date d'expiration, la qualité de `Cheese` varie de combien par jour ?
-
-**Question 13** : Après la date d'expiration, quelle est la qualité de `Concert Ticket` ?
-
-**Question 14** : Quelle est la spécialité de `Excalibur` ?
-
-Maintenant que vous avez compris le comportement des différents items, il faut réécrire `updateItems` avec des (sous-)méthodes auxiliaires en respectant les principes vus en cours.
-- La fonction `updateItems` devrait faire seulement parcourir la liste des items et de faire `updateItem` pour chaque item. Il ne faut pas oublier de remettre la qualité au niveaux autorisés (en appelant une méthode `resetQualityToWithinRange` après l'update par exemple).
-- Vu qu'il y a plusieurs types d'item différents, `updateItem` devrait identifier l'item concerné et appeler la méthode correspondante (par exemple `updateNormalItem`, `updateCheese`, ...). 
-- Chaque méthode `update<nom de l'item>` devrait changer les atrributs de l'item selon le comportement que vous avez observé.
-- Dans `resetQualityToWithinRange`, il faut remettre la qualité au niveau minimum (ou maximum) si nous avons descendu en dessous (ou dépasser) des niveaux possibles (rappeler vous qu'il faut éviter les [*magic numbers*](#tp2-magic-numbers)).
-
-:::{warning} Ne pas travailler sur une copie de l'objet !
-:class: dropdown
-Si vous faites `updateItem(Item item)`, alors vous allez travailler sur une copie de l'item appelé en argument. Il ne faut pas oublier de rajouter `&` (par exemple `updateItem(Item& item)`).
-:::
-
-**Question 15** : Combien de méthodes (au moins) doit-il y avoir dans `Shop` (sans compter les getters et setters) ?
-
-Comparer le code que vous avez obtenu au code initial. Si vous avez bien fait votre travail, vous devez voir tout de suite la différence de **qualité** entre les deux. 
-
-Maintenant que le nouveau propriétaire a compris comment fonctionnent les items de son magasin, il pense qu'il est intéressant de vendre un item spécial dont la qualité diminue deux fois plus vite qu'un item normal mais après sa date d'expiration, sa qualité augmente de 4 par jour !
-
-`Special Item` commence avec une date d'expiration de 3 jours et une qualité de 4. Implémenter `"Special Item"` dans votre code et rajouter-le dans `main` avec les autres items.
-
-**Question 16** : Quelle est la qualité de l'item spécial lors du sixième jour ?
-
-:::{note} Facile à maintenir et modulable !
-:class: dropdown
-Normalement, le code est clair même sans commentaire. De plus, il devrait être facile de rajouter l'item spécial. C'est un signe que votre code est facile à maintenir et modulable !
+:::{important} Tests
+Il ne faut pas oublier de tester votre code régulièrement quand vous faites de la refactorisation. Il faut que les résultats retournés soient cohérents !
 :::
