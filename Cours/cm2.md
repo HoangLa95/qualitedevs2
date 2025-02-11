@@ -48,12 +48,14 @@ private:
 ```
 
 2. `class Object` :
-Le nom d'une classe utilise **CamelCase** qui est **camelCase** mais avec une majuscule au début.
+Le nom d'une classe utilise **UpperCamelCase** qui est **camelCase** mais avec une majuscule au début.
 :::
 
 (cm2-kebab-case)=
 :::{important} Noms de fichiers
-Nous allons utiliser le **kebab-case** (`my-first-file.txt`, `hello-world.cpp`, ...) pour les noms de fichier, car c'est la convention la plus standard pour la plupart des écosystèmes.
+Nous allons utiliser le **kebab-case** (`my-first-file.txt`, `hello-world.cpp`, ...) pour les noms de fichier, car c'est la convention la plus standard pour C++.
+
+En Java, vous allez plutôt utiliser **camelCase** et **UpperCamelCase** pour les noms de fichiers (selon si le fichier correspond à une classe ou non).
 :::
 
 (cm2-nom-revelateur)=
