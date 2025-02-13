@@ -85,6 +85,7 @@ Plus le code contient de structures imbriquées, plus il devient difficile à co
 
 ### Responsabilité unique
 
+(cm3-unique-responsibility)=
 :::{important} Principe de responsabilité unique
 :class: dropdown
 Une fonction doit accomplir une seule tâche, et cette responsabilité doit être clairement indiquée dans son nom et/ou sa documentation / ses commentaires.
@@ -102,6 +103,7 @@ Dans l’exemple précédent, on mélange deux niveaux d’abstraction tels que 
 - *Ajouter les nombres premiers dans un nouveau vecteur*.
 :::
 
+(cm3-stepdown-rule)=
 :::{important} *The Stepdown Rule*
 Une fonction doit se lire comme un livre avec un sommaire bien structuré.
 - Au plus haut niveau, on trouve les différents chapitres.
@@ -173,6 +175,7 @@ La duplication de code comporte un risque d'erreur : chaque modification de la l
 Dans ce cas, il est nécessaire de refactoriser le code.
 :::
 
+(cm3-peu-arguments)=
 ### Peu d'arguments
 
 :::{hint} Le nombre idéal d'arguments d'une fonction
