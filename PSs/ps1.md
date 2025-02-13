@@ -1,4 +1,4 @@
-# PS1 : Discover Git and GitLab
+# PS1: Discover Git and GitLab
 
 Before starting to code, it is important to familiarize yourself with the tools that help organize your programming work.
 

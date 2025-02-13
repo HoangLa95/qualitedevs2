@@ -1,4 +1,4 @@
-# PS2 : How to rename things?
+# PS2: How to rename things?
 
 :::{important} Git  
 From now on, occasional reminders will be given to help you maintain your repository, but you should be autonomous with Git.  
