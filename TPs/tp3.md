@@ -1,6 +1,7 @@
 # TP3 : Initiation à la refactorisation
 
 :::{important} Dernier rappel Git de ce TP
+:class: dropdown
 Maintenez votre dépôt !  
 :::
 
@@ -18,6 +19,7 @@ Pour le moment, vous pouvez supposer que les arguments sont toujours valide sans
 :::
 
 :::{important} Tests
+:class: dropdown
 Il ne faut pas oublier de tester votre code régulièrement quand vous faites de la refactorisation. Il faut que les résultats retournés soient cohérents !
 :::
 
@@ -114,7 +116,7 @@ Pour pouvoir rentrer les informations de plusieurs étudiants, nous allons écri
 :::{note} `cin >>`
 `cin >>` va juste affecter les valeurs rentrées au clavier jusqu'à trouver un espace.
 Par exemple, si vous tapez `Jean Pierre` alors `cin >>` va juste retourner `Jean`.
-Pour éviter les détails de parsing d'entrée, nous allons supposer qu'un nom est un seul mot ou est plusieurs mots écrits en UpperCamelCase.
+Pour éviter les détails de lecture (*parsing*) d'entrée, nous allons supposer qu'un nom est un seul mot ou est plusieurs mots écrits en UpperCamelCase.
 :::
 
 5. Recopiez la fonction suivante pour récupérer les notes d'un étudiant :
@@ -134,7 +136,7 @@ void inputScores(Student& student) {
 6. Écrivez une fonction `Student createStudentFromInput()` qui crée un objet étudiant à partir des user inputs.
 
 Nous pouvons maintenant créer un étudiant. 
-Pour créer plusieurs étudiants et afficher tous leurs notes et moyennes, nous allons implémenter les fonctions suivantes.
+Pour créer plusieurs étudiants et afficher toutes leurs notes et moyennes, nous allons implémenter les fonctions suivantes.
 
 7. Écrivez une fonction `int inputNumberOfStudents()` qui retourne le nombre d'étudiants à créer à partir d'un user input.
 
@@ -221,7 +223,7 @@ int main() {
 :::{note} `sort`
 La fonction `sort` trie un `vector` en place (pas de copie de `vector` créée).
 Elle prend en argument l'indice du début et de la fin du `vector` et la comparaison `<` par défaut.
-Elle trie donc les valeurs de façon croissante (*non-decreasing* en anglais, *increasing* est "strictement croissant*).
+Elle trie donc les valeurs de façon croissante (*non-decreasing* en anglais, *increasing* est "strictement croissant").
 Quand le type de l'objet à trier est plus complexe, elle demande une fonction de comparaison en argument.
 Ici, la fonction est écrite sous la forme :
 ```{code} cpp
@@ -244,7 +246,7 @@ sort(availableProducts.begin(), availableProducts.end(), <nom de la fonction de 
 (tp3-const-and-ref)=
 :::{hint} `const` et `&`
 :class: dropdown
-L'utilisation de `const` pour les arguments des fonctions promets que la fonction ne va pas modifier l'argument `const`.
+L'utilisation de `const` pour les arguments des fonctions promet que la fonction ne va pas modifier l'argument `const`.
 La référence `&` pour les arguments permet de travailler sur le même objet que quand la fonction est appelé et ne pas créer de copie de l'objet.
 Cela permet aussi d'éviter de copie les objets "lourds".
 Ici, `Product` a trois attributs de type `string`, `double` et `int`.
@@ -272,5 +274,6 @@ Ceci est un bonus.
 4. **Bonus** : Implémenter les user inputs pour les informations sur les produits.
 
 :::{note} `cin >>`
+:class: dropdown
 Comme avant, nous allons considérer qu'un nom est écrit en UpperCamelCase ou est un seul mot.
 :::
