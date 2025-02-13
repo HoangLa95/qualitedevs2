@@ -184,9 +184,9 @@ Dans ce cas, il est nécessaire de refactoriser le code.
 :::
 
 ```{code} cpp
-bool isEven(const int number)
+bool isEven(int number)
 
-double squareRoot(const int number)
+double squareRoot(int number)
 
 void printMessage(const string& message)
 void removeVowels(string& inputString)
@@ -219,8 +219,8 @@ Si les comportements des deux fonctions sont très similaires, la séparation pe
 
 ```{code} cpp
 Point createPoint(int xCoordinate, int yCoordinate)
-Matrix multiply(Matrix leftMatrix, Matrix rightMatrix)
-bool verifyBehavior(SomeType expected, SomeType actual)
+Matrix multiply(const Matrix& leftMatrix, const Matrix& rightMatrix)
+bool verifyBehavior(const SomeType& expected, const SomeType& actual)
 ```
 
 :::{warning} Deux arguments
@@ -235,7 +235,7 @@ Il est important de choisir des verbes et des mots-clés qui reflètent claireme
 
 L'ordre des arguments dans une fonction à deux paramètres peut également être précisé dans le nom de la fonction. Par exemple :
 ```{code} cpp
-bool assertExpectedEqualsActual(SomeType expected, SomeType actual)
+bool assertExpectedEqualsActual(const SomeType& expected, const SomeType& actual)
 ``` 
 :::
 
@@ -246,6 +246,11 @@ Circle makeCircle(double xCoordinate, double yCoordinate, double radius)
 :::{danger} Trois arguments 
 Dans le même esprit que précédemment, l'utilisation de fonctions à trois arguments doit être soigneusement justifiée. Si vous pouvez refactoriser, il est souvent préférable de refactoriser !
 ```{code} cpp
+struct Point{
+    double xCoordinate;
+    double yCoordinate;
+}
+
 Circle makeCircle(Point center, double radius)
 ```
 :::
@@ -258,7 +263,7 @@ Si vous avez plus de trois arguments, il est souvent préférable de regrouper c
 ### Pas d'effets secondaires 
 
 ```{code} cpp
-void activateUser(vector<User> users, int validUserId) {
+void activateUser(const vector<User>& users, int validUserId) {
     users[validUserId].activate();
     sendActivationNotification(users[userId].name + "@example.com");
 }
@@ -272,7 +277,7 @@ Il est crucial d'éviter les effets secondaires pour garantir la responsabilité
 :::
 
 ```{code} cpp
-void activateUserAndSendNotification(vector<User> users, int validUserId) {
+void activateUserAndSendNotification(const vector<User>& users, int validUserId) {
     users[validUserId].activate();
     sendActivationNotification(users[userId].name + "@example.com");
 }
