@@ -65,7 +65,7 @@ Que fait cette fonction ?
 :alt: Crible d'Érastosthènes
 :align: center
 
-Crible d'Ératosthènes (Credits: https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
+Crible d'Ératosthènes (Credits: [Wikipedia](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes))
 ```
 
 ## Comment écrire une fonction courte ?
@@ -94,19 +94,17 @@ Si une fonction contient plusieurs sections (qui ne sont pas des appels à d’a
 
 ### Un seul niveau d'abstraction
 
-:::{warning} Ne pas mélanger les idées
+:::{warning} Ne pas mélanger les niveaux
 :class: dropdown
 Une fonction comportant plusieurs niveaux d’abstraction est difficile à comprendre.
-
 Dans l’exemple précédent, on mélange deux niveaux d’abstraction tels que :
 - *Un nombre non premier n doit avoir un facteur inférieur ou égal à la racine carrée de n*, et
 - *Ajouter les nombres premiers dans un nouveau vecteur*.
 :::
 
 :::{important} *The Stepdown Rule*
-:class: dropdown
 Une fonction doit se lire comme un livre avec un sommaire bien structuré.
-- Au même niveau d’abstraction, on trouve les différents chapitres.
+- Au plus haut niveau, on trouve les différents chapitres.
 - À l’intérieur d’un chapitre, on trouve les différentes sections.
 - À l’intérieur d’une section, on trouve du contenu qui traite d’une seule et même chose.
 
@@ -183,13 +181,15 @@ Dans ce cas, il est nécessaire de refactoriser le code.
 :::
 
 ```{code} cpp
-bool isEven(int number)
+bool isEven(const int number)
+
 double squareRoot(const int number)
-void printMessage(string& message)
+
+void printMessage(const string& message)
+void removeVowels(string& inputString)
 ```
 
 :::{important} Un seul argument
-:class: dropdown
 Il existe trois types de fonctions prenant un seul argument :
 1. **Fonction booléenne** : elle vérifie une condition en fonction de l'argument et retourne un booléen.
 2. **Fonction de transformation** : elle prend un argument en entrée et retourne une valeur, éventuellement d'un autre type.
@@ -221,7 +221,6 @@ bool verifyBehavior(SomeType expected, SomeType actual)
 ```
 
 :::{warning} Deux arguments
-:class: dropdown
 L'utilisation de fonctions à deux arguments peut être risquée, sauf lorsque les deux arguments ont un ordre naturel ou lorsqu'ils sont clairement définis dans leur contexte.
 
 Même dans le troisième cas, imaginez à quel point il est facile de mélanger `expected` et `actual` !
@@ -242,7 +241,6 @@ Circle makeCircle(double xCoordinate, double yCoordinate, double radius)
 ```
 
 :::{danger} Trois arguments 
-:class: dropdown
 Dans le même esprit que précédemment, l'utilisation de fonctions à trois arguments doit être soigneusement justifiée. Si vous pouvez refactoriser, il est souvent préférable de refactoriser !
 ```{code} cpp
 Circle makeCircle(Point center, double radius)
