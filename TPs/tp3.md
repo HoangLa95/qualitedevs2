@@ -2,25 +2,26 @@
 
 :::{important} Dernier rappel Git de ce TP
 :class: dropdown
-Maintenez votre dépôt !  
+Maintenez vos dépôts !  
 :::
 
 :::{important} Résolution de conflits
 :class: dropdown
-Vous avez vu une initiation à la résolution de conflits en Projet SAÉ. 
-Essayez de résoudre les conflits vous-même.
-En cas de difficulté, appelez votre encadrant.
+Vous avez suivi une initiation à la résolution de conflits en Projet SAÉ.  
+Essayez de résoudre les conflits par vous-même.  
+En cas de difficulté, sollicitez votre encadrant.
 :::
 
 :::{important} Gestion des erreurs
 :class: dropdown
-Nous n'avons pas encore abordé la gestion des erreurs en classe.
-Pour le moment, vous pouvez supposer que les arguments sont toujours valide sans vous soucier de la gestion des erreurs.
+Nous n'avons pas encore abordé la gestion des erreurs en classe.  
+Pour le moment, vous pouvez supposer que les arguments sont toujours valides et ne pas vous préoccuper de la gestion des erreurs.
 :::
 
 :::{important} Tests
 :class: dropdown
-Il ne faut pas oublier de tester votre code régulièrement quand vous faites de la refactorisation. Il faut que les résultats retournés soient cohérents !
+N'oubliez pas de compiler et de tester votre code régulièrement lors de la refactorisation.  
+Les résultats doivent rester cohérents !
 :::
 
 (tp3-objectifs)=
@@ -80,16 +81,15 @@ int main() {
 
 1. Que fait ce code ?
 
-Il est difficile de rajouter des étudiants et leurs notes.
-Nous allons donc créer une classe `Student` avec les trois attributs :
-- Nous allons considérer qu'il suffit d'avoir l'ID d'un étudiant pour construire l'objet.
-- L'ID est *immutable* : une fois qu'elle est initialisée par le constructeur, elle ne pourra pas être modifiée. Ceci est possible grâce à `const` devant l'attribut.
-- Il est possible de modifier le nom d'un objet étudiant (qui peut être créé sans nom).
-- Nous ne voulons pas donner accès au `vector` des notes de l'étudiant à part l'affichage (`printScores`) et pour ajouter des notes à travers une fonction `appendScore` qui ajoute une note à la fin du `vector` grâce à `push_back`.
+Il est difficile d'ajouter des étudiants et leurs notes.  
+Nous allons donc créer une classe `Student` avec les trois attributs suivants :  
+- Seul l'ID de l'étudiant est nécessaire pour construire l'objet. L'ID est *immutable* : une fois initialisée par le constructeur, elle ne peut plus être modifiée. Cela est rendu possible en utilisant `const` devant l'attribut.  
+- Le nom de l'étudiant peut être modifié (et l'objet peut être créé sans nom).  
+- Le `vector` des notes de l'étudiant ne sera accessible que pour l'affichage (`printScores`) et l'ajout de notes via la fonction `appendScore`, qui ajoute une note à la fin du `vector` en utilisant `push_back`.  
 
 :::{hint} Setter
 :class: dropdown
-Un setter typique ressemble au suivant :
+Un setter typique ressemble à ceci :
 ```{code} cpp
 void setAttribute(const AttributeType& valueName){
     mAttribute = valueName;
@@ -101,22 +101,22 @@ void setAttribute(const AttributeType& valueName){
 
 :::{hint} Avez-vous accompli votre tâche ?
 :class: dropdown
-- Est-ce que les attributs sont bien nommés (pas de préfixes inutiles) ?
-- Est-ce que les getters et setters correspondent à notre cas d'utilisation ?
-- Est-ce que vous avez transformé les fonctions appropriées en méthodes de la classe ?
-- Est-ce que vous avez vérifier si les méthodes qui ne modifie pas l'objet sont `const` ?
+- Les attributs sont-ils bien nommés (sans préfixes inutiles) ?  
+- Les getters et setters correspondent-ils à notre cas d'utilisation ?  
+- Avez-vous transformé les fonctions appropriées en méthodes de la classe ?  
+- Avez-vous vérifié si les méthodes qui ne modifient pas l'objet sont marquées `const` ?
 :::
 
-Pour pouvoir rentrer les informations de plusieurs étudiants, nous allons écrire plusieurs fonctions pour gérér les user inputs.
+Pour pouvoir saisir les informations de plusieurs étudiants, nous allons écrire plusieurs fonctions pour gérer les user inputs.
 
-3. Écrivez une fonction `int inputStudentID()` qui retourne l'ID de l'étudiant à partir d'un user input.
+3. Écrivez une fonction `int inputStudentID()` qui retourne l'ID de l'étudiant à partir d'une user input.
 
-4. Écrivez une fonction `void inputStudentName(Student& student)` qui modifie le nom de `student` à partir d'un user input.
+4. Écrivez une fonction `void inputStudentName(Student& student)` qui modifie le nom de `student` à partir d'une user input.
 
 :::{note} `cin >>`
-`cin >>` va juste affecter les valeurs rentrées au clavier jusqu'à trouver un espace.
-Par exemple, si vous tapez `Jean Pierre` alors `cin >>` va juste retourner `Jean`.
-Pour éviter les détails de lecture (*parsing*) d'entrée, nous allons supposer qu'un nom est un seul mot ou est plusieurs mots écrits en UpperCamelCase.
+`cin >>` affecte uniquement les valeurs saisies au clavier jusqu'à rencontrer un espace.  
+Par exemple, si vous tapez `Jean Pierre`, `cin >>` retournera uniquement `Jean`.  
+Pour éviter les détails de lecture (*parsing*) de l'entrée, nous supposerons qu'un nom est un seul mot ou plusieurs mots écrits en UpperCamelCase.
 :::
 
 5. Recopiez la fonction suivante pour récupérer les notes d'un étudiant :
@@ -133,12 +133,12 @@ void inputScores(Student& student) {
 }
 ```
 
-6. Écrivez une fonction `Student createStudentFromInput()` qui crée un objet étudiant à partir des user inputs.
+6. Écrivez une fonction `Student createStudentFromInput()` qui crée un `Student` à partir des user inputs.
 
-Nous pouvons maintenant créer un étudiant. 
-Pour créer plusieurs étudiants et afficher toutes leurs notes et moyennes, nous allons implémenter les fonctions suivantes.
+Nous pouvons maintenant créer un étudiant.  
+Pour créer plusieurs étudiants et afficher toutes leurs notes ainsi que leurs moyennes, nous allons implémenter les fonctions suivantes.
 
-7. Écrivez une fonction `int inputNumberOfStudents()` qui retourne le nombre d'étudiants à créer à partir d'un user input.
+7. Écrivez une fonction `int inputNumberOfStudents()` qui retourne le nombre d'étudiants à créer à partir d'une user input.
 
 8. Écrivez une fonction `void printAllScoresAndAverages(const vector<Student>& students)` qui affiche les notes et moyennes de chaque étudiant de `students`.
 
@@ -221,24 +221,24 @@ int main() {
 1. Que fait ce code ?
 
 :::{note} `sort`
-La fonction `sort` trie un `vector` en place (pas de copie de `vector` créée).
-Elle prend en argument l'indice du début et de la fin du `vector` et la comparaison `<` par défaut.
-Elle trie donc les valeurs de façon croissante (*non-decreasing* en anglais, *increasing* est "strictement croissant").
-Quand le type de l'objet à trier est plus complexe, elle demande une fonction de comparaison en argument.
-Ici, la fonction est écrite sous la forme :
-```{code} cpp
+La fonction `sort` trie un `vector` en place (aucune copie du `vector` n'est créée).  
+Elle prend en argument l'indice de début et de fin du `vector` ainsi que la comparaison `<` par défaut.  
+Elle trie donc les valeurs de manière croissante (*non-decreasing* en anglais, *increasing* désignant un ordre strictement croissant).  
+Lorsque le type de l'objet à trier est plus complexe, elle nécessite une fonction de comparaison en argument.  
+Ici, la fonction est écrite sous la forme suivante :  
+```cpp
 [](const Product& leftHandSideProduct, const Product& rightHandSideProduct){return leftHandSideProduct.getPrice() < rightHandSideProduct.getPrice();}
 ```
-Ceci est appelé une *fonction lambda*, ou *fonction anonyme* (sans nom).
+Cela s'appelle une *fonction lambda*, ou *fonction anonyme* (sans nom).  
 
-Nous allons éviter les fonctions anonyme en refactorisant la fonction de comparaison ailleurs sous la forme suivante :
-```{code} cpp
+Nous allons éviter les fonctions anonymes en refactorisant la fonction de comparaison ailleurs sous la forme suivante :  
+```cpp
 bool <nom de la fonction de comparaison>(const Product& leftHandSideProduct, const Product& rightHandSideProduct){
     return leftHandSideProduct.getPrice() < rightHandSideProduct.getPrice();
 }
 ```
-Puis, nous pouvons appeler `sort` avec :
-```{code} cpp
+Ensuite, nous pouvons appeler `sort` avec :  
+```cpp
 sort(availableProducts.begin(), availableProducts.end(), <nom de la fonction de comparaison>);
 ```
 :::
@@ -246,34 +246,36 @@ sort(availableProducts.begin(), availableProducts.end(), <nom de la fonction de 
 (tp3-const-and-ref)=
 :::{hint} `const` et `&`
 :class: dropdown
-L'utilisation de `const` pour les arguments des fonctions promet que la fonction ne va pas modifier l'argument `const`.
-La référence `&` pour les arguments permet de travailler sur le même objet que quand la fonction est appelé et ne pas créer de copie de l'objet.
-Cela permet aussi d'éviter de copie les objets "lourds".
-Ici, `Product` a trois attributs de type `string`, `double` et `int`.
-`double` et `int` sont considérées comme "léger" alors que `string` peut être "lourd".
+L'utilisation de `const` pour les arguments des fonctions garantit que la fonction ne modifiera pas l'argument `const`.  
+La référence `&` pour les arguments permet de travailler sur le même objet que celui passé à la fonction, évitant ainsi de créer une copie de l'objet.  
+Cela permet aussi d'éviter de copier des objets "lourds".  
+Ici, `Product` a trois attributs de type `string`, `double` et `int`.  
+`double` et `int` sont considérés comme "légers", tandis que `string` peut être "lourd".
 :::
 
 2. **Quiz** : Quels sont les problèmes de ce code ?
 
-3. Refactoriser le code.
+3. Refactorisez le code.
 
 :::{hint} Avez-vous accompli votre tâche ?
 :class: dropdown
-- Est-ce que vous avez respecté **The Stepdown Rule** ?
-- Est-ce que vos fonctions sont bien nommées ?
-- Est-ce que vos fonctions ont une responsabilité unique ?
-- Est-ce que vos fonctions ont peu d'arguments ?
-- Est-ce que vos fonctions à un argument rentrent bien dans les catégories vues en cours ?
-- Est-ce que vous avez mis `const` et `&` aux bons endroits ?
+- Avez-vous respecté **The Stepdown Rule** ?  
+- Vos fonctions sont-elles bien nommées ?  
+- Vos fonctions ont-elles une responsabilité unique ?  
+- Vos fonctions ont-elles peu d'arguments ?  
+- Vos fonctions avec un argument sont-elles bien classées dans les catégories vues en cours ?  
+- Avez-vous placé `const` et `&` aux bons endroits ?  
 :::
 
-Les produits courants apparaissent en dur dans le code. 
-Nous pouvons ajouter des user inputs pour pouvoir rentrer les informations sur les produits courants.
-Ceci est un bonus.
+Les produits courants sont actuellement codés en dur.  
+Nous pouvons ajouter des user input pour permettre l'entrée des informations sur les produits courants.  
+La question suivante est un bonus.
 
-4. **Bonus** : Implémenter les user inputs pour les informations sur les produits.
+4. **Bonus** : Implémentez les user inputs pour récupérer les informations sur les produits.
 
 :::{note} `cin >>`
 :class: dropdown
-Comme avant, nous allons considérer qu'un nom est écrit en UpperCamelCase ou est un seul mot.
+Comme précédemment, nous allons supposer qu'un nom est écrit en UpperCamelCase ou qu'il s'agit d'un seul mot.
 :::
+
+Revenez aux [objectifs](#tp3-objectifs) et cochez les points que vous avez maîtrisés. Revenez sur les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
