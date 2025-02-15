@@ -21,19 +21,19 @@ N'oubliez pas de compiler et exécuter votre code régulièrement lors de la ref
 :::
 
 :::{important} Organisation du code
-Dans ce TP, nous allons apprendre à réorganiser du code. Il ne faut donc plus créer un seul fichier `.cpp` contenant tout le code. Suivez les instructions pour l'organisation des fichiers et du code.
+Dans ce TP, nous allons apprendre à réorganiser le code. Il ne s'agit plus de créer un seul fichier `.cpp` contenant tout le code. Suivez les instructions pour organiser les fichiers et le code de manière appropriée.
 :::
 
 :::{important} Utilisation d'un IDE 
-Les codes deviennent de plus en plus complexes.
-Une bonne coloration syntaxique, une auto-complétion, un simple *Search and Replace* peut vous sauvez beaucoup de temps.
-Utilisez donc un IDE (comme VSCodium) sans son intégration Git pour le moment.
+Les codes deviennent de plus en plus complexes.  
+Une bonne coloration syntaxique, une autocomplétion et un simple *Search and Replace* peuvent vous faire gagner beaucoup de temps.  
+Utilisez donc un IDE (comme VSCodium) sans son intégration Git pour le moment.  
 
-Quelques points utiles à savoir sur VSCodium:
-- Ouvrez le répertoire Git (la racine de votre dépôt) avec **File** > **Open Folder** et restez sur **Explorer** (premier icône de la barre à gauche).
-- Vous pouvez créer des fichiers et des dossiers avec des boutons à droite du nom de la racine de votre dépôt.
-- Un clic droit sur n'importe quel fichier permet d'ouvrir un terminal dans le répertoire du fichier avec **Open in Integrated Terminal**.
-- `Ctrl+h` sur n'importe quelle sélection d'un bout de code permet de faire un **Search and Replace** dans le fichier courant.
+Quelques points utiles à connaître sur VSCodium :  
+- Ouvrez le répertoire Git (la racine de votre dépôt) via **File** > **Open Folder** et restez sur **Explorer** (première icône de la barre à gauche).  
+- Vous pouvez créer des fichiers et des dossiers à l'aide des boutons situés à droite du nom de la racine de votre dépôt.  
+- Un clic droit sur un fichier permet d'ouvrir un terminal dans le répertoire du fichier avec **Open in Integrated Terminal**.  
+- Utilisez `Ctrl+h` sur une sélection de code pour effectuer un **Search and Replace** dans le fichier courant.  
 :::
 
 (tp3-objectifs)=
@@ -52,9 +52,9 @@ Le but de ce TP est de comprendre les points suivants :
 ### Organisation du code
 
 :::{warning} Théorie à venir !
-Cette partie demande des manipulations simples mais beaucoup de théorie de compilation en C++ (qui est applicable seulement à quelques langages de la famille C mais pas à d'autres languages comme C#, Java, Python, Javascript...) pour comprendre l'intérêt de cette organisation.
+Cette partie nécessite des manipulations simples, mais aussi une compréhension approfondie de la théorie de la compilation en C++ (applicable à certains langages de la famille C, mais pas à d'autres comme C#, Java, Python, ou Javascript) pour saisir l'intérêt de cette organisation.  
 
-Si vous voulez juste apprendre les bonnes pratiques de façon générale, vous pouvez passer plus rapidement sur la théorie de C++ et seulement retenir les points importants (qui sont résumés à la fin de la sous-section).
+Si vous souhaitez simplement apprendre les bonnes pratiques de manière générale, vous pouvez parcourir plus rapidement la théorie de C++ et vous concentrer sur les points essentiels (résumés à la fin de la sous-section).  
 :::
 
 1. Créez un répertoire `short-functions/` dans `TP3/`.
@@ -66,8 +66,8 @@ Si vous voulez juste apprendre les bonnes pratiques de façon générale, vous p
 - `product.cpp`
 - `product.h`
 
-:::{important} Pourquoi ne pas avoir tout le code dans un seul fichier ?
-Quand un projet devient plus complexe qu'un simple exercice de code, la séparation du code a les mêmes valeurs que les principes de propreté et de développement que nous avons vu en cours : modularité, réutilisabilité, maintenabilité, extensibilité, encapsulation, lisibilité, gestion des erreurs,... 
+:::{important} Pourquoi ne pas regrouper tout le code dans un seul fichier ?
+Lorsque le projet devient plus complexe qu'un simple exercice de code, la séparation du code apporte les mêmes avantages que les principes de propreté et de développement abordés en cours : modularité, réutilisabilité, maintenabilité, extensibilité, encapsulation, lisibilité, gestion des erreurs, ...  
 :::
 
 3. Recopiez les codes suivants dans les fichiers correspondant.
@@ -98,16 +98,16 @@ public:
 
 :::{important} Où est `using namespace std` ?
 :class: dropdown
-`using namespace std` permet de ne pas réécrire `std::` devant tous les types/fonctions/objets de la bibliothèque standard de C++.
-Quand le projet devient plus complexe, nous pouvons avoir un problème si une fonction (ou un type/objet) porte le même nom qu'une fonction de la bibliothèque standard.
-Nous allons donc éviter l'utilisation de `using namespace std` à partir de maintenant.
+`using namespace std` évite de réécrire `std::` devant tous les types, fonctions ou objets de la bibliothèque standard de C++.  
+Cependant, lorsque le projet devient plus complexe, des conflits peuvent survenir si une fonction (ou un type/objet) porte le même nom qu'une fonction de la bibliothèque standard.  
+Nous éviterons donc l'utilisation de `using namespace std` à partir de maintenant.  
 :::
 
 :::{important} Fichiers header `.h` en C++
 :class: dropdown
-En C++, les fichiers header (`.h`) contiennent les déclarations de fonctions, de classes et de variables, mais pas leur implémentation.
-Cette séparation entre déclaration et implémentation permet à C++ de gérer les dépendences et la modularisation du code.
-Par exemple, si un code source `.cpp` a besoin de l'objet `Product`, il suffit d'inclure (`#include`) `"product.h"` sans se soucier de l'implémentation car `product.h` "promets" que les attributs, constructeur et méthodes déclarées seront implémentés. 
+En C++, les fichiers header (`.h`) contiennent les déclarations de fonctions, de classes et de variables, mais pas leur définition.  
+Cette séparation entre déclaration et définition permet à C++ de gérer les dépendances et de modulariser le code.  
+Par exemple, si un fichier source `.cpp` a besoin de l'objet `Product`, il suffit d'inclure (`#include`) `"product.h"` sans se soucier de l'implémentation, car `product.h` "promet" que les attributs, le constructeur et les méthodes déclarés seront implémentés.  
 :::
 
 :::{note} Les directives du préprocesseur en C++
@@ -127,28 +127,28 @@ Cette partie est appelé les directives :
 
 :::{note} Compilation en C++
 :class: dropdown
-Pour comprendre comment organiser un code C++ et son intérêt, il faut comprendre comment la compilation fonctionne en C++.
-La "compilation" est un abus de langage en C++ qui contient en réalité 4 étapes pour chaque fichier de code source `.cpp` :
-1. **Preprocessing** : les **directives** sont exécutées. Par exemple, `#include` est remplacé par le contenu du fichier inclus.
-2. **Translation Unit** : le fichier prétraité devient un unique large fichier de texte appelé *translation unit*.
-3. **Compilation** : le *translation unit* est compilé en code machine dans un fichier objet (`.o`).
-4. **Linking** : les fichiers objets sont liés à travers leur dépendences (header avec code source correspondant) pour former l'exécutable.
+Pour bien organiser un code C++ et en comprendre l'intérêt, il est essentiel de saisir le fonctionnement de la compilation en C++.  
+En réalité, le terme "compilation" regroupe 4 étapes pour chaque fichier source `.cpp` :  
+1. **Preprocessing** : les **directives** sont exécutées. Par exemple, `#include` est remplacé par le contenu du fichier inclus.  
+2. **Translation Unit** : le fichier prétraité devient un grand fichier texte appelé *translation unit*.  
+3. **Compilation** : le *translation unit* est compilé en code machine dans un fichier objet (`.o`).  
+4. **Linking** : les fichiers objets sont liés en fonction de leurs dépendances (headers et fichiers sources correspondants) pour former l'exécutable.  
 :::
 
-:::{important} Pourquoi séparer en header et code source en C++ ?
+:::{important} Pourquoi séparer les headers et le code source en C++ ?
 :class: dropdown
-- Imaginons un code source contenant à la fois les déclarations et l'implémentation (ce dont nous avons l'habitude) d'une classe que nous avons besoin de réutiliser dans plusieurs codes différents pour construire notre exécutable.
-- La bonne pratique nous dit de compiler tous les fichiers `.cpp` au lieu d'essayer de suivre les dépendances entre les fichiers et se perdre juste pour ne pas tout compiler.
-- Ce code sera donc compilé au moins deux fois, une fois parce que c'est un fichier `.cpp` et au moins une autre fois lors d'un include dans un autre fichier `.cpp`.
-- C++ suit la **règle de la définition unique** qui dit que pour un exécutable donné, si les portées de deux variables/fonctions intersectent alors elles doivent être différentes.
-- Lors du linking, C++ détecte une erreur parce que l'exécutable contient des définitions en double venant de translation units différentes.
-- Un header n'est pas compilé comme un code source car il contient seulement des déclarations mais pas les définitions elles-mêmes. Quand un header est recopié dans les codes sources `.cpp` à travers `#include`, des déclarations des mêmes variables/fonctions peuvent apparaître plusieurs fois mais **C++ autorise plusieurs déclarations du même élément avec des portées différentes ou venant de translation units différentes** (tant qu'il a une seule définition).
-- Il ne faut donc **jamais include un `.cpp` mais que des `.h`**.
+- Imaginons un code source contenant à la fois les déclarations et l'implémentation (ce dont nous avons l'habitude) d'une classe que nous devons réutiliser dans plusieurs fichiers pour construire notre exécutable.  
+- La bonne pratique consiste à compiler tous les fichiers `.cpp`, plutôt que de tenter de suivre les dépendances entre les fichiers et risquer de se perdre pour éviter de tout compiler.  
+- Ce code sera donc compilé au moins deux fois : une première fois en tant que fichier `.cpp` et une autre lors de l'inclusion dans un autre fichier `.cpp`.  
+- C++ suit la **règle de la définition unique**, qui stipule que pour un exécutable donné, si les portées de deux variables ou fonctions se croisent, elles doivent être différentes.  
+- Lors du linking, C++ détecte une erreur parce que l'exécutable contient des définitions en double provenant de différentes translation units.  
+- Un header n'est pas compilé comme un fichier source car il contient uniquement des déclarations, pas les définitions elles-mêmes. Lorsque le header est inclus dans les fichiers sources `.cpp` via `#include`, des déclarations identiques peuvent apparaître plusieurs fois, mais **C++ autorise plusieurs déclarations d'un même élément avec des portées différentes ou venant de translation units différentes** (tant qu'il n'y a qu'une seule définition).  
+- Il ne faut donc **jamais inclure un `.cpp`, mais seulement des `.h`**.
 :::
 
 :::{note} Include guards
 :class: dropdown
-Ces directives ensemble forment ce que nous appelons un **include guard** :
+Ces directives ensemble forment ce que l'on appelle un **include guard** :
 ```{code} cpp
 #ifndef PRODUCT_H
 #define PRODUCT_H
@@ -157,15 +157,15 @@ Ces directives ensemble forment ce que nous appelons un **include guard** :
 
 #endif
 ```
-- `#define` crée une **macro** qui remplace le texte défini (`PRODUCT_H`) par le code qui suit. La convention de nommage des macros est la même que celle des constantes globales et elle inclus `_H` pour dire que c'est une macro liée à l'include guard d'une header (il peut exister d'autre type de macro).
-- `#ifndef` (une abbréviation de "if not defined"), `#define` et `#endif`  veut dire : "If the macro PRODUCT_H is not defined, then define the macro PRODUCT_H as follows : `<code>`, end if". 
+- `#define` crée une **macro** qui remplace le texte défini (`PRODUCT_H`) par le code qui suit. La convention de nommage des macros est la même que celle des constantes globales et inclut `_H` pour indiquer qu'il s'agit d'une macro liée à l'include guard d'un header (bien qu'il puisse exister d'autres types de macros).  
+- `#ifndef` (abréviation de "if not defined"), `#define` et `#endif` signifient : "Si la macro PRODUCT_H n'est pas définie, définissez la macro PRODUCT_H comme suit : `<code>`, fin de la condition".  
 
-L'include guard permet à un header d'être défini une seule fois dans chaque code source et donc chaque translation unit.
+L'include guard permet à un header d'être défini une seule fois dans chaque code source et donc dans chaque translation unit.  
 
-L'inconvénience des include guards est la nécessité d'avoir un schéma de nommage cohérent pour un exécutable (dont la compilation peut venir de milliers de fichiers différents dans des répertoires différents) : il ne peut pas y avoir deux header avec la même macro (même si les deux fichiers sont dans des répertoires très éloignées les uns des autres).
+L'inconvénient des include guards est la nécessité d'avoir un schéma de nommage cohérent pour un exécutable (dont la compilation peut provenir de milliers de fichiers différents répartis dans différents répertoires) : il ne peut pas y avoir deux headers avec la même macro (même si les fichiers se trouvent dans des répertoires très éloignés les uns des autres).  
 
-Une autre directive est parfois utilisée à la place des include guards mais elle présente aussi ses propres inconvéniences.
-Les bonnes pratiques standard en C++ recommandent l'utilisation des include guards.
+Une autre directive est parfois utilisée à la place des include guards, mais elle présente aussi ses propres inconvénients.  
+Les bonnes pratiques standard en C++ recommandent l'utilisation des include guards.  
 :::
 
 `product.cpp` :
@@ -195,22 +195,22 @@ bool Product::operator<(const Product& other) const {
 
 :::{important} Pourquoi `#include <string>` une "deuxième" fois ?
 :class: dropdown
-Si `product.h` inclus `<string>` et que `product.cpp` inclus `product.h`, alors pourquoi avons nous besoin d'inclure `<string>` une deuxième fois ?
-**Include what you see** est une bonne pratique en C++.
+Si `product.h` inclut `<string>` et que `product.cpp` inclut `product.h`, pourquoi devons-nous inclure `<string>` une deuxième fois ?  
+**Include what you see** est une bonne pratique en C++.  
 
-D'abord, les headers ne contiennent pas toujours toutes les bibliothèques nécessaires pour les codes sources parce que nous n'avons pas forcément besoin de certaines bibliothèques pour une déclaration alors que nous en avons besoin pour la définition.
-De plus, vérifiez que toutes les bibliothèques nécessaires sont déjà dans les headers est une perte de temps quand le nombre de header est grand alors qu'un include en trop ne fait rien de mal si les include guards sont utilisés (ce qui est le cas de toutes les bibliothèques C++).
+Tout d'abord, les headers ne contiennent pas toujours toutes les bibliothèques nécessaires pour les fichiers sources, car certaines bibliothèques peuvent ne pas être nécessaires pour une déclaration, mais seront indispensables pour la définition.  
+De plus, vérifier que toutes les bibliothèques nécessaires sont déjà incluses dans les headers est une perte de temps lorsqu'il y a un grand nombre de headers. En revanche, un include en trop ne pose pas de problème si les include guards sont utilisés (ce qui est le cas pour toutes les bibliothèques C++).
 :::
 
 :::{important} `Product::`
 :class: dropdown
-Il est nécessaire d'écrire `Product::` devant toutes les méthodes de `Product` pour indiquer à C++ que ces éléments sont bien internes à `Product`. Il est possible de définir des fonctions externes à `Product` dans ce même fichier mais ce n'est pas une bonne pratique.
+Il est nécessaire d'écrire `Product::` devant toutes les méthodes de `Product` pour indiquer à C++ que ces éléments sont bien internes à `Product`. Il est possible de définir des fonctions externes à `Product` dans ce même fichier, mais ce n'est pas une bonne pratique.
 :::
 
 :::{important} `operator<`
-La méthode `operator<` est un **override** de la comparaison par défaut `<`.
-Il s'agit de dire que nos objets (`Product`) ne peuvent pas être comparé avec `<` et nous redéfinissons la comparaison en disant qu'un objet `Product` est plus petit qu'un autre (`other`) si son prix est plus petit (`mPrice < other.mPrice`).
-Ceci va servir pour trier les produits selon leur prix plus tard.
+La méthode `operator<` est un **override** de la comparaison par défaut `<`.  
+Cela signifie que les objets `Product` ne peuvent pas être comparés avec `<` de manière traditionnelle. Nous redéfinissons cette comparaison en disant qu'un objet `Product` est plus petit qu'un autre (`other`) si son prix est plus petit (`mPrice < other.mPrice`).  
+Cela permettra de trier les produits en fonction de leur prix plus tard.
 :::
 
 `display-prices.h` :
@@ -289,8 +289,8 @@ int main() {
 ```
 :::{important} Découpage du code
 :class: dropdown
-C'est une bonne pratique de découper le code en classes, fonctions externes liées et le main (chacun avec son propre header à part main).
-Des découpages plus fines des fonctions externes peuvent être effectués s'il y a besoin de réutiliser une partie de ses fonctions ailleurs (modularité et réutilisabilité).
+C'est une bonne pratique de découper le code en classes, fonctions externes liées et le main (chacun ayant son propre header, à l'exception de `main`).  
+Des découpages plus fins des fonctions externes peuvent être réalisés si une partie de ces fonctions doit être réutilisée ailleurs (modularité et réutilisabilité).
 :::
 
 4. Compilez le code avec `g++ -o short-functions main.cpp display-price.cpp product.cpp` (l'ordre des `.cpp` n'a pas d'importance).
@@ -298,23 +298,23 @@ Des découpages plus fines des fonctions externes peuvent être effectués s'il 
 5. Exécutez `./short-functions`.
 
 :::{important} Résumé des bonnes pratiques d'organisation du code en C++
-- Ne pas tout coder dans un seul fichier.
-- Utiliser un fichier `.cpp` et un fichier `.h` de même nom pour chaque classe et chaque groupe de fonctions externes liées; puis `main.cpp`.
-- Un fichier (`.cpp` et `.h`) d'une classe porte le nom de la classe et un fichier (`.cpp` et `.h`) de fonctions externes porte le nom qui les relie.
-- Les fichiers `.h` doivent contenir seulement les déclarations et les fichiers `.cpp` les définitions.
-- Les fichiers `.h` doivent toujours avoir des **include guards**, c'est-à-dire :
-```{code} cpp
+- Ne pas tout coder dans un seul fichier.  
+- Utiliser un fichier `.cpp` et un fichier `.h` de même nom pour chaque classe et chaque groupe de fonctions externes liées, puis un fichier `main.cpp`.  
+- Un fichier (`.cpp` et `.h`) d'une classe porte le nom de la classe, et un fichier (`.cpp` et `.h`) de fonctions externes porte le nom qui les relie.  
+- Les fichiers `.h` doivent contenir uniquement les déclarations, et les fichiers `.cpp` doivent contenir les définitions.  
+- Les fichiers `.h` doivent toujours avoir des **include guards**, c'est-à-dire :  
+```cpp
 #ifndef NOM_DE_HEADER_H
 #define NOM_DE_HEADER_H
 
 //...
 
 #endif
-```
-- Ne pas oublier d'utiliser `MyClass::` devant les méthodes dans `my-class.cpp` qui définit la classe `MyClass` déclarée dans `my-class.h`.
-- Si vous avez besoin du code d'un fichier `code.cpp`, `#include "code.h"`, pas le `code.cpp` lui-même.
-- Include what you see : ajouter les bibliothèques et header que vous utilisez pour votre code au début peu importe si un header que vous incluez les contient déjà.
-- Ne plus utiliser `using namespace std`.
+```  
+- Ne pas oublier d'utiliser `MyClass::` devant les méthodes dans `my-class.cpp` qui définit la classe `MyClass` déclarée dans `my-class.h`.  
+- Si vous avez besoin du code d'un fichier `code.cpp`, `#include "code.h"`, et non le `code.cpp` lui-même.  
+- **Include what you see** : ajouter les bibliothèques et headers que vous utilisez pour votre code au début, peu importe si un header que vous incluez les contient déjà.  
+- Ne plus utiliser `using namespace std`.  
 :::
 
 ### Refactorisation du code
@@ -322,19 +322,13 @@ Des découpages plus fines des fonctions externes peuvent être effectués s'il 
 1. Que fait ce code ?
 
 :::{note} `sort`
-La fonction `sort` trie un `vector` en place (aucune copie du `vector` n'est créée).  
-Elle prend en argument l'indice de début et de fin du `vector` et utilise la comparaison `<` par défaut (qui a été redéfini pour `Product`).  
-Elle trie donc les valeurs de manière croissante (*non-decreasing* en anglais, *increasing* désignant un ordre strictement croissant).  
+La fonction `sort` trie un `vector` en place (aucune copie du `vector` n'est créée). Elle prend en argument l'indice de début et de fin du `vector` et utilise la comparaison `<` par défaut (qui a été redéfinie pour `Product`). Elle trie donc les valeurs de manière croissante (*non-decreasing* en anglais, *increasing* désignant un ordre strictement croissant). 
 :::
 
 (tp3-const-and-ref)=
 :::{hint} `const` et `&`
 :class: dropdown
-L'utilisation de `const` pour les arguments des fonctions garantit que la fonction ne modifiera pas l'argument `const`.  
-La référence `&` pour les arguments permet de travailler sur le même objet que celui passé à la fonction, évitant ainsi de créer une copie de l'objet.  
-Cela permet aussi d'éviter de copier des objets "lourds".  
-Ici, `Product` a trois attributs de type `string`, `double` et `int`.  
-`double` et `int` sont considérés comme "légers", tandis que `string` peut être "lourd".
+L'utilisation de `const` pour les arguments des fonctions garantit que la fonction ne modifiera pas l'argument `const`. La référence `&` pour les arguments permet de travailler sur le même objet que celui passé à la fonction, évitant ainsi de créer une copie de l'objet. Cela permet aussi d'éviter de copier des objets "lourds". Ici, `Product` a trois attributs de type `string`, `double` et `int`. `double` et `int` sont considérés comme "légers", tandis que `string` peut être "lourd".
 :::
 
 2. **Quiz** : Quels sont les problèmes de ce code ?
@@ -343,17 +337,17 @@ Ici, `Product` a trois attributs de type `string`, `double` et `int`.
 
 :::{hint} Avez-vous accompli votre tâche ?
 :class: dropdown
-- Avez-vous respecté The Stepdown Rule ?  
+- Avez-vous respecté **The Stepdown Rule** ?  
 - Vos fonctions sont-elles bien nommées ?  
 - Vos fonctions ont-elles une responsabilité unique ?  
 - Vos fonctions ont-elles peu d'arguments ?  
 - Vos fonctions avec un argument sont-elles bien classées dans les catégories vues en cours ?  
-- Avez-vous placé `const` et `&` aux bons endroits ? 
+- Avez-vous placé `const` et `&` aux bons endroits ?
 :::
 
 :::{note} Informations codées en dur
-Nous allons ignorer le fait que les informations sur les produits sont codées en dur.
-Nous allons imaginer que ces informations viennent d'une base de donnée.
+Nous allons ignorer le fait que les informations sur les produits sont codées en dur.  
+Nous allons imaginer que ces informations proviennent d'une base de données.
 :::
 
 ## Exercice 2 : Classify it
@@ -415,7 +409,7 @@ int main() {
 
 Il est difficile d'ajouter des étudiants et leurs notes.  
 Nous allons donc créer une classe `Student` avec les trois attributs suivants :  
-- Seul l'ID de l'étudiant est nécessaire pour construire l'objet. L'ID est *immutable* : une fois initialisée par le constructeur, elle ne peut plus être modifiée. Cela est rendu possible en utilisant `const` devant l'attribut.  
+- Seul l'ID de l'étudiant est nécessaire pour construire l'objet. L'ID est *immutable* : une fois initialisée par le constructeur, elle ne peut plus être modifiée. Cela est rendu possible en utilisant `const` devant l'attribut.
 
 :::{note} Initialiser un attribut `const`
 Un attribut immutable (`const`) ne peut être initialisé que dans l'*initializer list* en C++.
@@ -430,7 +424,7 @@ public:
     }
 }
 ```
-Cet attribut ne peut pas êtré initialisé dans *Constructor body*.
+Cet attribut ne peut pas être initialisé dans le *Constructor body*.  
 Par exemple, le code suivant retournera une erreur de compilation :
 ```{code} cpp
 class MyClass{
@@ -456,27 +450,27 @@ void setAttribute(const AttributeType& valueName){
 ```
 :::
 
-- Le `vector` des notes de l'étudiant ne sera pas accessible. Les seuls accès se feront à travers l'affichage (`printScores`) et l'ajout de notes via la fonction `appendScore`, qui ajoute une note à la fin du `vector` en utilisant `push_back`. Il n'y a pas de notes au début mais nous allons aussi ignorer les erreurs potentielles venant d'un `vector` vide dans cet exercice.
+- Le `vector` des notes de l'étudiant ne sera pas accessible. Les seuls accès se feront à travers l'affichage (`printScores`) et l'ajout de notes via la fonction `appendScore`, qui ajoute une note à la fin du `vector` en utilisant `push_back`. Il n'y a pas de notes au début, mais nous allons aussi ignorer les erreurs potentielles venant d'un `vector` vide dans cet exercice.
 
-3. Créez la classe `Student` avec les bonnes méthodes (avec les fichiers `.h` et `.cpp` correspondant) et y rajouter les fonctions de calcul de moyenne et d'affichage.
+3. Créez la classe `Student` avec les méthodes appropriées (en incluant les fichiers `.h` et `.cpp` correspondants), et ajoutez-y les fonctions pour calculer la moyenne et afficher les notes.
 
 4. Modifiez les directives de `main.cpp` pour inclure `student.h` et les bibliothèques nécessaires.
 
 :::{hint} Avez-vous accompli votre tâche ?
 :class: dropdown
 - Les fichiers `.h` et `.cpp` respectent-ils les bonnes pratiques ?
-- Les attributs sont-ils bien nommés (sans préfixes inutiles) ?  
-- Les getters et setters correspondent-ils à notre cas d'utilisation ?  
-- Avez-vous transformé les fonctions en méthodes de la classe de la bonne manière ?  
+- Les attributs sont-ils bien nommés (sans préfixes inutiles) ?
+- Les getters et setters correspondent-ils à notre cas d'utilisation ?
+- Avez-vous transformé les fonctions en méthodes de la classe de manière appropriée ?
 - Avez-vous vérifié si les méthodes qui ne modifient pas l'objet sont marquées `const` ?
 :::
 
 ### User input (Bonus)
 
-L'intérêt d'avoir une classe `Student` est la possibilité de rentrer les données de plusieurs étudiants plus facilement.
-Pour pouvoir saisir les informations de plusieurs étudiants, nous allons écrire plusieurs fonctions pour gérer les user inputs.
+L'intérêt d'avoir une classe `Student` est de faciliter l'entrée des données de plusieurs étudiants.  
+Pour pouvoir saisir les informations de plusieurs étudiants, nous allons écrire plusieurs fonctions pour gérer les saisies utilisateur.
 
-1. Créez un fichier `user-input.cpp` et la header associée.
+1. Créez un fichier `user-input.cpp` ainsi que le fichier header associé.
 
 2. Voici des déclarations de fonctions pour vous aider :
 ```{code} cpp
@@ -509,6 +503,6 @@ Par exemple, si vous tapez `Jean Pierre`, `cin >>` retournera uniquement `Jean`.
 Pour éviter les détails de lecture (*parsing*) de l'entrée, nous supposerons qu'un nom est un seul mot ou plusieurs mots écrits en UpperCamelCase.
 :::
 
-4. Implémentez les fonctions données et modifiez le main pour récupérer les user-inputs et afficher les notes et moyennes de chaque étudiant.
+4. Implémentez les fonctions données et modifiez le `main` pour récupérer les saisies utilisateur et afficher les notes ainsi que les moyennes de chaque étudiant.
 
 Revenez aux [objectifs](#tp3-objectifs) et cochez les points que vous avez maîtrisés. Revenez sur les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
