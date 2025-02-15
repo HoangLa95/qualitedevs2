@@ -133,7 +133,6 @@ Plus de commandes dans les TPs !
 :::{important} Objectifs du cours
 - Savoir utiliser les commandes de bases de Git, un outil de gestion de versions.
 - Connaître les principes de base du code propre.
-- Savoir utiliser un debugger.
 - Découvrir les tests unitaires et le TDD (Test Driven Development).
 :::
 
