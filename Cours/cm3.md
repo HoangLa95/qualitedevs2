@@ -184,12 +184,12 @@ Dans ce cas, il est nécessaire de refactoriser le code.
 :::
 
 ```{code} cpp
-bool isEven(int number)
+bool isEven(int number);
 
-double squareRoot(int number)
+double squareRoot(int number);
 
-void printMessage(const string& message)
-void removeVowels(string& inputString)
+void printMessage(const string& message);
+void removeVowels(string& inputString);
 ```
 
 :::{important} Un seul argument
@@ -202,7 +202,7 @@ Il faut éviter les fonctions à un argument qui ne sont pas dans une de ces cat
 :::
 
 ```{code} cpp
-void switchPower(bool onOrOff)
+void switchPower(bool onOrOff);
 ```
 
 :::{warning} *Flag argument*
@@ -218,9 +218,9 @@ Si les comportements des deux fonctions sont très similaires, la séparation pe
 :::
 
 ```{code} cpp
-Point createPoint(int xCoordinate, int yCoordinate)
-Matrix multiply(const Matrix& leftMatrix, const Matrix& rightMatrix)
-bool verifyBehavior(const SomeType& expected, const SomeType& actual)
+Point createPoint(int xCoordinate, int yCoordinate);
+Matrix multiply(const Matrix& leftMatrix, const Matrix& rightMatrix);
+bool verifyBehavior(const SomeType& expected, const SomeType& actual);
 ```
 
 :::{warning} Deux arguments
@@ -235,12 +235,12 @@ Il est important de choisir des verbes et des mots-clés qui reflètent claireme
 
 L'ordre des arguments dans une fonction à deux paramètres peut également être précisé dans le nom de la fonction. Par exemple :
 ```{code} cpp
-bool assertExpectedEqualsActual(const SomeType& expected, const SomeType& actual)
+bool assertExpectedEqualsActual(const SomeType& expected, const SomeType& actual);
 ``` 
 :::
 
 ```{code} cpp
-Circle makeCircle(double xCoordinate, double yCoordinate, double radius)
+Circle makeCircle(double xCoordinate, double yCoordinate, double radius);
 ```
 
 :::{danger} Trois arguments 
@@ -251,7 +251,7 @@ struct Point{
     double yCoordinate;
 }
 
-Circle makeCircle(Point center, double radius)
+Circle makeCircle(Point center, double radius);
 ```
 :::
 
