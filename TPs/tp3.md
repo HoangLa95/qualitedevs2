@@ -7,27 +7,21 @@ Maintenez vos dépôts !
 
 :::{important} Résolution de conflits
 :class: dropdown
-Vous avez suivi une initiation à la résolution de conflits en Projet SAÉ.  
-Essayez de résoudre les conflits par vous-même.  
-En cas de difficulté, sollicitez votre encadrant.
+Vous avez suivi une initiation à la résolution de conflits en Projet SAÉ. Essayez de résoudre les conflits par vous-même. En cas de difficulté, sollicitez votre encadrant.
 :::
 
 :::{important} Ignorer la gestion des erreurs pour le moment
 :class: dropdown
-Nous n'avons pas encore abordé la gestion des erreurs en classe.  
-Pour le moment, vous pouvez supposer que les arguments sont toujours valides et ne pas vous préoccuper de la gestion des erreurs.
+Nous n'avons pas encore abordé la gestion des erreurs en classe. Pour le moment, vous pouvez supposer que les arguments sont toujours valides et ne pas vous préoccuper de la gestion des erreurs.
 :::
 
 :::{important} Compiler et exécuter régulièrement
 :class: dropdown
-N'oubliez pas de compiler et exécuter votre code régulièrement lors de la refactorisation.  
-Le comportement du code doit rester cohérent avec vos attentes !
+N'oubliez pas de compiler et exécuter votre code régulièrement lors de la refactorisation. Le comportement du code doit rester cohérent avec vos attentes !
 :::
 
 :::{important} Organisation du code
-Dans ce TP, nous allons apprendre à réorganiser du code. 
-Il ne faut donc plus créer un seul fichier `.cpp` contenant tout le code.
-Suivez les instructions pour l'organisation des fichiers et du code.
+Dans ce TP, nous allons apprendre à réorganiser du code. Il ne faut donc plus créer un seul fichier `.cpp` contenant tout le code. Suivez les instructions pour l'organisation des fichiers et du code.
 :::
 
 :::{important} Utilisation d'un IDE 
@@ -60,7 +54,7 @@ Le but de ce TP est de comprendre les points suivants :
 :::{warning} Théorie à venir !
 Cette partie demande des manipulations simples mais beaucoup de théorie de compilation en C++ (qui est applicable seulement à quelques langages de la famille C mais pas à d'autres languages comme C#, Java, Python, Javascript...) pour comprendre l'intérêt de cette organisation.
 
-Si vous voulez juste apprendre les bonnes pratiques de façon générale, vous pouvez passer plus rapidement sur la théorie de C++ et seulement retenir les points importants (qui sont résumé à la fin de la sous-section).
+Si vous voulez juste apprendre les bonnes pratiques de façon générale, vous pouvez passer plus rapidement sur la théorie de C++ et seulement retenir les points importants (qui sont résumés à la fin de la sous-section).
 :::
 
 1. Créez un répertoire `short-functions/` dans `TP3/`.
@@ -113,7 +107,7 @@ Nous allons donc éviter l'utilisation de `using namespace std` à partir de mai
 :class: dropdown
 En C++, les fichiers header (`.h`) contiennent les déclarations de fonctions, de classes et de variables, mais pas leur implémentation.
 Cette séparation entre déclaration et implémentation permet à C++ de gérer les dépendences et la modularisation du code.
-Par exemple, si un code source `.cpp` a besoin de l'objet `Product`, il suffit d'inclure (#include) `"product.h"` sans se soucier de l'implémentation car `product.h` "promets" que les attributs, constructeur et méthodes déclarées seront implémentés. 
+Par exemple, si un code source `.cpp` a besoin de l'objet `Product`, il suffit d'inclure (`#include`) `"product.h"` sans se soucier de l'implémentation car `product.h` "promets" que les attributs, constructeur et méthodes déclarées seront implémentés. 
 :::
 
 :::{note} Les directives du préprocesseur en C++
@@ -148,7 +142,7 @@ La "compilation" est un abus de langage en C++ qui contient en réalité 4 étap
 - Ce code sera donc compilé au moins deux fois, une fois parce que c'est un fichier `.cpp` et au moins une autre fois lors d'un include dans un autre fichier `.cpp`.
 - C++ suit la **règle de la définition unique** qui dit que pour un exécutable donné, si les portées de deux variables/fonctions intersectent alors elles doivent être différentes.
 - Lors du linking, C++ détecte une erreur parce que l'exécutable contient des définitions en double venant de translation units différentes.
-- Un header n'est pas compilé comme un code source car il contient seulement des déclarations mais pas les définitions elles-mêmes. Quand un header est recopié dans les codes sources `.cpp` à travers `#include`, des déclarations des mêmes variables/fonctions peuvent apparaître plusieurs fois mais **C++ autorise plusieurs déclarations** tant qu'il a une seule définition.
+- Un header n'est pas compilé comme un code source car il contient seulement des déclarations mais pas les définitions elles-mêmes. Quand un header est recopié dans les codes sources `.cpp` à travers `#include`, des déclarations des mêmes variables/fonctions peuvent apparaître plusieurs fois mais **C++ autorise plusieurs déclarations du même élément avec des portées différentes ou venant de translation units différentes** (tant qu'il a une seule définition).
 - Il ne faut donc **jamais include un `.cpp` mais que des `.h`**.
 :::
 
@@ -166,7 +160,7 @@ Ces directives ensemble forment ce que nous appelons un **include guard** :
 - `#define` crée une **macro** qui remplace le texte défini (`PRODUCT_H`) par le code qui suit. La convention de nommage des macros est la même que celle des constantes globales et elle inclus `_H` pour dire que c'est une macro liée à l'include guard d'une header (il peut exister d'autre type de macro).
 - `#ifndef` (une abbréviation de "if not defined"), `#define` et `#endif`  veut dire : "If the macro PRODUCT_H is not defined, then define the macro PRODUCT_H as follows : `<code>`, end if". 
 
-L'include guard permet à un header d'être défini une seule fois dans chaque code source et donc chaque translation unit. Ce n'est pas forcément nécessaire vu que C++ autorise plusieurs déclarations de la même chose à l'intérieur même d'une translation unit mais c'est une bonne pratique d'avoir une seule déclaration par translation unit pour casser des boucles dans les dépendances et rendre la compilation plus efficace car il n'y aura pas de duplications de code.
+L'include guard permet à un header d'être défini une seule fois dans chaque code source et donc chaque translation unit.
 
 L'inconvénience des include guards est la nécessité d'avoir un schéma de nommage cohérent pour un exécutable (dont la compilation peut venir de milliers de fichiers différents dans des répertoires différents) : il ne peut pas y avoir deux header avec la même macro (même si les deux fichiers sont dans des répertoires très éloignées les uns des autres).
 
@@ -303,7 +297,7 @@ Des découpages plus fines des fonctions externes peuvent être effectués s'il 
 
 5. Exécutez `./short-functions`.
 
-:::{important} Résumé des bonnes pratiques d'organisation du code
+:::{important} Résumé des bonnes pratiques d'organisation du code en C++
 - Ne pas tout coder dans un seul fichier.
 - Utiliser un fichier `.cpp` et un fichier `.h` de même nom pour chaque classe et chaque groupe de fonctions externes liées; puis `main.cpp`.
 - Un fichier (`.cpp` et `.h`) d'une classe porte le nom de la classe et un fichier (`.cpp` et `.h`) de fonctions externes porte le nom qui les relie.
@@ -318,7 +312,7 @@ Des découpages plus fines des fonctions externes peuvent être effectués s'il 
 #endif
 ```
 - Ne pas oublier d'utiliser `MyClass::` devant les méthodes dans `my-class.cpp` qui définit la classe `MyClass` déclarée dans `my-class.h`.
-- Si vous avez besoin du code d'un fichier, include son header (`.h`), pas le code `.cpp` lui-même.
+- Si vous avez besoin du code d'un fichier `code.cpp`, `#include "code.h"`, pas le `code.cpp` lui-même.
 - Include what you see : ajouter les bibliothèques et header que vous utilisez pour votre code au début peu importe si un header que vous incluez les contient déjà.
 - Ne plus utiliser `using namespace std`.
 :::
@@ -349,7 +343,7 @@ Ici, `Product` a trois attributs de type `string`, `double` et `int`.
 
 :::{hint} Avez-vous accompli votre tâche ?
 :class: dropdown
-- Avez-vous respecté **The Stepdown Rule** ?  
+- Avez-vous respecté The Stepdown Rule ?  
 - Vos fonctions sont-elles bien nommées ?  
 - Vos fonctions ont-elles une responsabilité unique ?  
 - Vos fonctions ont-elles peu d'arguments ?  
@@ -431,7 +425,7 @@ class MyClass{
 private:
     const int mAttribute;
 public:
-    MyClass(valueName) : mAttribute(valueName){
+    MyClass(int valueName) : mAttribute(valueName){
         // Constructor body
     }
 }
@@ -443,7 +437,7 @@ class MyClass{
 private:
     const int mAttribute;
 public:
-    MyClass(valueName) {
+    MyClass(int valueName) {
         mAttribute = valueName;
     }
 }
