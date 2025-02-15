@@ -48,7 +48,6 @@ Le but de ce TP est de comprendre les points suivants :
 
 ## Exercice 1 : Short functions
 
-(tp3-organisation-code)=
 ### Organisation du code
 
 :::{warning} Théorie à venir !
@@ -297,6 +296,7 @@ Des découpages plus fins des fonctions externes peuvent être réalisés si une
 
 5. Exécutez `./short-functions`.
 
+(tp3-organisation-code)=
 :::{important} Résumé des bonnes pratiques d'organisation du code en C++
 - Ne pas tout coder dans un seul fichier.  
 - Utiliser un fichier `.cpp` et un fichier `.h` de même nom pour chaque classe et chaque groupe de fonctions externes liées, puis un fichier `main.cpp`.  
@@ -331,7 +331,7 @@ La fonction `sort` trie un `vector` en place (aucune copie du `vector` n'est cr�
 L'utilisation de `const` pour les arguments des fonctions garantit que la fonction ne modifiera pas l'argument `const`. La référence `&` pour les arguments permet de travailler sur le même objet que celui passé à la fonction, évitant ainsi de créer une copie de l'objet. Cela permet aussi d'éviter de copier des objets "lourds". Ici, `Product` a trois attributs de type `string`, `double` et `int`. `double` et `int` sont considérés comme "légers", tandis que `string` peut être "lourd".
 :::
 
-2. **Quiz** : Quels sont les problèmes de ce code ?
+2. **Quiz** : Quels sont les problèmes du code de `displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice` ?
 
 3. Refactorisez le code (en modifiant les autres fichiers concernés comme le header, le main).
 

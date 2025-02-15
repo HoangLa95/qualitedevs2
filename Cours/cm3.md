@@ -279,7 +279,7 @@ Il est crucial d'éviter les effets secondaires pour garantir la responsabilité
 ```{code} cpp
 void activateUserAndSendNotification(const vector<User>& users, int validUserId) {
     users[validUserId].activate();
-    sendActivationNotification(users[userId].name + "@example.com");
+    sendActivationNotification(users[userId].getName() + "@example.com");
 }
 ```
 
