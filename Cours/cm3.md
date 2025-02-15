@@ -265,7 +265,7 @@ Si vous avez plus de trois arguments, il est souvent préférable de regrouper c
 ```{code} cpp
 void activateUser(const vector<User>& users, int validUserId) {
     users[validUserId].activate();
-    sendActivationNotification(users[userId].name + "@example.com");
+    sendActivationNotification(users[userId].getName() + "@example.com");
 }
 ```
 
