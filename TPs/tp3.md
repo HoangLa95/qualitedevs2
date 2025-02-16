@@ -317,6 +317,13 @@ Des découpages plus fins des fonctions externes peuvent être réalisés si une
 - Ne plus utiliser `using namespace std`.  
 :::
 
+:::{warning} Java et C#
+- En Java et C#, il n'y a pas de séparation entre les headers et les codes source, car leurs systèmes de compilation diffèrent. Les éléments du code sont à la fois déclarés et définis dans le même fichier.
+- Néanmoins, il reste essentiel d'organiser le code en plusieurs fichiers, de la même manière qu'en C++.
+- En Java et C#, il est nécessaire de nommer un fichier contenant une classe en fonction du nom de la classe (comme en C++), mais en utilisant la convention **UpperCamelCase** (également appelée **PascalCase**). De plus, en Java, la compilation échouera si le fichier contenant une classe n'est pas correctement nommé, contrairement à C++.
+- En Java et C#, on suit plutôt le principe de **Include what you use**, qui consiste à importer (`import` en Java, `using` en C#) uniquement ce qui est nécessaire au bon fonctionnement du code. Cela diffère du principe **Include what you see** en C++, qui repose sur les include guards pour éviter les duplications de code.
+:::
+
 ### Refactorisation du code
 
 1. Que fait ce code ?
