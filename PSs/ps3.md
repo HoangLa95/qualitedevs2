@@ -51,7 +51,7 @@ The goal of this session is to understand the following points:
 
 ### Code organization
 
-:::{warning} Theory ahead !
+:::{warning} Theory ahead!
 This section requires simple manipulations but also a good understanding of the compilation theory in C++ (applicable to some languages in the C family, but not to others like C#, Java, Python, or Javascript) to grasp the importance of this organization.
 
 If you simply wish to learn general best practices, then you can go through the C++ theory more quickly and focus on the key points (summarized at the end of the sub-section).  
