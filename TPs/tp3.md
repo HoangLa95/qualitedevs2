@@ -109,7 +109,7 @@ Cette séparation entre déclaration et définition permet à C++ de gérer les 
 Par exemple, si un fichier source `.cpp` a besoin de l'objet `Product`, il suffit d'inclure (`#include`) `"product.h"` sans se soucier de l'implémentation, car `product.h` "promet" que les attributs, le constructeur et les méthodes déclarés seront implémentés.  
 :::
 
-:::{note} Les directives du préprocesseur en C++
+:::{important} Les directives du préprocesseur en C++
 :class: dropdown
 Cette partie est appelé les directives :
 ```{code} cpp
@@ -145,7 +145,7 @@ En réalité, le terme "compilation" regroupe 4 étapes pour chaque fichier sour
 - Il ne faut donc **jamais inclure un `.cpp`, mais seulement des `.h`**.
 :::
 
-:::{note} Include guards
+:::{important} Include guards
 :class: dropdown
 Ces directives ensemble forment un **include guard** :
 ```{code} cpp

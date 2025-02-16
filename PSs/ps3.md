@@ -110,7 +110,7 @@ This separation between declaration and definition allows C++ to manage dependen
 For example, if a source file `.cpp` needs the `Product` object, it is enough to include (`#include`) `"product.h"` without worrying about the implementation, because `product.h` "promises" that the declared attributes, constructor, and methods will be implemented.  
 :::
 
-:::{note} Preprocessor directives in C++
+:::{important} Preprocessor directives in C++
 :class: dropdown
 This part is called directives:
 ```{code} cpp
@@ -146,7 +146,7 @@ In reality, the term "compilation" encompasses 4 steps for each source file `.cp
 :::
 
 
-:::{note} Include guards
+:::{important} Include guards
 :class: dropdown
 These directives together form an **include guard** :
 ```{code} cpp
