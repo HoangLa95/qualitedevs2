@@ -41,10 +41,10 @@ Some useful things to know about VSCodium:
 ## Objectives
 
 The goal of this session is to understand the following points:
-- [ ] [Code Organization and Structuring](#ps3-code-organization)
+- [ ] [Code organization and structuring](#ps3-code-organization)
 - [ ] [Single Responsibility Principle](#cm3-unique-responsibility)
 - [ ] [The Stepdown Rule](#cm3-stepdown-rule)
-- [ ] [Functions with Few Arguments](#cm3-peu-arguments)
+- [ ] [Functions with few arguments](#cm3-peu-arguments)
 - [ ] [`const` and `&`](#ps3-const-and-ref)
 
 ## Exercise 1 : Short functions
@@ -288,7 +288,7 @@ int main() {
 }
 ```
 
-:::{important} Code Organization
+:::{important} Code organization
 :class: dropdown
 It is good practice to break down the code into classes, related external functions, and the main (each having its own header, except for `main`).  
 Finer breakdowns of external functions can be made if part of these functions needs to be reused elsewhere (modularity and reusability).
@@ -296,7 +296,7 @@ Finer breakdowns of external functions can be made if part of these functions ne
 
 4. Compile the code with `g++ -o short-functions main.cpp display-prices.cpp product.cpp` (the order of `.cpp` files does not matter).
 
-:::{note} C++ Version
+:::{note} C++ version
 :class: dropdown
 If you see warnings during compilation related to the syntax standards used (for example, `for (ElementType element : vectorOfElements)`, which only exists since C++11), you can compile with a more recent version of C++ that is compatible with your `g++` compiler.
 
@@ -348,7 +348,7 @@ g++ -std=c++14 -o short-functions main.cpp display-prices.cpp product.cpp
 - In Java and C#, the principle of **Include what you use** is followed, meaning that only what is necessary for the code to function properly is imported (`import` in Java, `using` in C#). This differs from the **Include what you see** principle in C++, which relies on include guards to prevent code duplication.
 :::
 
-### Refactoring the Code
+### Refactoring the code
 
 1. What does this code do?
 
