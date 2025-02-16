@@ -292,7 +292,29 @@ C'est une bonne pratique de découper le code en classes, fonctions externes li�
 Des découpages plus fins des fonctions externes peuvent être réalisés si une partie de ces fonctions doit être réutilisée ailleurs (modularité et réutilisabilité).
 :::
 
-4. Compilez le code avec `g++ -o short-functions main.cpp display-price.cpp product.cpp` (l'ordre des `.cpp` n'a pas d'importance).
+4. Compilez le code avec `g++ -o short-functions main.cpp display-prices.cpp product.cpp` (l'ordre des `.cpp` n'a pas d'importance).
+
+:::{note} Version C++
+:class: dropdown
+Si vous voyez des warnings lors de la compilation liés aux standards de syntaxe utilisés (par exemple, `for (ElementType element : vectorOfElements)`, qui n'existe que depuis C++11), vous pouvez compiler avec une version plus récente de C++ compatible avec votre compilateur `g++`.
+
+Pour vérifier la version (l'année) de C++ utilisée par défaut par `g++` sur votre poste de travail, utilisez la commande suivante :
+```{code} sh
+g++ -dM -E -x c++ /dev/null | grep __cplusplus | sed 's/[^0-9]*\([0-9]\{4\}\)[0-9]*L/\1/'
+```
+Par exemple, `2011` correspond à C++11.
+
+Pour vérifier les versions compatibles avec `g++` sur votre poste, utilisez la commande :
+```{code} sh
+g++ -v --help 2> /dev/null | grep -oP '(?<=-std=)c\+\+\S+' | sed 's/\.$//' | sort | uniq
+```
+Les dernières versions de C++ après 11 sont C++14, 17, 20 et 23.
+
+Vous pouvez compiler votre code en utilisant une version plus récente et compatible que celle par défaut. Par exemple :
+```{code} sh
+g++ -std=c++14 -o short-functions main.cpp display-prices.cpp product.cpp
+```
+:::
 
 5. Exécutez `./short-functions`.
 

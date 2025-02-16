@@ -294,7 +294,29 @@ It is good practice to break down the code into classes, related external functi
 Finer breakdowns of external functions can be made if part of these functions needs to be reused elsewhere (modularity and reusability).
 :::
 
-4. Compile the code with `g++ -o short-functions main.cpp display-price.cpp product.cpp` (the order of `.cpp` files does not matter).
+4. Compile the code with `g++ -o short-functions main.cpp display-prices.cpp product.cpp` (the order of `.cpp` files does not matter).
+
+:::{note} C++ Version
+:class: dropdown
+If you see warnings during compilation related to the syntax standards used (for example, `for (ElementType element : vectorOfElements)`, which only exists since C++11), you can compile with a more recent version of C++ that is compatible with your `g++` compiler.
+
+To check the version (year) of C++ used by default by `g++` on your workstation, use the following command:
+```{code} sh
+g++ -dM -E -x c++ /dev/null | grep __cplusplus | sed 's/[^0-9]*\([0-9]\{4\}\)[0-9]*L/\1/'
+```
+For example, `2011` corresponds to C++11.
+
+To check the versions compatible with `g++` on your workstation, use the command:
+```{code} sh
+g++ -v --help 2> /dev/null | grep -oP '(?<=-std=)c\+\+\S+' | sed 's/\.$//' | sort | uniq
+```
+The latest C++ versions after 11 are C++14, 17, 20, and 23.
+
+You can compile your code using a more recent and compatible version than the default one. For example:
+```{code} sh
+g++ -std=c++14 -o short-functions main.cpp display-prices.cpp product.cpp
+```
+:::
 
 5. Run `./short-functions`.
 
