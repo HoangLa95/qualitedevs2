@@ -26,7 +26,7 @@ Dans ce TP, nous allons apprendre à réorganiser le code. Il ne s'agit plus de 
 
 :::{important} Utilisation d'un IDE 
 Les codes deviennent de plus en plus complexes.  
-Une bonne coloration syntaxique, une autocomplétion et un simple *Search and Replace* peuvent vous faire gagner beaucoup de temps.  
+Une bonne coloration syntaxique, une autocomplétion et un *Search and Replace* peuvent vous faire gagner beaucoup de temps.  
 Utilisez donc un IDE (comme VSCodium) sans son intégration Git pour le moment.  
 
 Quelques points utiles à connaître sur VSCodium :  
@@ -147,7 +147,7 @@ En réalité, le terme "compilation" regroupe 4 étapes pour chaque fichier sour
 
 :::{note} Include guards
 :class: dropdown
-Ces directives ensemble forment ce que l'on appelle un **include guard** :
+Ces directives ensemble forment un **include guard** :
 ```{code} cpp
 #ifndef PRODUCT_H
 #define PRODUCT_H
@@ -159,7 +159,7 @@ Ces directives ensemble forment ce que l'on appelle un **include guard** :
 - `#define` crée une **macro** qui remplace le texte défini (`PRODUCT_H`) par le code qui suit. La convention de nommage des macros est la même que celle des constantes globales et inclut `_H` pour indiquer qu'il s'agit d'une macro liée à l'include guard d'un header (bien qu'il puisse exister d'autres types de macros).  
 - `#ifndef` (abréviation de "if not defined"), `#define` et `#endif` signifient : "Si la macro PRODUCT_H n'est pas définie, définissez la macro PRODUCT_H comme suit : `<code>`, fin de la condition".  
 
-L'include guard permet à un header d'être défini une seule fois dans chaque code source et donc dans chaque translation unit.  
+L'include guard permet à un header d'être inclus une seule fois dans chaque code source et donc dans chaque translation unit.  
 
 L'inconvénient des include guards est la nécessité d'avoir un schéma de nommage cohérent pour un exécutable (dont la compilation peut provenir de milliers de fichiers différents répartis dans différents répertoires) : il ne peut pas y avoir deux headers avec la même macro (même si les fichiers se trouvent dans des répertoires très éloignés les uns des autres).  
 
@@ -312,7 +312,7 @@ Des découpages plus fins des fonctions externes peuvent être réalisés si une
 #endif
 ```  
 - Ne pas oublier d'utiliser `MyClass::` devant les méthodes dans `my-class.cpp` qui définit la classe `MyClass` déclarée dans `my-class.h`.  
-- Si vous avez besoin du code d'un fichier `code.cpp`, `#include "code.h"`, et non le `code.cpp` lui-même.  
+- Si vous avez besoin des éléments définis dans `code.cpp`, alors `#include "code.h"` (qui déclare ces éléments), et non le `code.cpp` lui-même.  
 - **Include what you see** : ajouter les bibliothèques et headers que vous utilisez pour votre code au début, peu importe si un header que vous incluez les contient déjà.  
 - Ne plus utiliser `using namespace std`.  
 :::
@@ -409,10 +409,10 @@ int main() {
 
 Il est difficile d'ajouter des étudiants et leurs notes.  
 Nous allons donc créer une classe `Student` avec les trois attributs suivants :  
-- Seul l'ID de l'étudiant est nécessaire pour construire l'objet. L'ID est *immutable* : une fois initialisée par le constructeur, elle ne peut plus être modifiée. Cela est rendu possible en utilisant `const` devant l'attribut.
+- Seul l'ID de l'étudiant est nécessaire pour construire l'objet. L'ID est **immutable** : une fois initialisée par le constructeur, elle ne peut plus être modifiée. Cela est rendu possible en utilisant `const` devant l'attribut.
 
 :::{note} Initialiser un attribut `const`
-Un attribut immutable (`const`) ne peut être initialisé que dans l'*initializer list* en C++.
+Un attribut immutable (`const`) ne peut être initialisé que dans l'**initializer list** en C++.
 Par exemple :
 ```{code} cpp
 class MyClass{
