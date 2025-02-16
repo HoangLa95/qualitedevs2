@@ -39,6 +39,7 @@ parts:
   chapters: 
     - file: PSs/ps1
     - file: PSs/ps2
+    - file: PSs/ps3
 - caption: Projet SAÉ 1256
   chapters:
     - file: SAE/prep.md
