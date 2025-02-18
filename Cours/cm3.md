@@ -78,7 +78,7 @@ Les blocs de code à l’intérieur d’une boucle doivent rester courts.
 Si un bloc devient trop long, il peut être refactorisé en une fonction séparée avec un nom descriptif.
 :::
 
-:::{important} Nombre d'intentations
+:::{important} Nombre d'indentations
 :class: dropdown
 Plus le code contient de structures imbriquées, plus il devient difficile à comprendre.
 :::
