@@ -399,8 +399,8 @@ double calculateAverage(const std::vector<double>& scores) {
     return sum / scores.size();
 }
 
-void printScores(const std::string& studentName, int studentID, const std::vector<double>& scores) {
-    std::cout << std::endl << "Scores for " << studentName << " (ID: " << studentID << "): ";
+void printScores(const std::string& studentName, int studentId, const std::vector<double>& scores) {
+    std::cout << std::endl << "Scores for " << studentName << " (ID: " << studentId << "): ";
     for (size_t i = 0; i < scores.size(); i++) {
         std::cout << "[" << i+1 << "] " << scores[i] << " ";
     }
@@ -413,10 +413,10 @@ void printAverage(const std::vector<double>& scores){
 
 int main() {
     std::string studentName;
-    int studentID;
+    int studentId;
     std::vector<double> scores;
 
-    studentID = 12345;
+    studentId = 12345;
     studentName = "Alice";
 
     scores.push_back(11);
@@ -424,7 +424,7 @@ int main() {
     scores.push_back(14.75);
     scores.push_back(19);
 
-    printScores(studentName, studentID, scores);
+    printScores(studentName, studentId, scores);
 
     return 0;
 }
