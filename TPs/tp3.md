@@ -399,7 +399,7 @@ double calculateAverage(const std::vector<double>& scores) {
 }
 
 void printScores(const std::string& studentName, int studentId, const std::vector<double>& scores) {
-    std::cout << std::endl << "Scores for " << studentName << " (ID: " << studentId << "): ";
+    std::cout << std::endl << "Scores for " << studentName << " (Id: " << studentId << "): ";
     for (size_t i = 0; i < scores.size(); i++) {
         std::cout << "[" << i+1 << "] " << scores[i] << " ";
     }
@@ -438,10 +438,10 @@ int main() {
 
 Il est difficile d'ajouter des étudiants et leurs notes.  
 Nous allons donc créer une classe `Student` avec les trois attributs suivants :  
-- Seul l'ID de l'étudiant est nécessaire pour construire l'objet. L'ID est **immutable** : une fois initialisée par le constructeur, elle ne peut plus être modifiée. Cela est rendu possible en utilisant `const` devant l'attribut.
+- Seul l'Id de l'étudiant est nécessaire pour construire l'objet. L'Id est **immuable** : une fois initialisé par le constructeur, il ne peut plus être modifié. Cela est rendu possible en utilisant `const` devant l'attribut.
 
 :::{note} Initialiser un attribut `const`
-Un attribut immutable (`const`) ne peut être initialisé que dans l'**initializer list** en C++.
+Un attribut immuable (`const`) ne peut être initialisé que dans l'**initializer list** en C++.
 Par exemple :
 ```{code} cpp
 class MyClass{

@@ -400,7 +400,7 @@ double calculateAverage(const std::vector<double>& scores) {
 }
 
 void printScores(const std::string& studentName, int studentId, const std::vector<double>& scores) {
-    std::cout << std::endl << "Scores for " << studentName << " (ID: " << studentId << "): ";
+    std::cout << std::endl << "Scores for " << studentName << " (Id: " << studentId << "): ";
     for (size_t i = 0; i < scores.size(); i++) {
         std::cout << "[" << i+1 << "] " << scores[i] << " ";
     }
@@ -439,7 +439,7 @@ int main() {
 
 It is difficult to add students and their grades.  
 We are therefore going to create a `Student` class with the following three attributes:  
-- Only the student’s ID is necessary to construct the object. The ID is **immutable**: once initialized by the constructor, it cannot be modified. This is made possible by using `const` in front of the attribute.
+- Only the student’s Id is necessary to construct the object. The Id is **immutable**: once initialized by the constructor, it cannot be modified. This is made possible by using `const` in front of the attribute.
 
 :::{note} Initializing a `const` attribute
 :class: dropdown
