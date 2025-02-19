@@ -364,7 +364,7 @@ Using `const` for function arguments ensures that the function will not modify t
 
 2. **Quiz**: What are the issues with the code of `displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice`?
 
-3. Refactor the code (by modifying the other affected files, such as the header and main).
+3. Refactor the code of `display-prices.cpp` (by modifying the other affected files, such as the header and main).
 
 :::{hint} Did you accomplish your task?
 :class: dropdown

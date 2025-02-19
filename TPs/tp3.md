@@ -362,7 +362,7 @@ L'utilisation de `const` pour les arguments des fonctions garantit que la foncti
 
 2. **Quiz** : Quels sont les problèmes du code de `displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice` ?
 
-3. Refactorisez le code (en modifiant les autres fichiers concernés comme le header, le main).
+3. Refactorisez le code de `display-prices.cpp` (en modifiant les autres fichiers concernés comme le header, le main).
 
 :::{hint} Avez-vous accompli votre tâche ?
 :class: dropdown
