@@ -302,8 +302,8 @@ Une version améliorée :
  * @return An approximation of 1 / sqrt(number).
  */
 float fastInverseSquareRoot(float number) {
-    static const uint32_t APPROXIMATION_CONSTANT = 0x5F3759DF;
-    static const float NEWTON_RAPHSON_FACTOR = 1.5F;
+    static const uint32_t approximationConstant = 0x5F3759DF;
+    static const float newtonRaphsonFactor = 1.5F;
 
     // Interpret the float as an integer for bitwise operations
     union {
@@ -312,12 +312,11 @@ float fastInverseSquareRoot(float number) {
     } inverseSqrtData = { .approximation = number };
 
     // Initial approximation using bitwise trick
-    inverseSqrtData.bitwiseRepresentation = APPROXIMATION_CONSTANT - (inverseSqrtData.bitwiseRepresentation >> 1);
+    inverseSqrtData.bitwiseRepresentation = approximationConstant - (inverseSqrtData.bitwiseRepresentation >> 1);
 
     // One iteration of Newton-Raphson refinement
     // A second iteration can improve precision at the cost of time
-    inverseSqrtData.approximation *= NEWTON_RAPHSON_FACTOR - 
-                                     (0.5F * number * inverseSqrtData.approximation * inverseSqrtData.approximation);
+    inverseSqrtData.approximation *= newtonRaphsonFactor - (0.5F * number * inverseSqrtData.approximation * inverseSqrtData.approximation);
 
     return inverseSqrtData.approximation;
 }
