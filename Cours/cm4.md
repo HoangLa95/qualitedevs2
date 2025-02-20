@@ -1,18 +1,44 @@
-# Rappel Git dans IDE et debug
+# Quand faut-il documenter ou commenter ?
 
-# Quand est-ce qu'il faut commenter ?
+:::{important} Documentez pour les utilisateurs, commentez pour les développeurs
+:class: dropdown
+La documentation explique l'utilisation d'un projet, tandis que les commentaires clarifient son code.
+Toutefois, la documentation sur les aspects techniques peut être utile pour le maintien et l'évolution du projet. Dans ce cours, nous nous limiterons à la documentation de l'interface publique d'un projet et réserverons les commentaires aux détails d'implémentation.
+:::
 
-```{figure} ../images/comments.jpeg
-:alt: Commentaires dans un code
-:align: center
+## Documenter
 
-Credits: Programmers Memes.
-```
-## Bons commentaires
+### README
 
-### Droits d'auteur
+:::{note} Premier point de contact
+:class: dropdown
+Le **README** fait partie de la documentation car il fournit des informations essentielles sur le projet, telles que son installation, son utilisation et sa configuration. Il sert de guide d'introduction pour les utilisateurs et les développeurs, facilitant la compréhension et l'accès au projet.
+:::
 
-Example de la [Licence MIT](https://fr.wikipedia.org/wiki/Licence_MIT) :
+:::{important} Contenu d'un README
+- Titre et résumé du projet.  
+- Fonctionnalités principales.
+- Documentation complémentaire.  
+- Instructions d'installation.  
+- Instructions d'utilisation.   
+- Licence.  
+
+Optionnel :  
+- Invitation à contribuer.  
+- Remerciements.  
+- Informations de contact.  
+- Démo.  
+:::
+
+:::{seealso} Examples de README
+:class: dropdown
+[Une liste d'examples de beaux READMEs.](https://github.com/usman-idris/readme-examples)
+:::
+
+
+### Licence
+
+Example de la [Licence MIT](https://fr.wikipedia.org/wiki/Licence_MIT), une licence open-source très permissive :
 ```{code} cpp
 /*
 Copyright <YEAR> <COPYRIGHT HOLDER>
@@ -43,6 +69,126 @@ IN THE SOFTWARE.
 */
 ```
 
+### Documentation du code
+
+Example de documentation de `temperature.h` en Doxygen (qui est très similaire à Javadoc) :
+
+```{code} cpp
+#ifndef TEMPERATURE_H
+#define TEMPERATURE_H
+
+/**
+ * Represents a temperature in Celsius and Fahrenheit.
+ * 
+ * This class allows you to set a temperature in Celsius, convert it to Fahrenheit,
+ * and vice versa. It also provides the ability to get the current temperature in either unit.
+ */
+class Temperature {
+private:
+    double mCelsius;
+
+public:
+    /**
+     * Constructs a new Temperature object.
+     * 
+     * Initializes the temperature in Celsius.
+     *
+     * @param celsius The initial temperature in Celsius.
+     */
+    Temperature(double celsius);
+
+    /**
+     * Gets the current temperature in Celsius.
+     * 
+     * @return The temperature in Celsius.
+     */
+    double getCelsius() const;
+
+    /**
+     * Sets the temperature in Celsius.
+     *
+     * This method sets the temperature value directly in Celsius.
+     *
+     * @param celsius The new temperature in Celsius.
+     */
+    void setCelsius(double celsius);
+
+    /**
+     * Gets the current temperature in Fahrenheit.
+     * 
+     * @return The temperature in Fahrenheit.
+     */
+    double getFahrenheit() const;
+
+    /**
+     * Sets the temperature using a value in Fahrenheit.
+     *
+     * This method converts the given Fahrenheit value to Celsius and sets it.
+     *
+     * @param fahrenheit The temperature in Fahrenheit.
+     */
+    void setFahrenheit(double fahrenheit);
+
+    /**
+     * Converts and displays the temperature in both Celsius and Fahrenheit.
+     * 
+     * This method prints the current temperature in both Celsius and Fahrenheit.
+     */
+    void displayTemperature() const;
+};
+
+/**
+ * @example
+ * \code{.cpp}
+ * Temperature currentTemperature(25.0);  // 25°C
+ * currentTemperature.displayTemperature();  // Output: Temperature: 25°C / 77°F
+ * currentTemperature.setFahrenheit(100.0);
+ * currentTemperature.displayTemperature();  // Output: Temperature: 37.7778°C / 100°F
+ * \endcode
+ */
+
+#endif
+```
+
+La syntaxe Doxygen/Javadoc :
+```{code} cpp
+/**
+ * One sentence describing the class/method.
+ *
+ * More detailed descriptions here with one or multiple sentences.
+ * 
+ * @param parameterName Parameter description.
+ * @return Output description if it exists.
+ * @throws ExceptionThrown Exception description if it exists (@exception in Javadoc).
+ */
+```
+
+Un bloc d'exemple en Doxygen :
+```{code} cpp
+/**
+ * @example
+ * \code{.cpp}
+ * Example usage code with comments on the output.
+ * The @example tag does is not built-in in Javadoc but 
+ * it supports HTML tags.
+ * \endcode
+ */
+```
+
+`@example` en Javadoc :
+```{code} java
+/**
+ * <pre>
+ * Example usage:
+ * <code>
+ * Example usage code with comments on the output.
+ * </code>
+ * </pre>
+ */
+```
+
+## Commenter
+
 ### Choix d'implémentation
 
 ```{code} cpp
@@ -51,34 +197,22 @@ IN THE SOFTWARE.
 
 :::{note} Note
 :class: dropdown
-Un commentaire pour expliquer un choix d'implémentation quand il y a plusieurs choix possibles peut-être utile. Un autre développeur peut ne pas être d'accord avec le choix effectué mais il peut comprendre le raisonnement derrière et l'améliorer s'il veut.
+Un commentaire expliquant un choix d'implémentation, lorsqu'il existe plusieurs options possibles, peut être utile. Même si un autre développeur n'est pas d'accord avec le choix fait, il pourra comprendre le raisonnement sous-jacent et l'améliorer si nécessaire.
 :::
 
 ### Clarifications
 
 ```{code} cpp
-void testCompareTo() {
-    WikiPagePath a = PathParser::parse("PageA");
-    WikiPagePath ab = PathParser::parse("PageA.PageB");
-    WikiPagePath b = PathParser::parse("PageB");
-    WikiPagePath aa = PathParser::parse("PageA.PageA");
-    WikiPagePath bb = PathParser::parse("PageB.PageB");
-    WikiPagePath ba = PathParser::parse("PageB.PageA");
-
-    assert(a.compareTo(a) == 0); // a == a
-    assert(a.compareTo(b) != 0); // a != b
-    assert(ab.compareTo(ab) == 0); // ab == ab
-    assert(a.compareTo(b) == -1); // a < b
-    assert(aa.compareTo(ab) == -1); // aa < ab
-    assert(ba.compareTo(bb) == -1); // ba < bb
-    assert(b.compareTo(a) == 1); // b > a
-    assert(ab.compareTo(aa) == 1); // ab > aa
-    assert(bb.compareTo(ba) == 1); // bb > ba
+double calculateLoanPayment(double principal, double annualRate, int months) {
+    // Formula: P = (r*PV) / (1 - (1 + r)^(-n))
+    // r = monthly interest rate, PV = present value (loan amount), n = number of payments
+    double monthlyRate = annualRate / 12;
+    return (monthlyRate * principal) / (1 - pow(1 + monthlyRate, -months));
 }
 ```
-:::{note} Note
+:::{note} Formules ou magic numbers
 :class: dropdown
-Parfois la syntaxe d'une librairie que l'on utilise est figée et on ne peut pas la changer même si elle n'est pas très claire à la lecture. Dans ce cas-là, il peut être utile de rajouter des commentaires qui clarifie la syntaxe.
+Le commentaire explique les composants de la formule et son application. Sans ce commentaire, une personne non familière avec la formule pourrait avoir du mal à saisir qu'il s'agit d'une formule mathématique, et non un choix d'implémentation technique.
 :::
 
 ```{code} cpp
@@ -88,8 +222,10 @@ regex timeMatcher("\\d*:\\d*:\\d* \\w* \\d*, \\d*");
 
 :::{important} Expressions régulières
 :class: dropdown
-Les expressions régulières sont souvent complexes mais nécessaires dans notre code. Dans ce cas-là, il est utile d'expliquer l'expression régulière utilisée.
+Les expressions régulières, bien que souvent complexes, sont indispensables dans notre code. Il est donc utile d'expliquer celle utilisée dans ce cas.
 :::
+
+De façon générale, il faut clarifier tout endroit où l'intention et/ou le contexte du code n'est pas clair.
 
 ### Warning
 
@@ -122,33 +258,6 @@ string listItemContent = trim(match.str(3));
 // TODO : sorting procedure to be implemented
 ```
 
-### Documenter
-
-:::{important} Disclaimer
-:class: dropdown
-En tant que développeur, vous serez amené à coder vos propres librairies et donc de les documenter. Il y a plusieurs types de documentations dont la documentation pour utilisateur ou pour développeur. 
-
-Il y a des outils pour générer de la documentation (sous forme de site web par exemple) à partir des commentaires dans le code. Cela nécessite donc des syntaxes à respecter. 
-
-Dans ce cours, nous n'allons pas rentrer dans les détails de comment écrire de la documentation (ce qui nécessite tout un cours en lui-même). Pourtant, nous allons voir des exemples de documentations et apprendre à écrire une documentation générique (sans syntaxe particulier) dans l'esprit de la documentation bien écrite. 
-:::
-
-```{code} cpp
-/*
-Summary line.
-
-Extended description of function.
-
-Parameters:
-    - firstArgument (FirstType): Description of firstArgument.
-    - secondArgument (SecondType): Description of secondArgument.
-
-Returns:
-    ReturnType: Description of return value.
-*/
-ReturnType function(FirstType firstArgument, SecondType secondArgument)
-```
-
 ## Mauvais commentaires
 
 Beaucoup de commentaires sont une excuse pour du code de mauvais qualité. Voici les erreurs à éviter.
@@ -175,9 +284,51 @@ float Q_rsqrt( float number )
 }
 ```
 
-:::{note} Note
+Une version améliorée :
+```{code} cpp
+#include <stdint.h>
+
+/**
+ * Computes an approximation of 1 / sqrt(number) using the Fast Inverse Square Root method.
+ *
+ * This function is based on the original Quake III Arena algorithm.
+ * It uses bit-level manipulation to obtain a rough approximation, followed by 
+ * one iteration of Newton-Raphson refinement for improved accuracy.
+ *
+ * Explanation:
+ * - https://en.wikipedia.org/wiki/Fast_inverse_square_root
+ *
+ * @param number The input floating-point number.
+ * @return An approximation of 1 / sqrt(number).
+ */
+float fastInverseSquareRoot(float number) {
+    static const uint32_t APPROXIMATION_CONSTANT = 0x5F3759DF;
+    static const float NEWTON_RAPHSON_FACTOR = 1.5F;
+
+    // Interpret the float as an integer for bitwise operations
+    union {
+        float approximation;  // Holds the estimated 1/sqrt(number)
+        uint32_t bitwiseRepresentation; // Stores the bitwise equivalent of the float
+    } inverseSqrtData = { .approximation = number };
+
+    // Initial approximation using bitwise trick
+    inverseSqrtData.bitwiseRepresentation = APPROXIMATION_CONSTANT - (inverseSqrtData.bitwiseRepresentation >> 1);
+
+    // One iteration of Newton-Raphson refinement
+    // A second iteration can improve precision at the cost of time
+    inverseSqrtData.approximation *= NEWTON_RAPHSON_FACTOR - 
+                                     (0.5F * number * inverseSqrtData.approximation * inverseSqrtData.approximation);
+
+    return inverseSqrtData.approximation;
+}
+```
+
+:::{note} Documenter les headers, commenter les codes source en C++
 :class: dropdown
-Des commentaires qui nécessitent eux-mêmes d'autres commentaires pour comprendre ce qui se passe ne sont pas des bons commentaires.
+Ici, la documentation est intégrée dans le code source afin de garder l'exemple concis.
+En C++, nous documentons uniquement les headers qui définissent l'interface publique du projet, tandis que les commentaires dans le code source sont réservés aux développeurs.
+
+Dans des langages comme Java, qui ne font pas cette distinction, vous trouverez à la fois de la documentation et des commentaires dans le même fichier.
 :::
 
 ### Commentaires avec trop d'informations
@@ -202,46 +353,12 @@ the first 8-bit byte, and so on.
 
 ### Commentaires redondants
 
-```{code} cpp
-/*
-Add a CD.
+```{figure} ../images/comments.jpeg
+:alt: Commentaires dans un code
+:align: center
 
-This function adds a CD.
-
-Parameters:
-    - title (string): The title of the CD.
-    - author (string): The author of the CD.
-    - numberOfTracks (int): The number of tracks on the CD.
-    - durationInMinutes (int): The duration of the CD in minutes.
-
-Returns:
-    void : This function does not return anything.
-*/
-void addCD(string title, string author, int numberOfTracks, int durationInMinutes)
+Credits: [Programmers Humor](https://www.reddit.com/r/ProgrammerHumor/comments/i4v6b2/comments/).
 ```
-
-:::{warning} Trop de documentations !
-:class: dropdown
-La documentation peut-être redondante quand le code est déjà très explicite. Par contre, la documentation peut quand même être nécessaire, surtout quand il s'agit de la documentation pour utilisateur. Une solution possible dans ce cas-ci est de simplifier les commentaires.
-
-```{code} cpp
-/*
-Add a CD.
-
-Parameters:
-    - title (string)
-    - author (string)
-    - numberOfTracks (int)
-    - durationInMinutes (int)
-
-Returns:
-    void
-*/
-void addCD(string title, string author, int numberOfTracks, int durationInMinutes)
-```
-
-La simplification ici évite aussi des commentaires faux dans le futur. Imaginons qu'un jour `durationInMinutes` devienne `durationInSeconds`, les IDE sont capables de changer le nom de la variable partout dans le code mais pas les commentaires qui vont avec !
-:::
 
 ### Commenter au lieu de coder proprement
 
@@ -260,9 +377,9 @@ bool isPasswordValid(const string& password) {
 
 :::{warning} Un bon commentaire ?
 :class: dropdown
-Le commentaire ci-dessus peut sembler utile parce qu'il explique l'expression régulière illisible qui permet de vérifier qu'un mot de passe est valide. 
+Le commentaire ci-dessus peut sembler utile puisqu'il explique l'expression régulière difficile à lire utilisée pour valider un mot de passe. 
 
-Pourtant, ces commentaires ne sont qu'une excuse pour du mauvais code. Avec nos principes de code propre, `isPasswordValid` devrait plutôt être refactorisé de la façon suivante.
+Cependant, ces commentaires ne font que masquer un mauvais code. En suivant les principes du code propre, la fonction `isPasswordValid` devrait être refactorisée comme suit.
 
 ```{code} cpp
 bool lengthIsInRangeInclusive(const string& str) {
@@ -312,9 +429,9 @@ response.setBody(formatter.getResultStream(), formatter.getByteCount());
 
 :::{note} Note
 :class: dropdown
-On est souvent amené à commenter des lignes des codes lors du développement. Pourtant, il ne faut pas les laisser trainer sans explication. Un autre programmeur qui lirait ce code et qui ne comprendrait pas ce que font les lignes commentés n'aurait pas le courage de les supprimer et ces lignes vont rester dans le code à jamais sans aucune explication et induiront peut-être des futurs développeurs en erreur.
+Il arrive souvent de commenter des lignes de code pendant le développement. Cependant, ces commentaires ne doivent pas rester sans explication. Si un autre programmeur lit ce code sans comprendre l'objectif des lignes commentées, il n'osera probablement pas les supprimer. Ainsi, elles risquent de demeurer dans le code, sans justification, et d'induire les futurs développeurs en erreur.
 
-Maintenant, avec les outils de versionnage comme Git. Il est presque impossible de perdre du code (si vous faites bien vos commits de façon régulière !). N'ayez pas peur de supprimer du code puis d'aller le chercher plus tard dans l'historique des commits.
+Avec les outils de versionnage comme Git, il est presque impossible de perdre du code (si vous effectuez des commits réguliers !). N'ayez donc pas peur de supprimer du code et de le retrouver plus tard dans l'historique des commits.
 :::
 
 ### Commenter au lieu de versionner
@@ -331,7 +448,7 @@ Maintenant, avec les outils de versionnage comme Git. Il est presque impossible 
 
 :::{note} Note
 :class: dropdown
-Certains pourraient penser que les laisser les notes sur l'évolution du code pour les autres développeurs dans les commentaires est une bonne pratique. 
+Certains pourraient penser qu'il est utile de laisser des notes sur l'évolution du code dans les commentaires pour les autres développeurs.
 
-Effectivement, cela serait une bonne pratique **si Git n'existait pas**. Avec le versionnage, un `git log` suffit (bien sûr à condition que les messages de commits sont bien écrits) !.
+En effet, cela pourrait être une bonne pratique **si Git n'existait pas**. Avec le versionnage, un simple `git log` suffit (à condition bien sûr que les messages de commits soient clairs) !
 :::
