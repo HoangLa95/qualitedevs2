@@ -31,7 +31,7 @@ parts:
     - file: TPs/tp1
     - file: TPs/tp2
     - file: TPs/tp3
-    # - file: TPs/tp4
+    - file: TPs/tp4
     # - file: TPs/tp5
     # - file: TPs/tp6
     # - file: TPs/tp7
