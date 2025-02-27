@@ -1,192 +1,589 @@
-# TP4 : Découvrir un IDE, résolution conflit, debug et commentaire
+# TP4 : Build system et documentations
 
-:::{important} QCM
+:::{note} Intégration Git dans un IDE
 :class: dropdown
-Les réponses aux questions du TPs sont à remplir dans le QCM sur Moodle.
+Encore une séance dans le terminal !
 :::
 
-## VSCodium
-
-Ouvrir VSCodium sur Debian à l'IUT. 
-
-:::{seealso} Sur votre machine personnelle.
-:class: dropdown
-Si vous travaillez sur votre machine personnelle, vous pouvez aller sur [le site de VSCodium](https://vscodium.com/#install) pour l'installer. C'est un logiciel complètement gratuit et open source.
+:::{important} `.gitignore`  
+Nous allons créer des fichiers `makefile` sans extension. Il est donc nécessaire d’ajouter `!makefile` au `.gitignore` afin de ne pas les ignorer, tout en continuant à exclure les fichiers exécutables.
+De plus, nous allons générer les répertoires `build/` et `docs/`, qui contiendront des fichiers de compilation. Ceux-ci doivent être ignorés.  
 :::
 
-Pour avoir accès à Internet, changer le proxy avec l'aide du [soutien technique](#vscodium-proxy).
+(tp4-objectifs)=
+Le but de ce TP est de comprendre les points suivants :
+- [ ] [Les commandes `make`](#tp4-make-commands)
+- [ ] [Le fonctionnement de Makefile](#tp4-make-behavior)
+- [ ] [L'organisation des fichiers de compilation](#tp4-build-directory)
+- [ ] [L'organisation des fichiers de code](#tp4-project-organization)
+- [ ] [README](../Cours/cm4.md/#readme)
+- [ ] [Documentations Doxygen/Javadoc](../Cours/cm4.md/#documentation-du-code)
 
-### Fonctionnalités de bases
+## Exercice 1 : Makefile
 
-Ouvrir le dossier contenant votre projet. Sur l'écran vous devez avoir l'*Editor* et tout à gauche, une barre verticale avec *Explorer*, *Search*, *Source Control*, *Run and Debug* et *Extensions*.
-- **Editor** est un éditeur de texte de base avec de la coloration syntaxique. 
-    - Cliquer sur le README généré par Git. Sur votre droite, vous devez voir une version miniature du code. Vous pouvez naviguer le code rapidement en cliquant directement sur la partie du code qui vous intéresse. 
-    - En haut à droite, vous avez deux actions affichées, une qui permet de *Preview* le README (cette option existe pour les markdowns et permet de voir le rendu du fichier en temps réel). L'autre option permet de *Split* l'éditeur pour vous permettre d'avoir plusieurs fichiers ouverts en même temps. Vous pouvez faire du *Drag and Drop* de fichiers entre les deux fenêtres.
-- **Explorer** est un outil de navigation à l'intérieur de votre projet. 
-    - Vous pouvez créer des fichiers et des dossiers directement avec les shorcuts qui apparaissent quand la souris survole l'Explorer. Un clic droit vous donne aussi des options que vous retrouvez dans un navigateur classique.
-    - En bas de la barre, vous avez **Outline** qui montre la structure du fichier (s'il y a une structure reconnue). Cliquer sur votre README pour voir un exemple.
-    - Vous y retrouvez aussi **Timeline** qui montre l'historique des changements du fichier. En survolant les items du Timeline, vous devez voir l'auteur du commit, la date à laquelle le commit a été effectué, et le message du commit.
-    Cliquer sur un fichier `.cpp` sur lequel vous avez travaillé. Vous devez voir aussi des changements locaux (*File saved*). Vous pouvez filtrer le Timeline pour faire afficher que l'historique de Git.
-    Quand vous survolez un item de l'historique des commits, vous pouvez cliquer sur *View Commit*. Cette vue permet de voir les modifications qui ont été faites au fichier courant lors de ce commit. 
-- **Search** est un outil de recherche à l'intérieur de votre projet.
-    - Avec cet outil, vous pouvez retrouver des morceaux de code dans tous les fichiers de votre projet. Taper `get` dans la barre de recherche pour voir un exemple. Pour mieux repérer l'emplacement des fichiers, vous pouvez cliquer sur *View as Tree* en haut de la barre. Vous pouvez aussi cliquer sur *Open New Search Editor* pour voir tous les codes concernés.
-    - À droite de la barre de recherche, vous avez différentes options. L'option *Match Whole Word* ne retourne que les résultats où `get` constitue tout le mot (au lieu des mots qui contiennent `get` par exemple).
-    - L'option *Use Regular Expression* vous permet de faire une recherche de mots qui correspondent à votre expression régulière. Taper `get[a-z]` dans la barre de recherche et cliquer sur *Use Regular Expression*. Vous devez voir tous les `get` qui sont suivis de n'importe quelle lettre.
-    - L'option *Match Case* recherche aussi à vérifier les majuscules et minuscules dans le mot. Cliquer sur *Match Case* et observer que `get[a-z]` retourne très peu de résultats : cette fois, les résultats retournés sont seulement les mots avec `get` suivi d'une lettre minuscule. Si vous changez `get[a-z]` en `get[A-Z]` alors vous devez voir beaucoup de résultats (si vous avez bien respecté la convention camelCase dans vos codes).
-    - Sur la barre à gauche, vous voyez aussi l'option **Replace** qui permet de remplacer le mot cherché. Cette option peut être utile pour changer toutes les occurrences d'une variable par exemple. À droite, vous avez l'icône *Replace All* qui permet de remplacer dans tous les fichiers. Vous pouvez aussi cliquer sur l'icône *Replace* qui apparaît quand vous survolez un résultat. *Replace All* est aussi possible à l'intérieur d'un fichier donné.  
-- **Source Control** est l'intégration Git dans VSCodium. Dans la barre horizontale tout en bas de l'écran, vous avez aussi une barre de statut du projet. Il faut toujours commencer par cliquer sur **Synchronize Changes** à côté de **main** quand vous commencer à travailler. 
-    - Maintenant, pour voir comment utiliser *Source Control*, **créer un dossier `TP4`** (en utilisant l'interface de l'IDE). À l'intérieur du dossier, **créer un fichier `hello-world.cpp`**.
-    - Vous devez voir `1` apparaitre sur l'icône de *Source Control*. Si vous le survolez, c'est marqué *1 pending change(s)*. Il s'agit des changements qui ne sont pas encore *commité*. Dans *Explorer*, vous voyez aussi un point vert à côté du dossier `TP4` qui contient le nouveau fichier et à côté du fichier vous voyez un `U` qui est une abbréviation de **Untracked**. Cela indique que ce nouveau fichier n'a pas encore été suivi. Si vous modifiez un fichier existant, vous devez voir la lettre `M` en jaune qui est court pour **Modified** et qui indique aussi que cette modification n'a pas été suivie.
-    - Cliquer sur *Source Control*. Vous devez voir les nouveaux changements du projet. Vous pouvez suivre le nouveau fichier `hello-world.cpp` en cliquant sur le `+` qui indique **Stage Changes**. Il y a deux catégories de changements qui apparaissent : **Staged Changes** et **Changes**. *Staged Changes* correspond aux changements qui sont suivis. Maintenant, dans *Explorer* vous devez voir la lettre `A` apparaitre à côté de `hello-world.cpp` qui est une abbréviation de **Added**.
-    - Écrire un message de commit dans la barre **Message**. Cliquer sur **Commit**. Vous voyez apparaitre **Outgoing** et la branche **main**, ce qui indique que ces changements vont être effectués sur la branche *main*. Si vous cliquez sur le *Drop Down* à côté de *main*, vous devez voir l'entrée dans le *Timeline* correspondant à votre commit. Vous pouvez maintenant cliquer sur **Sync Changes** qui va synchroniser (pull puis push) votre dépôt local avec le dépôt distant.
-- **Run and Debug** sera étudié au TP suivant.
-- **Extensions** permet d'ajouter des extensions qui rajoutent des fonctionnalités à notre IDE. Si vous avez l'erreur "Error while fetching extensions. XHR failed", allez dans [Soutien Technique : VSCodium](#vscodium-proxy).
-    - Installer l'extension **C/C++ Runner** de *franneck94*.
-
-### Compiler et exécuter
-
-Dans `hello-world.cpp`, écrire un code qui permet d'afficher `Hello World!` dans le terminal. Vous pouvez observer que des options d'autocomplétion vous sont proposées quand vous coder. L'autocomplétion est assez pratique pour éviter des erreurs en tapant des noms de variables/fonctions existantes.
-
-Cliquer droit sur le dossier `TP4` et choisir **Open in Integrated Terminal**. Vous devez voir apparaître un terminal en bas de l'écran. Comme d'habitude, vous pouvez toujours travailler directement dans le terminal que ce soit pour compiler, éxécuter ou pour utiliser Git.
-
-Nous pouvons aussi utiliser l'extension **C/C++ Runner** pour compiler et exécuter le code.
-- Cliquer sur votre fichier `hello-world.cpp`. Maintenant, pour compiler ce fichier, vous pouvez faire **Ctrl+Alt+B**.
-:::{warning} Le bouton "Start Compilation" en bas
-Il faut faire attention à ne pas utiliser le bouton "Start Compilation" en bas si vous avez plusieurs fichiers de code d'exercices différents dans le même dossier.  
-:::
-- En haut à droite, maintenant, vous avez un bouton **Run**. Il faut choisir l'option **C/C++ Runner: Run File** pour exécuter votre code.
-:::{warning} Si vous n'avez pas le bouton Run en haut à droite...
-Il y a peut-être des différentes versions entre celle de l'IUT et ce que vous pouvez installer. Si vous n'avez pas de bouton *Run* en haut à droite, alors vous pouvez utiliser **Run Executable** dans la barre en bas.
-:::
-
-(tp4-gitignore)=
-### .gitignore
-
-À cause des fichiers de configurations et des fichiers générés lors de la compilation, notre projet est pollué avec des fichiers non voulus.
-
-Recopier les lignes suivantes et remplacer le contenu de votre `.gitignore`.
-(tp4-gitignore)=
-```{code}
-*
-!*.*
-!*/
-.vscode/
-build/
+Voici un exemple minimal d'un projet en C++ :
+```{code} md
+minimal-project/
+    hello.h
+    hello.cpp
+    main.cpp
+    makefile
 ```
-Les fichiers non voulus qui apparaissaient avec un `U` sont maintenant ignorés.
 
-:::{seealso} Comment ça marche ?
-:class: dropdown
-- On commence avec `*` pour tout ignorer. 
-- L'expression `!*.*` indique qu'il ne faut pas ignorer les fichiers avec une extension (autrement dit, les fichiers sans extension comme les exécutables sont ignorés). 
-- L'expression `!*/` indique qu'il ne faut ignorer les dossiers.
-- L'expression `.vscode/` indique qu'il faut ignorer tout ce qui se trouve à l'intérieur du dossier `.vscode`.
-- L'expression `build/` indique qu'il faut ignorer tout ce qui se trouve à l'intérieur d'un dossier nommé `build`.
+:::{important} Build systems
+Au lieu de compiler et d'exécuter chaque projet manuellement, les projets devenant de plus en plus complexes nécessitent un **build system** reposant sur des **build scripts**.  
+
+Un **build script** est un fichier qui automatise le processus de compilation et de gestion des dépendances d'un projet. Il définit les étapes nécessaires à la construction du projet, comme la compilation du code source, l'assemblage des fichiers, la génération de la documentation ou encore l'exécution des tests. Son objectif est de simplifier, standardiser et accélérer le processus de construction du projet.  
+
+Les **build systems** standards en C++ sont **CMake** et **Makefile**. D'autres langages utilisent leurs propres outils, comme **MSBuild** pour C# ou **Gradle** et **Maven** pour Java. Certains IDE intègrent également leur propre build system. Par exemple, un projet Java sous Eclipse utilise le système de build natif d'Eclipse.  
+
+Dans ce TP, nous allons explorer le fonctionnement d’un build system à travers un build script en **Makefile**, un build system bas niveau pour C/C++ conçu pour les systèmes Unix (Linux et macOS). **CMake** est plus haut niveau et **cross-platform** (compatible avec d'autres systèmes comme Windows), mais nous nous concentrerons sur **Makefile**, qui offre un meilleur contrôle à bas niveau.  
+
+Si vous utilisez Windows, **Git Bash** permet de simuler un environnement Unix, et l'installation de **MinGW** ou **MSYS2** vous permettra d'utiliser `g++`. Si cela ne fonctionne pas, utilisez Linux... ou trouvez une solution par vous-même !
 :::
 
-## Exercice : Commenter et Documenter
+1. Créez le répertoire et les fichiers ci-dessus dans `TP4/` avec les codes correspondant.
 
-Améliorer le code suivant (sans faire le TODO).
-
+`hello.h`
 ```{code} cpp
-/*
-Copyright 2024, Université Paris-Saclay
+#ifndef HELLO_H
+#define HELLO_H
 
-Permission is hereby granted, free of charge, to any 
-person obtaining a copy of this software and associated 
-documentation files (the “Software”), to deal in the 
-Software without restriction, including without 
-limitation the rights to use, copy, modify, merge, 
-publish, distribute, sublicense, and/or sell copies of 
-the Software, and to permit persons to whom the Software 
-is furnished to do so, subject to the following 
-conditions:
+void sayHello();
 
-The above copyright notice and this permission notice 
-shall be included in all copies or substantial portions 
-of the Software.
-
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY 
-KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
-THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
-DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
-IN THE SOFTWARE.
-*/
-#include <cmath>
-#include <vector>
-
-using namespace std;
-
-class PrimeGenerator {
-public:
-/*
-Generate the primes up to the given parameter.
-
-generatePrimes uses the sieve of Erastosthenes whose 
-general idea is to remove the multiples of each interger 
-successively and the remaining ones must be the primes. 
-
-Parameters:
-    - maxValue: the upper limit of integers that will be 
-    checked
-
-Returns:
-    Primes between 2 and maxValue.
-*/
-    vector<int> generatePrimes(int maxValue) {
-        if (maxValue < 2)
-            return vector<int>();
-        else {
-            init(maxValue); // initialize by uncrossing integers up to maxValue
-            sieve(); // cross out all the multiples
-            result(); // put uncrossed integers into result
-            return result;
-        }
-    }
-    
-private:
-    vector<bool> crossedOut;
-    // vector was chosen for result instead a simple
-    // array since the number of primes before maxValue
-    // is variable and hard to compute
-    vector<int> result; 
-
-    // initialize by uncrossing integers up to maxValue 
-    void init(int maxValue) {
-        crossedOut = vector<bool>(maxValue + 1, false);
-    }
-
-    // cross out all the multiples
-    void sieve() {
-        int limit = determineIterationLimit();
-        for (int i = 2; i <= limit; i++)
-            if (!crossedOut[i])
-                crossOutMultiplesOf(i);
-    }
-
-    // It suffices to check the multiples of numbers
-    // less than sqrt(crossedOut.size()) because every
-    // number has a prime factor in this range
-    int determineIterationLimit() {
-        double iterationLimit = sqrt(crossedOut.size());
-        // cout << iterationLimit << endl;
-        return floor(iterationLimit);
-    }
-
-    // cross out multiples of i
-    void crossOutMultiplesOf(int i) {
-        for (int multiple = 2 * i; multiple < crossedOut.size(); multiple += i)
-            crossedOut[multiple] = true;
-    }
-
-    // TODO: for every integer that is not crossed 
-    // out, push it into result.
-    void result() {
-    
-    }
-};
+#endif
 ```
+
+`hello.cpp`
+```{code} cpp
+#include <iostream>
+#include "hello.h"
+
+void sayHello() {
+    std::cout << "Hello World!" << std::endl;
+}
+```
+
+`main.cpp`
+```{code} cpp
+#include "hello.h"
+
+int main() {
+    sayHello();
+    return 0;
+}
+```
+
+`makefile`
+```{code} makefile
+all: executable
+
+executable: main.o hello.o
+	g++ -o executable main.o hello.o
+
+main.o: main.cpp
+	g++ -c main.cpp
+
+hello.o: hello.cpp
+	g++ -c hello.cpp
+
+run:
+	./executable
+
+clean:
+	rm -f executable main.o hello.o
+
+.PHONY: all run clean
+```
+
+(tp4-make-commands)=
+:::{important} Makefile
+Un **Makefile** utilise une syntaxe basée sur des **cibles**. Dans le terminal, on peut exécuter une cible avec la commande :  
+```{code} sh
+make <cible>
+```  
+Voici quelques exemples courants :  
+- `make` exécute la cible par défaut **`all`**, qui compile le programme.  
+- `make run` exécute le programme compilé (l'exécutable).  
+- `make clean` supprime les fichiers générés par la compilation pour nettoyer le projet.  
+
+Par défaut, **Make** recherche un fichier nommé `makefile` ou `Makefile` pour y trouver les cibles à exécuter. Si votre build script porte un autre nom, comme `my-build-script`, vous devrez spécifier son nom avec l’option `-f` :  
+```{code} sh
+make -f my-build-script <cible>
+```  
+(`-f` signifie **file**, pour indiquer un fichier Makefile spécifique).
+:::
+
+:::{important} Syntaxe d'un makefile
+La syntaxe de base d'une cible :
+```{code} makefile
+<cible>: <premier prérequis> <deuxième prérequis> <...>
+    <première commande>
+    <deuxième commande>
+    <...>
+```
+:::
+
+(tp4-make-behavior)=
+:::{important} Comportement de `make <cible>`
+`make <cible>` cherche à créer un fichier portant le nom de la **cible** en exécutant les commandes associées. Pour simplifier, nous parlerons uniquement de "fichier" plutôt que de "fichier/répertoire".  
+
+Si le fichier correspondant est **à jour** (il existe et ses prérequis sont à jour), `make` ne fait rien. Sinon, `make` détecte des mises à jour et exécute la cible. Si le fichier n'existe pas, `make` s'assure d'abord que ses **prérequis** sont à jour avant d'exécuter la commande.  
+
+Ce comportement optimise la compilation, évitant de recompiler l'intégralité du projet, ce qui est crucial pour les grands projets pouvant prendre plusieurs heures à compiler.  
+
+### Explication du Makefile de l'exemple :  
+- **`all`** : C'est la **cible par défaut** exécutée lorsque l'on tape `make`. Elle ne contient pas de commande et vérifie simplement si `executable` est à jour.  
+- **`executable`** : Cette cible dépend de `main.o` et `hello.o`, qui sont des **fichiers objets** générés à partir des fichiers `.cpp` du projet. Une fois ces prérequis à jour, `make` exécute `g++ -o executable main.o hello.o`  qui relie `main.o` et `hello.o` pour créer l’exécutable `executable` (Linking, dernière étape de la compilation en C++).
+- **`main.o` et `hello.o`** :  
+  - `main.o` dépend de `main.cpp`. Même si `main.cpp` n'est pas une cible explicite, `make` vérifie simplement si le fichier existe et s'il est à jour.  
+  - Pour générer `main.o`, `make` exécute `g++ -c main.cpp`. Cela exécute le **préprocesseur**, génère la **translation unit** et compile le code en **fichier objet** `.o`.  
+  - Même logique pour `hello.o`.  
+- **`run`** : Suppose que le programme est déjà compilé et exécute simplement `./executable`.
+- **`clean`** :  
+  - N'a aucun prérequis.  
+  - Supprime les fichiers générés avec `rm -f executable main.o hello.o`. 
+  - L'option `-f` (**force**) permet de supprimer sans confirmation et sans erreur si les fichiers n'existent pas. Cette option est couramment utilisée pour `clean` dans les Makefiles.
+:::
+
+:::{important} `.PHONY`
+Vous avez peut-être remarqué que certaines cibles (`all`, `run`, `clean`) ne correspondent pas à des fichiers, et les commandes associées ne génèrent pas de fichiers ou de répertoires portant ces noms.  
+
+Comme ces fichiers n'existent pas, `make` considère toujours que ces cibles ne sont pas à jour et les exécute systématiquement, ce qui est bien le comportement voulu pour `all`, `run` et `clean`.  
+
+**Problème potentiel :** 
+Si le projet contient des fichiers nommés `all`, `run` ou `clean`, `make` pourrait les interpréter comme des fichiers à jour et ne pas exécuter les commandes associées.  
+
+**Solution : les cibles `.PHONY`**  
+Pour éviter cette confusion, on déclare ces cibles comme **fictives** (*phony*) en ajoutant la directive `.PHONY: all run clean`.
+Cela indique que `all`, `run` et `clean` ne sont pas des fichiers, mais des commandes à exécuter systématiquement, même si des fichiers portant ces noms existent.
+:::
+
+:::{important} Pourquoi séparer la compilation en plusieurs étapes ?
+Nous avons l’habitude de compiler en une seule étape sans générer de fichiers intermédiaires comme les fichiers objets `.o`. Pourquoi ne faisons-nous pas la même chose ici ?
+  
+Dans un projet en évolution, les différentes parties du code qui composent l’exécutable (ou les exécutables) final arrivent progressivement. Il est donc essentiel de pouvoir compiler et tester certaines parties du code sans attendre que tout le projet soit terminé.
+Même si tous les fichiers sont présents, modifier une seule partie du code ne signifie pas que nous devons tout recompiler. Pour les projets volumineux, où la compilation peut prendre plusieurs minutes (voire plusieurs heures), éviter une recompilation complète est un gain de temps considérable.  
+
+Ainsi, découper la compilation en plusieurs étapes (génération de fichiers `.o` pour chaque fichier `.cpp`, puis linking final) est une bonne pratique pour les projets évolutifs et volumineux.
+:::
+
+2. Exécutez les commandes `make`, `make run` et `make clean` et observez leur effet dans le terminal et sur les fichiers.
+
+:::{important} Prérequis cachés
+Dans le makefile précédent, il existe des prérequis implicites qui sont les fichiers header `.h`. Par exemple, `main.cpp` et `hello.cpp` dépendent de `hello.h`, mais ce prérequis n’est pas spécifié dans le makefile. Cela ne pose pas de problème pour la compilation, car `g++` comprend, grâce aux directives `#include`, qu’il doit inclure les headers appropriés lors de la traduction du code source `.cpp`.
+
+Un problème peut survenir lorsqu’un header est modifié et que l’on souhaite recompiler seulement une partie du projet au lieu de le recompiler entièrement. Étant donné que les headers ne sont pas mentionnés explicitement parmi les prérequis, si tous les autres fichiers existent déjà et que leur date de modification n’indique aucune modification, `make` ne recompilerait pas le projet. Il est donc nécessaire d’ajouter ces prérequis dans le makefile, même s’ils n'apparaissent pas dans les commandes de compilation.
+:::
+
+3. Apportez les modifications suivantes au makefile :
+```{code} makefile
+all: executable
+
+executable: main.o hello.o
+	g++ -o executable main.o hello.o
+
+main.o: main.cpp hello.h
+	g++ -c main.cpp
+
+hello.o: hello.cpp hello.h
+	g++ -c hello.cpp
+
+run:
+	./executable
+
+clean:
+	rm -f executable main.o hello.o
+
+.PHONY: all run clean
+```
+
+4. Exécutez à nouveau les différentes commandes `make`. Le comportement de ces commandes ne doit pas changer.
+
+5. Apportez les modifications suivantes au makefile :
+```{code} makefile
+-include *.d
+
+all: executable
+
+executable: main.o hello.o
+	g++ -o executable main.o hello.o
+
+main.o: main.cpp
+	g++ -c main.cpp -MMD 
+
+hello.o: hello.cpp
+	g++ -c hello.cpp -MMD 
+
+run:
+	./executable
+
+clean:
+	rm -f executable main.o hello.o main.d hello.d
+
+.PHONY: all run clean
+```
+
+6. Exécutez la commande `make` et examinez le contenu des fichiers `.d` générés.
+
+:::{important} Fichiers `.d` (dépendances)  
+Afin d'éviter d'avoir à spécifier manuellement les headers pour la compilation de chaque fichier source, nous générons automatiquement les fichiers de dépendances `.d` en utilisant l'option `-MMD` (qui inclut les prérequis avec les headers que nous avons créés, mais pas ceux des bibliothèques C++ stables) et demandons à `make` d'inclure ces prérequis avec l'option `-include *.d`.  
+
+En raison de l'ordre d'exécution, la génération de `main.d` par exemple se produit après que les prérequis de `main.o` aient été traités. Ce n'est pas un problème, car l'objectif d'ajouter les headers aux prérequis est d'éviter de recompiler l'intégralité du projet une fois qu'il a déjà été compilé. La première compilation générera donc ces dépendances, et lors des compilations suivantes, les fichiers `.d` seront inclus, permettant à `make` de détecter les changements dans les headers.
+:::
+
+7. Apportez les modifications suivantes au makefile :
+```{code} makefile
+-include build/dependencies/*.d 
+
+all: build build/binaries/executable
+
+build:
+	mkdir -p build/dependencies build/objects build/binaries 
+
+build/binaries/executable: build/objects/main.o build/objects/hello.o
+	g++ -o build/binaries/executable build/objects/main.o build/objects/hello.o
+
+build/objects/main.o: main.cpp
+	g++ -c main.cpp -o build/objects/main.o -MMD -MF build/dependencies/main.d  
+
+build/objects/hello.o: hello.cpp
+	g++ -c hello.cpp -o build/objects/hello.o -MMD -MF build/dependencies/hello.d  
+
+run:
+	./build/binaries/executable
+
+clean:
+	rm -rf build
+
+.PHONY: all run clean
+```
+
+(tp4-build-directory)=
+:::{important} `build/`
+Afin d'éviter de mélanger les fichiers de compilation avec le code source, nous allons les générer dans un répertoire nommé `build` et les organiser dans des sous-répertoires : `dependencies/` pour les fichiers `.d`, `objects/` pour les fichiers `.o` et `binaries/` pour les exécutables.  
+
+Pour ce faire, nous créons une cible `build` qui génère les répertoires nécessaires à l'aide de l'option `-p` (pour `parents`), permettant de créer tous les répertoires (y compris les parents) s'ils n'existent pas déjà. Si les répertoires existent déjà, la commande ne les écrasera pas.  
+
+Dans les prérequis de la cible `all`, nous ajoutons `build` en premier, afin d'exécuter d'abord la cible `build`. Sinon, `make` ne pourra pas trouver les fichiers prérequis si les répertoires de `build` n'existent pas encore.  
+
+Puisque nous ne générons plus tous les fichiers au même endroit, nous spécifions avec l'option `-o` l'emplacement et le nom du fichier `.o` à créer. Par exemple, `-o build/objects/main.o` indique que `main.o` doit être généré dans `build/objects/` sous ce nom. Il en va de même pour `-MF build/dependencies/main.d` pour les fichiers de dépendances contenant les prérequis.  
+
+Maintenant, pour nettoyer le projet (`make clean`), il suffit de supprimer le répertoire `build/`. L'option `-rf` de la commande `rm` combine les options `recursive` et `force`, permettant ainsi de supprimer les répertoires et tous leurs sous-répertoires sans confirmation.  
+:::
+
+8. Exécutez les différentes commandes `make`, `make run` et `make clean` et observez.
+
+Le code actuel du makefile contient beaucoup de redondances. Nous pouvons refactoriser ce code en utilisant des variables de la manière suivante :
+```{code} makefile
+BUILD_DIRECTORY = build
+DEPENDENCY_DIRECTORY = $(BUILD_DIRECTORY)/dependencies
+OBJECT_DIRECTORY = $(BUILD_DIRECTORY)/objects
+BINARY_DIRECTORY = $(BUILD_DIRECTORY)/binaries
+
+EXECUTABLE = $(BINARY_DIRECTORY)/executable
+
+SOURCE_FILES = $(wildcard *.cpp)
+
+OBJECT_FILES = $(SOURCE_FILES:.cpp=.o)
+OBJECT_FILES := $(OBJECT_FILES:%=$(OBJECT_DIRECTORY)/%)
+
+DEPENDENCY_FILES = $(SOURCE_FILES:.cpp=.d)
+DEPENDENCY_FILES := $(DEPENDENCY_FILES:%=$(DEPENDENCY_DIRECTORY)/%)
+
+-include $(DEPENDENCY_FILES)
+
+all: $(BUILD_DIRECTORY) $(EXECUTABLE)
+
+$(BUILD_DIRECTORY):
+	mkdir -p $(DEPENDENCY_DIRECTORY) $(OBJECT_DIRECTORY) $(BINARY_DIRECTORY)
+
+$(EXECUTABLE): $(OBJECT_FILES)
+	g++ -o $@ $^
+
+$(OBJECT_DIRECTORY)/%.o: %.cpp
+	g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d
+
+run:
+	./$(EXECUTABLE)
+
+clean:
+	rm -rf $(BUILD_DIRECTORY)
+
+.PHONY: all run clean
+```
+
+:::{important} Variables en Makefile
+Les variables dans un Makefile sont nommées en suivant la convention UPPER_SNAKE_CASE. On accède à leur valeur en utilisant `$(VARIABLE)`.
+
+Ici, nous avons défini des variables pour les différents noms de répertoires et types de fichiers. Voyons le contenu de ce code :
+- `BUILD_DIRECTORY` désigne le répertoire qui contiendra nos fichiers de compilation : ici, `build`.
+- Dans `build`, nous allons organiser les répertoires pour les différents types de fichiers mentionnés précédemment. Par exemple, la valeur de `OBJECT_DIRECTORY` est `build/objects`.
+- `EXECUTABLE` nous permet de définir le nom de l'exécutable qui sera situé dans `build/binaries/`. Il est important de différencier le nom du fichier du chemin d'accès au fichier (*file path*) à partir du répertoire courant. `$(EXECUTABLE)` sera utilisé pour générer le fichier au bon endroit en utilisant un chemin d'accès, et ce n'est pas seulement le nom de l'exécutable.
+- `SOURCE_FILES` est la liste des chemins d'accès aux fichiers sources. Ici, comme ces fichiers sont situés dans le même répertoire que le makefile, nous pouvons obtenir ces chemins avec la commande `wildcard *.cpp`, qui retourne `main.cpp hello.cpp`. Nous réorganiserons ces fichiers sources dans des sous-répertoires plus tard.
+- `OBJECT_FILES` est la liste des chemins d'accès aux fichiers objets. Nous obtenons cette liste d'abord avec `OBJECT_FILES = $(SOURCE_FILES:.cpp=.o)`, qui parcourt la liste `main.cpp hello.cpp` et remplace l'extension `.cpp` par `.o` pour obtenir `main.o hello.o`. L'instruction `OBJECT_FILES := $(OBJECT_FILES:%=$(OBJECT_DIRECTORY)/%)` parcourt cette liste `main.o hello.o` et remplace le motif `%` (par exemple `main.o`) par `$(OBJECT_DIRECTORY)/%`, ce qui donne `build/objects/main.o`. Ainsi, `OBJECT_FILES` devient `build/objects/main.o build/objects/hello.o`. L'utilisation de `:=` au lieu de `=` demande à Make de n'interpréter l'expression qu'une seule fois, contrairement à `=`, qui entraîne une boucle infinie en raison de la présence de `OBJECT_FILES` des deux côtés de la définition.
+- Il en va de même pour `DEPENDENCY_FILES`.
+
+Le reste du code ressemble à celui du précédent, avec les variables utilisées à la place des valeurs définies en début de fichier :
+
+- `$@` renvoie la valeur de la cible courante.
+- `$^` renvoie la valeur des prérequis.
+- `$<` renvoie la valeur du premier prérequis.
+- `$*` renvoie la valeur du motif `%` courant.
+
+Par exemple :
+```{code} makefile
+$(EXECUTABLE): $(OBJECT_FILES)
+	g++ -o $@ $^
+```
+Ici, `$@` renvoie `$(EXECUTABLE)`, qui est `build/binaries/executable`, et `$^` renvoie `$(OBJECT_FILES)`, qui est `build/objects/main.o build/objects/hello.o`. Ainsi, la commande `g++ -o $@ $^` devient `g++ -o build/binaries/executable build/objects/main.o build/objects/hello.o`.
+
+Un autre exemple :
+```{code} makefile
+$(OBJECT_DIRECTORY)/%.o: %.cpp
+	g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d
+```
+Le motif `$(OBJECT_DIRECTORY)/%.o` permet de définir les cibles sous la forme `build/objects/<filename>.o` et répète le motif `%` dans les prérequis avec `%.cpp`. Ainsi, `build/objects/main.o` a pour prérequis `main.cpp` car `%` ici correspond à `main`.  
+Pour la cible `build/objects/main.o`, nous avons donc `$<` qui est `main.cpp`, `$@` qui est `build/objects/main.o`, et `$(DEPENDENCY_DIRECTORY)/$*.d` qui est `build/dependencies/main.d`, car `$*` prend la valeur de `%`, soit `main`.  
+La commande `g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d` devient donc `g++ -c main.cpp -o build/objects/main.o -MMD -MF build/dependencies/main.d`, ce qui est la même ligne de code qu'auparavant.  
+Il en est de même pour la cible `build/objects/hello.o`.
+:::
+
+9. Exécutez les commandes `make`, `make run` et `make clean` et observez.
+
+:::{warning} Le makefile parfait ?
+Nous pouvons encore aller plus loin dans la refactorisation en créant une variable pour le compilateur `g++`, au cas où nous souhaiterions changer de compilateur un jour, ou une variable pour les options de compilation `-c -o -MMD -MF <...>`, qui pourrait même varier selon le contexte.  
+Dans le futur, nous pourrions aussi ajouter des cibles pour générer la documentation ou encore pour les tests.  
+Mais de manière générale, notre makefile semble bien adapté pour un projet évolutif : il n'est pas nécessaire de le modifier fréquemment lorsque nous ajoutons du code au projet.
+
+Malheureusement, ce n'est pas encore le cas !  
+Vous avez dû remarquer que tous les fichiers de code source se trouvent au même endroit. Si nous avons un gros projet avec plusieurs modules, notre makefile ne sera plus adapté car, par exemple, il devient difficile de gérer les cibles `.o`, qui se trouvent toutes dans `build/objects/`, mais qui dépendent de fichiers `.cpp` provenant de répertoires différents.
+
+Selon le module, il peut aussi être souhaitable de compiler le projet de manière différente ou de ne compiler qu'un seul module. Par exemple, si d'autres équipes travaillent sur les autres modules, ou si le projet est trop grand pour effectuer un `make` complet simplement pour tester un module.
+
+La bonne pratique ici est d'avoir plusieurs makefiles, un pour chaque module, et un makefile principal qui appellera les makefiles des différents modules.
+:::
+
+(tp4-project-organization)=
+10. Réorganisez votre projet minimal de la façon suivante :
+```{code} md
+minimal-project/
+    source/
+        first-module/
+            hello.cpp
+            hello.h
+            makefile
+        second-module/
+            hi.cpp
+            hi.h
+            makefile
+        main.cpp
+    makefile
+```
+
+11. Dans `hi.h`, recopiez le code de `hello.h` et modifiez l'include guard et le nom de la fonction à `sayHi`.
+
+12. Dans `hi.cpp`, recopiez le code de `hello.cpp` et modifiez l'include pour inclure `hi.h`, le nom de la fonction à `sayHi` et la sortie console à `Hi!` par exemple au lieu de `Hello World!`.
+
+13. Dans `main.cpp`, modifiez les includes pour inclure `first-module/hello.h` et `second-module/hi.h` et ajouter `sayHi();` après `sayHello();`.
+
+Pour cet exemple minimal, nous allons utiliser le même makefile dans les deux modules, mais nous pouvons imaginer que ces makefiles soient différents et même écrits par des personnes différentes.
+
+14. Modifiez les makefiles des modules de la façon suivante :
+```{code} makefile
+BUILD_DIRECTORY = ../../build
+DEPENDENCY_DIRECTORY = $(BUILD_DIRECTORY)/dependencies
+OBJECT_DIRECTORY = $(BUILD_DIRECTORY)/objects
+
+SOURCE_FILES = $(wildcard *.cpp)
+
+OBJECT_FILES = $(SOURCE_FILES:.cpp=.o)
+OBJECT_FILES := $(OBJECT_FILES:%=$(OBJECT_DIRECTORY)/%)
+
+DEPENDENCY_FILES = $(SOURCE_FILES:.cpp=.d)
+DEPENDENCY_FILES := $(DEPENDENCY_FILES:%=$(DEPENDENCY_DIRECTORY)/%)
+
+-include $(DEPENDENCY_FILES)
+
+all: $(BUILD_DIRECTORY) $(OBJECT_FILES)
+
+$(BUILD_DIRECTORY):
+	mkdir -p $(DEPENDENCY_DIRECTORY) $(OBJECT_DIRECTORY) $(BINARY_DIRECTORY)
+
+$(OBJECT_DIRECTORY)/%.o: %.cpp
+	g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d
+
+clean:
+	rm -rf $(OBJECT_FILES) $(DEPENDENCY_FILES)
+
+.PHONY: all clean
+```
+
+:::{important} Makefile d'un module
+- Le code reste inchangé sans générer d'exécutable.
+- Le répertoire `build` sera créé dans le répertoire grand-parent (`../../build`), au même niveau que `source`.
+- La cible par défaut `all` va créer les `$(OBJECT_FILES)` au lieu de l'exécutable.
+- La cible `clean` supprime uniquement les fichiers objets et de dépendances liés au module.
+:::
+
+15. Modifiez le makefile à la racine du projet de la façon suivante :
+```{code} makefile
+BUILD_DIRECTORY = build
+DEPENDENCY_DIRECTORY = $(BUILD_DIRECTORY)/dependencies
+OBJECT_DIRECTORY = $(BUILD_DIRECTORY)/objects
+BINARY_DIRECTORY = $(BUILD_DIRECTORY)/binaries
+
+SOURCE_DIRECTORY = source
+
+EXECUTABLE = $(BINARY_DIRECTORY)/executable
+
+MODULES = $(wildcard $(SOURCE_DIRECTORY)/*/)
+SOURCE_FILES = $(wildcard $(SOURCE_DIRECTORY)/*.cpp)
+
+OBJECT_FILES = $(SOURCE_FILES:$(SOURCE_DIRECTORY)/%.cpp=%.o)
+OBJECT_FILES := $(OBJECT_FILES:%=$(OBJECT_DIRECTORY)/%)
+
+DEPENDENCY_FILES = $(SOURCE_FILES:$(SOURCE_DIRECTORY)/%.cpp=%.d)
+DEPENDENCY_FILES := $(DEPENDENCY_FILES:%=$(DEPENDENCY_DIRECTORY)/%)
+
+all: $(BUILD_DIRECTORY) $(EXECUTABLE)
+
+$(BUILD_DIRECTORY):
+	mkdir -p $(DEPENDENCY_DIRECTORY) $(OBJECT_DIRECTORY) $(BINARY_DIRECTORY)
+
+$(EXECUTABLE): $(MODULES) $(OBJECT_FILES) 
+	g++ -o $@ $(wildcard $(OBJECT_DIRECTORY)/*.o)
+
+$(MODULES):
+	$(MAKE) -C $@
+
+$(OBJECT_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.cpp
+	g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d
+
+run:
+	./$(EXECUTABLE)
+
+clean:
+	rm -rf $(BUILD_DIRECTORY)
+
+.PHONY: all run clean $(MODULES)
+```
+
+:::{important} Makefile à la racine
+- Nous récupérons le répertoire des codes source (`source/`).
+- À l'intérieur de `source/`, nous récupérons les noms des modules qui correspondent aux sous-répertoires.
+- Nous récupérons aussi les fichiers de code `.cpp`. Dans cet exemple, nous avons seulement `main.cpp`, mais il est possible d'avoir d'autres fichiers.
+- De manière similaire à avant, nous récupérons les noms des fichiers objets et des fichiers de dépendances à générer.
+- Pour créer l'exécutable final, il faut d'abord compiler les modules et les fichiers objets des nouveaux codes sources, puis relier tous les fichiers objets dans `build/objects/`.
+- Pour chaque module (`source/first-module source/second-module`), nous nous plaçons à l'intérieur du sous-répertoire correspondant (par exemple `source/first-module`) avec l'option `-C source/first-module`. Ensuite, nous exécutons `make` via la variable native `$(MAKE)`, qui reprend les options de la commande `make` dans notre terminal. Par exemple, il est possible de paralléliser la compilation lorsque notre machine dispose de plusieurs processeurs, car des fichiers sources peuvent être compilés en même temps. Ainsi, `make -j4` utilise 4 processeurs simultanément, et `$(MAKE)` reprend l'option `-j4` pour compiler les modules. Pour notre exemple, nous aurions pu remplacer `$(MAKE)` par `make` directement, mais il est préférable d'utiliser la variable native associée à la commande `make`.  
+:::
+
+16. Commentez les makefiles grâce à `#` (en français si vous le souhaitez).
+
+## Exercice 2 : Documentations
+
+1. Réécrivez votre README (en français si vous le souhaitez).
+
+:::{hint} Rappels
+- Les fonctionnalités principales de ce projet sont d'apprendre les bonnes pratiques de code et de développement.
+- Il n'y a pas de documentation complémentaire.
+- Vous pouvez expliquer comment cloner le dépôt en créant un PAT (il n'est pas nécessaire d'être aussi détaillé que dans le premier TP) et comment compiler le code en ligne de commande avec `g++` pour les instructions d'installation.
+- Vous pouvez expliquer comment exécuter un exécutable en ligne de commande pour les instructions d'utilisation.
+- Vous pouvez ajouter une licence (fichier `LICENSE` en anglais) MIT dans un fichier séparé et un lien vers la licence.  
+:::
+
+1. Créez un répertoire `documentations/` dans `TP4/`.
+
+En cours, nous avons vu un exemple de documentation utilisant Doxygen (très similaire à la syntaxe Javadoc). Étant donné que Doxygen n'est pas (encore) installé sur les machines de l'IUT, nous allons revoir le même exemple en Javadoc.
+
+2. Recopiez le code suivant dans un fichier `Temperature.java`.
+
+```{code} java
+/**
+ * Represents a temperature in Celsius and Fahrenheit.
+ *
+ * This class allows you to set a temperature in Celsius, convert it to Fahrenheit,
+ * and vice versa. It also provides the ability to get the current temperature in either unit.
+ *
+ * <p> Example usage: </p> 
+ * <pre>
+ * <code>
+ * Temperature currentTemperature = new Temperature(25.0);  // 25°C
+ * currentTemperature.displayTemperature();  // Output: Temperature: 25°C / 77°F
+ * currentTemperature.setFahrenheit(100.0);
+ * currentTemperature.displayTemperature();  // Output: Temperature: 37.7778°C / 100°F
+ * </code>
+ * </pre>
+ */
+public class Temperature {
+    private double celsius;
+
+    /**
+     * Constructs a new Temperature object.
+     *
+     * Initializes the temperature in Celsius.
+     *
+     * @param celsius The initial temperature in Celsius.
+     */
+    public Temperature(double celsius) {
+        this.celsius = celsius;
+    }
+
+    /**
+     * Gets the current temperature in Celsius.
+     *
+     * @return The temperature in Celsius.
+     */
+    public double getCelsius() {
+        return celsius;
+    }
+
+    /**
+     * Sets the temperature in Celsius.
+     *
+     * This method sets the temperature value directly in Celsius.
+     *
+     * @param celsius The new temperature in Celsius.
+     */
+    public void setCelsius(double celsius) {
+        this.celsius = celsius;
+    }
+
+    /**
+     * Gets the current temperature in Fahrenheit.
+     *
+     * @return The temperature in Fahrenheit.
+     */
+    public double getFahrenheit() {
+        return celsius * 9 / 5 + 32; // Formula to convert Farenheit to Celsius
+    }
+
+    /**
+     * Sets the temperature using a value in Fahrenheit.
+     *
+     * This method converts the given Fahrenheit value to Celsius and sets it.
+     *
+     * @param fahrenheit The temperature in Fahrenheit.
+     */
+    public void setFahrenheit(double fahrenheit) {
+        this.celsius = (fahrenheit - 32) * 5 / 9; // Formula to convert Celsius to Farenheit
+    }
+
+    /**
+     * Converts and displays the temperature in both Celsius and Fahrenheit.
+     *
+     * This method prints the current temperature in both Celsius and Fahrenheit.
+     */
+    public void displayTemperature() {
+        System.out.println("Temperature: " + celsius + "°C / " + getFahrenheit() + "°F");
+    }
+}
+```
+
+3. Générer la documentation pour `Temperature.java` avec la commande `javadoc -d docs Temperature.java`, ce qui créera un répertoire `docs/`.
+
+4. Consultez la documentation générée en ouvrant `docs/index.html` dans un navigateur web.
+
+5. Reprenez la syntaxe Doxygen vue en cours pour rédiger la documentation de la classe `Product` de l'exercice `short-functions` du `TP3`.
+
+Revenez aux [objectifs](#tp4-objectifs) et cochez les points que vous avez maîtrisés. Revenez sur les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
