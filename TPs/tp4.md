@@ -537,7 +537,7 @@ clean:
 - Vous pouvez ajouter une licence (fichier `LICENSE` en anglais) MIT dans un fichier séparé et un lien vers la licence.  
 :::
 
-:::{hint} Quelques syntaxes README
+:::{hint} Quelques syntaxes Markdown
 :class: dropdown
 - `#` fait des titres. Plus il y a de `#`, plus le titre est petit.
 - `[texte](lien)` crée des liens hypertextes.
