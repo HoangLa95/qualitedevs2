@@ -529,13 +529,28 @@ clean:
 
 1. Réécrivez votre README (en français si vous le souhaitez) et vérifiez le rendu du README sur GitLab.
 
-:::{hint} Rappels
+:::{note} Rappels
 - Les fonctionnalités principales de ce projet sont d'apprendre les bonnes pratiques de code et de développement.
 - Il n'y a pas de documentation complémentaire.
 - Vous pouvez expliquer comment cloner le dépôt en créant un PAT (il n'est pas nécessaire d'être aussi détaillé que dans le premier TP) et comment compiler le code en ligne de commande avec `g++` pour les instructions d'installation.
 - Vous pouvez expliquer comment exécuter un exécutable en ligne de commande pour les instructions d'utilisation.
 - Vous pouvez ajouter une licence (fichier `LICENSE` en anglais) MIT dans un fichier séparé et un lien vers la licence.  
 :::
+
+:::{hint} Quelques syntaxes README
+:class: dropdown
+- `#` fait des titres. Plus il y a de `#`, plus le titre est petit.
+- `[texte](lien)` crée des liens hypertextes.
+- ` ``` code ``` ` crée des blocs de code.
+- `**texte en gras**` met le texte en gras.
+- `*texte en italique*` met le texte en italique.
+- `-` crée des listes à puces.
+- `1.`, `2.`, etc. crée des listes numérotées.
+- `> citation` suivi de `> - auteur`  crée une citation avec un auteur.
+- `![texte alternatif](lien d'image)` insère une image.
+- `- [ ]` crée une case à cocher, et `- [x]` une case cochée.
+- `---` insère une ligne horizontale.
+::: 
 
 2. Créez un répertoire `documentations/` dans `TP4/`.
 
