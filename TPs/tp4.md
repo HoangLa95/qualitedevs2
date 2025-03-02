@@ -6,8 +6,8 @@ Encore une séance dans le terminal !
 :::
 
 :::{important} `.gitignore`  
-Nous allons créer des fichiers `makefile` sans extension. Il est donc nécessaire d'ajouter `!makefile` au `.gitignore` afin de ne pas les ignorer, tout en continuant à exclure les fichiers exécutables.
-De plus, nous allons générer les répertoires `build/` et `docs/`, qui contiendront des fichiers de compilation. Ceux-ci doivent être ignorés.  
+Nous allons créer des fichiers `makefile` sans extension. Ajoutez `!makefile` au `.gitignore` afin de ne pas les ignorer, tout en continuant à exclure les fichiers exécutables.
+De plus, nous allons générer les répertoires `build/` et `docs/`, qui contiendront des fichiers de compilation et de documentation que nous allons ignorer.
 :::
 
 (tp4-objectifs)=
@@ -115,7 +115,7 @@ Par défaut, `make` cherche un fichier nommé `makefile` ou `Makefile` pour y tr
 ```{code} sh
 make -f my-build-script <cible>
 ```  
-(`-f` signifie **file**, pour indiquer un fichier makefile spécifique).
+`-f` signifie **file**, pour indiquer un fichier makefile spécifique.
 :::
 
 :::{important} Syntaxe d'un makefile
@@ -136,7 +136,7 @@ Avant de construire une cible, `make` cherche à construire ses **prérequis**.
 Si tout est à jour, c'est-à-dire que pour chaque paire de (cible, prérequis) qui intervient dans la construction de la cible, le fichier correspondant à la cible a été créé/modifié après le fichier correspondant au prérequis, alors `make` ne fait rien. Si le fichier n'existe pas, `make` considère qu'il n'est pas à jour.
 Quand une cible n'est pas à jour, `make` exécute les commandes associées à la cible.
 
-Par exemple, 
+Par exemple :
 ```{code} makefile
 cible : prérequis
     commande cible
@@ -148,7 +148,7 @@ Dans l'exemple précédent, si les fichiers `cible` et `prérequis` existent, la
 
 Ce comportement optimise la compilation, évitant de recompiler l'intégralité du projet, ce qui est crucial pour les grands projets pouvant prendre plusieurs heures à compiler.  
 
-**Explication du Makefile de l'exemple** :  
+**Explication du makefile de l'exemple** :  
 - `all` : C'est la **cible par défaut** exécutée lorsque l'on tape `make`. Elle ne contient pas de commande et vérifie simplement si `executable` est à jour.  
 - `executable` : Cette cible dépend de `main.o` et `hello.o`, qui sont des **fichiers objets** générés à partir des fichiers `.cpp` du projet. Une fois ces prérequis à jour, `make` exécute `g++ -o executable main.o hello.o`  qui relie `main.o` et `hello.o` pour créer l'exécutable `executable` (Linking, dernière étape de la compilation en C++).
 - `main.o` et `hello.o` :  
@@ -159,7 +159,7 @@ Ce comportement optimise la compilation, évitant de recompiler l'intégralité 
 - `clean` :  
   - N'a aucun prérequis.  
   - Supprime les fichiers générés avec `rm -f executable main.o hello.o`. 
-  - L'option `-f` (**force**) permet de supprimer sans confirmation et sans erreur si les fichiers n'existent pas. Cette option est couramment utilisée pour `clean` dans les Makefiles.
+  - L'option `-f` (**force**) permet de supprimer sans confirmation et sans erreur si les fichiers n'existent pas. Cette option est couramment utilisée pour `clean` dans les makefiles.
 :::
 
 :::{important} `.PHONY`
@@ -285,7 +285,7 @@ Dans les prérequis de la cible `all`, nous ajoutons `build` en premier, afin d'
 
 Puisque nous ne générons plus tous les fichiers au même endroit, nous spécifions avec l'option `-o` l'emplacement et le nom du fichier `.o` à créer. Par exemple, `-o build/objects/main.o` indique que `main.o` doit être généré dans `build/objects/` sous ce nom. Il en va de même pour `-MF build/dependencies/main.d` pour les fichiers de dépendances contenant les prérequis.  
 
-Maintenant, pour nettoyer le projet (`make clean`), il suffit de supprimer le répertoire `build/`. L'option `-rf` de la commande `rm` combine les options `recursive` et `force`, permettant ainsi de supprimer les répertoires et tous leurs sous-répertoires sans confirmation.  
+Maintenant, pour nettoyer le projet (`make clean`), il suffit de supprimer le répertoire `build/`. L'option `-rf` de la commande `rm` combine les options *recursive* et *force*, permettant ainsi de supprimer les répertoires et tous leurs sous-répertoires sans confirmation.  
 :::
 
 8. Exécutez les différentes commandes `make`, `make run` et `make clean` et observez.
@@ -359,7 +359,7 @@ clean:
 ```
 
 :::{important} Variables en Makefile
-Les variables dans un Makefile sont nommées en suivant la convention UPPER_SNAKE_CASE. On accède à leur valeur en utilisant `$(VARIABLE)`.
+Les variables dans un makefile sont nommées en suivant la convention UPPER_SNAKE_CASE. On accède à leur valeur en utilisant `$(VARIABLE)`.
 
 Ici, nous avons défini des variables pour les différents noms de répertoires et types de fichiers. Voyons le contenu de ce code :
 - `BUILD_DIRECTORY` désigne le répertoire qui contiendra nos fichiers de compilation : ici, `build`.
@@ -520,7 +520,7 @@ clean:
 - Nous récupérons aussi les fichiers de code `.cpp`. Dans cet exemple, nous avons seulement `main.cpp`, mais il est possible d'avoir d'autres fichiers.
 - De manière similaire à avant, nous récupérons les noms des fichiers objets et des fichiers de dépendances à générer.
 - Pour créer l'exécutable final, il faut d'abord compiler les modules et les fichiers objets des nouveaux codes sources, puis relier tous les fichiers objets dans `build/objects/`.
-- Pour chaque module (`source/first-module source/second-module`), nous nous plaçons à l'intérieur du sous-répertoire correspondant (par exemple `source/first-module`) avec l'option `-C source/first-module`. Ensuite, nous exécutons `make` via la variable native `$(MAKE)`, qui reprend les options de la commande `make` dans notre terminal. Par exemple, il est possible de paralléliser la compilation lorsque notre machine dispose de plusieurs processeurs, car des fichiers sources peuvent être compilés en même temps. Ainsi, `make -j4` utilise 4 processeurs simultanément, et `$(MAKE)` reprend l'option `-j4` pour compiler les modules. Pour notre exemple, nous aurions pu remplacer `$(MAKE)` par `make` directement, mais il est préférable d'utiliser la variable native associée à la commande `make`.  
+- Pour chaque module (`source/first-module source/second-module`), nous nous plaçons à l'intérieur du sous-répertoire correspondant (par exemple `source/first-module`) avec l'option `-C source/first-module`. Ensuite, nous exécutons `make` via la variable native `$(MAKE)`, qui reprend les options de la commande `make` dans notre terminal. Par exemple, il est possible de paralléliser la compilation lorsque notre machine dispose de plusieurs processeurs, car des fichiers sources peuvent être compilés en même temps. Ainsi, `make -j4` utilise 4 processeurs simultanément, et `$(MAKE)` reprend l'option `-j4` pour compiler les modules. Pour notre exemple, nous aurions pu remplacer `$(MAKE)` par `make` directement, mais il est préférable d'utiliser la variable native associée à la commande `make` de façon générale.  
 :::
 
 16. Commentez les makefiles grâce à `#` (en français si vous le souhaitez) pour clarifier les différents blocs de code et ajoutez des exemples pour les commandes pour clarifier la syntaxe.
@@ -542,7 +542,7 @@ $(TARGET_VARIABLE): $(PREREQUISITE_VARIABLE)
 - Il n'y a pas de documentation complémentaire.
 - Vous pouvez expliquer comment cloner le dépôt en créant un PAT (il n'est pas nécessaire d'être aussi détaillé que dans le premier TP) et comment compiler le code en ligne de commande avec `g++` pour les instructions d'installation.
 - Vous pouvez expliquer comment exécuter un exécutable en ligne de commande pour les instructions d'utilisation.
-- Vous pouvez ajouter une licence (fichier `LICENSE` en anglais) MIT dans un fichier séparé et un lien vers la licence.  
+- Vous pouvez ajouter une licence (fichier `LICENSE` en anglais) MIT dans un fichier séparé et un lien vers la licence à la racine du projet.  
 :::
 
 :::{hint} Quelques syntaxes Markdown
@@ -555,7 +555,7 @@ $(TARGET_VARIABLE): $(PREREQUISITE_VARIABLE)
 - `-` crée des listes à puces.
 - `1.`, `2.`, etc. crée des listes numérotées.
 - `> citation` suivi de `> - auteur`  crée une citation avec un auteur.
-- `![texte alternatif](lien d'image)` insère une image.
+- `![texte alternatif](lien d'image)` insère une image et affiche le texte alternatif quand l'image ne peut pas être chargé ou quand nous survolons l'image.
 - `- [ ]` crée une case à cocher, et `- [x]` une case cochée.
 - `---` insère une ligne horizontale.
 ::: 
