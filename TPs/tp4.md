@@ -646,4 +646,9 @@ public class Temperature {
 
 6. Reprenez la syntaxe Doxygen vue en cours pour rédiger la documentation de la classe `Product` de l'exercice `short-functions` du `TP3`.
 
+:::{warning} `@example` dans Doxygen
+:class: dropdown
+Le tag `@example` dans Doxygen doit être utilisé dans un bloc séparé. Sinon, Doxygen va reconnaître tout le bloc comme un exemple et ne va pas montrer les descriptions dans la documentation générée, contrairement à Javadoc qui n'a pas de tag `@example`.
+:::
+
 Revenez aux [objectifs](#tp4-objectifs) et cochez les points que vous avez maîtrisés. Revenez sur les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
