@@ -1,4 +1,4 @@
-# TP4 : Build system et documentations
+# TP4 : Build system et documentation
 
 :::{note} Intégration Git dans un IDE
 :class: dropdown
@@ -17,7 +17,7 @@ Le but de ce TP est de comprendre les points suivants :
 - [ ] [L'organisation des fichiers de compilation](#tp4-build-directory)
 - [ ] [L'organisation des fichiers de code](#tp4-project-organization)
 - [ ] [README](../Cours/cm4.md/#readme)
-- [ ] [Documentations Doxygen/Javadoc](../Cours/cm4.md/#documentation-du-code)
+- [ ] [Documentation Doxygen/Javadoc](../Cours/cm4.md/#documentation-du-code)
 
 ## Exercice 1 : Makefile
 
@@ -533,7 +533,7 @@ $(TARGET_VARIABLE): $(PREREQUISITE_VARIABLE)
     g++ -c $< -o $@ 
 ```
 
-## Exercice 2 : Documentations
+## Exercice 2 : Documentation
 
 1. Réécrivez votre README (en français si vous le souhaitez) et vérifiez le rendu du README sur GitLab.
 
@@ -560,7 +560,7 @@ $(TARGET_VARIABLE): $(PREREQUISITE_VARIABLE)
 - `---` insère une ligne horizontale.
 ::: 
 
-2. Créez un répertoire `documentations/` dans `TP4/`.
+2. Créez un répertoire `documentation/` dans `TP4/`.
 
 En cours, nous avons vu un exemple de documentation utilisant Doxygen (très similaire à la syntaxe Javadoc). Étant donné que Doxygen n'est pas (encore) installé sur les machines de l'IUT, nous allons revoir le même exemple en Javadoc.
 
