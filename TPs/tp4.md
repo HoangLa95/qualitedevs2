@@ -144,7 +144,7 @@ cible : prérequis
 prérequis :
     commande prérequis
 ```
-Dans l'exemple précédent, si les fichiers `cible` et `prérequis` existent, la dernière modification de `cible` est à 14h00 et de `prérequis` à 13h59, alors `make` vérifier que `prérequis` est à jour (ce qui est le cas vu qu'il n'a pas prérequis lui-même), puis vérifie que `cible` est à jour (ce qui est le cas vu que `cible` la dernière modification de `cible` est plus récente que celle de `prérequis`).
+Dans l'exemple précédent, si les fichiers `cible` et `prérequis` existent, la dernière modification de `cible` est à 14h00 et de `prérequis` à 13h59, alors `make` vérifier que `prérequis` est à jour (ce qui est le cas vu qu'il n'a pas prérequis lui-même), puis vérifie que `cible` est à jour (ce qui est le cas vu que `cible` la dernière modification de `cible` est plus récente que celle de `prérequis`) et ne fait rien.
 
 Ce comportement optimise la compilation, évitant de recompiler l'intégralité du projet, ce qui est crucial pour les grands projets pouvant prendre plusieurs heures à compiler.  
 
