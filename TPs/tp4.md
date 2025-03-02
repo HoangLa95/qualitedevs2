@@ -523,7 +523,15 @@ clean:
 - Pour chaque module (`source/first-module source/second-module`), nous nous plaçons à l'intérieur du sous-répertoire correspondant (par exemple `source/first-module`) avec l'option `-C source/first-module`. Ensuite, nous exécutons `make` via la variable native `$(MAKE)`, qui reprend les options de la commande `make` dans notre terminal. Par exemple, il est possible de paralléliser la compilation lorsque notre machine dispose de plusieurs processeurs, car des fichiers sources peuvent être compilés en même temps. Ainsi, `make -j4` utilise 4 processeurs simultanément, et `$(MAKE)` reprend l'option `-j4` pour compiler les modules. Pour notre exemple, nous aurions pu remplacer `$(MAKE)` par `make` directement, mais il est préférable d'utiliser la variable native associée à la commande `make`.  
 :::
 
-16. Commentez les makefiles grâce à `#` (en français si vous le souhaitez).
+16. Commentez les makefiles grâce à `#` (en français si vous le souhaitez) pour clarifier les différents blocs de code et ajoutez des exemples pour les commandes pour clarifier la syntaxe.
+
+Par exemple :
+```{code} makefile
+# Compile source codes to object files
+$(TARGET_VARIABLE): $(PREREQUISITE_VARIABLE)
+    # For example: g++ -c prerequisite.cpp -o target.o
+    g++ -c $< -o $@ 
+```
 
 ## Exercice 2 : Documentations
 
