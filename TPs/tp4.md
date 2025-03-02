@@ -132,7 +132,19 @@ La syntaxe de base d'une cible :
 :::{important} Comportement de `make <cible>`
 `make <cible>` cherche à créer un fichier portant le nom de la **cible** en exécutant les commandes associées. Pour simplifier, nous parlerons uniquement de "fichier" plutôt que de "fichier/répertoire".  
 
-Si le fichier correspondant est **à jour** (il existe et ses prérequis sont à jour), `make` ne fait rien. Sinon, `make` détecte des mises à jour et exécute la cible. Si le fichier n'existe pas, `make` s'assure d'abord que ses **prérequis** sont à jour avant d'exécuter la commande.  
+Avant de construire une cible, `make` cherche à construire ses **prérequis**.
+Si tout est à jour, c'est-à-dire que pour chaque paire de (cible, prérequis) qui intervient dans la construction de la cible, le fichier correspondant à la cible a été créé/modifié après le fichier correspondant au prérequis, alors `make` ne fait rien. Si le fichier n'existe pas, `make` considère qu'il n'est pas à jour.
+Quand une cible n'est pas à jour, `make` exécute les commandes associées à la cible.
+
+Par exemple, 
+```{code} makefile
+cible : prérequis
+    commande cible
+
+prérequis :
+    commande prérequis
+```
+Dans l'exemple précédent, si les fichiers `cible` et `prérequis` existent, la dernière modification de `cible` est à 14h00 et de `prérequis` à 13h59, alors `make` vérifier que `prérequis` est à jour (ce qui est le cas vu qu'il n'a pas prérequis lui-même), puis vérifie que `cible` est à jour (ce qui est le cas vu que `cible` la dernière modification de `cible` est plus récente que celle de `prérequis`).
 
 Ce comportement optimise la compilation, évitant de recompiler l'intégralité du projet, ce qui est crucial pour les grands projets pouvant prendre plusieurs heures à compiler.  
 
