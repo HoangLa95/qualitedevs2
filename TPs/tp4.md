@@ -527,7 +527,7 @@ clean:
 
 ## Exercice 2 : Documentations
 
-1. Réécrivez votre README (en français si vous le souhaitez).
+1. Réécrivez votre README (en français si vous le souhaitez) et vérifiez le rendu du README sur GitLab.
 
 :::{hint} Rappels
 - Les fonctionnalités principales de ce projet sont d'apprendre les bonnes pratiques de code et de développement.
