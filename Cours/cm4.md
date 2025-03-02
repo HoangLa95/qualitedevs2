@@ -39,8 +39,7 @@ Optionnel :
 ### Licence
 
 Example de la [Licence MIT](https://fr.wikipedia.org/wiki/Licence_MIT), une licence open-source très permissive :
-```{code} cpp
-/*
+```{code}
 Copyright <YEAR> <COPYRIGHT HOLDER>
 
 Permission is hereby granted, free of charge, to any 
@@ -66,7 +65,6 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
 CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
 IN THE SOFTWARE.
-*/
 ```
 
 ### Documentation du code
