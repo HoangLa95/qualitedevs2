@@ -37,10 +37,13 @@ Un **build script** est un fichier qui automatise le processus de compilation et
 
 Les **build systems** standards en C++ sont **CMake** et **Makefile**. D'autres langages utilisent leurs propres outils, comme **MSBuild** pour C# ou **Gradle** et **Maven** pour Java. Certains IDE intègrent également leur propre build system. Par exemple, un projet Java sous Eclipse utilise le système de build natif d'Eclipse.  
 
-Dans ce TP, nous allons explorer le fonctionnement d'un build system à travers un build script en **Makefile**, un build system bas niveau pour C/C++ conçu pour les systèmes Unix (Linux et macOS). **CMake** est plus haut niveau et **cross-platform** (compatible avec d'autres systèmes comme Windows), mais nous nous concentrerons sur **Makefile**, qui offre un meilleur contrôle à bas niveau.  
+Dans ce TP, nous allons explorer le fonctionnement d'un build system à travers un build script en **Makefile**, un build system bas niveau pour C/C++ conçu pour les systèmes Unix (Linux et macOS). **CMake** est plus haut niveau et **cross-platform** (compatible avec d'autres systèmes comme Windows), mais nous nous concentrerons sur **Makefile**, qui offre un meilleur contrôle à bas niveau. 
+:::
 
+:::{warning} Linux sous Windows
+:class: dropdown
 Si vous utilisez Windows à l'IUT, vous pouvez tenter d'utiliser **Git Bash** et espérer que les bonnes installations sont là. Si cela ne fonctionne pas, utilisez Linux (distribution Debian à l'IUT)...
-Si vous utilisez votre propre machine, vous pouvez installer [**Windows Subsystem for Linux (WSL)**](https://learn.microsoft.com/fr-fr/windows/wsl/install) pour bénéficier d'une machine virtuelle Linux avec, par défaut, la distribution Ubuntu. Vous pouvez également opter pour un **Dual Boot Windows/Linux** afin d'avoir les deux systèmes sur votre ordinateur. Toutefois, effectuez ces installations chez vous afin de ne pas perdre de temps en TP.
+Si vous utilisez votre propre machine, vous pouvez installer [**Windows Subsystem for Linux (WSL)**](https://learn.microsoft.com/fr-fr/windows/wsl/install) pour bénéficier d'une machine virtuelle Linux avec, par défaut, la distribution Ubuntu. Toutefois, effectuez ces installations chez vous afin de ne pas perdre de temps en TP.
 :::
 
 1. Créez le répertoire et les fichiers ci-dessus dans `TP4/` avec les codes correspondant.
