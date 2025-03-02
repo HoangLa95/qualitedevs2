@@ -6,7 +6,7 @@ Encore une séance dans le terminal !
 :::
 
 :::{important} `.gitignore`  
-Nous allons créer des fichiers `makefile` sans extension. Il est donc nécessaire d’ajouter `!makefile` au `.gitignore` afin de ne pas les ignorer, tout en continuant à exclure les fichiers exécutables.
+Nous allons créer des fichiers `makefile` sans extension. Il est donc nécessaire d'ajouter `!makefile` au `.gitignore` afin de ne pas les ignorer, tout en continuant à exclure les fichiers exécutables.
 De plus, nous allons générer les répertoires `build/` et `docs/`, qui contiendront des fichiers de compilation. Ceux-ci doivent être ignorés.  
 :::
 
@@ -37,9 +37,10 @@ Un **build script** est un fichier qui automatise le processus de compilation et
 
 Les **build systems** standards en C++ sont **CMake** et **Makefile**. D'autres langages utilisent leurs propres outils, comme **MSBuild** pour C# ou **Gradle** et **Maven** pour Java. Certains IDE intègrent également leur propre build system. Par exemple, un projet Java sous Eclipse utilise le système de build natif d'Eclipse.  
 
-Dans ce TP, nous allons explorer le fonctionnement d’un build system à travers un build script en **Makefile**, un build system bas niveau pour C/C++ conçu pour les systèmes Unix (Linux et macOS). **CMake** est plus haut niveau et **cross-platform** (compatible avec d'autres systèmes comme Windows), mais nous nous concentrerons sur **Makefile**, qui offre un meilleur contrôle à bas niveau.  
+Dans ce TP, nous allons explorer le fonctionnement d'un build system à travers un build script en **Makefile**, un build system bas niveau pour C/C++ conçu pour les systèmes Unix (Linux et macOS). **CMake** est plus haut niveau et **cross-platform** (compatible avec d'autres systèmes comme Windows), mais nous nous concentrerons sur **Makefile**, qui offre un meilleur contrôle à bas niveau.  
 
-Si vous utilisez Windows, **Git Bash** permet de simuler un environnement Unix, et l'installation de **MinGW** ou **MSYS2** vous permettra d'utiliser `g++`. Si cela ne fonctionne pas, utilisez Linux... ou trouvez une solution par vous-même !
+Si vous utilisez Windows à l'IUT, vous pouvez tenter d'utiliser **Git Bash** et espérer que les bonnes installations sont là. Si cela ne fonctionne pas, utilisez Linux (distribution Debian à l'IUT)...
+Si vous utilisez votre propre machine, vous pouvez installer [**Windows Subsystem for Linux (WSL)**](https://learn.microsoft.com/fr-fr/windows/wsl/install) pour bénéficier d'une machine virtuelle Linux avec, par défaut, la distribution Ubuntu. Vous pouvez également opter pour un **Dual Boot Windows/Linux** afin d'avoir les deux systèmes sur votre ordinateur. Toutefois, effectuez ces installations chez vous afin de ne pas perdre de temps en TP.
 :::
 
 1. Créez le répertoire et les fichiers ci-dessus dans `TP4/` avec les codes correspondant.
@@ -107,11 +108,11 @@ Voici quelques exemples courants :
 - `make run` exécute le programme compilé (l'exécutable).  
 - `make clean` supprime les fichiers générés par la compilation pour nettoyer le projet.  
 
-Par défaut, **Make** recherche un fichier nommé `makefile` ou `Makefile` pour y trouver les cibles à exécuter. Si votre build script porte un autre nom, comme `my-build-script`, vous devrez spécifier son nom avec l’option `-f` :  
+Par défaut, `make` cherche un fichier nommé `makefile` ou `Makefile` pour y trouver les cibles à exécuter. Si votre build script porte un autre nom, comme `my-build-script`, vous devrez spécifier son nom avec l'option `-f` :  
 ```{code} sh
 make -f my-build-script <cible>
 ```  
-(`-f` signifie **file**, pour indiquer un fichier Makefile spécifique).
+(`-f` signifie **file**, pour indiquer un fichier makefile spécifique).
 :::
 
 :::{important} Syntaxe d'un makefile
@@ -132,15 +133,15 @@ Si le fichier correspondant est **à jour** (il existe et ses prérequis sont à
 
 Ce comportement optimise la compilation, évitant de recompiler l'intégralité du projet, ce qui est crucial pour les grands projets pouvant prendre plusieurs heures à compiler.  
 
-### Explication du Makefile de l'exemple :  
-- **`all`** : C'est la **cible par défaut** exécutée lorsque l'on tape `make`. Elle ne contient pas de commande et vérifie simplement si `executable` est à jour.  
-- **`executable`** : Cette cible dépend de `main.o` et `hello.o`, qui sont des **fichiers objets** générés à partir des fichiers `.cpp` du projet. Une fois ces prérequis à jour, `make` exécute `g++ -o executable main.o hello.o`  qui relie `main.o` et `hello.o` pour créer l’exécutable `executable` (Linking, dernière étape de la compilation en C++).
-- **`main.o` et `hello.o`** :  
+**Explication du Makefile de l'exemple** :  
+- `all` : C'est la **cible par défaut** exécutée lorsque l'on tape `make`. Elle ne contient pas de commande et vérifie simplement si `executable` est à jour.  
+- `executable` : Cette cible dépend de `main.o` et `hello.o`, qui sont des **fichiers objets** générés à partir des fichiers `.cpp` du projet. Une fois ces prérequis à jour, `make` exécute `g++ -o executable main.o hello.o`  qui relie `main.o` et `hello.o` pour créer l'exécutable `executable` (Linking, dernière étape de la compilation en C++).
+- `main.o` et `hello.o` :  
   - `main.o` dépend de `main.cpp`. Même si `main.cpp` n'est pas une cible explicite, `make` vérifie simplement si le fichier existe et s'il est à jour.  
   - Pour générer `main.o`, `make` exécute `g++ -c main.cpp`. Cela exécute le **préprocesseur**, génère la **translation unit** et compile le code en **fichier objet** `.o`.  
   - Même logique pour `hello.o`.  
-- **`run`** : Suppose que le programme est déjà compilé et exécute simplement `./executable`.
-- **`clean`** :  
+- `run` : Suppose que le programme est déjà compilé et exécute simplement `./executable`.
+- `clean` :  
   - N'a aucun prérequis.  
   - Supprime les fichiers générés avec `rm -f executable main.o hello.o`. 
   - L'option `-f` (**force**) permet de supprimer sans confirmation et sans erreur si les fichiers n'existent pas. Cette option est couramment utilisée pour `clean` dans les Makefiles.
@@ -160,9 +161,9 @@ Cela indique que `all`, `run` et `clean` ne sont pas des fichiers, mais des comm
 :::
 
 :::{important} Pourquoi séparer la compilation en plusieurs étapes ?
-Nous avons l’habitude de compiler en une seule étape sans générer de fichiers intermédiaires comme les fichiers objets `.o`. Pourquoi ne faisons-nous pas la même chose ici ?
+Nous avons l'habitude de compiler en une seule étape sans générer de fichiers intermédiaires comme les fichiers objets `.o`. Pourquoi ne faisons-nous pas la même chose ici ?
   
-Dans un projet en évolution, les différentes parties du code qui composent l’exécutable (ou les exécutables) final arrivent progressivement. Il est donc essentiel de pouvoir compiler et tester certaines parties du code sans attendre que tout le projet soit terminé.
+Dans un projet en évolution, les différentes parties du code qui composent l'exécutable (ou les exécutables) final arrivent progressivement. Il est donc essentiel de pouvoir compiler et tester certaines parties du code sans attendre que tout le projet soit terminé.
 Même si tous les fichiers sont présents, modifier une seule partie du code ne signifie pas que nous devons tout recompiler. Pour les projets volumineux, où la compilation peut prendre plusieurs minutes (voire plusieurs heures), éviter une recompilation complète est un gain de temps considérable.  
 
 Ainsi, découper la compilation en plusieurs étapes (génération de fichiers `.o` pour chaque fichier `.cpp`, puis linking final) est une bonne pratique pour les projets évolutifs et volumineux.
@@ -171,9 +172,9 @@ Ainsi, découper la compilation en plusieurs étapes (génération de fichiers `
 2. Exécutez les commandes `make`, `make run` et `make clean` et observez leur effet dans le terminal et sur les fichiers.
 
 :::{important} Prérequis cachés
-Dans le makefile précédent, il existe des prérequis implicites qui sont les fichiers header `.h`. Par exemple, `main.cpp` et `hello.cpp` dépendent de `hello.h`, mais ce prérequis n’est pas spécifié dans le makefile. Cela ne pose pas de problème pour la compilation, car `g++` comprend, grâce aux directives `#include`, qu’il doit inclure les headers appropriés lors de la traduction du code source `.cpp`.
+Dans le makefile précédent, il existe des prérequis implicites qui sont les fichiers header `.h`. Par exemple, `main.cpp` et `hello.cpp` dépendent de `hello.h`, mais ce prérequis n'est pas spécifié dans le makefile. Cela ne pose pas de problème pour la compilation, car `g++` comprend, grâce aux directives `#include`, qu'il doit inclure les headers appropriés lors de la traduction du code source `.cpp`.
 
-Un problème peut survenir lorsqu’un header est modifié et que l’on souhaite recompiler seulement une partie du projet au lieu de le recompiler entièrement. Étant donné que les headers ne sont pas mentionnés explicitement parmi les prérequis, si tous les autres fichiers existent déjà et que leur date de modification n’indique aucune modification, `make` ne recompilerait pas le projet. Il est donc nécessaire d’ajouter ces prérequis dans le makefile, même s’ils n'apparaissent pas dans les commandes de compilation.
+Un problème peut survenir lorsqu'un header est modifié et que l'on souhaite recompiler seulement une partie du projet au lieu de le recompiler entièrement. Étant donné que les headers ne sont pas mentionnés explicitement parmi les prérequis, si tous les autres fichiers existent déjà et que leur date de modification n'indique aucune modification, `make` ne recompilerait pas le projet. Il est donc nécessaire d'ajouter ces prérequis dans le makefile, même s'ils n'apparaissent pas dans les commandes de compilation.
 :::
 
 3. Apportez les modifications suivantes au makefile :
@@ -274,6 +275,35 @@ Maintenant, pour nettoyer le projet (`make clean`), il suffit de supprimer le r�
 
 8. Exécutez les différentes commandes `make`, `make run` et `make clean` et observez.
 
+9. Commentez le makefile (avec `#`) pour clarifier les points que nous avons abordés (en français si vous le souhaitez).
+
+(tp4-project-organization)=
+:::{important} Organisation d'un gros projet
+Les gros projets s'organisent de la façon suivante avec plusieurs makefile (un à la racine du projet, puis un par module).
+```{code} md 
+minimal-project/
+    source/
+        first-module/
+            hello.cpp
+            hello.h
+            makefile
+        second-module/
+            hi.cpp
+            hi.h
+            makefile
+        main.cpp
+    makefile
+```
+Nous allons découvrir la gestion de la compilation dans ce cas-ci dans la partie bonus qui suit.
+:::
+
+### Bonus
+
+:::{important} Bonus
+Finissez le reste du TP d'abord !
+:::
+
+
 Le code actuel du makefile contient beaucoup de redondances. Nous pouvons refactoriser ce code en utilisant des variables de la manière suivante :
 ```{code} makefile
 BUILD_DIRECTORY = build
@@ -321,7 +351,7 @@ Ici, nous avons défini des variables pour les différents noms de répertoires 
 - Dans `build`, nous allons organiser les répertoires pour les différents types de fichiers mentionnés précédemment. Par exemple, la valeur de `OBJECT_DIRECTORY` est `build/objects`.
 - `EXECUTABLE` nous permet de définir le nom de l'exécutable qui sera situé dans `build/binaries/`. Il est important de différencier le nom du fichier du chemin d'accès au fichier (*file path*) à partir du répertoire courant. `$(EXECUTABLE)` sera utilisé pour générer le fichier au bon endroit en utilisant un chemin d'accès, et ce n'est pas seulement le nom de l'exécutable.
 - `SOURCE_FILES` est la liste des chemins d'accès aux fichiers sources. Ici, comme ces fichiers sont situés dans le même répertoire que le makefile, nous pouvons obtenir ces chemins avec la commande `wildcard *.cpp`, qui retourne `main.cpp hello.cpp`. Nous réorganiserons ces fichiers sources dans des sous-répertoires plus tard.
-- `OBJECT_FILES` est la liste des chemins d'accès aux fichiers objets. Nous obtenons cette liste d'abord avec `OBJECT_FILES = $(SOURCE_FILES:.cpp=.o)`, qui parcourt la liste `main.cpp hello.cpp` et remplace l'extension `.cpp` par `.o` pour obtenir `main.o hello.o`. L'instruction `OBJECT_FILES := $(OBJECT_FILES:%=$(OBJECT_DIRECTORY)/%)` parcourt cette liste `main.o hello.o` et remplace le motif `%` (par exemple `main.o`) par `$(OBJECT_DIRECTORY)/%`, ce qui donne `build/objects/main.o`. Ainsi, `OBJECT_FILES` devient `build/objects/main.o build/objects/hello.o`. L'utilisation de `:=` au lieu de `=` demande à Make de n'interpréter l'expression qu'une seule fois, contrairement à `=`, qui entraîne une boucle infinie en raison de la présence de `OBJECT_FILES` des deux côtés de la définition.
+- `OBJECT_FILES` est la liste des chemins d'accès aux fichiers objets. Nous obtenons cette liste d'abord avec `OBJECT_FILES = $(SOURCE_FILES:.cpp=.o)`, qui parcourt la liste `main.cpp hello.cpp` et remplace l'extension `.cpp` par `.o` pour obtenir `main.o hello.o`. L'instruction `OBJECT_FILES := $(OBJECT_FILES:%=$(OBJECT_DIRECTORY)/%)` parcourt cette liste `main.o hello.o` et remplace le motif `%` (par exemple `main.o`) par `$(OBJECT_DIRECTORY)/%`, ce qui donne `build/objects/main.o`. Ainsi, `OBJECT_FILES` devient `build/objects/main.o build/objects/hello.o`. L'utilisation de `:=` au lieu de `=` demande à `make` de n'interpréter l'expression qu'une seule fois, contrairement à `=`, qui entraîne une boucle infinie en raison de la présence de `OBJECT_FILES` des deux côtés de la définition.
 - Il en va de même pour `DEPENDENCY_FILES`.
 
 Le reste du code ressemble à celui du précédent, avec les variables utilisées à la place des valeurs définies en début de fichier :
@@ -349,7 +379,7 @@ La commande `g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d` devient donc
 Il en est de même pour la cible `build/objects/hello.o`.
 :::
 
-9. Exécutez les commandes `make`, `make run` et `make clean` et observez.
+1. Exécutez les commandes `make`, `make run` et `make clean` et observez.
 
 :::{warning} Le makefile parfait ?
 Nous pouvons encore aller plus loin dans la refactorisation en créant une variable pour le compilateur `g++`, au cas où nous souhaiterions changer de compilateur un jour, ou une variable pour les options de compilation `-c -o -MMD -MF <...>`, qui pourrait même varier selon le contexte.  
@@ -364,8 +394,8 @@ Selon le module, il peut aussi être souhaitable de compiler le projet de maniè
 La bonne pratique ici est d'avoir plusieurs makefiles, un pour chaque module, et un makefile principal qui appellera les makefiles des différents modules.
 :::
 
-(tp4-project-organization)=
-10. Réorganisez votre projet minimal de la façon suivante :
+
+2. Réorganisez votre projet minimal de la façon suivante :
 ```{code} md
 minimal-project/
     source/
@@ -492,11 +522,11 @@ clean:
 - Vous pouvez ajouter une licence (fichier `LICENSE` en anglais) MIT dans un fichier séparé et un lien vers la licence.  
 :::
 
-1. Créez un répertoire `documentations/` dans `TP4/`.
+2. Créez un répertoire `documentations/` dans `TP4/`.
 
 En cours, nous avons vu un exemple de documentation utilisant Doxygen (très similaire à la syntaxe Javadoc). Étant donné que Doxygen n'est pas (encore) installé sur les machines de l'IUT, nous allons revoir le même exemple en Javadoc.
 
-2. Recopiez le code suivant dans un fichier `Temperature.java`.
+3. Recopiez le code suivant dans un fichier `Temperature.java`.
 
 ```{code} java
 /**
@@ -580,10 +610,10 @@ public class Temperature {
 }
 ```
 
-3. Générer la documentation pour `Temperature.java` avec la commande `javadoc -d docs Temperature.java`, ce qui créera un répertoire `docs/`.
+4. Générer la documentation pour `Temperature.java` avec la commande `javadoc -d docs Temperature.java`, ce qui créera un répertoire `docs/`.
 
-4. Consultez la documentation générée en ouvrant `docs/index.html` dans un navigateur web.
+5. Consultez la documentation générée en ouvrant `docs/index.html` dans un navigateur web.
 
-5. Reprenez la syntaxe Doxygen vue en cours pour rédiger la documentation de la classe `Product` de l'exercice `short-functions` du `TP3`.
+6. Reprenez la syntaxe Doxygen vue en cours pour rédiger la documentation de la classe `Product` de l'exercice `short-functions` du `TP3`.
 
 Revenez aux [objectifs](#tp4-objectifs) et cochez les points que vous avez maîtrisés. Revenez sur les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
