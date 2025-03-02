@@ -537,4 +537,4 @@ To avoid the details of input parsing, we will assume that a name is either a si
 
 4. Implement the given functions and modify `main` to retrieve user input and display the grades as well as the averages for each student.
 
-Return to the [objectives](#ps3-objectives) and check the points you have mastered. Review the points you haven’t fully understood yet. Ask your instructor for help if needed.
+Return to the [objectives](#ps3-objectives) and check the points you have mastered. Review the points you have not yet fully understood. Ask your instructor for help if needed.

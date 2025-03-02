@@ -13,7 +13,7 @@ Don't hesitate to revisit PS1 if you're unsure. The quality of your Git history 
 :::{important} Conflict resolution  
 :class: dropdown  
 You have not yet learned how to resolve merge conflicts (divergent branches) in Git, which occur when there are multiple versions of the same file in different repositories and you attempt to synchronize them.  
-If you encounter difficulties, call your supervisor over.  
+If you encounter difficulties, call your instructor over.  
 Once this skill is mastered, you will be on your own in managing conflicts.  
 :::
 
@@ -455,7 +455,7 @@ I hope this exercise has convinced you of the importance of clean coding 😊.
 
 12. **Quiz**: What is the sum of the balances of all three accounts?
 
-Return to the [objectives](#ps2-objectives) and check the points you have mastered. Review the points you haven't fully understood yet. Call your supervisor if needed.
+Return to the [objectives](#ps2-objectives) and check the points you have mastered. Review the points you have not fully understood yet. Ask your instructor for help if needed.
 
 :::{important} Git
 :class: dropdown

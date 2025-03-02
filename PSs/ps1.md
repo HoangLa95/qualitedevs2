@@ -562,7 +562,7 @@ You can even combine everything to ignore extensionless files, `.o` files, `.exe
 
 5. Run `add`, `commit`, and `push` to synchronize your repositories.
 
-6. Add your supervisor to your project by following the instructions below.
+6. Add your instructor to your project by following the instructions below.
 - Click on **Manage** on the left, then select **Members**.
 
 ```{image} ../images/manage-members.png
@@ -571,13 +571,13 @@ You can even combine everything to ignore extensionless files, `.o` files, `.exe
 ```
 
 - Click on **Invite members** at the top right.
-- Add your supervisor with the **Maintainer** role, which gives them almost as much control over the project as the **Owner** role.
+- Add your instructor with the **Maintainer** role, which gives them almost as much control over the project as the **Owner** role.
 
 :::{important} DO NOT FORGET!  
-**If your supervisor is not added to your project, they will not be able to evaluate it, and you will receive a grade of 0!**
+**If your instructor is not added to your project, they will not be able to evaluate it, and you will receive a grade of 0!**
 :::
 
-7. Go back to the [objectives](#objectives) and check the points you have mastered. Practice the commands and points you have not fully understood yet. Call your supervisor over if necessary.
+7. Go back to the [objectives](#objectives) and check the points you have mastered. Practice the commands and points you have not fully understood yet. Call your instructor over if necessary.
 
 :::{important} Your remote repository at the end of the session  
 At the end of the session, your remote repository should look like this:  
