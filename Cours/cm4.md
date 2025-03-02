@@ -18,7 +18,7 @@ Le **README** fait partie de la documentation car il fournit des informations es
 :::{important} Contenu d'un README
 - Titre et résumé du projet.  
 - Fonctionnalités principales.
-- Documentation complémentaire.  
+- Documentation complémentaire s'il y en a.  
 - Instructions d'installation.  
 - Instructions d'utilisation.   
 - Licence.  
