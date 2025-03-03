@@ -192,6 +192,16 @@ In the previous makefile, there are implicit prerequisites, which are the `.h` h
 A problem can arise when a header is modified, and we want to recompile only part of the project instead of recompiling everything. Since headers are not explicitly listed as prerequisites, if all other files exist and their modification date does not indicate any changes, `make` would not recompile the project. Therefore, it is necessary to add these prerequisites to the makefile, even if they do not appear in the compilation commands.
 :::
 
+:::{important} `touch <file>` and `make -d`
+To better understand the behavior of `make`, you can modify the modification date of existing files using the `touch <file>` command. If `<file>` does not exist, `touch` creates it; if it already exists, `touch` simply updates its last modification date.
+
+Then, the `make -d` command displays all the steps of the `make` process in the terminal. However, this command generates a lot of details that are not necessarily relevant. To see only the information that interests us, you can use the following command:
+```{code} sh
+make -d | grep -E 'Considering|Finished|Prerequisite|No need|up to date'
+```
+`grep -E '<regular expression>'` allows you to retrieve only the lines that match the given regular expression. In this case, we are looking for all lines containing the specified keywords.
+:::
+
 3. Make the following modifications to the makefile:
 ```{code} makefile
 all: executable
@@ -214,7 +224,7 @@ clean:
 .PHONY: all run clean
 ```
 
-4. Run the different `make` commands again. The behavior of these commands should not change.
+4. Run `make`, `make run`, and `make clean` again. The behavior of these commands should not change.
 
 5. Make the following modifications to the makefile:
 ```{code} makefile
@@ -229,8 +239,6 @@ main.o: main.cpp
 hello.o: hello.cpp
     g++ -c hello.cpp -MMD
 
--include *.d
-
 run:
     ./executable
 
@@ -238,6 +246,8 @@ clean:
     rm -f executable main.o hello.o main.d hello.d
 
 .PHONY: all run clean
+
+-include *.d
 ```
 
 6. Run `make` and examine the content of the generated `.d` files.
@@ -264,8 +274,6 @@ build/objects/main.o: main.cpp
 build/objects/hello.o: hello.cpp
     g++ -c hello.cpp -o build/objects/hello.o -MMD -MF build/dependencies/hello.d  
 
--include build/dependencies/*.d
-
 run:
     ./build/binaries/executable
 
@@ -273,6 +281,8 @@ clean:
     rm -rf build
 
 .PHONY: all run clean
+
+-include build/dependencies/*.d
 ```
 
 (ps4-build-directory)=
@@ -286,6 +296,8 @@ In the prerequisites of the `all` target, we add `build` first to ensure it runs
 Since we are no longer generating all files in the same location, we specify the destination and filename for each `.o` file using the `-o` option. For example, `-o build/objects/main.o` ensures `main.o` is generated in `build/objects/`. Similarly, `-MF build/dependencies/main.d` specifies the dependency file location and its name.  
 
 Now, to clean the project (`make clean`), we simply delete the `build/` directory. The `-rf` option in `rm` combines *recursive* and *force*, allowing directory and subdirectory deletion without confirmation.
+
+We also add `build` to `.PHONY` in case the `build/` directory exists, but not its subdirectories. This could mislead `make`, making it think that `build` is up to date.
 :::
 
 8. Run `make`, `make run`, and `make clean` again and observe.
@@ -346,8 +358,6 @@ $(EXECUTABLE): $(OBJECT_FILES)
 $(OBJECT_DIRECTORY)/%.o: %.cpp
     g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d
 
--include $(DEPENDENCY_FILES)
-
 run:
     ./$(EXECUTABLE)
 
@@ -355,6 +365,8 @@ clean:
     rm -rf $(BUILD_DIRECTORY)
 
 .PHONY: all run clean $(BUILD_DIRECTORY)
+
+-include $(DEPENDENCY_FILES)
 ```
 
 :::{important} Makefile variables
@@ -454,12 +466,12 @@ $(BUILD_DIRECTORY):
 $(OBJECT_DIRECTORY)/%.o: %.cpp
 	g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d
 
--include $(DEPENDENCY_FILES)
-
 clean:
 	rm -rf $(OBJECT_FILES) $(DEPENDENCY_FILES)
 
 .PHONY: all clean $(BUILD_DIRECTORY)
+
+-include $(DEPENDENCY_FILES)
 ```
 
 :::{important} Module makefile
@@ -503,8 +515,6 @@ $(MODULES):
 $(OBJECT_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.cpp
 	g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d
 
--include $(DEPENDENCY_FILES)
-
 run:
 	./$(EXECUTABLE)
 
@@ -512,6 +522,8 @@ clean:
 	rm -rf $(BUILD_DIRECTORY)
 
 .PHONY: all run clean $(MODULES) $(BUILD_DIRECTORY)
+
+-include $(DEPENDENCY_FILES)
 ```
 
 :::{important} Root makefile
