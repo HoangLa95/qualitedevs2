@@ -218,8 +218,6 @@ clean:
 
 5. Make the following modifications to the makefile:
 ```{code} makefile
--include *.d
-
 all: executable
 
 executable: main.o hello.o
@@ -230,6 +228,8 @@ main.o: main.cpp
 
 hello.o: hello.cpp
     g++ -c hello.cpp -MMD
+
+-include *.d
 
 run:
     ./executable
@@ -250,8 +250,6 @@ Due to the order of execution, generating `main.d`, for example, occurs after th
 
 7. Make the following modifications to the makefile:
 ```{code} makefile
--include build/dependencies/*.d
-
 all: build build/binaries/executable
 
 build:
@@ -265,6 +263,8 @@ build/objects/main.o: main.cpp
 
 build/objects/hello.o: hello.cpp
     g++ -c hello.cpp -o build/objects/hello.o -MMD -MF build/dependencies/hello.d  
+
+-include build/dependencies/*.d
 
 run:
     ./build/binaries/executable
@@ -335,8 +335,6 @@ OBJECT_FILES := $(OBJECT_FILES:%=$(OBJECT_DIRECTORY)/%)
 DEPENDENCY_FILES = $(SOURCE_FILES:.cpp=.d)
 DEPENDENCY_FILES := $(DEPENDENCY_FILES:%=$(DEPENDENCY_DIRECTORY)/%)
 
--include $(DEPENDENCY_FILES)
-
 all: $(BUILD_DIRECTORY) $(EXECUTABLE)
 
 $(BUILD_DIRECTORY):
@@ -348,13 +346,15 @@ $(EXECUTABLE): $(OBJECT_FILES)
 $(OBJECT_DIRECTORY)/%.o: %.cpp
     g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d
 
+-include $(DEPENDENCY_FILES)
+
 run:
     ./$(EXECUTABLE)
 
 clean:
     rm -rf $(BUILD_DIRECTORY)
 
-.PHONY: all run clean
+.PHONY: all run clean $(BUILD_DIRECTORY)
 ```
 
 :::{important} Makefile variables
@@ -446,20 +446,20 @@ OBJECT_FILES := $(OBJECT_FILES:%=$(OBJECT_DIRECTORY)/%)
 DEPENDENCY_FILES = $(SOURCE_FILES:.cpp=.d)
 DEPENDENCY_FILES := $(DEPENDENCY_FILES:%=$(DEPENDENCY_DIRECTORY)/%)
 
--include $(DEPENDENCY_FILES)
-
 all: $(BUILD_DIRECTORY) $(OBJECT_FILES)
 
 $(BUILD_DIRECTORY):
-    mkdir -p $(DEPENDENCY_DIRECTORY) $(OBJECT_DIRECTORY) $(BINARY_DIRECTORY)
+	mkdir -p $(DEPENDENCY_DIRECTORY) $(OBJECT_DIRECTORY) $(BINARY_DIRECTORY)
 
 $(OBJECT_DIRECTORY)/%.o: %.cpp
-    g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d
+	g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d
+
+-include $(DEPENDENCY_FILES)
 
 clean:
-    rm -rf $(OBJECT_FILES) $(DEPENDENCY_FILES)
+	rm -rf $(OBJECT_FILES) $(DEPENDENCY_FILES)
 
-.PHONY: all clean
+.PHONY: all clean $(BUILD_DIRECTORY)
 ```
 
 :::{important} Module makefile
@@ -489,29 +489,29 @@ OBJECT_FILES := $(OBJECT_FILES:%=$(OBJECT_DIRECTORY)/%)
 DEPENDENCY_FILES = $(SOURCE_FILES:$(SOURCE_DIRECTORY)/%.cpp=%.d)
 DEPENDENCY_FILES := $(DEPENDENCY_FILES:%=$(DEPENDENCY_DIRECTORY)/%)
 
--include $(DEPENDENCY_FILES)
-
-all: $(BUILD_DIRECTORY) $(EXECUTABLE)
+all: $(BUILD_DIRECTORY) $(MODULES) $(EXECUTABLE)
 
 $(BUILD_DIRECTORY):
-    mkdir -p $(DEPENDENCY_DIRECTORY) $(OBJECT_DIRECTORY) $(BINARY_DIRECTORY)
+	mkdir -p $(DEPENDENCY_DIRECTORY) $(OBJECT_DIRECTORY) $(BINARY_DIRECTORY)
 
-$(EXECUTABLE): $(MODULES) $(OBJECT_FILES) 
-    g++ -o $@ $(wildcard $(OBJECT_DIRECTORY)/*.o)
+$(EXECUTABLE): $(OBJECT_FILES) 
+	g++ -o $@ $(wildcard $(OBJECT_DIRECTORY)/*.o)
 
 $(MODULES):
-    $(MAKE) -C $@
+	$(MAKE) -C $@
 
 $(OBJECT_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.cpp
-    g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d
+	g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d
+
+-include $(DEPENDENCY_FILES)
 
 run:
-    ./$(EXECUTABLE)
+	./$(EXECUTABLE)
 
 clean:
-    rm -rf $(BUILD_DIRECTORY)
+	rm -rf $(BUILD_DIRECTORY)
 
-.PHONY: all run clean $(MODULES)
+.PHONY: all run clean $(MODULES) $(BUILD_DIRECTORY)
 ```
 
 :::{important} Root makefile
