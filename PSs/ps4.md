@@ -315,7 +315,7 @@ We will explore compilation management in this case in the following bonus secti
 ### Bonus
 
 :::{important} Bonus
-Finish the rest of the first!
+Finish the rest of the session (Exercise 2) first!
 :::
 
 The current makefile code contains a lot of redundancies. We can refactor this code using variables as follows:
@@ -424,15 +424,15 @@ minimal-project/
     makefile
 ```
 
-11. In `hi.h`, copy the code from `hello.h` and modify the include guard and the function name to `sayHi`.
+3. In `hi.h`, copy the code from `hello.h` and modify the include guard and the function name to `sayHi`.
 
-12. In `hi.cpp`, copy the code from `hello.cpp` and modify the include directive to include `hi.h`, the function name to `sayHi`, and the console output to `Hi!` instead of `Hello World!`.
+4. In `hi.cpp`, copy the code from `hello.cpp` and modify the include directive to include `hi.h`, the function name to `sayHi`, and the console output to `Hi!` instead of `Hello World!`.
 
-13. In `main.cpp`, modify the include directives to include `first-module/hello.h` and `second-module/hi.h` and add `sayHi();` after `sayHello();`.
+5. In `main.cpp`, modify the include directives to include `first-module/hello.h` and `second-module/hi.h` and add `sayHi();` after `sayHello();`.
 
 For this minimal example, we will use the same makefile in both modules, but we can imagine that these makefiles might differ and even be written by different people.
 
-14. Modify the module makefiles as follows:
+6. Modify the module makefiles as follows:
 ```{code} makefile
 BUILD_DIRECTORY = ../../build
 DEPENDENCY_DIRECTORY = $(BUILD_DIRECTORY)/dependencies
@@ -469,7 +469,7 @@ clean:
 - The `clean` target deletes only the object and dependency files related to the module.
 :::
 
-15. Modify the root project makefile as follows:
+7. Modify the root project makefile as follows:
 ```{code} makefile
 BUILD_DIRECTORY = build
 DEPENDENCY_DIRECTORY = $(BUILD_DIRECTORY)/dependencies
@@ -521,7 +521,7 @@ clean:
 - For each module (`source/first-module source/second-module`), we go into the corresponding subdirectory (e.g., `source/first-module`) with the `-C source/first-module` option. Then, we run `make` via the native `$(MAKE)` variable, which inherits the options from the `make` command in our terminal. For example, we can parallelize the compilation when our machine has multiple processors, as source files can be compiled simultaneously. So, `make -j4` uses 4 processors at once, and `$(MAKE)` will take the `-j4` option to compile the modules. For our example, we could replace `$(MAKE)` with `make` directly, but it is better in general to use the native variable associated with the `make` command.  
 :::
 
-16. Add comments to the makefiles with `#` to clarify the different blocks of code and add examples for the commands to clarify the syntax.
+8. Add comments to the makefiles with `#` to clarify the different blocks of code and add examples for the commands to clarify the syntax.
 
 For example:
 ```{code} makefile
