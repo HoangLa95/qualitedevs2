@@ -192,6 +192,16 @@ Dans le makefile précédent, il existe des prérequis implicites qui sont les f
 Un problème peut survenir lorsqu'un header est modifié et que l'on souhaite recompiler seulement une partie du projet au lieu de le recompiler entièrement. Étant donné que les headers ne sont pas mentionnés explicitement parmi les prérequis, si tous les autres fichiers existent déjà et que leur date de modification n'indique aucune modification, `make` ne recompilerait pas le projet. Il est donc nécessaire d'ajouter ces prérequis dans le makefile, même s'ils n'apparaissent pas dans les commandes de compilation.
 :::
 
+:::{important} `touch <fichier>` et `make -d`
+Pour mieux comprendre le comportement de `make`, vous pouvez modifier la date de modification des fichiers existants en utilisant la commande `touch <fichier>`. Si `<fichier>` n'existe pas, `touch` le crée ; s'il existe déjà, `touch` met simplement à jour sa date de dernière modification.
+
+Ensuite, la commande `make -d` permet d'afficher toutes les étapes du processus de `make` dans le terminal. Cependant, cette commande génère beaucoup de détails qui ne sont pas forcément pertinents. Pour ne voir que les informations qui nous intéressent, vous pouvez utiliser la commande suivante :
+```{code} sh
+make -d | grep -E 'Considering|Finished|Prerequisite|No need|up to date'
+```
+`grep -E '<expression régulière>'` permet de récupérer uniquement les lignes qui correspondent à l'expression régulière donnée. Dans ce cas, nous cherchons toutes les lignes contenant les mots-clés spécifiés.
+:::
+
 3. Apportez les modifications suivantes au makefile :
 ```{code} makefile
 all: executable
@@ -214,7 +224,7 @@ clean:
 .PHONY: all run clean
 ```
 
-4. Exécutez à nouveau les différentes commandes `make`. Le comportement de ces commandes ne doit pas changer.
+4. Exécutez à nouveau les différentes commandes `make`, `make run` et `make clean`. Le comportement de ces commandes ne doit pas changer.
 
 5. Apportez les modifications suivantes au makefile :
 ```{code} makefile
@@ -229,8 +239,6 @@ main.o: main.cpp
 hello.o: hello.cpp
 	g++ -c hello.cpp -MMD 
 
--include *.d
-
 run:
 	./executable
 
@@ -238,6 +246,8 @@ clean:
 	rm -f executable main.o hello.o main.d hello.d
 
 .PHONY: all run clean
+
+-include *.d
 ```
 
 6. Exécutez la commande `make` et examinez le contenu des fichiers `.d` générés.
@@ -246,6 +256,10 @@ clean:
 Afin d'éviter d'avoir à spécifier manuellement les headers pour la compilation de chaque fichier source, nous générons automatiquement les fichiers de dépendances `.d` en utilisant l'option `-MMD` (qui inclut les prérequis avec les headers que nous avons créés, mais pas ceux des bibliothèques C++ stables) et demandons à `make` d'inclure ces prérequis avec l'option `-include *.d`.  
 
 En raison de l'ordre d'exécution, la génération de `main.d` par exemple se produit après que les prérequis de `main.o` aient été traités. Ce n'est pas un problème, car l'objectif d'ajouter les headers aux prérequis est d'éviter de recompiler l'intégralité du projet une fois qu'il a déjà été compilé. La première compilation générera donc ces dépendances, et lors des compilations suivantes, les fichiers `.d` seront inclus, permettant à `make` de détecter les changements dans les headers.
+:::
+
+:::{warning} `-include *.d` à la fin
+La directive `-include` doit être placée à la fin du makefile (contrairement aux directives `include` habituelles qui se trouvent en début de fichier). Si `-include` est au début, elle remplace le comportement par défaut de `make`, qui est `make all`, par `make` des cibles incluses. Lorsqu'elle est à la fin, elle remplace uniquement les cibles existantes par celles ayant les mêmes noms que celles définies dans les fichiers `.d`.
 :::
 
 7. Apportez les modifications suivantes au makefile :
@@ -264,8 +278,6 @@ build/objects/main.o: main.cpp
 build/objects/hello.o: hello.cpp
 	g++ -c hello.cpp -o build/objects/hello.o -MMD -MF build/dependencies/hello.d  
 
--include build/dependencies/*.d
-
 run:
 	./build/binaries/executable
 
@@ -273,6 +285,8 @@ clean:
 	rm -rf build
 
 .PHONY: all run clean build
+
+-include build/dependencies/*.d
 ```
 
 (tp4-build-directory)=
@@ -285,7 +299,9 @@ Dans les prérequis de la cible `all`, nous ajoutons `build` en premier, afin d'
 
 Puisque nous ne générons plus tous les fichiers au même endroit, nous spécifions avec l'option `-o` l'emplacement et le nom du fichier `.o` à créer. Par exemple, `-o build/objects/main.o` indique que `main.o` doit être généré dans `build/objects/` sous ce nom. Il en va de même pour `-MF build/dependencies/main.d` pour les fichiers de dépendances contenant les prérequis.  
 
-Maintenant, pour nettoyer le projet (`make clean`), il suffit de supprimer le répertoire `build/`. L'option `-rf` de la commande `rm` combine les options *recursive* et *force*, permettant ainsi de supprimer les répertoires et tous leurs sous-répertoires sans confirmation.  
+Maintenant, pour nettoyer le projet (`make clean`), il suffit de supprimer le répertoire `build/`. L'option `-rf` de la commande `rm` combine les options *recursive* et *force*, permettant ainsi de supprimer les répertoires et tous leurs sous-répertoires sans confirmation.
+
+Nous ajoutons également `build` à `.PHONY` au cas où le répertoire `build/` existe, mais pas ses sous-répertoires. Cela pourrait induire `make` en erreur, le faisant penser que `build` est à jour.
 :::
 
 8. Exécutez les différentes commandes `make`, `make run` et `make clean` et observez.
@@ -347,8 +363,6 @@ $(EXECUTABLE): $(OBJECT_FILES)
 $(OBJECT_DIRECTORY)/%.o: %.cpp
 	g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d
 
--include $(DEPENDENCY_FILES)
-
 run:
 	./$(EXECUTABLE)
 
@@ -356,6 +370,8 @@ clean:
 	rm -rf $(BUILD_DIRECTORY)
 
 .PHONY: all run clean $(BUILD_DIRECTORY)
+
+-include $(DEPENDENCY_FILES)
 ```
 
 :::{important} Variables en Makefile
@@ -456,12 +472,12 @@ $(BUILD_DIRECTORY):
 $(OBJECT_DIRECTORY)/%.o: %.cpp
 	g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d
 
--include $(DEPENDENCY_FILES)
-
 clean:
 	rm -rf $(OBJECT_FILES) $(DEPENDENCY_FILES)
 
 .PHONY: all clean $(BUILD_DIRECTORY)
+
+-include $(DEPENDENCY_FILES)
 ```
 
 :::{important} Makefile d'un module
@@ -505,8 +521,6 @@ $(MODULES):
 $(OBJECT_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.cpp
 	g++ -c $< -o $@ -MMD -MF $(DEPENDENCY_DIRECTORY)/$*.d
 
--include $(DEPENDENCY_FILES)
-
 run:
 	./$(EXECUTABLE)
 
@@ -514,6 +528,8 @@ clean:
 	rm -rf $(BUILD_DIRECTORY)
 
 .PHONY: all run clean $(MODULES) $(BUILD_DIRECTORY)
+
+-include $(DEPENDENCY_FILES)
 ```
 
 :::{important} Makefile à la racine
