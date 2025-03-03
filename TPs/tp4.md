@@ -197,7 +197,7 @@ Pour mieux comprendre le comportement de `make`, vous pouvez modifier la date de
 
 Ensuite, la commande `make -d` permet d'afficher toutes les étapes du processus de `make` dans le terminal. Cependant, cette commande génère beaucoup de détails qui ne sont pas forcément pertinents. Pour ne voir que les informations qui nous intéressent, vous pouvez utiliser la commande suivante :
 ```{code} sh
-make -d | grep -E 'Considering|Finished|Prerequisite|No need|up to date'
+make -d | grep -E 'Considering|Entering|Leaving|Finished|Prerequisite|No need|up to date'
 ```
 `grep -E '<expression régulière>'` permet de récupérer uniquement les lignes qui correspondent à l'expression régulière donnée. Dans ce cas, nous cherchons toutes les lignes contenant les mots-clés spécifiés.
 :::

@@ -197,7 +197,7 @@ To better understand the behavior of `make`, you can modify the modification dat
 
 Then, the `make -d` command displays all the steps of the `make` process in the terminal. However, this command generates a lot of details that are not necessarily relevant. To see only the information that interests us, you can use the following command:
 ```{code} sh
-make -d | grep -E 'Considering|Finished|Prerequisite|No need|up to date'
+make -d | grep -E 'Considering|Entering|Leaving|Finished|Prerequisite|No need|up to date'
 ```
 `grep -E '<regular expression>'` allows you to retrieve only the lines that match the given regular expression. In this case, we are looking for all lines containing the specified keywords.
 :::
