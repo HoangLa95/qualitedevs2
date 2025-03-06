@@ -1,167 +1,178 @@
-# Comment tester le code ?
+# Comment gérer les erreurs (utilisateurs) ?
 
-```{figure} ../images/tdd.jpg
-:alt: TDD
+D'abord, un point sur Git.
+
+## Structure de donnée de l'historique Git
+
+:::{hint} Indice : je fais de la recherche en ... 
+:class:dropdown
+```{figure} ../images/git-graph.png
+:alt: Git Graph
 :align: center
 
-Credits: imgflip.com/memegenerator
+Credits: [Marco Eidinger](https://blog.eidinger.info/the-easiest-way-to-draw-git-graphs)
 ```
 
-## Tests unitaires
+C'est un DAG (Directed Acyclic Graph) où :
+- les sommets sont des commits,
+- un arc d'un commit `A` vers un commit `B` représente l'évolution d'un dépôt de l'état `A` vers l'état `B`,
+- le graphe "évolue dans une direction" qui correspond au temps donc il est sans cycle dirigé.
 
-Nous allons utiliser le framework **Google Test**.
+Branchement :
+- Les branches en Git correspond à des "branches" de ce graphe.
+- Des conflits à cause de branches divergentes arrive quand un même dépôt se trouve dans deux états différents (`A` pointe à la fois vers `B` et `C`).
+- Des `merge` fusionnent deux branches en une seule (`D` et `E` pointe tous les deux vers `F`).
+
+Nous allons apprendre à naviguer ce graphe en TP !
+:::
+
+## Gestion des erreurs
+
+:::{important} Quels sont les différentes catégories d'erreur ?
+:class: dropdown
+- Erreur à la compilation (cf. votre cours d'Anglais et Google).
+- Erreur à l'éxécution.
+    - Erreur côté développeur (cf. TP debugger en IHM).
+    - **Erreur côté utilisateur** (ce cours).
+:::
+
+### Programmation robuste
+
+:::{note} Robustesse
+:class: dropdown
+La robustesse d'un programme est sa capacité de gérer des erreurs et de permettre aux utilisateurs d'identifier les problèmes et de les corriger. La robustesse concerne aussi la conception du programme et non seulement l'écriture des gestionnaires d'erreurs.
+:::
+
+:::{important} Les principes de la programmation robuste  
+:class: dropdown  
+- **Soyez paranoïaque** : L'utilisateur, volontairement ou non, mettra votre code à l'épreuve. Il est essentiel de prévoir ses actions pour éviter les comportements imprévus.
+- **Ils sont stupides** : Les messages d'erreur doivent être clairs, bienveillants et fournir les informations nécessaires pour que l'utilisateur puisse corriger l'erreur lui-même : explication concise, lien vers la documentation si besoin, et suggestions de correction.
+- **Ils sont dangereux** : L'utilisateur ne doit pas avoir à manipuler directement le code source. Il doit pouvoir accomplir ses tâches uniquement avec les fonctionnalités mises à sa disposition.
+- **Rien n'est impossible** : Ne supposez jamais qu'une condition sera toujours respectée. Concevez votre code comme une machine, si une erreur peut techniquement arriver alors elle arrivera forcément.
+:::
+
+### Input validation
+
+Pour certaines erreurs, il n'est pas nécessaire d'arrêter l'exécution du programme et il suffit de valider l'entrée de l'utilisateur avant de passer à l'étape suivante.
 
 ```{code} cpp
-int factorial(int number);
+#include <iostream>
+#include <limits>
+#include <stdexcept>
 
-TEST(factorialTest, handlesZeroInput) {
-    EXPECT_EQ(factorial(0), 1);
-}
+int getPositiveInteger() {
+    int userInput;
+    int attempts = 0;
+    const int maxAttempts = 5;
 
-TEST(factorialTest, handlesSomePositiveInput) {
-    EXPECT_EQ(factorial(1), 1);
-    EXPECT_EQ(factorial(2), 2);
-    EXPECT_EQ(factorial(3), 6);
-    EXPECT_EQ(factorial(8), 40320);
+    while (attempts < maxAttempts) {
+        std::cout << "Enter a positive integer: ";
+        std::cin >> userInput;
+
+        if (std::cin.fail() || userInput <= 0) { // cin.fail() is true if user inputs non-integer value or the value is too large
+            std::cin.clear(); // cin.clear() resets the state of cin if it was in fail state
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the buffer until it reaches end of line character '\n'.
+            attempts++;
+            std::cout << "Invalid input. Please try again. For example: 1" << std::endl;
+            std::cout << maxAttemps - attempts << " left." << std::endl;
+        } else {
+            return userInput;
+        }
+    }
+    
+    // Explained below
+    throw std::invalid_argument("Maximum attempts reached.");
 }
 ```
 
-Convention générale de nommage :
+## try, throw, catch
 
+:::{important} Syntaxe d'un gestionnaire d'erreurs*
 ```{code} cpp
-FunctionType function();
+#include <stdexcept> // for standard exceptions
 
-TEST(functionTest, firstTestName) {
-    // First Test
-}
-
-TEST(functionTest, secondTestName) {
-    // Second test
+try {
+  //Code to try
+  //...
+  
+  //Throw an exception when encoutering user error
+  throw(std::exception("Error message")); 
+} catch (const std::exception& error) {
+  // Code to handle errors
+  //...
 }
 ```
 
-Plus de détails dans le TP6 et [la documentation de Google Test](https://google.github.io/googletest/).
-
-## Test Driven Development (TDD)
-
-:::{important} Développment piloté par les Tests
-:class: dropdown
-Le **TDD** est une méthode de développement qui consiste en des cycles de développement très courts. Le principe de cette méthode est d'écrire un test qui impose un comportement au code puis produire le code correspondant et est écrit d'abord puis le code correspondant, puis un autre test et ainsi de suite. 
-:::
-
-:::{important} Les trois lois du TDD :
-- Écrivez un test qui échoue avant d’écrire le code correspondant.
-- Écrivez un seul test à la fois.
-- Écrivez le minimum de code qui satisfait le test courant.
-:::
-
-```{figure} ../images/test-driven-development.png
-:alt: Test Driven Development
-:align: center
-
-Le workflow du TDD (Credits: Medium.com).
-```
-
-:::{note} Le cycle de développement
-:class: dropdown
-1. Écrire un seul test.
-2. Vérifier que le test échoue (le code correspondant n'existe pas).
-3. Écrire juste assez de code pour que le test réussisse.
-4. Vérifier que ce test et tous les tests précédents passent.
-5. Refactoriser le code tout en gardant les mêmes fonctionnalités (en testant constamment).
-:::
-
-Ce principe est bien illustré par [The Password Game de NEAL.FUN](https://neal.fun/password-game/) !
-
-## Principes du test propre
-
-:::{important} Un seul concept par test
-:class: dropdown
-Un test doit tester un seul concept. Souvent, un test consiste en une seule assertion à tester.
-:::
-
-Les cinq règles du code propre **F.I.R.S.T.**:
-- **Fast**
-- **Independent**
-- **Repeatable**
-- **Self-Validating**
-- **Timely**
-
+Example :
 ```{code} cpp
-// Don't run unless you have some time to kill.
-TEST(parseFileTest, testWithReallyBigFile)
-```
+#include <iostream>
+#include <limits>
+#include <stdexcept>
+#include <cstdlib> // for exit
 
-:::{danger} not Fast
-:class: dropdown
-Un test rapide est un test qui peut être exécuter rapidement. Si un test est lent, alors ce test ne sera pas souvent exécuté. Si un test n'est pas exécuté, alors ce n'est pas un test.
+int getPositiveInteger() {
+    //...
+
+    throw std::invalid_argument("Maximum attempts reached.");
+}
+
+void processUserInput() {
+    try {
+        int number = getPositiveInteger();
+        // ...
+
+        // Example of another throw
+        throw std::runtime_error("Some error message here.");
+
+    } catch (const std::invalid_argument& error) {
+        // Output the error message (error.what()) on the cerr stream (for errors)
+        std::cerr << "Error: " << error.what() << std::endl; // Output: Error: Maximum attempts reached.
+        exit(EXIT_FAILURE);
+    } catch (const std::runtime_error& error) {
+        std::cerr << "Error: " << error.what() << std::endl;
+        // Possibly handles error gracefully without exiting
+    }
+}
+```
 :::
 
+:::{important} Standard exception
+:class: dropdown
+Quelques exceptions utiles de la bibliothèque standard de C++:
+`std::exception` est l'exception de base qui se dérive en :
+- `std::logic_error` :
+    - `std::invalid_argument` 
+    - `std::out_of_range`
+- `std::runtime_error` :
+    - `std::overflow_error`
+
+Consulter [C++ exceptions standard](https://en.cppreference.com/w/cpp/error/exception) pour beaucoup plus de types d'exceptions.
+
+Soyez précis quand vous pouvez et évitez d'utiliser juste `std::exception`.
+:::
+
+:::{danger} Ce principe concerne la gestion des erreurs d'utilisateur, pas celles des développeurs !
+:class: dropdown
+Il est crucial de gérer les erreurs d'utilisateur, mais attraper des erreurs imprévues dans le code des développeurs peut compliquer le débogage. C'est pourquoi il est important d'utiliser `throw` avec un `catch` approprié, afin de ne pas capturer des erreurs inattendues.
+:::
+
+:::{danger} `null`, c'est nul !
+:class: dropdown
+Il faut éviter d'utiliser `nullptr` en C++ (`null` en Java et C#). Vous allez passer votre temps à vérifier si un objet est `nullptr` et cela rend le code illisible.
+
+Exemple:
 ```{code} cpp
-int GLOBAL_VARIABLE = 10;
-
-int identityFunction(int value);
-
-TEST(identityFunctionTest, incrementValue) {
-    GLOBAL_VARIABLE++;
-    EXPECT_EQ(identityFunction(GLOBAL_VARIABLE),11);
-}
-
-TEST(identityFunctionTest, checkValue) {
-    EXPECT_EQ(identityFunction(GLOBAL_VARIABLE), 10);
-}
-```
-
-:::{danger} not Independent
-:class: dropdown
-Un test ne doit pas dépendre d'un autre test. Les tests doivent pouvoir être exécutés dans n'importe quel ordre. Si un test qui ne passe pas entraîne d'autres tests à échouer alors on ne pourra pas cerner le problème du code. 
-:::
-
-```{code} cpp
-#include <chrono>
-
-SomeType someFunction(chrono::weekday day);
-
-TEST(someFunctionTest, isTrueOnMondayOnly) {
-    auto currentTime = chrono::system_clock::now();
-    auto currentDay = chrono::weekday(currentTime);
-    if (currentDay == chrono::Monday)
-        EXPECT_TRUE(someFunction(currentDay));
-    else
-        EXPECT_FALSE(someFunction(currentDay));
+void registerItemInStore(Item* item, Store store) {
+    if (item != nullptr) {
+        ItemRegistry* registry = store.getItemRegistry();
+        if (registry != nullptr) {
+            Item* existing = registry->getItem(item->getID());
+            if (existing->getBillingPeriod().hasRetailOwner()) {
+                existing->register(item);
+            }
+        }
+    }
 }
 ```
-
-:::{danger} not Repeatable
-:class: dropdown
-Un test doit pouvoir être répété dans n'importe quel environnement et il testera toujours le même concept. Si le comportement du test change (parfois il passe, parfois il échoue), alors nous ne pouvons pas cerner le problème du code.
-:::
-
-```{code} cpp
-void produceComplexLog(ArgumentType argument);
-
-TEST(produceComplexLogTest, checkLogOnSomeArgument) {
-    ArgumentType someArgument;
-    // Code defining someArgument
-    // ...
-
-    produceComplexLog(someArgument);
-}
-```
-
-:::{danger} not Self-Validating
-:class: dropdown
-Un test est booléen. Soit il passe, soit il échoue. Un test qui passe "à moitié" n'est pas un test. Cela implique que le test doit contenir des assertions (booléennes).
-:::
-
-```{figure} ../images/timely.jpg
-:alt: Timely TDD meme
-:align: center
-
-Credits: imgflip.com/memegenerator
-```
-
-:::{danger} not Timely
-:class: dropdown
-On fait souvent l'erreur de commencer par coder avant d'écrire les tests unitaires. Puis, on se concentre seulement sur l'écriture des tests qui vont passer avec le code que l'on a déjà écrit et on a du mal à trouver d'autres tests. Ce manque de recul vient du fait que l'on a fait des choix d'implémentations qui restreint notre vision des choses. Si on arrive à trouver un test qui ne passe pas, souvent on doit repenser une grande partie du programme. **Écrire le test avant de coder** permet de bien choisir une implémentation qui répondrait à ce qui attendu.  
+Est-ce que vous avez remarqué que l'on n'a pas vérifié si `existing` est `nullptr` ?
 :::
