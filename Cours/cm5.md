@@ -83,7 +83,7 @@ int getPositiveInteger() {
 }
 ```
 
-## try, throw, catch
+### try, throw, catch
 
 :::{important} Syntaxe d'un gestionnaire d'erreurs
 ```{code} cpp
