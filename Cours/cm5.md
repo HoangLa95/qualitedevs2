@@ -29,7 +29,6 @@ Nous allons apprendre à naviguer ce graphe en TP !
 ## Gestion des erreurs
 
 :::{important} Quels sont les différentes catégories d'erreur ?
-:class: dropdown
 - Erreur à la compilation (cf. votre cours d'Anglais et Google).
 - Erreur à l'éxécution.
     - Erreur côté développeur (cf. TP debugger en IHM).
@@ -44,7 +43,6 @@ La robustesse d'un programme est sa capacité de gérer des erreurs et de permet
 :::
 
 :::{important} Les principes de la programmation robuste  
-:class: dropdown  
 - **Soyez paranoïaque** : L'utilisateur, volontairement ou non, mettra votre code à l'épreuve. Il est essentiel de prévoir ses actions pour éviter les comportements imprévus.
 - **Ils sont stupides** : Les messages d'erreur doivent être clairs, bienveillants et fournir les informations nécessaires pour que l'utilisateur puisse corriger l'erreur lui-même : explication concise, lien vers la documentation si besoin, et suggestions de correction.
 - **Ils sont dangereux** : L'utilisateur ne doit pas avoir à manipuler directement le code source. Il doit pouvoir accomplir ses tâches uniquement avec les fonctionnalités mises à sa disposition.
@@ -87,7 +85,7 @@ int getPositiveInteger() {
 
 ## try, throw, catch
 
-:::{important} Syntaxe d'un gestionnaire d'erreurs*
+:::{important} Syntaxe d'un gestionnaire d'erreurs
 ```{code} cpp
 #include <stdexcept> // for standard exceptions
 
@@ -151,7 +149,7 @@ Consulter [C++ exceptions standard](https://en.cppreference.com/w/cpp/error/exce
 Soyez précis quand vous pouvez et évitez d'utiliser juste `std::exception`.
 :::
 
-:::{danger} Ce principe concerne la gestion des erreurs d'utilisateur, pas celles des développeurs !
+:::{danger} Ne pas gérer les erreurs de développeurs !
 :class: dropdown
 Il est crucial de gérer les erreurs d'utilisateur, mais attraper des erreurs imprévues dans le code des développeurs peut compliquer le débogage. C'est pourquoi il est important d'utiliser `throw` avec un `catch` approprié, afin de ne pas capturer des erreurs inattendues.
 :::
