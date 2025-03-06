@@ -186,6 +186,11 @@ Ainsi, découper la compilation en plusieurs étapes (génération de fichiers `
 
 2. Exécutez les commandes `make`, `make run` et `make clean` et observez leur effet dans le terminal et sur les fichiers.
 
+:::{warning} Erreur : séparateur manquant
+:class: dropdown
+Si vous rencontrez l'erreur "séparateur manquant" en exécutant `make`, il est possible que le copier-coller du contenu du M=makefile dans votre éditeur ait remplacé les tabulations par des espaces. Assurez-vous que chaque ligne de commande dans le makefile est bien précédée d'une tabulation (`Tab` au lieu de quatre espaces).
+:::
+
 :::{important} Prérequis cachés
 Dans le makefile précédent, il existe des prérequis implicites qui sont les fichiers header `.h`. Par exemple, `main.cpp` et `hello.cpp` dépendent de `hello.h`, mais ce prérequis n'est pas spécifié dans le makefile. Cela ne pose pas de problème pour la compilation, car `g++` comprend, grâce aux directives `#include`, qu'il doit inclure les headers appropriés lors de la traduction du code source `.cpp`.
 

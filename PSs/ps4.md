@@ -186,6 +186,11 @@ Thus, splitting compilation into multiple steps (generating `.o` files for each 
 
 2. Run `make`, `make run`, and `make clean`, and observe their effects in the terminal and on the files.
 
+:::{warning} Error: missing separator  
+:class: dropdown  
+If you encounter the "missing separator" error when running `make`, it is possible that copying and pasting the makefile content into your editor replaced tab characters with spaces. Make sure that each command line in the makefile is preceded by a tab (`Tab` instead of four spaces).  
+:::
+
 :::{important} Hidden prerequisites
 In the previous makefile, there are implicit prerequisites, which are the `.h` header files. For example, `main.cpp` and `hello.cpp` depend on `hello.h`, but this prerequisite is not specified in the makefile. This does not cause issues during compilation because `g++`, thanks to the `#include` directives, understands that it must include the appropriate headers during the translation of the `.cpp` source code.
 
