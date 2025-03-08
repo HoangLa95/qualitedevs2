@@ -55,7 +55,7 @@ Pour certaines erreurs, il n'est pas nécessaire d'arrêter l'exécution du prog
 
 ```{code} cpp
 #include <iostream>
-#include <limits>
+#include <limits> // for numeric_limits
 #include <stdexcept>
 
 int getPositiveInteger() {
