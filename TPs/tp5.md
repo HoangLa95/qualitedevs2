@@ -107,7 +107,6 @@ Quand vous allez apprendre à gérer plusieurs branches dans votre dépôt, vous
 ```{code} sh
 git config --global alias.graph "log --oneline --graph --decorate --all"
 ```
-:::
 
 2. Exécutez `git graph`.
 
@@ -184,7 +183,7 @@ Vous pouvez aussi faire `git reset HEAD~<nombre>` pour reset les `<nombre>` dern
 Si un commit existe déjà sur votre dépôt distant, il est très dangereux de faire un reset parce que reset modifie l'historique. Cela implique que vous devez écraser l'historique du dépôt distant avec l'historique du dépôt local. Ceci est possible avec l'option `--force` de push mais la branche `main` est toujours protégée par défaut (impossible de faire `--force`). Dans ce cas-ci, **il faut utiliser revert** à la place de reset.
 :::
 
-## Git avec IDE
+### Git avec IDE
 
 Vous pouvez maintenant ouvrir votre dépôt Git avec VSCodium.
 Si VSCodium vous demande si vous voulez faire `git fetch` régulièrement, vous pouvez répondre oui. Si vous avez répondu non, ce n'est pas grave. Nous allons expliquer ce que fait `git fetch` plus bas.
@@ -300,5 +299,10 @@ Le Web IDE de GitLab est basé sur VSCode/VSCodium donc son intégration Git est
 Vous pouvez aussi choisir l'option **Open in merge editor** qui est proposée en bas à droite qui ouvre trois écrans avec les deux versions du fichier avec le conflit et une troisième version qui est la version finale que vous allez écrire.
 
 8. Finissez la synchronisation avec la version fusionnée.
+
+:::{seealso} `git merge --abort`
+:class: dropdown
+`git pull` fait la même chose que `git fetch` puis `git merge`. Quand vous avez oublié de regardez l'état des dépôts avant de faire un pull ou une merge, vous pouvez utiliser `git merge --abort` pour annuler la fusion.
+:::
 
 Revenez aux [objectifs](#tp5-objectifs) et cochez les points que vous avez maîtrisés. Revenez sur les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
