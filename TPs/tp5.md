@@ -66,13 +66,13 @@ Les fichiers `level1`, `level2` et `level3` ont juste besoin d'exister pour notr
 
 4. Dans `getLevelFromUser`, écrivez un validateur de l'entrée qui autorise seulement 3 tentatives et l'entrée doit être un entier entre `firstLevel` et `lastLevel` que nous pouvons par exemple fixer à 1 et 5 respectivement. Au delà de 3 tentatives, la fonction doit lancer une erreur.
 
-Nous n'allons pas gérer cette erreur tout de suite car dans ce cas-ci, nous avons envie de retourner vers le menu principal du jeu, ce qui ne devrait pas être accessible depuis `getLevelFromUser`.
+Nous n'allons pas gérer cette erreur tout de suite car dans ce cas-ci, nous avons envie de retourner vers le menu principal du jeu, ce qui ne devrait pas être accessible depuis `getLevelFromUser`. La gestion des erreurs sans interrompre le programme est toujours préférable à arrêter le programme avec un code d'erreur.
 
 5. Attraper l'erreur dans `play` et simuler le retour vers le menu principal avec un message dans `cout` qui dit `Returning to main menu.`
 
 6. Dans `getLevelData`, nous allons vérifier si le fichier correspondant au niveau existe. S'il n'existe pas (`if(!file) {...}`), alors nous retournons le message `"Resources not found for level <numéro du niveau>."` et arrête le programme avec le code `EXIT_FAILURE`. 
 
-Il s'agit d'une gestion d'erreur locale sans avoir à lancer l'erreur pour l'attraper ailleurs.
+Il s'agit d'une gestion d'erreur locale sans avoir à lancer l'erreur pour l'attraper ailleurs, ce qui simplifie la logique du code.
 
 ## Exercice 2 : Git integration
 
@@ -91,7 +91,7 @@ D'abord, nous allons apprendre à utiliser les commandes suivantes dans le termi
 Un petit rappel : `q` pour quitter le log.
 :::
 
-2. Exécutez `git log --online --graph` pour voir le graphe (dessiné en ASCII dans le terminal) associé à ces commits, où chaque sommet est représenté par une étoile.
+2. Exécutez `git log --online --graph` pour voir le graphe (dessiné en [ASCII](https://fr.wikipedia.org/wiki/American_Standard_Code_for_Information_Interchange) dans le terminal) associé à ces commits, où chaque sommet est représenté par une étoile.
 
 Votre graphe devrait être plutôt linéaire (un chemin) à part les endroits où vous avez eu des conflits et donc des branches divergentes.
 
