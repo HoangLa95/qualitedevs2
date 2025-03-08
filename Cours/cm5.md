@@ -72,7 +72,7 @@ int getPositiveInteger() {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the buffer until it reaches end of line character '\n'.
             attempts++;
             std::cout << "Invalid input. Please try again. For example: 1" << std::endl;
-            std::cout << maxAttemps - attempts << " left." << std::endl;
+            std::cout << maxAttempts - attempts << " left." << std::endl;
         } else {
             return userInput;
         }
