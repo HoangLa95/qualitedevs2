@@ -8,6 +8,7 @@ D'abord, un point sur Git.
 :class:dropdown
 ```{figure} ../images/git-graph.png
 :alt: Git Graph
+:width: 50%
 :align: center
 
 Credits: [Marco Eidinger](https://blog.eidinger.info/the-easiest-way-to-draw-git-graphs)
