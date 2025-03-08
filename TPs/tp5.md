@@ -1,484 +1,304 @@
-# TP6 : Tests Driven Development
+# TP5 : Gestion des erreurs et intégration Git dans VSCodium
 
-:::{important} QCM
+(tp5-objectifs)=
+Le but de ce TP est de comprendre les points suivants :
+- [ ] [La gestion des erreurs](#exercice-1--error-handling)
+- [ ] [`git graph`](#alias)
+- [ ] [`git checkout`](#checkout)
+- [ ] [`git revert`](#revert)
+- [ ] [`git reset`](#reset)
+- [ ] [Intégration Git dans VSCodium](#git-avec-ide)
+
+## Exercice 1 : Error handling
+
+:::{warning} Disclaimer
 :class: dropdown
-Ne pas oublier de répondre au QCM sur Moodle.
+Nous allons nous concentrer sur l'écriture et le fonctionnement des gestionnaires d'erreur dans cet exercice sans se soucier de réorganiser le code, les fichiers et la compilation automatique.
 :::
 
-## CMake et Google Test
+1. Créez un répertoire `error-handling` dans `TP5` qui contient les fichiers: `level1`, `level2`, `level3` et `play.cpp`.
 
-Avant de commencer à coder, il faut configurer notre projet. Jusqu'à maintenant, nous avons travaillé que sur des mini-projets avec un seul fichier de code. Pour des projets plus complexes (dont les projets qui incluent des tests unitaires par exemple), il est préférable d'utiliser un "makefile" (ensemble d'instructions de compilation pour un projet).
+2. Dans un fichier `play.cpp`, recopiez le code suivant.
 
-Pour C++, nous allons utiliser **CMake**. Aller dans Extension et **télécharger CMake**. Vous pouvez aussi **télécharger C++ TestMate** pour un affichage plus compréhensible dans VSCodium des tests unitaires que nous allons écrire. 
-
-Créer un dossier **TP6** dans lequel vous allez **ajouter deux fichiers `kataTDD.cpp` et `kataTDD_test.cpp`**.
-
-Dans `kataTDD.cpp`, nous allons écrire une simple fonction qui retourne `Hello World!` :
 ```{code} cpp
-using namespace std;
+#include <iostream>
+#include <string>
+#include <fstream>
 
-string hello() {
-  return "Hello World!";
+int getLevelFromUser() {
+    int userInput;
+    std::cout << "Enter a game level: ";
+    std::cin >> userInput;
+    return userInput;
+}
+
+std::string getLevelData(int level) {
+    std::string filepath = "level" + std::to_string(level);
+    std::ifstream file(filepath);
+    std::string levelData;
+    levelData.assign((std::istreambuf_iterator<char>(file)),std::istreambuf_iterator<char>());
+    file.close();
+    return levelData;
+}
+
+void play() {
+    int level = getLevelFromUser();
+    getLevelData(level);
+    std::cout << "You are playing level " + std::to_string(level) + ".\n";
+}
+
+int main() {
+    play();
+    return 0;
 }
 ```
 
-Dans `kataTDD_test.cpp`, nous allons écrire un test simple qui vérifie si la fonction `hello` retourne bien `Hello World!` en utilisant le framework **Google Test** :
-```{code} cpp
-#include <gtest/gtest.h>
-#include "kataTDD.cpp"
+:::{hint} Que fait ce code ?
+:class: dropdown
+Nous allons simuler une portion de code d'un jeu où :
+- `getLevelFromUser` récupère le niveau du jeu à partir d'une entrée utilisateur.
+- `getLevelData(int level)` récupère les ressources pour le niveau `level` en ouvrant le fichier `level1` par exemple si `level` est `1`. Le contenu de `level1` est ensuite recopié dans `string levelData` avec la fonction `assign`. Nous fermons le fichier avec `file.close()` et retournons `levelData`.
+- `play` récupère le numéro du niveau, les ressources correspondant et nous simulons le gameplay avec le message `You are playing level 1.` (si `level` est 1).
+Les fichiers `level1`, `level2` et `level3` ont juste besoin d'exister pour notre simulation.
+:::
 
-TEST(helloTest, saysHelloWorld) {
-  EXPECT_EQ(hello(),"Hello World!");
-}
-```
+3. Compilez et exécutez le code pour observer son comportement selon l'entrée utilisateur.
 
-Maintenant, nous pouvons construire notre projet en incluant les tests unitaires que nous venons d'écrire. **Créer un fichier `CMakeLists.txt` dans `monprojet`** (et non pas dans `TP6`, votre fichier `CMakeLists.txt` doit être au même niveau que `README.md` et `.gitignore`).
+4. Dans `getLevelFromUser`, écrivez un validateur de l'entrée qui autorise seulement 3 tentatives et l'entrée doit être un entier entre `firstLevel` et `lastLevel` que nous pouvons par exemple fixer à 1 et 5 respectivement. Au delà de 3 tentatives, la fonction doit lancer une erreur.
 
-Recopier le code suivant dans `CMakeLists.txt`.
-```{code} cpp
-cmake_minimum_required(VERSION 3.14)
-project(monprojet) # Remplacer par le nom de votre projet : par exemple qualite-dev-s2-prenom-nom
+Nous n'allons pas gérer cette erreur tout de suite car dans ce cas-ci, nous avons envie de retourner vers le menu principal du jeu, ce qui ne devrait pas être accessible depuis `getLevelFromUser`.
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+5. Attraper l'erreur dans `play` et simuler le retour vers le menu principal avec un message dans `cout` qui dit `Returning to main menu.`
 
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-)
+6. Dans `getLevelData`, nous allons vérifier si le fichier correspondant au niveau existe. S'il n'existe pas (`if(!file) {...}`), alors nous retournons le message `"Resources not found for level <numéro du niveau>."` et arrête le programme avec le code `EXIT_FAILURE`. 
 
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
+Il s'agit d'une gestion d'erreur locale sans avoir à lancer l'erreur pour l'attraper ailleurs.
 
-enable_testing()
+## Exercice 2 : Git integration
 
-add_executable(
-  kataTDD_test
-  ./TP6/kataTDD_test.cpp
-)
-target_link_libraries(
-  kataTDD_test
-  GTest::gtest_main
-)
+Créez un répertoire `git-integration`.
 
-include(GoogleTest)
-gtest_discover_tests(kataTDD_test)
-```
+### Git sans IDE
 
-Ouvrir un terminal avec un clic droit sur `CMakeLists.txt` puis *Open in Integrated Terminal*.
+D'abord, nous allons apprendre à utiliser les commandes suivantes dans le terminal.
 
-Compiler le projet avec les commandes suivantes.
+#### log
+
+1. Exécutez `git log --oneline` pour voir l'historique du dépôt où chaque commit correspond à une ligne qui commence avec un code, appelé **commit hash**, permettant d'identifier le commit puis le message du commit.
+
+:::{hint} `q`
+:class:dropdown
+Un petit rappel : `q` pour quitter le log.
+:::
+
+2. Exécutez `git log --online --graph` pour voir le graphe (dessiné en ASCII dans le terminal) associé à ces commits, où chaque sommet est représenté par une étoile.
+
+Votre graphe devrait être plutôt linéaire (un chemin) à part les endroits où vous avez eu des conflits et donc des branches divergentes.
+
+:::{important} HEAD et origin/HEAD
+**HEAD** est le sommet courant où se trouve votre dépôt local (pas votre répertoire de travail mais le dépôt local où vous avez fait les commits). De même pour **origin/HEAD** pour le dépôt distant.
+:::
+
+#### alias
+
+Quand vous allez apprendre à gérer plusieurs branches dans votre dépôt, vous pouvez aussi ajouter les options `--decorate` (pour avoir le nom de la branche à côté des commits) et `--all` (pour voir toutes les branches) à `git log --oneline --graph`.
+
+1. Définissez la commande `git graph` avec un **alias** de la façon suivante :
 ```{code} sh
-cmake -S . -B build
-cmake --build build
+git config --global alias.graph "log --oneline --graph --decorate --all"
 ```
+:::
 
-:::{important} .gitignore
+2. Exécutez `git graph`.
+
+:::{important} `git status` et `git graph`
+Dans la suite, exécutez `git status` et `git graph` après chaque manipulation pour comprendre ce qui se passe !
+:::
+
+#### show
+
+1. Vous pouvez voir tous les détails d'un commit particulier avec `git show <commit hash>`.
+
+#### checkout
+
+Nous pouvons visiter les différents sommets de ce graphe, ce qui veut dire que nous pouvons revenir aux différents états de notre dépôt, des états qui sont loggés par les commits.
+
+1. Exécutez `git checkout <commit hash>` avec un commit hash d'un vieux commit. Votre commande devrait ressembler à `git checkout abc0123` par exemple.
+
+:::{important} Detached HEAD
+Quand vous checkout un vieux commit, vous êtes en état **detached HEAD** où les changements et commit que vous faites dans cet état vont être perdu.
+Pour garder ces changements, il faut créer une autre branche. Nous n'allons pas voir ces manipulations dans ce TP.
+:::
+
+2. Observez l'état de votre (ancien) dépôt.
+
+3. Revenez au sommet le plus récent (et sortez de l'état detached HEAD) en faisant `git checkout main`. 
+
+:::{seealso} `git checkout -`
+:class:dropdown
+`git checkout -` permet de revenir au dernier sommet visité (avant le sommet courant où se trouve HEAD).
+:::
+
+#### revert
+
+1. Créez un fichier `revert.txt` qui contient une ligne `Hello World!` et commit ce nouveau changement.
+
+2. Ajoutez une deuxième ligne à `revert.txt` qui dit `Hi!` et commit ce nouveau changement.
+
+Imaginons que la deuxième ligne ajoutée était une erreur. Nous allons **revert** ce commit tout en gardant le commit erroné dans l'historique parce qu'il se peut que ce commit erroné contient des informations utiles ou il est déjà synchronisé avec le dépôt distant (si vous avez fait un push).
+
+3. Exécutez `git revert HEAD --no-edit` puis regardez le contenu de `revert.txt`.
+
+Vous pouvez voir qu'un nouveau commit a été créé avec le message par défaut `Revert "<message du commit annulé>"`. Vous auriez aussi pu faire `git revert HEAD -m "<message>"` pour mettre un message personalisé au lieu du message par défaut.
+
+Nous pouvons aussi revert plusieurs commits. Chaque commit sera accompagné d'un revert commit.
+
+4. Exécutez `git revert HEAD~3..HEAD --no-edit` pour revert les trois commits les plus récents.
+
+Vous pouvez enlever l'option `--no-edit` pour écrire un message par revert commit. Vous auriez aussi pu faire `git revert -n HEAD~3..HEAD` qui ne fait pas automatiquement plusieurs commit puis `git commit -m "<message>"` pour écrire un seul commit (au lieu de trois) avec le message que vous voulez.
+
+:::{danger} Revert un vieux commit
+Il est très dangereux de revert un commit `A` particulier dans le passé (si ce n'est pas le dernier commit) car vous allez avoir des conflits avec tous les commits qui suivent `A` et qui modifie des fichiers modifiés par `A`. Il est donc conseillé de faire que des revert avec `HEAD` ou `HEAD~<nombre>..HEAD`. Sinon, il faut résoudre les conflits manuellement, ajouter les modifications, puis `git revert --continue`. Si vous êtes perdu, vous pouvez aussi faire `git revert --abort` pour annuler l'opération.
+:::
+
+#### reset
+
+1. Créez un fichier `reset.txt` avec `Hello World!` et commit ce changement **sans push**.
+
+2. Ajoutez une deuxième ligne à `reset.txt` qui dit `Hi!` et commit ce nouveau changement **sans push**.
+
+La commande `git reset` fonctionne similairement à revert mais elle supprime un commit `A` de l'historique au lieu de créer un commit supplémentaire qui revert `A`.
+
+3. Exécutez `git reset HEAD~1` pour reset le dernier commit.
+
+Vous pouvez aussi faire `git reset HEAD~<nombre>` pour reset les `<nombre>` derniers commits.
+
+:::{important} `--soft`, `--mixed` et `--hard`
+`git reset` a trois options principales qui sont `--soft`, `--mixed` et `--hard` :
+- `--soft` reset vos commits mais gardent l'état de leurs changements comme changements suivis (staged changes) pour les différencier des changements courant qui ne sont pas encore suivis.
+- `--mixed` est le comportement par défaut de reset qui garde les changements de ces commits mais les mélange aussi avec les changements dans votre répertoire de travail.
+- `--hard` supprime les commits et leurs changements.
+:::
+
+:::{danger} Reset d'un commit synchronisé
+Si un commit existe déjà sur votre dépôt distant, il est très dangereux de faire un reset parce que reset modifie l'historique. Cela implique que vous devez écraser l'historique du dépôt distant avec l'historique du dépôt local. Ceci est possible avec l'option `--force` de push mais la branche `main` est toujours protégée par défaut (impossible de faire `--force`). Dans ce cas-ci, **il faut utiliser revert** à la place de reset.
+:::
+
+## Git avec IDE
+
+Vous pouvez maintenant ouvrir votre dépôt Git avec VSCodium.
+Si VSCodium vous demande si vous voulez faire `git fetch` régulièrement, vous pouvez répondre oui. Si vous avez répondu non, ce n'est pas grave. Nous allons expliquer ce que fait `git fetch` plus bas.
+
+1. Dans la barre verticale à gauche, vous avez **Extensions**. Si vous voyez l'erreur **Error while fetching extensions. XHR failed** sous Debian à l'IUT, consultez le [soutien technique sur VSCodium](#vscodium-proxy) pour régler le proxy.
+
+2. Cherchez et installez l'extension **Git Graph** de **mhutchie**.
+
+#### log
+
+1. Ouvrez **Git Graph** avec le bouton Git Graph en bas de votre écran ou en cliquant (dans la barre en haut) sur **View** > **Command Palette** (raccourci `F1` ou `Ctrl+Shift+P`) puis tapez `Git Graph` et choisissez l'option **Git Graph: View Git Graph**.
+
+:::{seealso} Command Palette
 :class: dropdown
-Corriger votre [.gitignore](#tp4-gitignore).
+Vous pouvez tout faire dans VSCodium avec la Command Palette, y compris toutes les commandes Git.
 :::
 
-Avec *C++ TestMate*, vous devez voir un onglet **Testing** dans la barre à gauche. Cliquer sur *Testing*. Vous devez voir les tests unitaires et vous pouvez les faire tourner[^testing].
+Le graphe de l'extension Git Graph représente votre log et les commit hash sont à droite.
 
-[^testing]: ![Testing](../images/testing.png)
+#### show
 
-Le test passe normalement. Maintenant, voyons ce qui se passe quand un test échoue.
-- Enlever l'espace dans `"Hello World!"` dans le test `saysHelloWorld`.
-- Recompiler avec `cmake --build build`.
-- Refaire tourner le test `saysHelloWorld`.
-- Le test ne doit pas passer et vous devez obtenir le message suivant qui indique qu'il s'attend à ce que `hello()` et `"HelloWorld!"` soient égaux alors que `hello()` a retourné `"Hello World!"`.
-```{code}
-# Failure:
-Expected equality of these values:
-  hello()
-    Which is: "Hello World!"
-  "HelloWorld!"
-```
+1. Cliquez sur un sommet du graphe pour voir tous les détails sur le commit correspondant.
 
-Vous pouvez maintenant rajouter l'espace dans `"HelloWorld!"`, recompiler et refaire passer le test.
+2. Cliquez sur un fichier modifié d'un commit pour voir les changements précis (comme avec `git diff`).
 
-:::{warning} Problème de syntaxe de Google Test avec la convention snake_case
+#### status
+
+1. Vous pouvez voir le statut de votre dépôt dans **Source Control** dans la barre verticale à gauche.
+
+#### add
+
+1. Créez un nouveau fichier.
+
+2. Vous pouvez ajouter le nouveau changement dans Source Control avec **+** à côté du changement ou ajouter tous les changements avec **+** en haut.
+
+#### restore
+
+1. Pour ne plus suivre un changement (unstage), vous pouvez cliquez sur **-** à côté d'un changement suivi (staged change).
+
+2. Pour supprimer les nouveaux changements qui ne sont pas encore suivis dans un fichier, vous pouvez cliquez sur **la flèche à gauche de +** qui indique **Discard Changes**.
+
+#### commit
+
+1. Dans la boîte **Message** en haut de Source Control, vous pouvez écrire votre message de commit.
+
+2. Cliquez sur le bouton **Commit** pour faire un commit.
+
+#### push
+
+1. Cliquez sur **Sync Changes** pour faire un push.
+
+#### pull
+
+1. Dans Source Control, juste au dessus de Message, quand vous survolez avec votre souris, il y a `...` qui indique **More Actions**.
+
+2. À l'intérieur de ce menu dropdown, vous pouvez trouvez **Pull** parmi d'autres commandes Git. 
+
+Vous pouvez aussi utiliser la **Command Palette** (`F1`), tapez `pull` et choisir l'option **Git: Pull**.
+
+#### clone
+
+1. Similairement à pull, vous pouvez faire Clone de la même façon et rentrez l'adresse du dépôt (avec le PAT).
+
+#### config
+
+1. Dans les boutons à droite de Git Graph, vous pouvez trouver un bouton **Repository Settings** avec les configurations du dépôt.
+
+#### fetch/remote update
+
+`git fetch` fait (presque) la même chose que `git remote update` mais permet d'être plus précis avec `git fetch <branche>` si vous voulez récupérer les informations sur une branche particulière.
+
+Par défaut `git fetch` récupère seulement les informations sur le dépôt distant appelé `origin`. Dans le futur, si vous allez contribuer à des projets existant développés par d'autres personnes, vous pouvez être amené à faire des **forks** qui sont des copies de ces projets avec vos propres dépôts distant et local. Dans ce cas-ci, il est utile de récupérer les changements de plusieurs dépôts distants différent. C'est ce que fait `git remote update` (ou de façon équivalente `git fetch --all`).
+
+1. Cliquez sur le bouton **Fetch from Remote(s)** parmi les boutons à droite de Git Graph.
+
+Parfois, il est utile de faire **Refresh** pour rafraîchir la vue du graphe s'il y a eu des changements récemment.
+
+#### checkout
+
+1. Dans Git Graph, cliquez droit sur un message à côté d'un commit et choisissez l'option **Checkout**.
+
+2. Revenez au commit le plus récent en cliquant droit sur l'icône de la branche `main` (à côté du commit le plus récent) et en choisissant l'option **Checkout Branch**.
+
+#### revert
+
+1. Dans Git Graph, cliquez droit sur le message du commit le plus récent et choisissez **Revert**.
+
+#### reset
+
+1. Dans Git Graph, cliquez droit sur le message d'un ancien commit et choisissez **Reset current branch to this Commit...** puis l'une des options **Soft**, **Mixed** ou **Hard** (préférablement Soft ou Mixed).
+
+#### merge
+
+1. Créez un fichier `merge.txt` vide et synchroniser ce fichier pour l'avoir dans vos deux dépôts.
+
+2. Localement, ajoutez `Hello World!` sur la première ligne du fichier.
+
+3. Sur GitLab, utilisez le Web IDE pour ajouter `Hi!` sur la première ligne du fichier.
+
+:::{seealso} Web IDE de GitLab
 :class: dropdown
-Dans ce cours, nous avons adopté la convention camelCase. Dans d'autres cours/projet, vous pouvez aussi utiliser la convention snake_case qui sépare les mots avec des `_` au lieu des majuscules. 
-
-Par contre, si vous utilisez Google Test, il ne faut absolument pas utiliser des `_` dans le nom des tests.
+Le Web IDE de GitLab est basé sur VSCode/VSCodium donc son intégration Git est très similaire mais il est sans extension. Vous pouvez toujours utiliser la Command Palette.
 :::
 
-<!-- ### Assertions
+4. Fetch/remote update dans Git Graph et observez les branches divergentes.
 
-Il y a deux mots clés qu'il faut connaître : `ASSERT` et `EXPECT`.
+5. Cliquez sur le message du commit de la branche du dépôt distant et choisissez **Merge into current branch...** avec l'option **No commit**.
 
-Observer la différence entre `ASSERT` et `EXPECT` grâce aux tests suivants qui doivent échouer.
+6. Ouvrez le fichier `merge.txt`.
 
-```{code} cpp
-TEST(helloTest, saysHelloWorldWithAssert) {
-  ASSERT_EQ(hello(),"Hello!");
-  EXPECT_EQ(hello(),"HelloWorld!");
-}
+7. Vous pouvez choisir une des options proposées au dessus du conflit ou aucune option et résoudre le conflit vous-même avec un nouveau texte comme `Bye!`.
 
-TEST(helloTest, saysHelloWorldWithExpect) {
-  EXPECT_EQ(hello(),"Hello!");
-  EXPECT_EQ(hello(),"HelloWorld!");
-}
-```
+Vous pouvez aussi choisir l'option **Open in merge editor** qui est proposée en bas à droite qui ouvre trois écrans avec les deux versions du fichier avec le conflit et une troisième version qui est la version finale que vous allez écrire.
 
-**Question 1** : Quelle est la différence entre `ASSERT` et `EXPECT` ?
+8. Finissez la synchronisation avec la version fusionnée.
 
-Maintenant, vous pouvez supprimer ces tests qui échouent ou les modifier pour les faire passer.
-
-Tester les mots clés suivants : 
-- `EXPECT_TRUE(condition)`
-- `EXPECT_FALSE(condition)`
-- `EXPECT_EQ(firstValue, secondValue)`
-- `EXPECT_NE(firstValue, secondValue)`
-- `EXPECT_LT(firstValue, secondValue)`
-- `EXPECT_LE(firstValue, secondValue)`
-- `EXPECT_GT(firstValue, secondValue)`
-- `EXPECT_GE(firstValue, secondValue)`
-Les mêmes mots-clés existent avec `ASSERT` au lieu de `EXPECT`.
-
-**Question 2** : Quelle est la signification de ces mots-clés ?
-
-### Tests -->
-
-Vous pouvez regarder [la documentation de Google Test](https://google.github.io/googletest/) pour plus d'informations sur la syntaxe de Google Test.
-
-## TDD
-
-:::{seealso} The Password Game
-:class: dropdown
-Le principe du TDD est bien illustré par [The Password Game](https://neal.fun/password-game/).
-:::
-
-### Fizz-Buzz
-
-:::{note} Disclaimer
-:class: dropdown
-L'exercice suivant est simple. Le but n'est pas de résoudre le problème algorithmique. Le but est d'apprendre à écrire des tests unitaires et le workflow du TDD.
-:::
-
-Nous voulons écrire une fonction `fizzBuzz` qui prend en entrée un entier qui retourne une chaîne de caractère selon les règles suivantes:
-1. Si l'entier est divisible par 3, alors le résultat doit contenir un `Fizz`.
-2. Si l'entier est divisible par 5, alors le résultat doit contenir un `Buzz`.
-3. Si l'entier contient un 3, alors le résultat doit contenir un `Fizz`.
-4. Si l'entier contient un 5, alors le résultat doit contenir un `Buzz`.
-5. Si l'entier ne vérifie aucune des règles précédentes, alors le résultat contient juste l'entier en question.
-6. Chaque `Fizz` et `Buzz` doivent correspondre à exactement une règle.
-7. Les `Fizz` viennent toujours avant les `Buzz`.
-8. Le résultat ne peut pas contenir plus de caractères que le minimum nécessaire pour respecter les règles. 
-
-Par exemple,
-- `1` doit retourner `"1"`.
-- `3` doit retourner `"FizzFizz"`.
-- `5` doit retourner `"BuzzBuzz"`.
-- `21` doit retourner `"Fizz"`.
-- `35` doit retourner `"FizzBuzzBuzz"`.
-- `3555` doit retourner `"FizzFizzBuzzBuzz"`.
-
-Pour commencer, nous allons ajouter `#include<string>` à `kataTDD.cpp` et la fonction suivante.
-```{code} cpp
-string fizzBuzz(int number) {
-  string result = "";
-  return result;
-}
-```
-
-Dans `kataTDD_test.cpp`, nous allons ajouter un test simple qui correspond à la règle 5[^5].
-```{code} cpp
-TEST(fizzBuzzTest, 1ShouldReturn1) {
-  EXPECT_EQ(fizzBuzz(1), "1");
-}
-```
-
-Nous pouvons compiler avec `cmake --build build` et faire tourner le test. Il échoue donc maintenant nous allons écrire le code pour faire passer le test.
-```{code} cpp
-string fizzBuzz(int number) {
-  string result = "1";
-  return result;
-}
-```
-
-Recompiler et refaire tourner le test. Il doit passer. Maintenant, nous pouvons écrire un autre test plus complexe qui vérifie la règle 5[^5].
-```{code} cpp
-TEST(fizzBuzzTest, theseShouldReturnTheSameNumbers) {
-  EXPECT_EQ(fizzBuzz(2), "2");
-  EXPECT_EQ(fizzBuzz(4), "4");
-  EXPECT_EQ(fizzBuzz(7), "7");
-  EXPECT_EQ(fizzBuzz(8), "8");
-  EXPECT_EQ(fizzBuzz(11), "11");
-  EXPECT_EQ(fizzBuzz(1111), "1111");
-  EXPECT_EQ(fizzBuzz(11111), "11111");
-}
-```
-
-:::{warning} Recompiler et tester à chaque modification
-:class: dropdown
-Ceci ne sera pas rappelé mais il faut le faire à chaque étape.
-:::
-
-Pour passer ce test, nous devons modifier le code de la façon suivante.
-```{code} cpp
-string fizzBuzz(int number) {
-  string result = to_string(number);
-  return result;
-}
-```
-
-Maintenant, vérifions la règle 3[^3] avec le test suivant.
-```{code} cpp
-TEST(fizzBuzzTest, theseShouldReturnFizzByRule1) {
-  EXPECT_EQ(fizzBuzz(6), "Fizz");
-  EXPECT_EQ(fizzBuzz(9), "Fizz");
-  EXPECT_EQ(fizzBuzz(12), "Fizz");
-  EXPECT_EQ(fizzBuzz(18), "Fizz");
-  EXPECT_EQ(fizzBuzz(21), "Fizz");
-  EXPECT_EQ(fizzBuzz(111), "Fizz");
-}
-```
-
-Ce test doit échouer. Écrivons le code correspondant.
-```{code} cpp
-string fizzBuzz(int number) {
-  string result; 
-  if (number % 3 ==0) 
-    result = "Fizz";  
-  else
-    result = to_string(number);
-  return result;
-}
-```
-
-Continuer le TDD en écrivant d'abord le test puis le code correspondant jusqu'à ce que vous vérifiez toutes les règles.
-
-:::{hint} Comment concaténer des chaînes de caractères ?
-:class: dropdown
-```{code} cpp
-string result = "Fizz";
-result += "Fizz";
-```
-La valeur de `result` est maintenant `"FizzFizz"`.
-:::
-
-:::{hint} Comment vérifier si un nombre contient un chiffre ?
-:class: dropdown
-Voici une condition pour vérifier si `number` contient `3`.
-```{code} cpp
-to_string(number).find("3")!=string::npos
-```
-:::
-
-Est-ce que votre code suit bien les principes de code propre que nous avons vu ?
-
-
-[^1]: Si l'entier est divisible par 3, alors le résultat doit contenir un `Fizz`.
-[^2]: Si l'entier est divisible par 5, alors le résultat doit contenir un `Buzz`.
-[^3]: Si l'entier contient un 3, alors le résultat doit contenir un `Fizz`.
-[^4]: Si l'entier contient un 5, alors le résultat doit contenir un `Buzz`.
-[^5]: Si l'entier ne vérifie aucune des règles précédentes, alors le résultat contient juste l'entier en question.
-[^6]: Chaque `Fizz` et `Buzz` doivent correspondre à exactement une règle.
-[^7]: Les `Fizz` viennent toujours avant les `Buzz`.
-[^8]: Le résultat ne peut pas contenir plus de caractères que le minimum nécessaire pour respecter les règles.
-
-### Les nombres romains
-
-:::{important} Bonus
-Cet exercice est devenu un bonus mais les questions du QCM sur la syntaxe de C++ sont obligatoires.  
-:::
-
-Nous allons utiliser le TDD pour écrire une fonction qui prend une chiffre romain en entrée et qui retourne le nombre correspondant en décimal.
-
-Ajouter le code suivant à votre fichier `kataTDD.cpp`.
-```{code} cpp
-#include <unordered_map>
-#include <stdexcept>
-
-class RomanToDecimal {
-public:
-  RomanToDecimal(string romanNumeral) : mRomanNumeral(romanNumeral) {}
-
-  int getDecimal() {}
-
-private:
-  string mRomanNumeral;
-  unordered_map<string, int> romanLetters;
-  int decimal = 0;
-};
-```
-
-Les lettres romaines :
-| I | V | X  | L  |  C  |  D  |  M   |
-|---|---|----|----|-----|-----|------|
-| 1 | 5 | 10 | 50 | 100 | 500 | 1000 |
-
-Un nombre romain se lit de gauche à droite en faisant des additions et des soustractions des valeurs des chiffres. Tout symbole qui suit un symbole de valeur supérieure ou égale s’ajoute à celui-ci (exemple : 6 s'écrit `VI`). Tout symbole qui précède un symbole de valeur supérieure se soustrait à ce dernier (exemple : 40 s'écrit `XL`). Par exemple le nombre romain `MLXIII` correspond à 1063 dans la numérotation décimale car il se décompose comme `M`+`L`+`X`+`I`+`I`+`I` = 1000+50+10+1+1+1. Alors que le nombre `XXXIV` vaut 34 car il se décompose comme `X`+`X`+`X`+`IV`=10+10+10+4. Une meilleure façon de voir ce dernier exemple c'est d'utiliser la soustraction `X`+`X`+`X`-`I`+`V`=10+10+10-1+5.
-
-On va se fixer une représentation unique des nombres romains avec les principes suivants :
-- Un même symbole n'est pas employé quatre fois de suite (sauf `M`).
-- Les soustractions s'effectuent sur un seul symbole (par exemple `XL` est correct et vaut 40, mais il est interdit d'écrire `XXL` pour 30, et on écrira plutôt `XXX`).
-- On écrira en respectant l'ordre suivant
-  - d'abord les chiffres des milliers (à l'aide uniquement de `M`)
-  - puis les chiffres des centaines (à l'aide uniquement de `C`,`D`,`M`)
-  - puis les chiffres des dizaines (à l'aide uniquement de `X`,`L`,`C`)
-  - puis les chiffres des unités (à l'aide uniquement de `I`,`V`,`X`)
-- Pour chacune des 4 étapes ci-dessus, on utilisera le moins de symboles possible.
-
-Par exemple :
-- `IL` (pour 49) est interdit (I n'est pas autorisé pour décrire les dizaines), et 49 = `XLIX`
-- `XCM` est interdit (car que l'on interprète comme `X` `CM` ou `XC` `M`, cela ne respecte pas l'ordre ci-dessus)
-- `VX` (pour 5) est interdit, car `V` utilise moins de symboles
-- `XCXX` (pour 110) est interdit, car il faut décrire le chiffre des centaines avec `C`,`D`, `M`.
-
-:::{important} TDD
-:class: dropdown
-Faites très attention pour cet exercice de bien respecter le principe du TDD en ajoutant vraiment tout le temps la quantité minimale de code nécessaire à la validation des tests. Si vous suivez cette règle, il se résout très facilement alors qu'en l'abordant de manière générale, il comporte de nombreux pièges pouvant vous faire perdre un temps précieux.
-:::
-
-Dans cet exercice, vous allez manipuler la classe [`string`](https://en.cppreference.com/w/cpp/string/basic_string) et [`unordered_map`](https://en.cppreference.com/w/cpp/container/unordered_map).
-
-**Question 1** : Que fait `s.length()` ?
-
-**Question 2** : Que fait `s.substr(i,2)` ?
-
-**Question 3** : Quelle est la syntaxe de `unordered_map` ?
-
-**Question 4** : Comment accéder à un élément de `unordered_map<string,int>` ?
-
-**Question 5** : Comment vérifier qu'un élément n'est pas dans `unordered_map` avec `find` ?
-
-<!-- 1. Commencer par écrire un test qui échoue quand on rentre une string qui n'est pas un nombre romain.
-```{code} cpp
-TEST(RomanToDecimalTest, IMShouldFail) {
-  RomanToDecimal romanNumeral("IM");
-  EXPECT_NO_FATAL_FAILURE(romanNumeral.getDecimal());
-}
-```
-
-2. Pour passer ce test, il faut écrire un gestionnaire d'erreur.
-
-3. Écrire un test pour les lettres romains (I, V, X, L, C, D, M).
-
-4. Passer le test en remplissant `romanLetters`.
-
-5. Écrire un test pour des nombres qui nécessitent pas de soustractions.
-
-6. Passer ce test.
-
-7. Écrire un tests pour des nombres à deux lettres qui nécessitent une soustraction.
-
-8. Passer ce test.
-
-9. Écrire un tests pour des faux nombres à deux lettres (avec `EXPECT_NO_FATAL_FAILURE`).
-
-10. Passer ce test en levant un erreur.
-
-11. Refactoriser en rajoutant à `romanLetters` les paires de lettres autorisées quand on détecte une soustraction à faire (IV, IX, XL, XC, CD, CM).
-
-12. Écrire d'autres tests et essayer de les passer jusqu'à ce que vous obtenez un code qui fonctionne.
-
-Pour vous aider, voici un tableau avec tous les nombres romains entre 1 et 1000 :
-```{code} cpp
-vector<string> values = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV",
-  "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII",
-  "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII",
-  "XXXIX", "XL", "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L", "LI",
-  "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX", "LXI", "LXII", "LXIII", "LXIV", "LXV",
-  "LXVI", "LXVII", "LXVIII", "LXIX", "LXX", "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII",
-  "LXXVIII", "LXXIX", "LXXX", "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII",
-  "LXXXVIII", "LXXXIX", "XC", "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX",
-  "C", "CI", "CII", "CIII", "CIV", "CV", "CVI", "CVII", "CVIII", "CIX", "CX", "CXI", "CXII", "CXIII",
-  "CXIV", "CXV", "CXVI", "CXVII", "CXVIII", "CXIX", "CXX", "CXXI", "CXXII", "CXXIII", "CXXIV", "CXXV",
-  "CXXVI", "CXXVII", "CXXVIII", "CXXIX", "CXXX", "CXXXI", "CXXXII", "CXXXIII", "CXXXIV", "CXXXV",
-  "CXXXVI", "CXXXVII", "CXXXVIII", "CXXXIX", "CXL", "CXLI", "CXLII", "CXLIII", "CXLIV", "CXLV", "CXLVI",
-  "CXLVII", "CXLVIII", "CXLIX", "CL", "CLI", "CLII", "CLIII", "CLIV", "CLV", "CLVI", "CLVII", "CLVIII",
-  "CLIX", "CLX", "CLXI", "CLXII", "CLXIII", "CLXIV", "CLXV", "CLXVI", "CLXVII", "CLXVIII", "CLXIX",
-  "CLXX", "CLXXI", "CLXXII", "CLXXIII", "CLXXIV", "CLXXV", "CLXXVI", "CLXXVII", "CLXXVIII", "CLXXIX",
-  "CLXXX", "CLXXXI", "CLXXXII", "CLXXXIII", "CLXXXIV", "CLXXXV", "CLXXXVI", "CLXXXVII", "CLXXXVIII",
-  "CLXXXIX", "CXC", "CXCI", "CXCII", "CXCIII", "CXCIV", "CXCV", "CXCVI", "CXCVII", "CXCVIII", "CXCIX",
-  "CC", "CCI", "CCII", "CCIII", "CCIV", "CCV", "CCVI", "CCVII", "CCVIII", "CCIX", "CCX", "CCXI", "CCXII",
-  "CCXIII", "CCXIV", "CCXV", "CCXVI", "CCXVII", "CCXVIII", "CCXIX", "CCXX", "CCXXI", "CCXXII", "CCXXIII",
-  "CCXXIV", "CCXXV", "CCXXVI", "CCXXVII", "CCXXVIII", "CCXXIX", "CCXXX", "CCXXXI", "CCXXXII", "CCXXXIII",
-  "CCXXXIV", "CCXXXV", "CCXXXVI", "CCXXXVII", "CCXXXVIII", "CCXXXIX", "CCXL", "CCXLI", "CCXLII",
-  "CCXLIII", "CCXLIV", "CCXLV", "CCXLVI", "CCXLVII", "CCXLVIII", "CCXLIX", "CCL", "CCLI", "CCLII",
-  "CCLIII", "CCLIV", "CCLV", "CCLVI", "CCLVII", "CCLVIII", "CCLIX", "CCLX", "CCLXI", "CCLXII", "CCLXIII",
-  "CCLXIV", "CCLXV", "CCLXVI", "CCLXVII", "CCLXVIII", "CCLXIX", "CCLXX", "CCLXXI", "CCLXXII", "CCLXXIII",
-  "CCLXXIV", "CCLXXV", "CCLXXVI", "CCLXXVII", "CCLXXVIII", "CCLXXIX", "CCLXXX", "CCLXXXI", "CCLXXXII",
-  "CCLXXXIII", "CCLXXXIV", "CCLXXXV", "CCLXXXVI", "CCLXXXVII", "CCLXXXVIII", "CCLXXXIX", "CCXC", "CCXCI",
-  "CCXCII", "CCXCIII", "CCXCIV", "CCXCV", "CCXCVI", "CCXCVII", "CCXCVIII", "CCXCIX", "CCC", "CCCI",
-  "CCCII", "CCCIII", "CCCIV", "CCCV", "CCCVI", "CCCVII", "CCCVIII", "CCCIX", "CCCX", "CCCXI", "CCCXII",
-  "CCCXIII", "CCCXIV", "CCCXV", "CCCXVI", "CCCXVII", "CCCXVIII", "CCCXIX", "CCCXX", "CCCXXI", "CCCXXII",
-  "CCCXXIII", "CCCXXIV", "CCCXXV", "CCCXXVI", "CCCXXVII", "CCCXXVIII", "CCCXXIX", "CCCXXX", "CCCXXXI",
-  "CCCXXXII", "CCCXXXIII", "CCCXXXIV", "CCCXXXV", "CCCXXXVI", "CCCXXXVII", "CCCXXXVIII", "CCCXXXIX",
-  "CCCXL", "CCCXLI", "CCCXLII", "CCCXLIII", "CCCXLIV", "CCCXLV", "CCCXLVI", "CCCXLVII", "CCCXLVIII",
-  "CCCXLIX", "CCCL", "CCCLI", "CCCLII", "CCCLIII", "CCCLIV", "CCCLV", "CCCLVI", "CCCLVII", "CCCLVIII",
-  "CCCLIX", "CCCLX", "CCCLXI", "CCCLXII", "CCCLXIII", "CCCLXIV", "CCCLXV", "CCCLXVI", "CCCLXVII",
-  "CCCLXVIII", "CCCLXIX", "CCCLXX", "CCCLXXI", "CCCLXXII", "CCCLXXIII", "CCCLXXIV", "CCCLXXV", "CCCLXXVI",
-  "CCCLXXVII", "CCCLXXVIII", "CCCLXXIX", "CCCLXXX", "CCCLXXXI", "CCCLXXXII", "CCCLXXXIII", "CCCLXXXIV",
-  "CCCLXXXV", "CCCLXXXVI", "CCCLXXXVII", "CCCLXXXVIII", "CCCLXXXIX", "CCCXC", "CCCXCI", "CCCXCII",
-  "CCCXCIII", "CCCXCIV", "CCCXCV", "CCCXCVI", "CCCXCVII", "CCCXCVIII", "CCCXCIX", "CD", "CDI", "CDII",
-  "CDIII", "CDIV", "CDV", "CDVI", "CDVII", "CDVIII", "CDIX", "CDX", "CDXI", "CDXII", "CDXIII", "CDXIV",
-  "CDXV", "CDXVI", "CDXVII", "CDXVIII", "CDXIX", "CDXX", "CDXXI", "CDXXII", "CDXXIII", "CDXXIV", "CDXXV",
-  "CDXXVI", "CDXXVII", "CDXXVIII", "CDXXIX", "CDXXX", "CDXXXI", "CDXXXII", "CDXXXIII", "CDXXXIV",
-  "CDXXXV", "CDXXXVI", "CDXXXVII", "CDXXXVIII", "CDXXXIX", "CDXL", "CDXLI", "CDXLII", "CDXLIII", "CDXLIV",
-  "CDXLV", "CDXLVI", "CDXLVII", "CDXLVIII", "CDXLIX", "CDL", "CDLI", "CDLII", "CDLIII", "CDLIV", "CDLV",
-  "CDLVI", "CDLVII", "CDLVIII", "CDLIX", "CDLX", "CDLXI", "CDLXII", "CDLXIII", "CDLXIV", "CDLXV",
-  "CDLXVI", "CDLXVII", "CDLXVIII", "CDLXIX", "CDLXX", "CDLXXI", "CDLXXII", "CDLXXIII", "CDLXXIV",
-  "CDLXXV", "CDLXXVI", "CDLXXVII", "CDLXXVIII", "CDLXXIX", "CDLXXX", "CDLXXXI", "CDLXXXII", "CDLXXXIII",
-  "CDLXXXIV", "CDLXXXV", "CDLXXXVI", "CDLXXXVII", "CDLXXXVIII", "CDLXXXIX", "CDXC", "CDXCI", "CDXCII",
-  "CDXCIII", "CDXCIV", "CDXCV", "CDXCVI", "CDXCVII", "CDXCVIII", "CDXCIX", "D", "DI", "DII", "DIII",
-  "DIV", "DV", "DVI", "DVII", "DVIII", "DIX", "DX", "DXI", "DXII", "DXIII", "DXIV", "DXV", "DXVI",
-  "DXVII", "DXVIII", "DXIX", "DXX", "DXXI", "DXXII", "DXXIII", "DXXIV", "DXXV", "DXXVI", "DXXVII",
-  "DXXVIII", "DXXIX", "DXXX", "DXXXI", "DXXXII", "DXXXIII", "DXXXIV", "DXXXV", "DXXXVI", "DXXXVII",
-  "DXXXVIII", "DXXXIX", "DXL", "DXLI", "DXLII", "DXLIII", "DXLIV", "DXLV", "DXLVI", "DXLVII", "DXLVIII",
-  "DXLIX", "DL", "DLI", "DLII", "DLIII", "DLIV", "DLV", "DLVI", "DLVII", "DLVIII", "DLIX", "DLX", "DLXI",
-  "DLXII", "DLXIII", "DLXIV", "DLXV", "DLXVI", "DLXVII", "DLXVIII", "DLXIX", "DLXX", "DLXXI", "DLXXII",
-  "DLXXIII", "DLXXIV", "DLXXV", "DLXXVI", "DLXXVII", "DLXXVIII", "DLXXIX", "DLXXX", "DLXXXI", "DLXXXII",
-  "DLXXXIII", "DLXXXIV", "DLXXXV", "DLXXXVI", "DLXXXVII", "DLXXXVIII", "DLXXXIX", "DXC", "DXCI", "DXCII",
-  "DXCIII", "DXCIV", "DXCV", "DXCVI", "DXCVII", "DXCVIII", "DXCIX", "DC", "DCI", "DCII", "DCIII", "DCIV",
-  "DCV", "DCVI", "DCVII", "DCVIII", "DCIX", "DCX", "DCXI", "DCXII", "DCXIII", "DCXIV", "DCXV", "DCXVI",
-  "DCXVII", "DCXVIII", "DCXIX", "DCXX", "DCXXI", "DCXXII", "DCXXIII", "DCXXIV", "DCXXV", "DCXXVI",
-  "DCXXVII", "DCXXVIII", "DCXXIX", "DCXXX", "DCXXXI", "DCXXXII", "DCXXXIII", "DCXXXIV", "DCXXXV",
-  "DCXXXVI", "DCXXXVII", "DCXXXVIII", "DCXXXIX", "DCXL", "DCXLI", "DCXLII", "DCXLIII", "DCXLIV", "DCXLV",
-  "DCXLVI", "DCXLVII", "DCXLVIII", "DCXLIX", "DCL", "DCLI", "DCLII", "DCLIII", "DCLIV", "DCLV", "DCLVI",
-  "DCLVII", "DCLVIII", "DCLIX", "DCLX", "DCLXI", "DCLXII", "DCLXIII", "DCLXIV", "DCLXV", "DCLXVI",
-  "DCLXVII", "DCLXVIII", "DCLXIX", "DCLXX", "DCLXXI", "DCLXXII", "DCLXXIII", "DCLXXIV", "DCLXXV",
-  "DCLXXVI", "DCLXXVII", "DCLXXVIII", "DCLXXIX", "DCLXXX", "DCLXXXI", "DCLXXXII", "DCLXXXIII", "DCLXXXIV",
-  "DCLXXXV", "DCLXXXVI", "DCLXXXVII", "DCLXXXVIII", "DCLXXXIX", "DCXC", "DCXCI", "DCXCII", "DCXCIII",
-  "DCXCIV", "DCXCV", "DCXCVI", "DCXCVII", "DCXCVIII", "DCXCIX", "DCC", "DCCI", "DCCII", "DCCIII", "DCCIV",
-  "DCCV", "DCCVI", "DCCVII", "DCCVIII", "DCCIX", "DCCX", "DCCXI", "DCCXII", "DCCXIII", "DCCXIV", "DCCXV",
-  "DCCXVI", "DCCXVII", "DCCXVIII", "DCCXIX", "DCCXX", "DCCXXI", "DCCXXII", "DCCXXIII", "DCCXXIV",
-  "DCCXXV", "DCCXXVI", "DCCXXVII", "DCCXXVIII", "DCCXXIX", "DCCXXX", "DCCXXXI", "DCCXXXII", "DCCXXXIII",
-  "DCCXXXIV", "DCCXXXV", "DCCXXXVI", "DCCXXXVII", "DCCXXXVIII", "DCCXXXIX", "DCCXL", "DCCXLI", "DCCXLII",
-  "DCCXLIII", "DCCXLIV", "DCCXLV", "DCCXLVI", "DCCXLVII", "DCCXLVIII", "DCCXLIX", "DCCL", "DCCLI",
-  "DCCLII", "DCCLIII", "DCCLIV", "DCCLV", "DCCLVI", "DCCLVII", "DCCLVIII", "DCCLIX", "DCCLX", "DCCLXI",
-  "DCCLXII", "DCCLXIII", "DCCLXIV", "DCCLXV", "DCCLXVI", "DCCLXVII", "DCCLXVIII", "DCCLXIX", "DCCLXX",
-  "DCCLXXI", "DCCLXXII", "DCCLXXIII", "DCCLXXIV", "DCCLXXV", "DCCLXXVI", "DCCLXXVII", "DCCLXXVIII",
-  "DCCLXXIX", "DCCLXXX", "DCCLXXXI", "DCCLXXXII", "DCCLXXXIII", "DCCLXXXIV", "DCCLXXXV", "DCCLXXXVI",
-  "DCCLXXXVII", "DCCLXXXVIII", "DCCLXXXIX", "DCCXC", "DCCXCI", "DCCXCII", "DCCXCIII", "DCCXCIV", "DCCXCV",
-  "DCCXCVI", "DCCXCVII", "DCCXCVIII", "DCCXCIX", "DCCC", "DCCCI", "DCCCII", "DCCCIII", "DCCCIV", "DCCCV",
-  "DCCCVI", "DCCCVII", "DCCCVIII", "DCCCIX", "DCCCX", "DCCCXI", "DCCCXII", "DCCCXIII", "DCCCXIV",
-  "DCCCXV", "DCCCXVI", "DCCCXVII", "DCCCXVIII", "DCCCXIX", "DCCCXX", "DCCCXXI", "DCCCXXII", "DCCCXXIII",
-  "DCCCXXIV", "DCCCXXV", "DCCCXXVI", "DCCCXXVII", "DCCCXXVIII", "DCCCXXIX", "DCCCXXX", "DCCCXXXI",
-  "DCCCXXXII", "DCCCXXXIII", "DCCCXXXIV", "DCCCXXXV", "DCCCXXXVI", "DCCCXXXVII", "DCCCXXXVIII",
-  "DCCCXXXIX", "DCCCXL", "DCCCXLI", "DCCCXLII", "DCCCXLIII", "DCCCXLIV", "DCCCXLV", "DCCCXLVI",
-  "DCCCXLVII", "DCCCXLVIII", "DCCCXLIX", "DCCCL", "DCCCLI", "DCCCLII", "DCCCLIII", "DCCCLIV", "DCCCLV",
-  "DCCCLVI", "DCCCLVII", "DCCCLVIII", "DCCCLIX", "DCCCLX", "DCCCLXI", "DCCCLXII", "DCCCLXIII", "DCCCLXIV",
-  "DCCCLXV", "DCCCLXVI", "DCCCLXVII", "DCCCLXVIII", "DCCCLXIX", "DCCCLXX", "DCCCLXXI", "DCCCLXXII",
-  "DCCCLXXIII", "DCCCLXXIV", "DCCCLXXV", "DCCCLXXVI", "DCCCLXXVII", "DCCCLXXVIII", "DCCCLXXIX",
-  "DCCCLXXX", "DCCCLXXXI", "DCCCLXXXII", "DCCCLXXXIII", "DCCCLXXXIV", "DCCCLXXXV", "DCCCLXXXVI",
-  "DCCCLXXXVII", "DCCCLXXXVIII", "DCCCLXXXIX", "DCCCXC", "DCCCXCI", "DCCCXCII", "DCCCXCIII", "DCCCXCIV",
-  "DCCCXCV", "DCCCXCVI", "DCCCXCVII", "DCCCXCVIII", "DCCCXCIX", "CM", "CMI", "CMII", "CMIII", "CMIV",
-  "CMV", "CMVI", "CMVII", "CMVIII", "CMIX", "CMX", "CMXI", "CMXII", "CMXIII", "CMXIV", "CMXV", "CMXVI",
-  "CMXVII", "CMXVIII", "CMXIX", "CMXX", "CMXXI", "CMXXII", "CMXXIII", "CMXXIV", "CMXXV", "CMXXVI",
-  "CMXXVII", "CMXXVIII", "CMXXIX", "CMXXX", "CMXXXI", "CMXXXII", "CMXXXIII", "CMXXXIV", "CMXXXV",
-  "CMXXXVI", "CMXXXVII", "CMXXXVIII", "CMXXXIX", "CMXL", "CMXLI", "CMXLII", "CMXLIII", "CMXLIV", "CMXLV",
-  "CMXLVI", "CMXLVII", "CMXLVIII", "CMXLIX", "CML", "CMLI", "CMLII", "CMLIII", "CMLIV", "CMLV", "CMLVI",
-  "CMLVII", "CMLVIII", "CMLIX", "CMLX", "CMLXI", "CMLXII", "CMLXIII", "CMLXIV", "CMLXV", "CMLXVI",
-  "CMLXVII", "CMLXVIII", "CMLXIX", "CMLXX", "CMLXXI", "CMLXXII", "CMLXXIII", "CMLXXIV", "CMLXXV",
-  "CMLXXVI", "CMLXXVII", "CMLXXVIII", "CMLXXIX", "CMLXXX", "CMLXXXI", "CMLXXXII", "CMLXXXIII", "CMLXXXIV",
-  "CMLXXXV", "CMLXXXVI", "CMLXXXVII", "CMLXXXVIII", "CMLXXXIX", "CMXC", "CMXCI", "CMXCII", "CMXCIII",
-  "CMXCIV", "CMXCV", "CMXCVI", "CMXCVII", "CMXCVIII", "CMXCIX", "M"};
-``` -->
-
-
-
+Revenez aux [objectifs](#tp5-objectifs) et cochez les points que vous avez maîtrisés. Revenez sur les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.

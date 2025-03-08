@@ -10,7 +10,7 @@ Si vous avez l'erreur **Error while fetching extensions. XHR failed** quand vous
 4. Dans la barre **Search Settings**, taper **Proxy**.
 5. Dans **Http: Proxy** *(Applies to all profile)*, taper dans la barre `http://<serveur proxy>:<port>`. À l'IUT d'Orsay, le serveur est proxy.iut-orsay.fr et le port est 3128.
 
-(vscodium-debugger)=
+<!-- (vscodium-debugger)=
 ## C/C++ Runner Debugger setup
 Il faut changer le fichier de configuration `launch_template.json`. Cette manipulation du code source est pour changer la configuration par défaut du debugger de C/C++ Runner.
 
@@ -42,4 +42,4 @@ Si `.vscode-oss` ne se trouve pas dans `~/`, vous pouvez essayer de suivre les �
     }
   ]
 }
-```
+``` -->

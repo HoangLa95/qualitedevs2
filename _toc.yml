@@ -32,7 +32,7 @@ parts:
     - file: TPs/tp2
     - file: TPs/tp3
     - file: TPs/tp4
-    # - file: TPs/tp5
+    - file: TPs/tp5
     # - file: TPs/tp6
     # - file: TPs/tp7
 - caption: Practical Sessions
@@ -47,4 +47,4 @@ parts:
 - caption: Soutien technique
   chapters:
     - file: TechSupport/internetProblem.md
-    # - file: TechSupport/vscodium.md
+    - file: TechSupport/vscodium.md
