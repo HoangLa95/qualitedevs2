@@ -157,7 +157,11 @@ Nous pouvons également effectuer un revert de plusieurs commits. Chaque reverte
 Vous pouvez omettre l'option `--no-edit` pour ajouter un message pour chaque reverted commit. Vous auriez aussi pu utiliser `git revert -n HEAD~3..HEAD`, ce qui ne crée pas automatiquement plusieurs commits, puis exécuter `git commit -m "<message>"` pour créer un seul commit (au lieu de trois) avec le message que vous souhaitez.
 
 :::{danger} Revert un ancien commit
-Il est risqué de revert un commit `A` particulier dans l'historique (si ce n'est pas le dernier commit), car cela pourrait entraîner des conflits avec tous les commits qui suivent `A` et qui modifient des fichiers modifiés par `A`. Il est donc conseillé de ne faire que des reverts avec `HEAD` ou `HEAD~<nombre>..HEAD`. Si vous devez revert un commit plus ancien, vous devrez résoudre les conflits manuellement, ajouter les modifications, puis utiliser `git revert --continue`. Si vous êtes perdu, vous pouvez également utiliser `git revert --abort` pour annuler l'opération.
+Il est risqué de revert un commit `A` particulier dans l'historique (si ce n'est pas le dernier commit), car cela pourrait entraîner des conflits avec tous les commits qui suivent `A` et qui modifient des fichiers modifiés par `A`. 
+
+Il est donc conseillé de ne faire que des reverts avec `HEAD` ou `HEAD~<nombre>..HEAD`. 
+
+Si vous devez revert un commit plus ancien, vous devrez résoudre les conflits manuellement, ajouter les modifications, puis utiliser `git revert --continue`. Si vous êtes perdu, vous pouvez également utiliser `git revert --abort` pour annuler l'opération.
 :::
 
 #### reset
