@@ -3,10 +3,10 @@
 (ps5-objectives)=  
 The goal of this session is to understand the following points:  
 - [ ] [Error handling](#exercise-1--error-handling)  
-- [ ] [`git graph`](#alias)  
-- [ ] [`git checkout`](#checkout)  
-- [ ] [`git revert`](#revert)  
-- [ ] [`git reset`](#reset)  
+- [ ] [`git graph`](ps5#alias)  
+- [ ] [`git checkout`](ps5#checkout)  
+- [ ] [`git revert`](ps5#revert)  
+- [ ] [`git reset`](ps5#reset)  
 - [ ] [Git integration in VSCodium](#git-with-ide)  
 
 ## Exercise 1: Error handling
