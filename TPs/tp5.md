@@ -256,7 +256,7 @@ Vous pouvez aussi utiliser la **Command Palette** (`F1`), tapez `pull` et sélec
 
 1. Dans les boutons à droite de Git Graph, vous trouverez un bouton **Repository Settings** où vous pourrez configurer les paramètres de votre dépôt.
 
-### fetch/remote update
+#### fetch/remote update
 
 `git fetch` fait (presque) la même chose que `git remote update`, mais permet d'être plus précis avec `git fetch <branche>` si vous souhaitez récupérer les informations d'une branche spécifique.
 

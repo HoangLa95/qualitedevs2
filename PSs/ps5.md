@@ -256,7 +256,7 @@ You can also use the **Command Palette** (`F1`), type `pull`, and select **Git: 
 
 1. In the buttons to the right of **Git Graph**, you will find **Repository Settings**, where you can configure repository settings.  
 
-### fetch/remote update  
+#### fetch/remote update  
 
 `git fetch` is almost the same as `git remote update`, but allows you to be more specific by using `git fetch <branch>` to retrieve information about a specific branch.  
 
