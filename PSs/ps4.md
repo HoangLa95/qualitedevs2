@@ -205,6 +205,12 @@ Then, the `make -d` command displays all the steps of the `make` process in the 
 make -d | grep -E 'Considering|Entering|Leaving|Finished|Prerequisite|No need|up to date'
 ```
 `grep -E '<regular expression>'` allows you to retrieve only the lines that match the given regular expression. In this case, we are looking for all lines containing the specified keywords.
+
+The above command only works if your terminal messages are in English.
+If they are in French, you can change the terminal language temporarily by running:
+```{code} sh
+export LANG=en_US.UTF-8
+```
 :::
 
 3. Make the following modifications to the makefile:

@@ -205,6 +205,12 @@ Ensuite, la commande `make -d` permet d'afficher toutes les étapes du processus
 make -d | grep -E 'Considering|Entering|Leaving|Finished|Prerequisite|No need|up to date'
 ```
 `grep -E '<expression régulière>'` permet de récupérer uniquement les lignes qui correspondent à l'expression régulière donnée. Dans ce cas, nous cherchons toutes les lignes contenant les mots-clés spécifiés.
+
+La commande au-dessus ne fonctionne que si les messages du terminal sont en Anglais.
+S'ils sont en Français, vous pouvez changer la langue dans le terminal temporairement en exécutant:
+```{code} sh
+export LANG=en_US.UTF-8
+```
 :::
 
 3. Apportez les modifications suivantes au makefile :
