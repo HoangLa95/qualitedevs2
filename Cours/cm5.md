@@ -21,8 +21,8 @@ C'est un DAG (Directed Acyclic Graph) où :
 
 Branchement :
 - Les branches en Git correspond à des "branches" de ce graphe.
-- Des conflits à cause de branches divergentes arrive quand un même dépôt se trouve dans deux états différents (`A` pointe à la fois vers `B` et `C`).
-- Des `merge` fusionnent deux branches en une seule (`D` et `E` pointe tous les deux vers `F`).
+- Des conflits à cause de branches divergentes arrivent quand un même dépôt se trouve dans deux états différents (`A` pointe à la fois vers `B` et `C`).
+- Des `merge` fusionnent deux branches en une seule (`D` et `E` pointent tous les deux vers `F`).
 
 Nous allons apprendre à naviguer ce graphe en TP !
 :::

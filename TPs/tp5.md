@@ -64,7 +64,7 @@ Les fichiers `level1`, `level2` et `level3` doivent simplement exister pour cett
 
 3. Compilez et exécutez le code pour observer son comportement en fonction de l'entrée utilisateur.
 
-4. Dans `getLevelFromUser`, implémentez un validateur d'entrée qui autorise seulement 3 tentatives, avec un entier compris entre `firstLevel` et `lastLevel` (par exemple, de 1 à 5). Après 3 tentatives échouées, la fonction doit lancer une erreur.
+4. Dans `getLevelFromUser`, implémentez un validateur d'entrée qui autorise seulement 3 tentatives, avec un entier compris entre `firstLevel` et `lastLevel` (par exemple, de 1 à 5). Après 3 tentatives échouées, la fonction doit lancer une exception.
 
 Nous ne gèrerons pas cette erreur tout de suite car nous souhaitons, dans ce cas, revenir au menu principal du jeu, ce qui ne doit pas être accessible depuis `getLevelFromUser`. La gestion des erreurs sans interrompre le programme est toujours préférable à l'arrêt du programme avec un code d'erreur.
 
@@ -72,7 +72,7 @@ Nous ne gèrerons pas cette erreur tout de suite car nous souhaitons, dans ce ca
 
 6. Dans `getLevelData`, nous allons vérifier si le fichier correspondant au niveau existe. S'il n'existe pas (`if(!file) {...}`), nous retournons le message `"Resources not found for level <numéro du niveau>."` et arrêtons le programme avec le code `EXIT_FAILURE`. 
 
-Il s'agit d'une gestion d'erreur locale, évitant de lancer l'erreur pour la gérer ailleurs, ce qui simplifie la logique du code.
+Il s'agit d'une gestion d'erreur locale, évitant de lancer l'exception pour la gérer ailleurs, ce qui simplifie la logique du code.
 
 ## Exercice 2 : Intégration Git
 

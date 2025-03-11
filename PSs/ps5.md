@@ -64,7 +64,7 @@ For this simulation, the files `level1`, `level2`, and `level3` must simply exis
 
 3. Compile and execute the code to observe its behavior based on user input.  
 
-4. In `getLevelFromUser`, implement an input validator that allows only 3 attempts, with an integer between `firstLevel` and `lastLevel` (e.g., from 1 to 5). After 3 failed attempts, the function should throw an error.  
+4. In `getLevelFromUser`, implement an input validator that allows only 3 attempts, with an integer between `firstLevel` and `lastLevel` (e.g., from 1 to 5). After 3 failed attempts, the function should throw an exception.  
 
 We will not handle this error immediately because we want to return to the gameâ€™s main menu, which should not be accessible from `getLevelFromUser`. Error handling without terminating the program is always preferable to stopping execution with an error code.  
 
@@ -72,7 +72,7 @@ We will not handle this error immediately because we want to return to the gameâ
 
 6. In `getLevelData`, check if the corresponding level file exists. If it does not (`if(!file) {...}`), return the message `"Resources not found for level <level number>."` and terminate the program with `EXIT_FAILURE`.  
 
-This is an example of local error handling, which avoids throwing an error that needs to be handled elsewhere, simplifying the code logic.  
+This is an example of local error handling, which avoids throwing an exception that needs to be handled elsewhere, simplifying the code logic.  
 
 ## Exercise 2: Git integration
 
