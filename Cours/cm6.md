@@ -9,6 +9,10 @@ Il faut me rajouter (Hoang La, *hla* sur GitLab) en tant que Maintainer pour que
 Vous seriez convoqués s'il y a des suspicions de plagiat.
 :::
 
+:::{warning} Révision
+Révisez pour le quiz final, vous n'auriez pas accès aux anciens Quiz pendant la dernière séance.
+:::
+
 ## Tests unitaires
 
 Vous apprendrez à utiliser des frameworks de test (comme JUnit en Java) en S4.  
