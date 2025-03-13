@@ -25,7 +25,7 @@ parts:
     - file: Cours/cm3
     - file: Cours/cm4
     - file: Cours/cm5
-    # - file: Cours/cm6
+    - file: Cours/cm6
 - caption: Travaux Pratiques
   chapters: 
     - file: TPs/tp1
