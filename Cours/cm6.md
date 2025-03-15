@@ -96,6 +96,7 @@ void CalculatorTest::runTests() {
     factorial_NegativeInput_ReturnsInvalidArgument();
     divide_NonZeroDenominator_ReturnsDivision();
     divide_ZeroDenominator_ReturnsInvalidArgument();
+    std::cout << "All tests passed\n";
 }
 
 void CalculatorTest::factorial_ZeroInput_ReturnsOne() {
