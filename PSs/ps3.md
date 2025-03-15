@@ -72,8 +72,8 @@ When the project becomes more complex than a simple coding exercise, code separa
 
 3. Copy the following code into the corresponding files.
 
-`product.h` :
 ```{code} cpp
+:filename: product.h
 #ifndef PRODUCT_H
 #define PRODUCT_H
 
@@ -168,8 +168,8 @@ Another directive is sometimes used instead of include guards, but it also has i
 Standard best practices in C++ recommend using include guards.  
 :::
 
-`product.cpp` :
 ```{code} cpp
+:filename: product.cpp
 #include "product.h"
 #include <string>
 
@@ -213,8 +213,8 @@ This means that `Product` objects cannot be compared with `<` in the traditional
 This will allow sorting the products based on their price later.
 :::
 
-`display-prices.h` :
 ```{code} cpp
+:filename: display-prices.h
 #ifndef DISPLAY_PRICE_H
 #define DISPLAY_PRICE_H
 
@@ -225,8 +225,8 @@ void displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice();
 #endif
 ```
 
-`display-prices.cpp` :
 ```{code} cpp
+:filename: display-prices.cpp
 #include "product.h"
 #include "display-prices.h"
 #include <iostream>
@@ -278,8 +278,8 @@ void displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice(){
 It is possible to write a `for` loop with the following syntax: `for (ElementType element : vectorOfElements)`.
 :::
 
-`main.cpp` :
 ```{code} cpp
+:filename: main.cpp
 #include "display-prices.h"
 
 int main() {
@@ -384,9 +384,10 @@ We will ignore the fact that product information is hardcoded. Let's imagine tha
 
 1. Create a directory `classify-it/` (within which the code will be organized into several different files).
 
-2. In `classify-it/`, create a file `main.cpp` and copy the following code into it:
+2. In `classify-it/`, create the following file.
 
 ```{code} cpp
+:filename: main.cpp
 #include <iostream>
 #include <string>
 #include <vector>
