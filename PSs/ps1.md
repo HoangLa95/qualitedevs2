@@ -31,16 +31,16 @@ As a student at the IUT of Orsay, you already have an account on the [IUT GitLab
 ```{figure} ../images/git-iut-orsay.jpg
 :alt: git.iut-orsay.fr
 :align: center
-:link: https://git.iut-orsay.fr/
+```
 
 To log in, use your department username and password.
-```
 
 ## Personal Access Token
 
 To establish a secure connection between your machine and the GitLab server at the IUT, we will use a **Personal Access Token** (PAT), which replaces the old password system.
 
 :::{note} Personal Access Token vs. Password  
+:link: https://git.iut-orsay.fr/
 In practice, the PAT functions as a "specific password" for your projects.  
 It helps limit the risks to your account in case of compromise: the exposure of a PAT is less critical than the exposure of your main password.  
 The advantages of the PAT will be explained in more detail later.  
