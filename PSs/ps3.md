@@ -51,29 +51,13 @@ The goal of this session is to understand the following points:
 
 ### Code organization
 
-:::{warning} Theory ahead!
-This section requires simple manipulations but also a good understanding of the compilation theory in C++ (applicable to some languages in the C family, but not to others like C#, Java, Python, or Javascript) to grasp the importance of this organization.
-
-If you simply wish to learn general best practices, then you can go through the C++ theory more quickly and focus on the key points (summarized at the end of the sub-section).  
-:::
-
 1. Create a `short-functions/` directory inside `PS3/`.
 
-2. Create the following files inside `short-functions/`:
-- `display-prices.cpp`
-- `display-prices.h`
-- `main.cpp`
-- `product.cpp`
-- `product.h`
+2. Create the following files inside `short-functions/`.
 
-:::{important} Why not group all the code into a single file?
-When the project becomes more complex than a simple coding exercise, code separation brings the same benefits as the cleanliness and development principles discussed in class: modularity, reusability, maintainability, extensibility, encapsulation, readability, error handling, ...
-:::
-
-3. Copy the following code into the corresponding files.
-
+::::{tab-set}
+:::{tab-item} product.h
 ```{code} cpp
-:filename: product.h
 #ifndef PRODUCT_H
 #define PRODUCT_H
 
@@ -95,81 +79,9 @@ public:
 
 #endif
 ```
-
-:::{important} Where is `using namespace std`?
-:class: dropdown
-`using namespace std` avoids the need to write `std::` before all types, functions, or objects from the C++ standard library.  
-However, when the project becomes more complex, conflicts may arise if a function (or type/object) shares the same name as a function from the standard library.  
-We will therefore avoid using `using namespace std` from now on.  
 :::
-
-:::{important} Header files `.h` in C++
-:class: dropdown
-In C++, header files (`.h`) contain the declarations of functions, classes, and variables, but not their definitions.  
-This separation between declaration and definition allows C++ to manage dependencies and modularize the code.  
-For example, if a source file `.cpp` needs the `Product` object, it is enough to include (`#include`) `"product.h"` without worrying about the implementation, because `product.h` "promises" that the declared attributes, constructor, and methods will be implemented.  
-:::
-
-:::{important} Preprocessor directives in C++
-:class: dropdown
-This part is called directives:
+:::{tab-item} product.cpp
 ```{code} cpp
-#ifndef PRODUCT_H
-#define PRODUCT_H
-
-#include <string>
-
-//...
-
-#endif
-```
-:::
-:::{note} Compilation in C++
-:class: dropdown
-To properly organize C++ code and understand its importance, it is essential to grasp how compilation works in C++.  
-In reality, the term "compilation" encompasses 4 steps for each source file `.cpp`:  
-1. **Preprocessing**: **Directives** are executed. For example, `#include` is replaced with the contents of the included file.  
-2. **Translation Unit**: The preprocessed file becomes a large text file called a translation unit.  
-3. **Compilation**: The translation unit is compiled into machine code in an object file (`.o`).  
-4. **Linking**: The object files are linked based on their dependencies (headers and corresponding source files) to form the executable.  
-:::
-
-:::{important} Why separate headers and source code in C++?
-:class: dropdown
-- Imagine a source code that contains both the declarations and the definition (which we are used to) of a class that we need to reuse in several files to build our executable.  
-- The best practice is to compile all `.cpp` files, rather than trying to follow the dependencies between files and risk getting lost to avoid compiling everything.  
-- This code will thus be compiled at least twice: first as a `.cpp` file and another time when included in another `.cpp` file.  
-- C++ follows the **one definition rule**, which states that for a given executable, if the scopes of two variables or functions overlap, they must be different.  
-- During linking, C++ detects an error because the executable contains duplicate definitions from different translation units.  
-- A header is not compiled like a source file because it only contains declarations, not the definitions themselves. When the header is included in source files `.cpp` via `#include`, identical declarations may appear multiple times, but **C++ allows multiple declarations of the same element with different scopes or from different translation units** (as long as there is only one definition).  
-- Therefore, **never include a `.cpp`, only `.h`** files.
-:::
-
-
-:::{important} Include guards
-:class: dropdown
-These directives together form an **include guard** :
-```{code} cpp
-#ifndef PRODUCT_H
-#define PRODUCT_H
-
-//...
-
-#endif
-```
-- `#define` creates a **macro** that replaces the defined text (`PRODUCT_H`) with the following code. The naming convention for macros is the same as for global constants and includes `_H` to indicate that it is a macro related to the include guard of a header (though other types of macros may exist).  
-- `#ifndef` (short for "if not defined"), `#define`, and `#endif` mean: "If the macro PRODUCT_H is not defined, define the macro PRODUCT_H as follows: `<code>`, end of the condition".  
-
-The include guard ensures that a header is included only once in each source code and therefore in each translation unit.  
-
-The downside of include guards is the need for a consistent naming scheme for an executable (whose compilation can come from thousands of different files spread across different directories): there cannot be two headers with the same macro (even if the files are in very distant directories from each other).  
-
-Another directive is sometimes used instead of include guards, but it also has its own drawbacks.  
-Standard best practices in C++ recommend using include guards.  
-:::
-
-```{code} cpp
-:filename: product.cpp
 #include "product.h"
 #include <string>
 
@@ -192,29 +104,9 @@ bool Product::operator<(const Product& other) const {
     return mPrice < other.mPrice;
 }   
 ```
-
-:::{important} Why include `<string>` a "second" time?
-:class: dropdown
-If `product.h` includes `<string>` and `product.cpp` includes `product.h`, why do we need to include `<string>` a second time?  
-**Include what you see** is a good practice in C++.
-
-First, headers do not always contain all the libraries needed for source files, as some libraries may not be necessary for a declaration but will be essential for the definition.  
-Additionally, checking that all necessary libraries are already included in the headers is a waste of time when there are many headers. On the other hand, an extra include is not an issue if include guards are used (which is the case for all C++ libraries).
 :::
-
-:::{important} `Product::`
-:class: dropdown
-It is necessary to write `Product::` in front of all methods of `Product` to indicate to C++ that these elements are internal to `Product`. It is possible to define functions external to `Product` in the same file, but this is not a good practice.
-:::
-
-:::{important} `operator<`
-The method `operator<` is an **override** of the default comparison `<`.  
-This means that `Product` objects cannot be compared with `<` in the traditional way. We redefine this comparison by saying that one `Product` object is smaller than another (`other`) if its price is smaller (`mPrice < other.mPrice`). 
-This will allow sorting the products based on their price later.
-:::
-
+:::{tab-item} display-prices.h
 ```{code} cpp
-:filename: display-prices.h
 #ifndef DISPLAY_PRICE_H
 #define DISPLAY_PRICE_H
 
@@ -224,9 +116,9 @@ void displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice();
 
 #endif
 ```
-
+:::
+:::{tab-item} display-prices.cpp
 ```{code} cpp
-:filename: display-prices.cpp
 #include "product.h"
 #include "display-prices.h"
 #include <iostream>
@@ -272,14 +164,9 @@ void displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice(){
     std::cout << "Total Price of Available Products: " << totalPrice << std::endl;
 }
 ```
-
-:::{note} `for (const Product& product : products)`
-:class: dropdown
-It is possible to write a `for` loop with the following syntax: `for (ElementType element : vectorOfElements)`.
 :::
-
+:::{tab-item} main.cpp
 ```{code} cpp
-:filename: main.cpp
 #include "display-prices.h"
 
 int main() {
@@ -287,6 +174,119 @@ int main() {
     return 0;
 }
 ```
+:::
+::::
+
+:::{important} Why not group all the code into a single file?
+:class: dropdown
+When the project becomes more complex than a simple coding exercise, code separation brings the same benefits as the cleanliness and development principles discussed in class: modularity, reusability, maintainability, extensibility, encapsulation, readability, error handling, ...
+:::
+
+:::{important} Where is `using namespace std`?
+:class: dropdown
+`using namespace std` avoids the need to write `std::` before all types, functions, or objects from the C++ standard library.  
+However, when the project becomes more complex, conflicts may arise if a function (or type/object) shares the same name as a function from the standard library.  
+We will therefore avoid using `using namespace std` from now on.  
+:::
+
+:::{important} Header files `.h` in C++
+:class: dropdown
+In C++, header files (`.h`) contain the declarations of functions, classes, and variables, but not their definitions.  
+This separation between declaration and definition allows C++ to manage dependencies and modularize the code.  
+For example, if a source file `.cpp` needs the `Product` object, it is enough to include (`#include`) `"product.h"` without worrying about the implementation, because `product.h` "promises" that the declared attributes, constructor, and methods will be implemented.  
+:::
+
+:::{important} Preprocessor directives in C++
+:class: dropdown
+This part is called directives:
+```{code} cpp
+#ifndef PRODUCT_H
+#define PRODUCT_H
+
+#include <string>
+
+//...
+
+#endif
+```
+:::
+
+:::{note} Compilation in C++
+:class: dropdown
+To properly organize C++ code and understand its importance, it is essential to grasp how compilation works in C++.  
+In reality, the term "compilation" encompasses 4 steps for each source file `.cpp`.  
+
+Preprocessing
+: **Directives** are executed. For example, `#include` is replaced with the contents of the included file.  
+
+Translation Unit
+: The preprocessed file becomes a large text file called a translation unit.  
+
+Compilation
+: The translation unit is compiled into machine code in an object file (`.o`).  
+
+Linking
+: The object files are linked based on their dependencies (headers and corresponding source files) to form the executable.  
+:::
+
+:::{important} Why separate headers and source code in C++?
+:class: dropdown
+- Imagine a source code that contains both the declarations and the definition (which we are used to) of a class that we need to reuse in several files to build our executable.  
+- The best practice is to compile all `.cpp` files, rather than trying to follow the dependencies between files and risk getting lost to avoid compiling everything.  
+- This code will thus be compiled at least twice: first as a `.cpp` file and another time when included in another `.cpp` file.  
+- C++ follows the **one definition rule**, which states that for a given executable, if the scopes of two variables or functions overlap, they must be different.  
+- During linking, C++ detects an error because the executable contains duplicate definitions from different translation units.  
+- A header is not compiled like a source file because it only contains declarations, not the definitions themselves. When the header is included in source files `.cpp` via `#include`, identical declarations may appear multiple times, but **C++ allows multiple declarations of the same element with different scopes or from different translation units** (as long as there is only one definition).  
+- Therefore, **never include a `.cpp`, only `.h`** files.
+:::
+
+:::{important} Include guards
+:class: dropdown
+These directives together form an **include guard** :
+```{code} cpp
+#ifndef PRODUCT_H
+#define PRODUCT_H
+
+//...
+
+#endif
+```
+- `#define` creates a **macro** that replaces the defined text (`PRODUCT_H`) with the following code. The naming convention for macros is the same as for global constants and includes `_H` to indicate that it is a macro related to the include guard of a header (though other types of macros may exist).  
+- `#ifndef` (short for "if not defined"), `#define`, and `#endif` mean: "If the macro PRODUCT_H is not defined, define the macro PRODUCT_H as follows: `<code>`, end of the condition".  
+
+The include guard ensures that a header is included only once in each source code and therefore in each translation unit.  
+
+The downside of include guards is the need for a consistent naming scheme for an executable (whose compilation can come from thousands of different files spread across different directories): there cannot be two headers with the same macro (even if the files are in very distant directories from each other).  
+
+Another directive is sometimes used instead of include guards, but it also has its own drawbacks.  
+Standard best practices in C++ recommend using include guards.  
+:::
+
+:::{important} Why include `<string>` a "second" time?
+:class: dropdown
+If `product.h` includes `<string>` and `product.cpp` includes `product.h`, why do we need to include `<string>` a second time?  
+**Include what you see** is a good practice in C++.
+
+First, headers do not always contain all the libraries needed for source files, as some libraries may not be necessary for a declaration but will be essential for the definition.  
+Additionally, checking that all necessary libraries are already included in the headers is a waste of time when there are many headers. On the other hand, an extra include is not an issue if include guards are used (which is the case for all C++ libraries).
+:::
+
+:::{important} `Product::`
+:class: dropdown
+It is necessary to write `Product::` in front of all methods of `Product` to indicate to C++ that these elements are internal to `Product`. It is possible to define functions external to `Product` in the same file, but this is not a good practice.
+:::
+
+:::{important} `operator<`
+:class: dropdown
+The method `operator<` is an **override** of the default comparison `<`.  
+This means that `Product` objects cannot be compared with `<` in the traditional way. We redefine this comparison by saying that one `Product` object is smaller than another (`other`) if its price is smaller (`mPrice < other.mPrice`). 
+This will allow sorting the products based on their price later.
+:::
+
+:::{note} `for (const Product& product : products)`
+:class: dropdown
+It is possible to write a `for` loop with the following syntax: `for (ElementType element : vectorOfElements)`.
+:::
 
 :::{important} Code organization
 :class: dropdown
@@ -294,7 +294,7 @@ It is good practice to break down the code into classes, related external functi
 Finer breakdowns of external functions can be made if part of these functions needs to be reused elsewhere (modularity and reusability).
 :::
 
-4. Compile the code with `g++ -o short-functions main.cpp display-prices.cpp product.cpp` (the order of `.cpp` files does not matter).
+3. Compile the code with `g++ -o short-functions main.cpp display-prices.cpp product.cpp` (the order of `.cpp` files does not matter).
 
 :::{note} C++ version
 :class: dropdown
@@ -318,7 +318,7 @@ g++ -std=c++14 -o short-functions main.cpp display-prices.cpp product.cpp
 ```
 :::
 
-5. Run `./short-functions`.
+4. Run `./short-functions`.
 
 (ps3-code-organization)=
 :::{important} Summary of good code organization practices in C++
@@ -353,6 +353,7 @@ g++ -std=c++14 -o short-functions main.cpp display-prices.cpp product.cpp
 1. What does this code do?
 
 :::{note} `sort`
+:class: dropdown
 The `sort` function sorts a `vector` in place (no copy of the `vector` is created). It takes as arguments the start and end indices of the `vector` and uses the default `<` comparison (which has been redefined for `Product`). Therefore, it sorts the values in a non-decreasing order (*increasing* meaning strictly ascending).
 :::
 
