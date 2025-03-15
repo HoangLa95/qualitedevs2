@@ -220,12 +220,16 @@ Cette partie est appelé les directives :
 :class: dropdown
 Pour bien organiser un code C++ et en comprendre l'intérêt, il est essentiel de saisir le fonctionnement de la compilation en C++.  
 En réalité, le terme "compilation" regroupe 4 étapes pour chaque fichier source `.cpp`.  
+
 Preprocessing
 : Les **directives** sont exécutées. Par exemple, `#include` est remplacé par le contenu du fichier inclus.  
+
 Translation Unit
 : Le fichier prétraité devient un grand fichier texte appelé *translation unit*.  
+
 Compilation
 : Le *translation unit* est compilé en code machine dans un fichier objet (`.o`).  
+
 Linking
 : Les fichiers objets sont liés en fonction de leurs dépendances (headers et fichiers sources correspondants) pour former l'exécutable.  
 :::
