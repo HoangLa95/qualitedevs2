@@ -21,6 +21,7 @@ Nous allons nous concentrer sur l'écriture et le fonctionnement des gestionnair
 2. Dans le fichier `play.cpp`, copiez le code suivant.
 
 ```{code} cpp
+:filename: play.cpp
 #include <iostream>
 #include <string>
 #include <fstream>
