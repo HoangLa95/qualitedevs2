@@ -38,6 +38,7 @@ The goal of this session is to understand the following points:
 ## Exercise 1 : Magic numbers
 
 ```{code} cpp
+:filename: magic-numbers.cpp
 #include <iostream>
 #include <string>
 
@@ -219,6 +220,7 @@ Have you remembered to maintain your repositories?
 ## Exercise 2 : Classes and methods
 
 ```{code} cpp
+:filename: classes-and-methods.cpp
 #include <iostream>
 using namespace std;
 
@@ -294,6 +296,7 @@ w2(50.0);
 
 (tp2-ex2-class-example)=
 ```{code} cpp
+:filename: classes-and-methods.cpp
 #include <iostream>
 using namespace std;
 
