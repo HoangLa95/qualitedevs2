@@ -32,18 +32,18 @@ Nous adopterons la convention **camelCase**, selon laquelle le premier mot d’u
 Il existe de nombreuses autres conventions de nommage, mais l’une des plus courantes après **camelCase** est **snake_case**, qui sépare les mots en minuscules à l’aide de underscores (`_`).
 :::
 
-:::{important} Variables globales et classes
-1. `VARIABLE_GLOBALE` :
-Les variables globales doivent utiliser la convention **UPPER_SNAKE_CASE** (aussi appelé **SCREAMING_SNAKE_CASE**). Les noms de variables globales doivent être écrites en majuscules, avec les mots séparés par des underscores (`_`). 
-De manière générale, il est recommandé d'éviter l'utilisation de véritables variables globales, c'est-à-dire de variables mutables. 
+:::{important} Constantes globales et classes
+1. `CONSTANTE_GLOBALE` :
+Les constantes globales doivent utiliser la convention **UPPER_SNAKE_CASE** (aussi appelé **SCREAMING_SNAKE_CASE**). Les noms de variables globales doivent être écrites en majuscules, avec les mots séparés par des underscores (`_`). 
+De manière générale, il est recommandé d'éviter l'utilisation de variables globales. 
 Toute variable susceptible de changer de valeur devrait avoir une portée (*scope*) limitée (locale) et utiliser la convention camelCase. 
-Les "variables globales" sont donc des constantes définies avec `const <type> VARIABLE_GLOBALE`.
-L'autre usage de la convention UPPER_SNAKE_CASE est pour les variables statiques et constantes à l'intérieur d'une classe.
+Les constantes globales sont définies avec `const <type> VARIABLE_GLOBALE`.
+L'autre usage de la convention UPPER_SNAKE_CASE est pour les constantes statiques à l'intérieur d'une classe.
 Par exemple :
 ```{code} cpp
 class MyClass {
 private:
-    static const int STATIC_CONST_VARIABLE = 100;
+    static const int STATIC_CONST = 100;
 }
 ```
 
