@@ -30,26 +30,9 @@ minimal-project/
     makefile
 ```
 
-:::{important} Build systems
-Au lieu de compiler et d'exécuter chaque projet manuellement, les projets devenant de plus en plus complexes nécessitent un **build system** reposant sur des **build scripts**.  
-
-Un **build script** est un fichier qui automatise le processus de compilation et de gestion des dépendances d'un projet. Il définit les étapes nécessaires à la construction du projet, comme la compilation du code source, l'assemblage des fichiers, la génération de la documentation ou encore l'exécution des tests. Son objectif est de simplifier, standardiser et accélérer le processus de construction du projet.  
-
-Les **build systems** standards en C++ sont **CMake** et **Makefile**. D'autres langages utilisent leurs propres outils, comme **MSBuild** pour C# ou **Gradle** et **Maven** pour Java. Certains IDE intègrent également leur propre build system. Par exemple, un projet Java sous Eclipse utilise le système de build natif d'Eclipse.  
-
-Dans ce TP, nous allons explorer le fonctionnement d'un build system à travers un build script en **Makefile**, un build system bas niveau pour C/C++ conçu pour les systèmes Unix (Linux et macOS). **CMake** est plus haut niveau et **cross-platform** (compatible avec d'autres systèmes comme Windows), mais nous nous concentrerons sur **Makefile**, qui offre un meilleur contrôle à bas niveau. 
-:::
-
-:::{warning} Linux sous Windows
-:class: dropdown
-Si vous utilisez Windows à l'IUT, vous pouvez tenter d'utiliser **Git Bash** et espérer que les bonnes installations sont là. Si cela ne fonctionne pas, utilisez Linux (distribution Debian à l'IUT)...
-Si vous utilisez votre propre machine, vous pouvez installer [**Windows Subsystem for Linux (WSL)**](https://learn.microsoft.com/fr-fr/windows/wsl/install) pour bénéficier d'une machine virtuelle Linux avec, par défaut, la distribution Ubuntu. Toutefois, effectuez ces installations chez vous afin de ne pas perdre de temps en TP.
-:::
-
-1. Créez le répertoire et les fichiers ci-dessus dans `TP4/` avec les codes correspondant.
-
+::::{tab-set}
+:::{tab-item} hello.h
 ```{code} cpp
-:filename: hello.h
 #ifndef HELLO_H
 #define HELLO_H
 
@@ -57,9 +40,9 @@ void sayHello();
 
 #endif
 ```
-
+:::
+:::{tab-item} hello.cpp
 ```{code} cpp
-:filename: hello.cpp
 #include <iostream>
 #include "hello.h"
 
@@ -67,9 +50,9 @@ void sayHello() {
     std::cout << "Hello World!" << std::endl;
 }
 ```
-
+:::
+:::{tab-item} main.cpp
 ```{code} cpp
-:filename: main.cpp
 #include "hello.h"
 
 int main() {
@@ -77,9 +60,9 @@ int main() {
     return 0;
 }
 ```
-
+:::
+:::{tab-item} makefile
 ```{code} makefile
-:filename: makefile
 all: executable
 
 executable: main.o hello.o
@@ -99,6 +82,26 @@ clean:
 
 .PHONY: all run clean
 ```
+:::
+::::
+
+:::{important} Build systems
+Au lieu de compiler et d'exécuter chaque projet manuellement, les projets devenant de plus en plus complexes nécessitent un **build system** reposant sur des **build scripts**.  
+
+Un **build script** est un fichier qui automatise le processus de compilation et de gestion des dépendances d'un projet. Il définit les étapes nécessaires à la construction du projet, comme la compilation du code source, l'assemblage des fichiers, la génération de la documentation ou encore l'exécution des tests. Son objectif est de simplifier, standardiser et accélérer le processus de construction du projet.  
+
+Les **build systems** standards en C++ sont **CMake** et **Makefile**. D'autres langages utilisent leurs propres outils, comme **MSBuild** pour C# ou **Gradle** et **Maven** pour Java. Certains IDE intègrent également leur propre build system. Par exemple, un projet Java sous Eclipse utilise le système de build natif d'Eclipse.  
+
+Dans ce TP, nous allons explorer le fonctionnement d'un build system à travers un build script en **Makefile**, un build system bas niveau pour C/C++ conçu pour les systèmes Unix (Linux et macOS). **CMake** est plus haut niveau et **cross-platform** (compatible avec d'autres systèmes comme Windows), mais nous nous concentrerons sur **Makefile**, qui offre un meilleur contrôle à bas niveau. 
+:::
+
+:::{warning} Linux sous Windows
+:class: dropdown
+Si vous utilisez Windows à l'IUT, vous pouvez tenter d'utiliser **Git Bash** et espérer que les bonnes installations sont là. Si cela ne fonctionne pas, utilisez Linux (distribution Debian à l'IUT)...
+Si vous utilisez votre propre machine, vous pouvez installer [**Windows Subsystem for Linux (WSL)**](https://learn.microsoft.com/fr-fr/windows/wsl/install) pour bénéficier d'une machine virtuelle Linux avec, par défaut, la distribution Ubuntu. Toutefois, effectuez ces installations chez vous afin de ne pas perdre de temps en TP.
+:::
+
+1. Créez le répertoire et les fichiers ci-dessus dans `TP4/` avec les codes correspondant.
 
 (tp4-make-commands)=
 :::{important} Makefile

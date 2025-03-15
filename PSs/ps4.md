@@ -30,26 +30,9 @@ minimal-project/
     makefile
 ```
 
-:::{important} Build systems
-Instead of manually compiling and executing each project, as projects become more complex, they require a **build system** based on **build scripts**.
-
-A **build script** is a file that automates the compilation process and dependency management of a project. It defines the necessary steps to build the project, such as compiling source code, assembling files, generating documentation, or running tests. Its purpose is to simplify, standardize, and accelerate the project build process.
-
-The standard **build systems** in C++ are **CMake** and **Makefile**. Other languages use their own tools, such as **MSBuild** for C# or **Gradle** and **Maven** for Java. Some IDEs also integrate their own build systems. For example, a Java project in Eclipse uses Eclipse's native build system.
-
-In this session, we will explore the operation of a build system through a **Makefile** build script, a low-level build system for C/C++ designed for Unix systems (Linux and macOS). **CMake** is more high-level and **cross-platform** (compatible with other systems like Windows), but we will focus on **Makefile**, which provides better low-level control.
-:::
-
-:::{warning} Linux on Windows
-:class: dropdown
-If you are using Windows at the IUT, you can try using **Git Bash** and hope that the necessary installations are available. If that does not work, use Linux (Debian distribution at the IUT)...
-If you are using your own machine, you can install [**Windows Subsystem for Linux (WSL)**](https://learn.microsoft.com/en-us/windows/wsl/install) to benefit from a Linux virtual machine with Ubuntu as the default distribution. However, perform these installations at home to avoid wasting time during the session.
-:::
-
-1. Create the directory and files listed above in `PS4/` with the corresponding code.
-
+::::{tab-set}
+:::{tab-item} hello.h
 ```{code} cpp
-:filename: hello.h
 #ifndef HELLO_H
 #define HELLO_H
 
@@ -57,9 +40,9 @@ void sayHello();
 
 #endif
 ```
-
+:::
+:::{tab-item} hello.cpp
 ```{code} cpp
-:filename: hello.cpp
 #include <iostream>
 #include "hello.h"
 
@@ -67,9 +50,9 @@ void sayHello() {
     std::cout << "Hello World!" << std::endl;
 }
 ```
-
+:::
+:::{tab-item} main.cpp
 ```{code} cpp
-:filename: main.cpp
 #include "hello.h"
 
 int main() {
@@ -77,9 +60,9 @@ int main() {
     return 0;
 }
 ```
-
+:::
+:::{tab-item} makefile
 ```{code} makefile
-:filename: makefile
 all: executable
 
 executable: main.o hello.o
@@ -99,6 +82,26 @@ clean:
 
 .PHONY: all run clean
 ```
+:::
+::::
+
+:::{important} Build systems
+Instead of manually compiling and executing each project, as projects become more complex, they require a **build system** based on **build scripts**.
+
+A **build script** is a file that automates the compilation process and dependency management of a project. It defines the necessary steps to build the project, such as compiling source code, assembling files, generating documentation, or running tests. Its purpose is to simplify, standardize, and accelerate the project build process.
+
+The standard **build systems** in C++ are **CMake** and **Makefile**. Other languages use their own tools, such as **MSBuild** for C# or **Gradle** and **Maven** for Java. Some IDEs also integrate their own build systems. For example, a Java project in Eclipse uses Eclipse's native build system.
+
+In this session, we will explore the operation of a build system through a **Makefile** build script, a low-level build system for C/C++ designed for Unix systems (Linux and macOS). **CMake** is more high-level and **cross-platform** (compatible with other systems like Windows), but we will focus on **Makefile**, which provides better low-level control.
+:::
+
+:::{warning} Linux on Windows
+:class: dropdown
+If you are using Windows at the IUT, you can try using **Git Bash** and hope that the necessary installations are available. If that does not work, use Linux (Debian distribution at the IUT)...
+If you are using your own machine, you can install [**Windows Subsystem for Linux (WSL)**](https://learn.microsoft.com/en-us/windows/wsl/install) to benefit from a Linux virtual machine with Ubuntu as the default distribution. However, perform these installations at home to avoid wasting time during the session.
+:::
+
+1. Create the directory and files listed above in `PS4/` with the corresponding code.
 
 (ps4-make-commands)=
 :::{important} Makefile
