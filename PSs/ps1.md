@@ -396,6 +396,7 @@ Configuration files can also cause compatibility issues, especially when syncing
 2. Open `hello-world.cpp` in your favorite code editor and copy the following code.
 
 ```{code} cpp
+:filename: hello-world.cpp
 #include <iostream>
 using namespace std;
 int main() {
@@ -520,6 +521,7 @@ Since we will be ignoring many executables in the future, to avoid modifying `.g
 4. Replace the content of the `.gitignore` file with the following code.
 
 ```{code}
+:filename: .gitignore
 *
 !*.*
 !*/
@@ -545,7 +547,7 @@ For example, if `.o` or `.exe` files have been generated and you want to ignore 
 
 Another example: if your editor has generated a `build/` folder, you can add the following line:
 ```{code} sh
-**/build/
+build/
 ```
 This will exclude all content within folders named `build`, regardless of their location in the project.
 
@@ -556,7 +558,7 @@ You can even combine everything to ignore extensionless files, `.o` files, `.exe
 !*/
 **/*.exe
 **/*.o
-**/build/
+build/
 ```
 :::
 
