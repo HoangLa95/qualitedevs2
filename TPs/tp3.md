@@ -58,23 +58,11 @@ Si vous souhaitez simplement apprendre les bonnes pratiques de manière généra
 
 1. Créez un répertoire `short-functions/` dans `TP3/`.
 
-2. Créez les fichiers suivants dans `short-funtions/` :
-- `display-prices.cpp`
-- `display-prices.h`
-- `main.cpp`
-- `product.cpp`
-- `product.h`
-
-:::{important} Pourquoi ne pas regrouper tout le code dans un seul fichier ?
-Lorsque le projet devient plus complexe qu'un simple exercice de code, la séparation du code apporte les mêmes avantages que les principes de propreté et de développement abordés en cours : modularité, réutilisabilité, maintenabilité, extensibilité, encapsulation, lisibilité, gestion des erreurs, ...  
-:::
-
-3. Recopiez les codes suivants dans les fichiers correspondant.
+2. Créez les fichiers suivants dans `short-funtions/`.
 
 ::::{tab-set}
-:::{tab-item} `product.h`
+:::{tab-item} product.h
 ```{code} cpp
-:filename: product.h
 #ifndef PRODUCT_H
 #define PRODUCT_H
 
@@ -97,9 +85,8 @@ public:
 #endif
 ```
 :::
-:::{tab-item} `product.cpp`
+:::{tab-item} product.cpp
 ```{code} cpp
-:filename: product.cpp
 #include "product.h"
 #include <string>
 
@@ -123,9 +110,8 @@ bool Product::operator<(const Product& other) const {
 }   
 ```
 :::
-:::{tab-item} `display-prices.h`
+:::{tab-item} display-prices.h
 ```{code} cpp
-:filename: display-prices.h
 #ifndef DISPLAY_PRICE_H
 #define DISPLAY_PRICE_H
 
@@ -136,9 +122,8 @@ void displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice();
 #endif
 ```
 :::
-:::{tab-item} `display-prices.cpp`
+:::{tab-item} display-prices.cpp
 ```{code} cpp
-:filename: display-prices.cpp
 #include "product.h"
 #include "display-prices.h"
 #include <iostream>
@@ -185,9 +170,8 @@ void displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice(){
 }
 ```
 :::
-:::{tab-item} `main.cpp`
+:::{tab-item} main.cpp
 ```{code} cpp
-:filename: main.cpp
 #include "display-prices.h"
 
 int main() {
@@ -197,6 +181,10 @@ int main() {
 ```
 :::
 ::::
+
+:::{important} Pourquoi ne pas regrouper tout le code dans un seul fichier ?
+Lorsque le projet devient plus complexe qu'un simple exercice de code, la séparation du code apporte les mêmes avantages que les principes de propreté et de développement abordés en cours : modularité, réutilisabilité, maintenabilité, extensibilité, encapsulation, lisibilité, gestion des erreurs, ...  
+:::
 
 
 :::{important} Où est `using namespace std` ?
@@ -231,11 +219,15 @@ Cette partie est appelé les directives :
 :::{note} Compilation en C++
 :class: dropdown
 Pour bien organiser un code C++ et en comprendre l'intérêt, il est essentiel de saisir le fonctionnement de la compilation en C++.  
-En réalité, le terme "compilation" regroupe 4 étapes pour chaque fichier source `.cpp` :  
-1. **Preprocessing** : les **directives** sont exécutées. Par exemple, `#include` est remplacé par le contenu du fichier inclus.  
-2. **Translation Unit** : le fichier prétraité devient un grand fichier texte appelé *translation unit*.  
-3. **Compilation** : le *translation unit* est compilé en code machine dans un fichier objet (`.o`).  
-4. **Linking** : les fichiers objets sont liés en fonction de leurs dépendances (headers et fichiers sources correspondants) pour former l'exécutable.  
+En réalité, le terme "compilation" regroupe 4 étapes pour chaque fichier source `.cpp`.  
+Preprocessing
+: Les **directives** sont exécutées. Par exemple, `#include` est remplacé par le contenu du fichier inclus.  
+Translation Unit
+: Le fichier prétraité devient un grand fichier texte appelé *translation unit*.  
+Compilation
+: Le *translation unit* est compilé en code machine dans un fichier objet (`.o`).  
+Linking
+: Les fichiers objets sont liés en fonction de leurs dépendances (headers et fichiers sources correspondants) pour former l'exécutable.  
 :::
 
 :::{important} Pourquoi séparer les headers et le code source en C++ ?
@@ -286,6 +278,7 @@ Il est nécessaire d'écrire `Product::` devant toutes les méthodes de `Product
 :::
 
 :::{important} `operator<`
+:class: dropdown
 La méthode `operator<` est un **override** de la comparaison par défaut `<`.  
 Cela signifie que les objets `Product` ne peuvent pas être comparés avec `<` de manière traditionnelle. Nous redéfinissons cette comparaison en disant qu'un objet `Product` est plus petit qu'un autre (`other`) si son prix est plus petit (`mPrice < other.mPrice`).  
 Cela permettra de trier les produits en fonction de leur prix plus tard.
@@ -302,7 +295,7 @@ C'est une bonne pratique de découper le code en classes, fonctions externes li�
 Des découpages plus fins des fonctions externes peuvent être réalisés si une partie de ces fonctions doit être réutilisée ailleurs (modularité et réutilisabilité).
 :::
 
-4. Compilez le code avec `g++ -o short-functions main.cpp display-prices.cpp product.cpp` (l'ordre des `.cpp` n'a pas d'importance).
+3. Compilez le code avec `g++ -o short-functions main.cpp display-prices.cpp product.cpp` (l'ordre des `.cpp` n'a pas d'importance).
 
 :::{note} Version C++
 :class: dropdown
@@ -326,7 +319,7 @@ g++ -std=c++14 -o short-functions main.cpp display-prices.cpp product.cpp
 ```
 :::
 
-5. Exécutez `./short-functions`.
+4. Exécutez `./short-functions`.
 
 (tp3-organisation-code)=
 :::{important} Résumé des bonnes pratiques d'organisation du code en C++
@@ -361,6 +354,7 @@ g++ -std=c++14 -o short-functions main.cpp display-prices.cpp product.cpp
 1. Que fait ce code ?
 
 :::{note} `sort`
+:class: dropdown
 La fonction `sort` trie un `vector` en place (aucune copie du `vector` n'est créée). Elle prend en argument l'indice de début et de fin du `vector` et utilise la comparaison `<` par défaut (qui a été redéfinie pour `Product`). Elle trie donc les valeurs de manière croissante (*non-decreasing* en anglais, *increasing* désignant un ordre strictement croissant). 
 :::
 
