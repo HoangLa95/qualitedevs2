@@ -45,7 +45,6 @@ Le but de ce TP est de comprendre les points suivants :
 
 ```{code} cpp
 :filename: magic-numbers.cpp
-:class: dropdown
 #include <iostream>
 #include <string>
 
