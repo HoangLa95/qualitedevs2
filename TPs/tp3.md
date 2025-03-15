@@ -50,12 +50,6 @@ Le but de ce TP est de comprendre les points suivants :
 
 ### Organisation du code
 
-:::{warning} Théorie à venir !
-Cette partie nécessite des manipulations simples, mais aussi une compréhension approfondie de la théorie de la compilation en C++ (applicable à certains langages de la famille C, mais pas à d'autres comme C#, Java, Python, ou Javascript) pour saisir l'intérêt de cette organisation.  
-
-Si vous souhaitez simplement apprendre les bonnes pratiques de manière générale, vous pouvez parcourir plus rapidement la théorie de C++ et vous concentrer sur les points essentiels (résumés à la fin de la sous-section).  
-:::
-
 1. Créez un répertoire `short-functions/` dans `TP3/`.
 
 2. Créez les fichiers suivants dans `short-funtions/`.
@@ -183,6 +177,7 @@ int main() {
 ::::
 
 :::{important} Pourquoi ne pas regrouper tout le code dans un seul fichier ?
+:class: dropdown
 Lorsque le projet devient plus complexe qu'un simple exercice de code, la séparation du code apporte les mêmes avantages que les principes de propreté et de développement abordés en cours : modularité, réutilisabilité, maintenabilité, extensibilité, encapsulation, lisibilité, gestion des erreurs, ...  
 :::
 
