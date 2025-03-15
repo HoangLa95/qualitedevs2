@@ -1,484 +1,625 @@
-# TP6 : How to write unit tests?
+# TP6 : Tests unitaires
 
-:::{important} QCM
+(tp6-objectifs)=
+Le but de ce TP est de comprendre les points suivants :
+- [ ] [La structure du projet et des tests](#exercice-1--fizzbuzz)
+- [ ] [La syntaxe des tests unitaires](../Cours/cm6.md/#tests-unitaires)
+- [ ] [Le cycle de développement du TDD](../Cours/cm6.md/#test-driven-development-(tdd))
+
+## Rappel dépôt GitLab
+
+:::{attention} Ajoutez-moi à votre dépôt GitLab
 :class: dropdown
-Ne pas oublier de répondre au QCM sur Moodle.
+Rappel qu'il faut me rajouter (Hoang La *hla*) comme **Maintainer** sur votre dépôt GitLab.
 :::
 
-## CMake et Google Test
-
-Avant de commencer à coder, il faut configurer notre projet. Jusqu'à maintenant, nous avons travaillé que sur des mini-projets avec un seul fichier de code. Pour des projets plus complexes (dont les projets qui incluent des tests unitaires par exemple), il est préférable d'utiliser un "makefile" (ensemble d'instructions de compilation pour un projet).
-
-Pour C++, nous allons utiliser **CMake**. Aller dans Extension et **télécharger CMake**. Vous pouvez aussi **télécharger C++ TestMate** pour un affichage plus compréhensible dans VSCodium des tests unitaires que nous allons écrire. 
-
-Créer un dossier **TP6** dans lequel vous allez **ajouter deux fichiers `kataTDD.cpp` et `kataTDD_test.cpp`**.
-
-Dans `kataTDD.cpp`, nous allons écrire une simple fonction qui retourne `Hello World!` :
-```{code} cpp
-using namespace std;
-
-string hello() {
-  return "Hello World!";
-}
-```
-
-Dans `kataTDD_test.cpp`, nous allons écrire un test simple qui vérifie si la fonction `hello` retourne bien `Hello World!` en utilisant le framework **Google Test** :
-```{code} cpp
-#include <gtest/gtest.h>
-#include "kataTDD.cpp"
-
-TEST(helloTest, saysHelloWorld) {
-  EXPECT_EQ(hello(),"Hello World!");
-}
-```
-
-Maintenant, nous pouvons construire notre projet en incluant les tests unitaires que nous venons d'écrire. **Créer un fichier `CMakeLists.txt` dans `monprojet`** (et non pas dans `TP6`, votre fichier `CMakeLists.txt` doit être au même niveau que `README.md` et `.gitignore`).
-
-Recopier le code suivant dans `CMakeLists.txt`.
-```{code} cpp
-cmake_minimum_required(VERSION 3.14)
-project(monprojet) # Remplacer par le nom de votre projet : par exemple qualite-dev-s2-prenom-nom
-
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-)
-
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
-
-enable_testing()
-
-add_executable(
-  kataTDD_test
-  ./TP6/kataTDD_test.cpp
-)
-target_link_libraries(
-  kataTDD_test
-  GTest::gtest_main
-)
-
-include(GoogleTest)
-gtest_discover_tests(kataTDD_test)
-```
-
-Ouvrir un terminal avec un clic droit sur `CMakeLists.txt` puis *Open in Integrated Terminal*.
-
-Compiler le projet avec les commandes suivantes.
-```{code} sh
-cmake -S . -B build
-cmake --build build
-```
-
-:::{important} .gitignore
+:::{warning} Si vous avez toujours des problèmes issus de la fusion des comptes...
 :class: dropdown
-Corriger votre [.gitignore](#tp4-gitignore).
+Veuillez contacter le CCRI, puis votre encadrant, puis moi (si le problème persiste).
 :::
 
-Avec *C++ TestMate*, vous devez voir un onglet **Testing** dans la barre à gauche. Cliquer sur *Testing*. Vous devez voir les tests unitaires et vous pouvez les faire tourner[^testing].
+:::{warning} Vérifiez l'adresse de votre dépôt
+:class: dropdown
+Vous devez normalement nommer votre dépôt `qualite-dev-s2-<prenom>-<nom>`.
+Si vous vous êtes trompé et que vous avez changé le nom de votre projet après la création, sachez que seul le nom sur l'interface GitLab sera mis à jour.
+Autrement dit, l'adresse pour cloner votre projet utilisera toujours l'ancien (mauvais) nom.
 
-[^testing]: ![Testing](../images/testing.png)
+Vous pouvez changer cette addresse en cliquant sur **Settings** > **General** > **Advanced** puis changer l'adresse dans **Change path**.
+Il faut penser à changer l'adresse de synchronisation de votre dépôt local avec : `git remote set-url origin <nouvelle addresse avec login et PAT>`.
+:::
 
-Le test passe normalement. Maintenant, voyons ce qui se passe quand un test échoue.
-- Enlever l'espace dans `"Hello World!"` dans le test `saysHelloWorld`.
-- Recompiler avec `cmake --build build`.
-- Refaire tourner le test `saysHelloWorld`.
-- Le test ne doit pas passer et vous devez obtenir le message suivant qui indique qu'il s'attend à ce que `hello()` et `"HelloWorld!"` soient égaux alors que `hello()` a retourné `"Hello World!"`.
+## Exercice 1 : FizzBuzz
+
+1. Dans `TP6/`, créez le répertoire `fizz-buzz/` avec la structure suivante :
+
 ```{code}
-# Failure:
-Expected equality of these values:
-  hello()
-    Which is: "Hello World!"
-  "HelloWorld!"
+fizz-buzz/
+    source/
+        fizz-buzz.cpp
+        fizz-buzz.h
+        main.cpp
+        makefile
+    tests/
+        fizz-buzz-test.cpp
+        fizz-buzz-test.h
+        main.cpp
+        makefile
+    makefile
 ```
 
-Vous pouvez maintenant rajouter l'espace dans `"HelloWorld!"`, recompiler et refaire passer le test.
+2. Recopiez le code suivant pour le makefile à la racine de `fizz-buzz/`.
 
-:::{warning} Problème de syntaxe de Google Test avec la convention snake_case
-:class: dropdown
-Dans ce cours, nous avons adopté la convention camelCase. Dans d'autres cours/projet, vous pouvez aussi utiliser la convention snake_case qui sépare les mots avec des `_` au lieu des majuscules. 
+```{code} makefile
+:filename: fizz-buzz/makefile
+all: build source
 
-Par contre, si vous utilisez Google Test, il ne faut absolument pas utiliser des `_` dans le nom des tests.
-:::
+build:
+	mkdir -p build/dependencies/ build/objects build/binaries
 
-<!-- ### Assertions
+source:
+	make -C source
 
-Il y a deux mots clés qu'il faut connaître : `ASSERT` et `EXPECT`.
+run:
+	make -C source run
 
-Observer la différence entre `ASSERT` et `EXPECT` grâce aux tests suivants qui doivent échouer.
+test: source
+	make -C tests
+	make -C tests run
 
-```{code} cpp
-TEST(helloTest, saysHelloWorldWithAssert) {
-  ASSERT_EQ(hello(),"Hello!");
-  EXPECT_EQ(hello(),"HelloWorld!");
-}
+clean:
+	rm -rf build
 
-TEST(helloTest, saysHelloWorldWithExpect) {
-  EXPECT_EQ(hello(),"Hello!");
-  EXPECT_EQ(hello(),"HelloWorld!");
-}
+.PHONY: all build source run test clean
 ```
 
-**Question 1** : Quelle est la différence entre `ASSERT` et `EXPECT` ?
+3. Recopiez les codes suivants pour les fichiers de `source/`.
 
-Maintenant, vous pouvez supprimer ces tests qui échouent ou les modifier pour les faire passer.
-
-Tester les mots clés suivants : 
-- `EXPECT_TRUE(condition)`
-- `EXPECT_FALSE(condition)`
-- `EXPECT_EQ(firstValue, secondValue)`
-- `EXPECT_NE(firstValue, secondValue)`
-- `EXPECT_LT(firstValue, secondValue)`
-- `EXPECT_LE(firstValue, secondValue)`
-- `EXPECT_GT(firstValue, secondValue)`
-- `EXPECT_GE(firstValue, secondValue)`
-Les mêmes mots-clés existent avec `ASSERT` au lieu de `EXPECT`.
-
-**Question 2** : Quelle est la signification de ces mots-clés ?
-
-### Tests -->
-
-Vous pouvez regarder [la documentation de Google Test](https://google.github.io/googletest/) pour plus d'informations sur la syntaxe de Google Test.
-
-## TDD
-
-:::{seealso} The Password Game
-:class: dropdown
-Le principe du TDD est bien illustré par [The Password Game](https://neal.fun/password-game/).
-:::
-
-### Fizz-Buzz
-
-:::{note} Disclaimer
-:class: dropdown
-L'exercice suivant est simple. Le but n'est pas de résoudre le problème algorithmique. Le but est d'apprendre à écrire des tests unitaires et le workflow du TDD.
-:::
-
-Nous voulons écrire une fonction `fizzBuzz` qui prend en entrée un entier qui retourne une chaîne de caractère selon les règles suivantes:
-1. Si l'entier est divisible par 3, alors le résultat doit contenir un `Fizz`.
-2. Si l'entier est divisible par 5, alors le résultat doit contenir un `Buzz`.
-3. Si l'entier contient un 3, alors le résultat doit contenir un `Fizz`.
-4. Si l'entier contient un 5, alors le résultat doit contenir un `Buzz`.
-5. Si l'entier ne vérifie aucune des règles précédentes, alors le résultat contient juste l'entier en question.
-6. Chaque `Fizz` et `Buzz` doivent correspondre à exactement une règle.
-7. Les `Fizz` viennent toujours avant les `Buzz`.
-8. Le résultat ne peut pas contenir plus de caractères que le minimum nécessaire pour respecter les règles. 
-
-Par exemple,
-- `1` doit retourner `"1"`.
-- `3` doit retourner `"FizzFizz"`.
-- `5` doit retourner `"BuzzBuzz"`.
-- `21` doit retourner `"Fizz"`.
-- `35` doit retourner `"FizzBuzzBuzz"`.
-- `3555` doit retourner `"FizzFizzBuzzBuzz"`.
-
-Pour commencer, nous allons ajouter `#include<string>` à `kataTDD.cpp` et la fonction suivante.
+::::{tab-set}
+:::{tab-item} fizz-buzz.cpp
 ```{code} cpp
-string fizzBuzz(int number) {
-  string result = "";
-  return result;
-}
-```
-
-Dans `kataTDD_test.cpp`, nous allons ajouter un test simple qui correspond à la règle 5[^5].
-```{code} cpp
-TEST(fizzBuzzTest, 1ShouldReturn1) {
-  EXPECT_EQ(fizzBuzz(1), "1");
-}
-```
-
-Nous pouvons compiler avec `cmake --build build` et faire tourner le test. Il échoue donc maintenant nous allons écrire le code pour faire passer le test.
-```{code} cpp
-string fizzBuzz(int number) {
-  string result = "1";
-  return result;
-}
-```
-
-Recompiler et refaire tourner le test. Il doit passer. Maintenant, nous pouvons écrire un autre test plus complexe qui vérifie la règle 5[^5].
-```{code} cpp
-TEST(fizzBuzzTest, theseShouldReturnTheSameNumbers) {
-  EXPECT_EQ(fizzBuzz(2), "2");
-  EXPECT_EQ(fizzBuzz(4), "4");
-  EXPECT_EQ(fizzBuzz(7), "7");
-  EXPECT_EQ(fizzBuzz(8), "8");
-  EXPECT_EQ(fizzBuzz(11), "11");
-  EXPECT_EQ(fizzBuzz(1111), "1111");
-  EXPECT_EQ(fizzBuzz(11111), "11111");
-}
-```
-
-:::{warning} Recompiler et tester à chaque modification
-:class: dropdown
-Ceci ne sera pas rappelé mais il faut le faire à chaque étape.
-:::
-
-Pour passer ce test, nous devons modifier le code de la façon suivante.
-```{code} cpp
-string fizzBuzz(int number) {
-  string result = to_string(number);
-  return result;
-}
-```
-
-Maintenant, vérifions la règle 3[^3] avec le test suivant.
-```{code} cpp
-TEST(fizzBuzzTest, theseShouldReturnFizzByRule1) {
-  EXPECT_EQ(fizzBuzz(6), "Fizz");
-  EXPECT_EQ(fizzBuzz(9), "Fizz");
-  EXPECT_EQ(fizzBuzz(12), "Fizz");
-  EXPECT_EQ(fizzBuzz(18), "Fizz");
-  EXPECT_EQ(fizzBuzz(21), "Fizz");
-  EXPECT_EQ(fizzBuzz(111), "Fizz");
-}
-```
-
-Ce test doit échouer. Écrivons le code correspondant.
-```{code} cpp
-string fizzBuzz(int number) {
-  string result; 
-  if (number % 3 ==0) 
-    result = "Fizz";  
-  else
-    result = to_string(number);
-  return result;
-}
-```
-
-Continuer le TDD en écrivant d'abord le test puis le code correspondant jusqu'à ce que vous vérifiez toutes les règles.
-
-:::{hint} Comment concaténer des chaînes de caractères ?
-:class: dropdown
-```{code} cpp
-string result = "Fizz";
-result += "Fizz";
-```
-La valeur de `result` est maintenant `"FizzFizz"`.
-:::
-
-:::{hint} Comment vérifier si un nombre contient un chiffre ?
-:class: dropdown
-Voici une condition pour vérifier si `number` contient `3`.
-```{code} cpp
-to_string(number).find("3")!=string::npos
-```
-:::
-
-Est-ce que votre code suit bien les principes de code propre que nous avons vu ?
-
-
-[^1]: Si l'entier est divisible par 3, alors le résultat doit contenir un `Fizz`.
-[^2]: Si l'entier est divisible par 5, alors le résultat doit contenir un `Buzz`.
-[^3]: Si l'entier contient un 3, alors le résultat doit contenir un `Fizz`.
-[^4]: Si l'entier contient un 5, alors le résultat doit contenir un `Buzz`.
-[^5]: Si l'entier ne vérifie aucune des règles précédentes, alors le résultat contient juste l'entier en question.
-[^6]: Chaque `Fizz` et `Buzz` doivent correspondre à exactement une règle.
-[^7]: Les `Fizz` viennent toujours avant les `Buzz`.
-[^8]: Le résultat ne peut pas contenir plus de caractères que le minimum nécessaire pour respecter les règles.
-
-### Les nombres romains
-
-:::{important} Bonus
-Cet exercice est devenu un bonus mais les questions du QCM sur la syntaxe de C++ sont obligatoires.  
-:::
-
-Nous allons utiliser le TDD pour écrire une fonction qui prend une chiffre romain en entrée et qui retourne le nombre correspondant en décimal.
-
-Ajouter le code suivant à votre fichier `kataTDD.cpp`.
-```{code} cpp
-#include <unordered_map>
+#include "fizz-buzz.h"
+#include <string>
 #include <stdexcept>
 
-class RomanToDecimal {
-public:
-  RomanToDecimal(string romanNumeral) : mRomanNumeral(romanNumeral) {}
-
-  int getDecimal() {}
-
-private:
-  string mRomanNumeral;
-  unordered_map<string, int> romanLetters;
-  int decimal = 0;
-};
-```
-
-Les lettres romaines :
-| I | V | X  | L  |  C  |  D  |  M   |
-|---|---|----|----|-----|-----|------|
-| 1 | 5 | 10 | 50 | 100 | 500 | 1000 |
-
-Un nombre romain se lit de gauche à droite en faisant des additions et des soustractions des valeurs des chiffres. Tout symbole qui suit un symbole de valeur supérieure ou égale s’ajoute à celui-ci (exemple : 6 s'écrit `VI`). Tout symbole qui précède un symbole de valeur supérieure se soustrait à ce dernier (exemple : 40 s'écrit `XL`). Par exemple le nombre romain `MLXIII` correspond à 1063 dans la numérotation décimale car il se décompose comme `M`+`L`+`X`+`I`+`I`+`I` = 1000+50+10+1+1+1. Alors que le nombre `XXXIV` vaut 34 car il se décompose comme `X`+`X`+`X`+`IV`=10+10+10+4. Une meilleure façon de voir ce dernier exemple c'est d'utiliser la soustraction `X`+`X`+`X`-`I`+`V`=10+10+10-1+5.
-
-On va se fixer une représentation unique des nombres romains avec les principes suivants :
-- Un même symbole n'est pas employé quatre fois de suite (sauf `M`).
-- Les soustractions s'effectuent sur un seul symbole (par exemple `XL` est correct et vaut 40, mais il est interdit d'écrire `XXL` pour 30, et on écrira plutôt `XXX`).
-- On écrira en respectant l'ordre suivant
-  - d'abord les chiffres des milliers (à l'aide uniquement de `M`)
-  - puis les chiffres des centaines (à l'aide uniquement de `C`,`D`,`M`)
-  - puis les chiffres des dizaines (à l'aide uniquement de `X`,`L`,`C`)
-  - puis les chiffres des unités (à l'aide uniquement de `I`,`V`,`X`)
-- Pour chacune des 4 étapes ci-dessus, on utilisera le moins de symboles possible.
-
-Par exemple :
-- `IL` (pour 49) est interdit (I n'est pas autorisé pour décrire les dizaines), et 49 = `XLIX`
-- `XCM` est interdit (car que l'on interprète comme `X` `CM` ou `XC` `M`, cela ne respecte pas l'ordre ci-dessus)
-- `VX` (pour 5) est interdit, car `V` utilise moins de symboles
-- `XCXX` (pour 110) est interdit, car il faut décrire le chiffre des centaines avec `C`,`D`, `M`.
-
-:::{important} TDD
-:class: dropdown
-Faites très attention pour cet exercice de bien respecter le principe du TDD en ajoutant vraiment tout le temps la quantité minimale de code nécessaire à la validation des tests. Si vous suivez cette règle, il se résout très facilement alors qu'en l'abordant de manière générale, il comporte de nombreux pièges pouvant vous faire perdre un temps précieux.
-:::
-
-Dans cet exercice, vous allez manipuler la classe [`string`](https://en.cppreference.com/w/cpp/string/basic_string) et [`unordered_map`](https://en.cppreference.com/w/cpp/container/unordered_map).
-
-**Question 1** : Que fait `s.length()` ?
-
-**Question 2** : Que fait `s.substr(i,2)` ?
-
-**Question 3** : Quelle est la syntaxe de `unordered_map` ?
-
-**Question 4** : Comment accéder à un élément de `unordered_map<string,int>` ?
-
-**Question 5** : Comment vérifier qu'un élément n'est pas dans `unordered_map` avec `find` ?
-
-<!-- 1. Commencer par écrire un test qui échoue quand on rentre une string qui n'est pas un nombre romain.
-```{code} cpp
-TEST(RomanToDecimalTest, IMShouldFail) {
-  RomanToDecimal romanNumeral("IM");
-  EXPECT_NO_FATAL_FAILURE(romanNumeral.getDecimal());
+std::string FizzBuzz::fizzBuzz(int number) {
+	std::string result = "";
+	return result;
 }
 ```
-
-2. Pour passer ce test, il faut écrire un gestionnaire d'erreur.
-
-3. Écrire un test pour les lettres romains (I, V, X, L, C, D, M).
-
-4. Passer le test en remplissant `romanLetters`.
-
-5. Écrire un test pour des nombres qui nécessitent pas de soustractions.
-
-6. Passer ce test.
-
-7. Écrire un tests pour des nombres à deux lettres qui nécessitent une soustraction.
-
-8. Passer ce test.
-
-9. Écrire un tests pour des faux nombres à deux lettres (avec `EXPECT_NO_FATAL_FAILURE`).
-
-10. Passer ce test en levant un erreur.
-
-11. Refactoriser en rajoutant à `romanLetters` les paires de lettres autorisées quand on détecte une soustraction à faire (IV, IX, XL, XC, CD, CM).
-
-12. Écrire d'autres tests et essayer de les passer jusqu'à ce que vous obtenez un code qui fonctionne.
-
-Pour vous aider, voici un tableau avec tous les nombres romains entre 1 et 1000 :
+:::
+:::{tab-item} fizz-buzz.h
 ```{code} cpp
-vector<string> values = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV",
-  "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII",
-  "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII",
-  "XXXIX", "XL", "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L", "LI",
-  "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX", "LXI", "LXII", "LXIII", "LXIV", "LXV",
-  "LXVI", "LXVII", "LXVIII", "LXIX", "LXX", "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII",
-  "LXXVIII", "LXXIX", "LXXX", "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII",
-  "LXXXVIII", "LXXXIX", "XC", "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX",
-  "C", "CI", "CII", "CIII", "CIV", "CV", "CVI", "CVII", "CVIII", "CIX", "CX", "CXI", "CXII", "CXIII",
-  "CXIV", "CXV", "CXVI", "CXVII", "CXVIII", "CXIX", "CXX", "CXXI", "CXXII", "CXXIII", "CXXIV", "CXXV",
-  "CXXVI", "CXXVII", "CXXVIII", "CXXIX", "CXXX", "CXXXI", "CXXXII", "CXXXIII", "CXXXIV", "CXXXV",
-  "CXXXVI", "CXXXVII", "CXXXVIII", "CXXXIX", "CXL", "CXLI", "CXLII", "CXLIII", "CXLIV", "CXLV", "CXLVI",
-  "CXLVII", "CXLVIII", "CXLIX", "CL", "CLI", "CLII", "CLIII", "CLIV", "CLV", "CLVI", "CLVII", "CLVIII",
-  "CLIX", "CLX", "CLXI", "CLXII", "CLXIII", "CLXIV", "CLXV", "CLXVI", "CLXVII", "CLXVIII", "CLXIX",
-  "CLXX", "CLXXI", "CLXXII", "CLXXIII", "CLXXIV", "CLXXV", "CLXXVI", "CLXXVII", "CLXXVIII", "CLXXIX",
-  "CLXXX", "CLXXXI", "CLXXXII", "CLXXXIII", "CLXXXIV", "CLXXXV", "CLXXXVI", "CLXXXVII", "CLXXXVIII",
-  "CLXXXIX", "CXC", "CXCI", "CXCII", "CXCIII", "CXCIV", "CXCV", "CXCVI", "CXCVII", "CXCVIII", "CXCIX",
-  "CC", "CCI", "CCII", "CCIII", "CCIV", "CCV", "CCVI", "CCVII", "CCVIII", "CCIX", "CCX", "CCXI", "CCXII",
-  "CCXIII", "CCXIV", "CCXV", "CCXVI", "CCXVII", "CCXVIII", "CCXIX", "CCXX", "CCXXI", "CCXXII", "CCXXIII",
-  "CCXXIV", "CCXXV", "CCXXVI", "CCXXVII", "CCXXVIII", "CCXXIX", "CCXXX", "CCXXXI", "CCXXXII", "CCXXXIII",
-  "CCXXXIV", "CCXXXV", "CCXXXVI", "CCXXXVII", "CCXXXVIII", "CCXXXIX", "CCXL", "CCXLI", "CCXLII",
-  "CCXLIII", "CCXLIV", "CCXLV", "CCXLVI", "CCXLVII", "CCXLVIII", "CCXLIX", "CCL", "CCLI", "CCLII",
-  "CCLIII", "CCLIV", "CCLV", "CCLVI", "CCLVII", "CCLVIII", "CCLIX", "CCLX", "CCLXI", "CCLXII", "CCLXIII",
-  "CCLXIV", "CCLXV", "CCLXVI", "CCLXVII", "CCLXVIII", "CCLXIX", "CCLXX", "CCLXXI", "CCLXXII", "CCLXXIII",
-  "CCLXXIV", "CCLXXV", "CCLXXVI", "CCLXXVII", "CCLXXVIII", "CCLXXIX", "CCLXXX", "CCLXXXI", "CCLXXXII",
-  "CCLXXXIII", "CCLXXXIV", "CCLXXXV", "CCLXXXVI", "CCLXXXVII", "CCLXXXVIII", "CCLXXXIX", "CCXC", "CCXCI",
-  "CCXCII", "CCXCIII", "CCXCIV", "CCXCV", "CCXCVI", "CCXCVII", "CCXCVIII", "CCXCIX", "CCC", "CCCI",
-  "CCCII", "CCCIII", "CCCIV", "CCCV", "CCCVI", "CCCVII", "CCCVIII", "CCCIX", "CCCX", "CCCXI", "CCCXII",
-  "CCCXIII", "CCCXIV", "CCCXV", "CCCXVI", "CCCXVII", "CCCXVIII", "CCCXIX", "CCCXX", "CCCXXI", "CCCXXII",
-  "CCCXXIII", "CCCXXIV", "CCCXXV", "CCCXXVI", "CCCXXVII", "CCCXXVIII", "CCCXXIX", "CCCXXX", "CCCXXXI",
-  "CCCXXXII", "CCCXXXIII", "CCCXXXIV", "CCCXXXV", "CCCXXXVI", "CCCXXXVII", "CCCXXXVIII", "CCCXXXIX",
-  "CCCXL", "CCCXLI", "CCCXLII", "CCCXLIII", "CCCXLIV", "CCCXLV", "CCCXLVI", "CCCXLVII", "CCCXLVIII",
-  "CCCXLIX", "CCCL", "CCCLI", "CCCLII", "CCCLIII", "CCCLIV", "CCCLV", "CCCLVI", "CCCLVII", "CCCLVIII",
-  "CCCLIX", "CCCLX", "CCCLXI", "CCCLXII", "CCCLXIII", "CCCLXIV", "CCCLXV", "CCCLXVI", "CCCLXVII",
-  "CCCLXVIII", "CCCLXIX", "CCCLXX", "CCCLXXI", "CCCLXXII", "CCCLXXIII", "CCCLXXIV", "CCCLXXV", "CCCLXXVI",
-  "CCCLXXVII", "CCCLXXVIII", "CCCLXXIX", "CCCLXXX", "CCCLXXXI", "CCCLXXXII", "CCCLXXXIII", "CCCLXXXIV",
-  "CCCLXXXV", "CCCLXXXVI", "CCCLXXXVII", "CCCLXXXVIII", "CCCLXXXIX", "CCCXC", "CCCXCI", "CCCXCII",
-  "CCCXCIII", "CCCXCIV", "CCCXCV", "CCCXCVI", "CCCXCVII", "CCCXCVIII", "CCCXCIX", "CD", "CDI", "CDII",
-  "CDIII", "CDIV", "CDV", "CDVI", "CDVII", "CDVIII", "CDIX", "CDX", "CDXI", "CDXII", "CDXIII", "CDXIV",
-  "CDXV", "CDXVI", "CDXVII", "CDXVIII", "CDXIX", "CDXX", "CDXXI", "CDXXII", "CDXXIII", "CDXXIV", "CDXXV",
-  "CDXXVI", "CDXXVII", "CDXXVIII", "CDXXIX", "CDXXX", "CDXXXI", "CDXXXII", "CDXXXIII", "CDXXXIV",
-  "CDXXXV", "CDXXXVI", "CDXXXVII", "CDXXXVIII", "CDXXXIX", "CDXL", "CDXLI", "CDXLII", "CDXLIII", "CDXLIV",
-  "CDXLV", "CDXLVI", "CDXLVII", "CDXLVIII", "CDXLIX", "CDL", "CDLI", "CDLII", "CDLIII", "CDLIV", "CDLV",
-  "CDLVI", "CDLVII", "CDLVIII", "CDLIX", "CDLX", "CDLXI", "CDLXII", "CDLXIII", "CDLXIV", "CDLXV",
-  "CDLXVI", "CDLXVII", "CDLXVIII", "CDLXIX", "CDLXX", "CDLXXI", "CDLXXII", "CDLXXIII", "CDLXXIV",
-  "CDLXXV", "CDLXXVI", "CDLXXVII", "CDLXXVIII", "CDLXXIX", "CDLXXX", "CDLXXXI", "CDLXXXII", "CDLXXXIII",
-  "CDLXXXIV", "CDLXXXV", "CDLXXXVI", "CDLXXXVII", "CDLXXXVIII", "CDLXXXIX", "CDXC", "CDXCI", "CDXCII",
-  "CDXCIII", "CDXCIV", "CDXCV", "CDXCVI", "CDXCVII", "CDXCVIII", "CDXCIX", "D", "DI", "DII", "DIII",
-  "DIV", "DV", "DVI", "DVII", "DVIII", "DIX", "DX", "DXI", "DXII", "DXIII", "DXIV", "DXV", "DXVI",
-  "DXVII", "DXVIII", "DXIX", "DXX", "DXXI", "DXXII", "DXXIII", "DXXIV", "DXXV", "DXXVI", "DXXVII",
-  "DXXVIII", "DXXIX", "DXXX", "DXXXI", "DXXXII", "DXXXIII", "DXXXIV", "DXXXV", "DXXXVI", "DXXXVII",
-  "DXXXVIII", "DXXXIX", "DXL", "DXLI", "DXLII", "DXLIII", "DXLIV", "DXLV", "DXLVI", "DXLVII", "DXLVIII",
-  "DXLIX", "DL", "DLI", "DLII", "DLIII", "DLIV", "DLV", "DLVI", "DLVII", "DLVIII", "DLIX", "DLX", "DLXI",
-  "DLXII", "DLXIII", "DLXIV", "DLXV", "DLXVI", "DLXVII", "DLXVIII", "DLXIX", "DLXX", "DLXXI", "DLXXII",
-  "DLXXIII", "DLXXIV", "DLXXV", "DLXXVI", "DLXXVII", "DLXXVIII", "DLXXIX", "DLXXX", "DLXXXI", "DLXXXII",
-  "DLXXXIII", "DLXXXIV", "DLXXXV", "DLXXXVI", "DLXXXVII", "DLXXXVIII", "DLXXXIX", "DXC", "DXCI", "DXCII",
-  "DXCIII", "DXCIV", "DXCV", "DXCVI", "DXCVII", "DXCVIII", "DXCIX", "DC", "DCI", "DCII", "DCIII", "DCIV",
-  "DCV", "DCVI", "DCVII", "DCVIII", "DCIX", "DCX", "DCXI", "DCXII", "DCXIII", "DCXIV", "DCXV", "DCXVI",
-  "DCXVII", "DCXVIII", "DCXIX", "DCXX", "DCXXI", "DCXXII", "DCXXIII", "DCXXIV", "DCXXV", "DCXXVI",
-  "DCXXVII", "DCXXVIII", "DCXXIX", "DCXXX", "DCXXXI", "DCXXXII", "DCXXXIII", "DCXXXIV", "DCXXXV",
-  "DCXXXVI", "DCXXXVII", "DCXXXVIII", "DCXXXIX", "DCXL", "DCXLI", "DCXLII", "DCXLIII", "DCXLIV", "DCXLV",
-  "DCXLVI", "DCXLVII", "DCXLVIII", "DCXLIX", "DCL", "DCLI", "DCLII", "DCLIII", "DCLIV", "DCLV", "DCLVI",
-  "DCLVII", "DCLVIII", "DCLIX", "DCLX", "DCLXI", "DCLXII", "DCLXIII", "DCLXIV", "DCLXV", "DCLXVI",
-  "DCLXVII", "DCLXVIII", "DCLXIX", "DCLXX", "DCLXXI", "DCLXXII", "DCLXXIII", "DCLXXIV", "DCLXXV",
-  "DCLXXVI", "DCLXXVII", "DCLXXVIII", "DCLXXIX", "DCLXXX", "DCLXXXI", "DCLXXXII", "DCLXXXIII", "DCLXXXIV",
-  "DCLXXXV", "DCLXXXVI", "DCLXXXVII", "DCLXXXVIII", "DCLXXXIX", "DCXC", "DCXCI", "DCXCII", "DCXCIII",
-  "DCXCIV", "DCXCV", "DCXCVI", "DCXCVII", "DCXCVIII", "DCXCIX", "DCC", "DCCI", "DCCII", "DCCIII", "DCCIV",
-  "DCCV", "DCCVI", "DCCVII", "DCCVIII", "DCCIX", "DCCX", "DCCXI", "DCCXII", "DCCXIII", "DCCXIV", "DCCXV",
-  "DCCXVI", "DCCXVII", "DCCXVIII", "DCCXIX", "DCCXX", "DCCXXI", "DCCXXII", "DCCXXIII", "DCCXXIV",
-  "DCCXXV", "DCCXXVI", "DCCXXVII", "DCCXXVIII", "DCCXXIX", "DCCXXX", "DCCXXXI", "DCCXXXII", "DCCXXXIII",
-  "DCCXXXIV", "DCCXXXV", "DCCXXXVI", "DCCXXXVII", "DCCXXXVIII", "DCCXXXIX", "DCCXL", "DCCXLI", "DCCXLII",
-  "DCCXLIII", "DCCXLIV", "DCCXLV", "DCCXLVI", "DCCXLVII", "DCCXLVIII", "DCCXLIX", "DCCL", "DCCLI",
-  "DCCLII", "DCCLIII", "DCCLIV", "DCCLV", "DCCLVI", "DCCLVII", "DCCLVIII", "DCCLIX", "DCCLX", "DCCLXI",
-  "DCCLXII", "DCCLXIII", "DCCLXIV", "DCCLXV", "DCCLXVI", "DCCLXVII", "DCCLXVIII", "DCCLXIX", "DCCLXX",
-  "DCCLXXI", "DCCLXXII", "DCCLXXIII", "DCCLXXIV", "DCCLXXV", "DCCLXXVI", "DCCLXXVII", "DCCLXXVIII",
-  "DCCLXXIX", "DCCLXXX", "DCCLXXXI", "DCCLXXXII", "DCCLXXXIII", "DCCLXXXIV", "DCCLXXXV", "DCCLXXXVI",
-  "DCCLXXXVII", "DCCLXXXVIII", "DCCLXXXIX", "DCCXC", "DCCXCI", "DCCXCII", "DCCXCIII", "DCCXCIV", "DCCXCV",
-  "DCCXCVI", "DCCXCVII", "DCCXCVIII", "DCCXCIX", "DCCC", "DCCCI", "DCCCII", "DCCCIII", "DCCCIV", "DCCCV",
-  "DCCCVI", "DCCCVII", "DCCCVIII", "DCCCIX", "DCCCX", "DCCCXI", "DCCCXII", "DCCCXIII", "DCCCXIV",
-  "DCCCXV", "DCCCXVI", "DCCCXVII", "DCCCXVIII", "DCCCXIX", "DCCCXX", "DCCCXXI", "DCCCXXII", "DCCCXXIII",
-  "DCCCXXIV", "DCCCXXV", "DCCCXXVI", "DCCCXXVII", "DCCCXXVIII", "DCCCXXIX", "DCCCXXX", "DCCCXXXI",
-  "DCCCXXXII", "DCCCXXXIII", "DCCCXXXIV", "DCCCXXXV", "DCCCXXXVI", "DCCCXXXVII", "DCCCXXXVIII",
-  "DCCCXXXIX", "DCCCXL", "DCCCXLI", "DCCCXLII", "DCCCXLIII", "DCCCXLIV", "DCCCXLV", "DCCCXLVI",
-  "DCCCXLVII", "DCCCXLVIII", "DCCCXLIX", "DCCCL", "DCCCLI", "DCCCLII", "DCCCLIII", "DCCCLIV", "DCCCLV",
-  "DCCCLVI", "DCCCLVII", "DCCCLVIII", "DCCCLIX", "DCCCLX", "DCCCLXI", "DCCCLXII", "DCCCLXIII", "DCCCLXIV",
-  "DCCCLXV", "DCCCLXVI", "DCCCLXVII", "DCCCLXVIII", "DCCCLXIX", "DCCCLXX", "DCCCLXXI", "DCCCLXXII",
-  "DCCCLXXIII", "DCCCLXXIV", "DCCCLXXV", "DCCCLXXVI", "DCCCLXXVII", "DCCCLXXVIII", "DCCCLXXIX",
-  "DCCCLXXX", "DCCCLXXXI", "DCCCLXXXII", "DCCCLXXXIII", "DCCCLXXXIV", "DCCCLXXXV", "DCCCLXXXVI",
-  "DCCCLXXXVII", "DCCCLXXXVIII", "DCCCLXXXIX", "DCCCXC", "DCCCXCI", "DCCCXCII", "DCCCXCIII", "DCCCXCIV",
-  "DCCCXCV", "DCCCXCVI", "DCCCXCVII", "DCCCXCVIII", "DCCCXCIX", "CM", "CMI", "CMII", "CMIII", "CMIV",
-  "CMV", "CMVI", "CMVII", "CMVIII", "CMIX", "CMX", "CMXI", "CMXII", "CMXIII", "CMXIV", "CMXV", "CMXVI",
-  "CMXVII", "CMXVIII", "CMXIX", "CMXX", "CMXXI", "CMXXII", "CMXXIII", "CMXXIV", "CMXXV", "CMXXVI",
-  "CMXXVII", "CMXXVIII", "CMXXIX", "CMXXX", "CMXXXI", "CMXXXII", "CMXXXIII", "CMXXXIV", "CMXXXV",
-  "CMXXXVI", "CMXXXVII", "CMXXXVIII", "CMXXXIX", "CMXL", "CMXLI", "CMXLII", "CMXLIII", "CMXLIV", "CMXLV",
-  "CMXLVI", "CMXLVII", "CMXLVIII", "CMXLIX", "CML", "CMLI", "CMLII", "CMLIII", "CMLIV", "CMLV", "CMLVI",
-  "CMLVII", "CMLVIII", "CMLIX", "CMLX", "CMLXI", "CMLXII", "CMLXIII", "CMLXIV", "CMLXV", "CMLXVI",
-  "CMLXVII", "CMLXVIII", "CMLXIX", "CMLXX", "CMLXXI", "CMLXXII", "CMLXXIII", "CMLXXIV", "CMLXXV",
-  "CMLXXVI", "CMLXXVII", "CMLXXVIII", "CMLXXIX", "CMLXXX", "CMLXXXI", "CMLXXXII", "CMLXXXIII", "CMLXXXIV",
-  "CMLXXXV", "CMLXXXVI", "CMLXXXVII", "CMLXXXVIII", "CMLXXXIX", "CMXC", "CMXCI", "CMXCII", "CMXCIII",
-  "CMXCIV", "CMXCV", "CMXCVI", "CMXCVII", "CMXCVIII", "CMXCIX", "M"};
-``` -->
+#ifndef FIZZ_BUZZ_H
+#define FIZZ_BUZZ_H
 
+#include <string>
 
+/**
+ * Contains only the fizzBuzz method.
+ *
+ * fizzBuzz is a method that takes a positive integer as input
+ * and outputs a string according to the some rules related to
+ * the divisibility by 2 or 7, and the presence of the digits 2 or 7.
+ */
+class FizzBuzz {
+public:
+    /**
+    * Returns a string depending on the number.
+    *
+    * fizzBuzz returns the string according to the following rules:
+    * 1. if number is even, then the string contains a "Fizz";
+    * 2. if number is divisible by 7, then the string contains a "Buzz";
+    * 3. if number contains 2, then the string contains a "Fizz";
+    * 4. if number contains 7, then the string contains a "Buzz";
+    * 5. each "Fizz" or "Buzz" correspond to exactly one rule from 1. to 4.;
+    * 6. if none of 1. to 4. is true, then the string is the number itself;
+    * 7. the string must not contain more characters than necessary.
+    *
+    * @param number A positive integer.
+    * @return The string according to the rules above.
+    * @throw std::invalid_argument when number is not positive.
+    */
+    static std::string fizzBuzz(int number); 
+};
 
+/**
+ * @example
+ * \code{.cpp}
+ * std::cout << FizzBuzz::fizzBuzz(1); \\ Output: "1"
+ * std::cout << FizzBuzz::fizzBuzz(2); \\ Output: "FizzFizz"
+ * std::cout << FizzBuzz::fizzBuzz(7); \\ Output: "BuzzBuzz"
+ * std::cout << FizzBuzz::fizzBuzz(728); \\ Output: "FizzFizzBuzzBuzz"
+ * \endcode
+ */
+
+#endif
+```
+:::
+:::{tab-item} main.cpp
+```{code} cpp
+#include "fizz-buzz.h"
+#include <iostream>
+
+int main() {
+    int number;
+    std::cout << "Enter a number: ";
+    std::cin >> number;
+    std::cout << FizzBuzz::fizzBuzz(number) << std::endl;
+    return 0;
+}
+```
+:::
+:::{tab-item} makefile
+```{code} makefile
+all: build ../build/binaries/source/fizz-buzz
+
+build:
+	mkdir -p ../build/dependencies/source ../build/objects/source ../build/binaries/source
+
+../build/binaries/source/fizz-buzz: ../build/objects/source/main.o ../build/objects/source/fizz-buzz.o
+	g++ -o ../build/binaries/source/fizz-buzz ../build/objects/source/main.o ../build/objects/source/fizz-buzz.o
+
+../build/objects/source/main.o: main.cpp
+	g++ -c main.cpp -o ../build/objects/source/main.o -MMD -MF ../build/dependencies/source/main.d
+
+../build/objects/source/fizz-buzz.o: fizz-buzz.cpp
+	g++ -c fizz-buzz.cpp -o ../build/objects/source/fizz-buzz.o -MMD -MF ../build/dependencies/source/fizz-buzz.d  
+
+run:
+	../build/binaries/source/fizz-buzz
+
+clean:
+	rm -rf ../build/dependencies/source ../build/objects/source ../build/binaries/source
+
+.PHONY: all clean build
+
+-include ../build/dependencies/source/*.d
+```
+:::
+::::
+
+4. Recopiez les codes suivants pour les fichiers de `test/`.
+
+::::{tab-set}
+:::{tab-item} fizz-buzz-test.cpp
+```{code} cpp
+#include "../source/fizz-buzz.h"
+#include "fizz-buzz-test.h"
+#include <iostream>
+#include <cassert>
+#include <stdexcept>
+
+void FizzBuzzTest::runTests() {
+    fizzBuzz_NegativeInput_ReturnsInvalidArgument();
+	fizzBuzz_ZeroInput_ReturnsInvalidArgument();
+    fizzBuzz_OddInputNonDivisibleBy7DoesNotContain2Or7_ReturnsTheSameNumber();
+    fizzBuzz_EvenInputNonDivisibleBy7DoesNotContain2Or7_ReturnsFizz();
+    fizzBuzz_EvenInputNonDivisibleBy7Contains2ButNot7_ReturnsFizzFizz();
+    fizzBuzz_OddInputDivisibleBy7DoesNotContain2Or7_ReturnsBuzz();
+    fizzBuzz_OddInputDivisibleBy7Contains7ButNot2_ReturnsBuzzBuzz();
+    fizzBuzz_EvenInputDivisibleBy7DoesNotContain2Or7_ReturnsFizzBuzz();
+    fizzBuzz_EvenInputNonDivisibleBy7Contains7ButNot2_ReturnsFizzBuzz();
+    fizzBuzz_OddInputDivisibleBy7Contains2ButNot7_ReturnsFizzBuzz();
+    fizzBuzz_OddInputNonDivisibleBy7Contains2And7_ReturnsFizzBuzz();
+    fizzBuzz_OddInputDivisibleBy7Contains2And7_ReturnsFizzBuzzBuzz();
+    fizzBuzz_EvenInputNonDivisibleBy7Contains2And7_ReturnsFizzFizzBuzz();
+    fizzBuzz_EvenInputDivisibleBy7Contains2ButNot7_ReturnsFizzFizzBuzz();
+    fizzBuzz_EvenInputDivisibleBy7Contains7ButNot2_ReturnsFizzBuzzBuzz();
+    fizzBuzz_EvenInputDivisibleBy7Contains2And7_ReturnsFizzFizzBuzzBuzz();
+    std::cout << "All tests passed\n";
+}
+
+void FizzBuzzTest::fizzBuzz_NegativeInput_ReturnsInvalidArgument() {
+	try{
+		FizzBuzz::fizzBuzz(-728);
+		assert(false);
+	} catch (const std::invalid_argument& error) {
+		std::cout << "fizzBuzz_NegativeInput_ReturnsInvalidArgument passed\n";
+	} catch (...){
+		assert(false);
+	}
+}
+
+void FizzBuzzTest::fizzBuzz_ZeroInput_ReturnsInvalidArgument() {
+	try{
+		FizzBuzz::fizzBuzz(0);
+		assert(false);
+	} catch (const std::invalid_argument& error) {
+		std::cout << "fizzBuzz_ZeroInput_ReturnsInvalidArgument passed\n";
+	} catch (...){
+		assert(false);
+	}
+}
+
+void FizzBuzzTest::fizzBuzz_OddInputNonDivisibleBy7DoesNotContain2Or7_ReturnsTheSameNumber() {
+    assert(FizzBuzz::fizzBuzz(1) == "1");
+	assert(FizzBuzz::fizzBuzz(3) == "3");
+	assert(FizzBuzz::fizzBuzz(5) == "5");
+	assert(FizzBuzz::fizzBuzz(11) == "11");
+	assert(FizzBuzz::fizzBuzz(13) == "13");
+	assert(FizzBuzz::fizzBuzz(19) == "19");
+	assert(FizzBuzz::fizzBuzz(31) == "31");
+	assert(FizzBuzz::fizzBuzz(41) == "41");
+	assert(FizzBuzz::fizzBuzz(43) == "43");
+	assert(FizzBuzz::fizzBuzz(53) == "53");
+	assert(FizzBuzz::fizzBuzz(59) == "59");
+    std::cout << "fizzBuzz_OddInputNonDivisibleBy7DoesNotContain2Or7_ReturnsTheSameNumber passed\n";
+}
+
+void FizzBuzzTest::fizzBuzz_EvenInputNonDivisibleBy7DoesNotContain2Or7_ReturnsFizz() {
+	assert(FizzBuzz::fizzBuzz(4) == "Fizz");
+	assert(FizzBuzz::fizzBuzz(6) == "Fizz");
+	assert(FizzBuzz::fizzBuzz(8) == "Fizz");
+	assert(FizzBuzz::fizzBuzz(10) == "Fizz");
+	assert(FizzBuzz::fizzBuzz(16) == "Fizz");
+	assert(FizzBuzz::fizzBuzz(18) == "Fizz");
+	assert(FizzBuzz::fizzBuzz(40) == "Fizz");
+	assert(FizzBuzz::fizzBuzz(44) == "Fizz");
+	assert(FizzBuzz::fizzBuzz(46) == "Fizz");
+	assert(FizzBuzz::fizzBuzz(48) == "Fizz");
+    std::cout << "fizzBuzz_EvenInputNonDivisibleBy7DoesNotContain2Or7_ReturnsFizz passed\n";
+}
+
+void FizzBuzzTest::fizzBuzz_EvenInputNonDivisibleBy7Contains2ButNot7_ReturnsFizzFizz() {
+	assert(FizzBuzz::fizzBuzz(2) == "FizzFizz");
+	assert(FizzBuzz::fizzBuzz(12) == "FizzFizz");
+	assert(FizzBuzz::fizzBuzz(20) == "FizzFizz");
+	assert(FizzBuzz::fizzBuzz(24) == "FizzFizz");
+	assert(FizzBuzz::fizzBuzz(26) == "FizzFizz");
+	assert(FizzBuzz::fizzBuzz(32) == "FizzFizz");
+	assert(FizzBuzz::fizzBuzz(62) == "FizzFizz");
+	assert(FizzBuzz::fizzBuzz(82) == "FizzFizz");	
+    std::cout << "fizzBuzz_EvenInputNonDivisibleBy7Contains2ButNot7_ReturnsFizzFizz passed\n";
+}
+
+void FizzBuzzTest::fizzBuzz_OddInputDivisibleBy7DoesNotContain2Or7_ReturnsBuzz() {
+    assert(FizzBuzz::fizzBuzz(35) == "Buzz");
+	assert(FizzBuzz::fizzBuzz(49) == "Buzz");
+	assert(FizzBuzz::fizzBuzz(63) == "Buzz");
+	assert(FizzBuzz::fizzBuzz(91) == "Buzz");
+	assert(FizzBuzz::fizzBuzz(105) == "Buzz");
+	assert(FizzBuzz::fizzBuzz(119) == "Buzz");
+    std::cout << "fizzBuzz_OddInputDivisibleBy7DoesNotContain2Or7_ReturnsBuzz passed\n";
+}
+
+void FizzBuzzTest::fizzBuzz_OddInputDivisibleBy7Contains7ButNot2_ReturnsBuzzBuzz() {
+	assert(FizzBuzz::fizzBuzz(7) == "BuzzBuzz");
+	assert(FizzBuzz::fizzBuzz(77) == "BuzzBuzz");
+	assert(FizzBuzz::fizzBuzz(147) == "BuzzBuzz");
+	assert(FizzBuzz::fizzBuzz(175) == "BuzzBuzz");	
+    std::cout << "fizzBuzz_OddInputDivisibleBy7Contains7ButNot2_ReturnsBuzzBuzz passed\n";
+}
+
+void FizzBuzzTest::fizzBuzz_EvenInputDivisibleBy7DoesNotContain2Or7_ReturnsFizzBuzz() {
+	assert(FizzBuzz::fizzBuzz(14) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(56) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(84) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(98) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(140) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(154) == "FizzBuzz");	
+    std::cout << "fizzBuzz_EvenInputDivisibleBy7DoesNotContain2Or7_ReturnsFizzBuzz passed\n";
+}
+
+void FizzBuzzTest::fizzBuzz_EvenInputNonDivisibleBy7Contains7ButNot2_ReturnsFizzBuzz() {
+	assert(FizzBuzz::fizzBuzz(74) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(76) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(78) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(170) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(174) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(176) == "FizzBuzz");
+    std::cout << "fizzBuzz_EvenInputNonDivisibleBy7Contains7ButNot2_ReturnsFizzBuzz passed\n";
+}
+
+void FizzBuzzTest::fizzBuzz_OddInputDivisibleBy7Contains2ButNot7_ReturnsFizzBuzz() {
+	assert(FizzBuzz::fizzBuzz(21) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(203) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(259) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(329) == "FizzBuzz");
+    std::cout << "fizzBuzz_OddInputDivisibleBy7Contains2ButNot7_ReturnsFizzBuzz passed\n";
+}
+
+void FizzBuzzTest::fizzBuzz_OddInputNonDivisibleBy7Contains2And7_ReturnsFizzBuzz() {
+    assert(FizzBuzz::fizzBuzz(27) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(127) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(527) == "FizzBuzz");
+	assert(FizzBuzz::fizzBuzz(927) == "FizzBuzz");
+    std::cout << "fizzBuzz_OddInputNonDivisibleBy7Contains2And7_ReturnsFizzBuzz passed\n";
+}
+
+void FizzBuzzTest::fizzBuzz_OddInputDivisibleBy7Contains2And7_ReturnsFizzBuzzBuzz() {
+	assert(FizzBuzz::fizzBuzz(217) == "FizzBuzzBuzz");
+	assert(FizzBuzz::fizzBuzz(273) == "FizzBuzzBuzz");
+	assert(FizzBuzz::fizzBuzz(427) == "FizzBuzzBuzz");
+	assert(FizzBuzz::fizzBuzz(721) == "FizzBuzzBuzz");
+    std::cout << "fizzBuzz_OddInputDivisibleBy7Contains2And7_ReturnsFizzBuzzBuzz passed\n";
+}
+
+void FizzBuzzTest::fizzBuzz_EvenInputNonDivisibleBy7Contains2And7_ReturnsFizzFizzBuzz() {
+	assert(FizzBuzz::fizzBuzz(72) == "FizzFizzBuzz");
+	assert(FizzBuzz::fizzBuzz(272) == "FizzFizzBuzz");
+	assert(FizzBuzz::fizzBuzz(274) == "FizzFizzBuzz");
+	assert(FizzBuzz::fizzBuzz(726) == "FizzFizzBuzz");
+	assert(FizzBuzz::fizzBuzz(872) == "FizzFizzBuzz");
+    std::cout << "fizzBuzz_EvenInputNonDivisibleBy7Contains2And7_ReturnsFizzFizzBuzz passed\n";
+}
+
+void FizzBuzzTest::fizzBuzz_EvenInputDivisibleBy7Contains2ButNot7_ReturnsFizzFizzBuzz() {
+	assert(FizzBuzz::fizzBuzz(28) == "FizzFizzBuzz");
+	assert(FizzBuzz::fizzBuzz(42)  == "FizzFizzBuzz");
+	assert(FizzBuzz::fizzBuzz(112) == "FizzFizzBuzz");
+	assert(FizzBuzz::fizzBuzz(126) == "FizzFizzBuzz");
+	assert(FizzBuzz::fizzBuzz(182) == "FizzFizzBuzz");
+    std::cout << "fizzBuzz_EvenInputDivisibleBy7Contains2ButNot7_ReturnsFizzFizzBuzz passed\n";
+}
+
+void FizzBuzzTest::fizzBuzz_EvenInputDivisibleBy7Contains7ButNot2_ReturnsFizzBuzzBuzz() {
+    assert(FizzBuzz::fizzBuzz(70) == "FizzBuzzBuzz");
+    assert(FizzBuzz::fizzBuzz(378) == "FizzBuzzBuzz");
+    assert(FizzBuzz::fizzBuzz(476) == "FizzBuzzBuzz");
+    std::cout << "fizzBuzz_EvenInputDivisibleBy7Contains7ButNot2_ReturnsFizzBuzzBuzz passed\n";
+}
+
+void FizzBuzzTest::fizzBuzz_EvenInputDivisibleBy7Contains2And7_ReturnsFizzFizzBuzzBuzz() {
+    assert(FizzBuzz::fizzBuzz(728) == "FizzFizzBuzzBuzz");
+	assert(FizzBuzz::fizzBuzz(2716) == "FizzFizzBuzzBuzz");
+    std::cout << "fizzBuzz_EvenInputDivisibleBy7Contains2And7_ReturnsFizzFizzBuzzBuzz passed\n";
+}
+```
+:::
+:::{tab-item} fizz-buzz-test.h
+```{code} cpp
+#ifndef FIZZ_BUZZ_TEST_H
+#define FIZZ_BUZZ_TEST_H
+
+class FizzBuzzTest {
+public:
+    static void runTests();
+
+private:
+    static void fizzBuzz_NegativeInput_ReturnsInvalidArgument();
+    static void fizzBuzz_ZeroInput_ReturnsInvalidArgument();
+    static void fizzBuzz_OddInputNonDivisibleBy7DoesNotContain2Or7_ReturnsTheSameNumber();
+    static void fizzBuzz_EvenInputNonDivisibleBy7DoesNotContain2Or7_ReturnsFizz();
+    static void fizzBuzz_EvenInputNonDivisibleBy7Contains2ButNot7_ReturnsFizzFizz();
+    static void fizzBuzz_OddInputDivisibleBy7DoesNotContain2Or7_ReturnsBuzz();
+    static void fizzBuzz_OddInputDivisibleBy7Contains7ButNot2_ReturnsBuzzBuzz();
+    static void fizzBuzz_EvenInputDivisibleBy7DoesNotContain2Or7_ReturnsFizzBuzz();
+    static void fizzBuzz_EvenInputNonDivisibleBy7Contains7ButNot2_ReturnsFizzBuzz();
+    static void fizzBuzz_OddInputDivisibleBy7Contains2ButNot7_ReturnsFizzBuzz();
+    static void fizzBuzz_OddInputNonDivisibleBy7Contains2And7_ReturnsFizzBuzz();
+    static void fizzBuzz_OddInputDivisibleBy7Contains2And7_ReturnsFizzBuzzBuzz();
+    static void fizzBuzz_EvenInputNonDivisibleBy7Contains2And7_ReturnsFizzFizzBuzz();
+    static void fizzBuzz_EvenInputDivisibleBy7Contains2ButNot7_ReturnsFizzFizzBuzz();
+    static void fizzBuzz_EvenInputDivisibleBy7Contains7ButNot2_ReturnsFizzBuzzBuzz();
+    static void fizzBuzz_EvenInputDivisibleBy7Contains2And7_ReturnsFizzFizzBuzzBuzz();
+};
+
+#endif
+```
+:::
+:::{tab-item} main.cpp
+```{code} cpp
+#include "fizz-buzz-test.h"
+
+int main() {
+    FizzBuzzTest::runTests();
+    return 0;
+}
+```
+:::
+:::{tab-item} makefile
+```{code} makefile
+all: build ../build/binaries/tests/fizz-buzz-test
+
+build:
+	mkdir -p ../build/dependencies/tests ../build/objects/tests ../build/binaries/tests 
+
+../build/binaries/tests/fizz-buzz-test: ../build/objects/tests/main.o ../build/objects/tests/fizz-buzz-test.o
+	g++ -o ../build/binaries/tests/fizz-buzz-test ../build/objects/tests/main.o ../build/objects/tests/fizz-buzz-test.o ../build/objects/source/fizz-buzz.o
+
+../build/objects/tests/main.o: main.cpp
+	g++ -c main.cpp -o ../build/objects/tests/main.o -MMD -MF ../build/dependencies/tests/main.d  
+
+../build/objects/tests/fizz-buzz-test.o: fizz-buzz-test.cpp
+	g++ -c fizz-buzz-test.cpp -o ../build/objects/tests/fizz-buzz-test.o -MMD -MF ../build/dependencies/tests/fizz-buzz-test.d  
+
+run:
+	../build/binaries/tests/fizz-buzz-test
+	
+clean:
+	rm -rf ../build/dependencies/tests ../build/objects/tests ../build/binaries/tests
+
+.PHONY: all clean build
+
+-include ../build/dependencies/tests/*.d
+```
+:::
+::::
+
+:::{attention} makefile
+:class: dropdown
+*Rappel* : `make -C <répertoire> <cible>` est équivalent à `cd <répertoire>` puis `make <cible>` à l'intérieur de `<répertoire>`. 
+
+Les fichiers makefile ici sont écrites de façon simple et explicite (sans refactorisation).
+Un fichier makefile propre utiliserait des variables pour refactoriser le code.
+:::
+
+Dans ce premier exercice, il s'agit d'implémenter la fonction `fizzBuzz` de la classe `FizzBuzz`.
+Les tests sont fournis dans le fichier `fizz-buzz-test.cpp`.
+
+Les commandes `make` qui vous sont fournises permettent de compiler le code et de lancer les tests.
+Quand vous vous placez dans le dossier `fizz-buzz/`, vous pouvez lancer les commandes suivantes :
+- `make` pour compiler le code source.
+- `make run` pour lancer l'exécutable de source pour tester le code à travers des entrées dans le terminal.
+- `make test` pour compiler et lancer les tests.
+- vous pouvez ajouter l'option `-s` à make pour avoir une sortie moins verbose (par exemple `make -s test` ou `make -s run`).
+
+5. Lisez la documentation de la classe `FizzBuzz` et les tests.
+
+6. Implémentez `fizzBuzz` dans `fizz-buzz.cpp` de sorte que tous les tests passent.
+
+:::{hint} Indices
+:class: dropdown
+- `std::to_string(number)` retourne la chaîne de caractères représentant `number` (par exemple, `std::to_string(3)` retourne `"3"`).
+- `a % b` retourne `a` modulo `b` (par exemple, `3 % 2` retourne `1`).
+-  `bigString.find(smallString)!=std::string::npos` retourne vrai si `bigString` contient `smallString`, faux sinon.
+- `"3" + "3"` retourne `"33"`.
+:::
+
+Est-ce que votre code est propre ?
+
+## Exercice 2 : Sorting Hat
+
+1. Dans `TP6/`, créez le répertoire `sorting-hat/`.
+
+Voici les codes pour la classe `SortingHat` et le `main.cpp` pour tester la classe avec des entrées dans le terminal.
+
+::::{tab-set}
+:::{tab-item} main.cpp
+```{code} cpp
+#include "sorting-hat.h"
+#include <iostream>
+
+int main() {
+    int mood;
+    std::cout << "Is the sorting fair(0) or playful(1)? ";
+    std::cin >> mood;
+    SortingHat hat(static_cast<Mood>(mood));
+
+    int student;
+    std::cout << "What is the student's best quality: ambitious(0), brave(1), intelligent(2), or loyal(3)? ";
+    std::cin >> student;
+
+    std::cout << "The perfect fit for you is (Slytherin:0, Gryffindor:1, Ravenclaw:2, Hufflepuff:3): " << hat.assignHouse(static_cast<Student>(student)) << std::endl;
+    return 0;
+}
+```
+:::
+:::{tab-item} sorting-hat.cpp
+```{code} cpp
+#include "sorting-hat.h"
+
+SortingHat::SortingHat(Mood mood) : mMood(mood) {}
+
+Mood SortingHat::getMood() const {
+    // TODO
+	return Mood::Fair;
+}
+
+House SortingHat::assignHouse(Student student) const {
+	// Bonus
+	return House::Slytherin;
+}
+```
+:::
+:::{tab-item} sorting-hat.h
+```{code} cpp
+#ifndef SORTING_HAT_H
+#define SORTING_HAT_H
+
+/**
+ * The four houses of Hogwarts.
+ *
+ * The four houses of Hogwarts are: 
+ * Slytherin, Gryffindor, Ravenclaw, and Hufflepuff.
+ */
+enum House {Slytherin, Gryffindor, Ravenclaw, Hufflepuff};
+
+/**
+ * The four qualities in a student the Sorting Hat is looking for.
+ *
+ * The four qualities in a student the Sorting Hat is looking for are:
+ * Ambition, Courage, Intelligence, and Loyalty.
+ */
+enum Student {Ambitious, Brave, Intelligent, Loyal};
+
+/**
+ * The two possible mood of the Sorting Hat.
+ *
+ * The two possible mood of the Sorting Hat are:
+ * Fair and Playful.
+ */
+enum Mood {Fair, Playful};
+
+/**
+ * The Sorting Hat which assigns students to houses.
+ *
+ * The Sorting Hat assign a student to a house based on
+ * its mood and the student's best quality.
+ */
+class SortingHat {
+private:
+    Mood mMood;
+
+public:
+    /**
+    * Constructs a SortingHat object.
+    *
+    * Initializes the SortingHat with a Mood.
+    * @param mood The hat's mood.
+    */
+    SortingHat(const Mood mood);
+
+    /**
+    * Gets the sorting hat's mood.
+    *
+    * @return The hat's mood.
+    */
+    Mood getMood() const;
+
+    /**
+    * Returns the House a Student is assigned to.
+    *
+    * The hat chooses the House for a student based on its mood
+    * and the student's best quality.
+    * If the hat is fair, then:
+    * - Ambitious students go to Slytherin;
+    * - Brave students go to Gryffindor;
+    * - Intelligent students go to Ravenclaw;
+    * - Loyal students go to Hufflepuff.
+    * If the hat is playful, then it never makes the same decision
+    * as when it is fair.
+    *
+    * @param student The student's best quality. 
+    * @return The House the student is assigned to.
+    */
+    House assignHouse(Student student) const;
+};
+
+/**
+ * @example
+ * \code{.cpp}
+ * SortingHat fairHat(Mood::Fair);
+ * fairHat.assignHouse(Student::Brave); \\ Output: House::Gryffindor
+ * SortingHat playfulHat(Mood::Playful);
+ * playfulHat.assignHouse(Student::Brave); \\ Outputs a House different from Gryffindor
+ * \endcode
+ */
+
+#endif
+```
+:::
+::::
+
+Nous cherchons à simuler le comportement du "Choixpeau magique" (Sorting Hat) du monde de Harry Potter.
+Hogwarts est l'école des sorciers. Elle est divisée en quatre maisons et le Choixpeau magique est un chapeau qui permet aux sorciers de trouver leur maison.
+Ce choix est normalement basé sur les quatre qualités principales recherchées chez un sorcier mais le choixpeau est aussi influencé par son humeur.
+
+Le but de l'exercice est d'écrire des tests unitaires pour vérifier le comportement du choixpeau.
+
+2. Créez et structurez les répertoires et les fichiers de `sorting-hat/` de la même manière que vous avez fait pour `fizz-buzz/`.
+
+:::{hint} makefile
+:class: dropdown
+Les deux répertoires doivent avoir la même structure donc il suffit de remplacer `fizz-buzz` par `sorting-hat` dans les makefiles.
+:::
+
+3. Lisez la documentation de la classe `SortingHat` pour comprendre son fonctionnement.
+
+4. Écrivez des tests unitaires pour tester les deux méthodes `getMood` et `assignHouse` de la classe `SortingHat`.
+
+5. Implémentez `getMood` dans `sorting-hat.cpp`.
+
+6. **Bonus**: Implémentez `assignHouse` dans `sorting-hat.cpp`.
+
+Retournez aux [objectifs](#tp6-objectifs) et cochez les points que vous avez maîtrisés. Reprenez les points que vous n'avez pas encore bien compris. Appelez votre encadrant si besoin.
