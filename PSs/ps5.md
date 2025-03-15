@@ -199,7 +199,7 @@ If VSCodium asks if you want to regularly perform `git fetch`, you can say yes. 
 
 #### log  
 
-1. Open **Git Graph** by clicking the **Git Graph** button at the bottom of your screen or by selecting **View** > **Command Palette** (shortcut `F1` or `Ctrl+Shift+P`), then type `Git Graph` and choose **Git Graph: View Git Graph**.  
+1. Open **Git Graph** by clicking the **Git Graph** button at the bottom of your screen or by selecting **View** > **Command Palette** (shortcut {kbd}`F1` or {kbd}`Ctrl` + {kbd}`Shift` + {kbd}`P`), then type `Git Graph` and choose **Git Graph: View Git Graph**.  
 
 :::{seealso} Command Palette  
 :class: dropdown  

@@ -440,7 +440,7 @@ An example of a [`.gitignore`](https://github.com/github/gitignore/blob/main/Uni
 :class: dropdown
 Files whose names start with a `.` are hidden files (they do not appear when using a file manager). These are often configuration files.
 
-To display hidden files in a file manager, you can usually press `Ctrl+h` (`h` for 'hidden').
+To display hidden files in a file manager, you can usually press {kbd}`Ctrl` + {kbd}`H` (for 'Hidden').
 The `.git` directory you see in your project contains Git's internal configuration files. It is important not to modify this folder, as it manages the tracking and history of your repository. Additionally, this folder is natively ignored by Git.
 :::
 
@@ -496,7 +496,7 @@ Here, we forgot to add a commit message for the deletion of a file named `test.t
 - Write your commit message on the first line.
 
 If you are using the **Nano** editor (which looks like the screen above):
-- Press `Ctrl+x` to exit.
+- Press {kbd}`Ctrl` + {kbd}`X` to exit.
 - Press `y` to confirm the changes.
 - Press `Enter` to quit the window.
 

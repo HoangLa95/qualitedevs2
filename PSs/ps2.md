@@ -163,7 +163,7 @@ It is essential to follow the proper naming conventions covered in the course to
 :class: dropdown  
 A simple way to check if you've applied the naming conventions correctly is to try modifying a single parameter at a time (for example, the student discount percentage, customer discount, etc.).  
 
-- Would you have been able to make this change in a similar 10,000-line code using a search (`Ctrl+f`)?  
+- Would you have been able to make this change in a similar 10,000-line code using a search ({kbd}`Ctrl` + {kbd}`F`)?  
 - Were you able to modify a single variable (just one line of code)?  
 
 If not, rename them.  

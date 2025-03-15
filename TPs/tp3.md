@@ -33,7 +33,7 @@ Quelques points utiles à connaître sur VSCodium :
 - Ouvrez le répertoire Git (la racine de votre dépôt) via **File** > **Open Folder** et restez sur **Explorer** (première icône de la barre à gauche).  
 - Vous pouvez créer des fichiers et des dossiers à l'aide des boutons situés à droite du nom de la racine de votre dépôt.  
 - Un clic droit sur un fichier permet d'ouvrir un terminal dans le répertoire du fichier avec **Open in Integrated Terminal**.  
-- Utilisez `Ctrl+h` sur une sélection de code pour effectuer un **Search and Replace** dans le fichier courant.  
+- Utilisez {kbd}`Ctrl` + {kbd}`H` sur une sélection de code pour effectuer un **Search and Replace** dans le fichier courant.  
 :::
 
 (tp3-objectifs)=

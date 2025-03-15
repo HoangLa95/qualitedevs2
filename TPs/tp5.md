@@ -200,7 +200,7 @@ Si VSCodium vous demande si vous souhaitez effectuer régulièrement un `git fet
 
 #### log
 
-1. Ouvrez **Git Graph** en cliquant sur le bouton Git Graph en bas de votre écran ou en sélectionnant **View** > **Command Palette** (raccourci `F1` ou `Ctrl+Shift+P`), puis tapez `Git Graph` et choisissez l'option **Git Graph: View Git Graph**.
+1. Ouvrez **Git Graph** en cliquant sur le bouton Git Graph en bas de votre écran ou en sélectionnant **View** > **Command Palette** (raccourci `F1` ou {kbd}`Ctrl` + {kbd}`Shift` + {kbd}`P`), puis tapez `Git Graph` et choisissez l'option **Git Graph: View Git Graph**.
 
 :::{seealso} Command Palette
 :class: dropdown

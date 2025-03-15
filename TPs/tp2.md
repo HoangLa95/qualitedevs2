@@ -169,7 +169,7 @@ Il est essentiel d'adopter les bonnes conventions de nommage abordées en cours 
 :class: dropdown
 Une façon simple de vérifier si vous avez correctement appliqué les conventions de nommage est d'essayer de modifier un seul paramètre à la fois (par exemple, le pourcentage de réduction étudiant, réduction client, etc.).
 
-- Auriez-vous pu faire cette modification dans un code similaire de 10 000 lignes en utilisant une recherche (`Ctrl+f`) ?
+- Auriez-vous pu faire cette modification dans un code similaire de 10 000 lignes en utilisant une recherche ({kbd}`Ctrl` + {kbd}`F`) ?
 - Avez-vous réussi à modifier une seule variable (une seule ligne dans le code) ?
 
 Dans le cas contraire, renommez-les.

@@ -442,7 +442,7 @@ Un exemple de [`.gitignore`](https://github.com/github/gitignore/blob/main/Unity
 :class: dropdown
 Les fichiers dont les noms commencent par `.` sont des fichiers cachés (qui ne s'affichent pas quand vous utilisez un gestionnaire de fichiers). Ce sont souvent des fichiers de configurations.
 
-Pour afficher les fichiers cachés dans un gestionnaire de fichiers, vous pouvez souvent appuyer sur `Ctrl+h` (`h` comme 'hidden').
+Pour afficher les fichiers cachés dans un gestionnaire de fichiers, vous pouvez souvent appuyer sur {kbd}`Ctrl` + {kbd}`H` (comme 'Hidden').
 Le répertoire `.git` que vous voyez dans votre projet contient les fichiers de configuration internes de Git.
 Il est important de ne pas modifier ce dossier, car il gère le suivi et l'historique de votre dépôt.
 Par ailleurs, ce dossier est ignoré par Git de manière native.
@@ -500,7 +500,7 @@ Ici, nous avons oublié d'ajouter un message de commit pour la suppression d'un 
 - Écrivez votre message de commit sur la première ligne.
 
 Si vous êtes sur l'éditeur **Nano** (qui ressemble à l'écran au-dessus) :
-- Appuyez sur `Ctrl+x` pour quitter.
+- Appuyez sur {kbd}`Ctrl` + {kbd}`X` pour quitter.
 - Appuyez sur `y` pour valider les modifications du message de commit.
 - Appuyez sur `Enter` pour quitter la fenêtre.
 
