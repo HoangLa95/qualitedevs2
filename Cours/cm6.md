@@ -18,8 +18,8 @@ Révisez pour le quiz final, vous n'auriez pas accès aux anciens Quiz pendant l
 Vous apprendrez à utiliser des frameworks de test (comme JUnit en Java) en S4.  
 Pour l'instant, nous écrirons des tests manuellement.
 
-`calculator.h` :
 ```{code} cpp
+:filename: calculator.h
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
@@ -32,8 +32,8 @@ public:
 #endif
 ```
 
-`calculator-test.h` :
 ```{code} cpp
+:filename: calculator-test.h
 #ifndef CALCULATOR_TEST_H
 #define CALCULATOR_TEST_H
 
@@ -54,6 +54,7 @@ private :
 
 Convention générale de nommage : 
 ```{code} cpp
+:filename: object-test.h
 #ifndef OBJECT_TEST_H
 #define OBJECT_TEST_H
 
@@ -80,8 +81,9 @@ private :
 Il existe également des tests paramétrés qui peuvent dépendre des instances d'objets, auquel cas la classe de test peut avoir des attributs, d'autres types de méthodes, et les tests ne seront plus statiques. Plus de détails en TP !  
 :::
 
-Exemple de tests `calculator-test.cpp` :
+Exemple de tests :
 ```{code} cpp
+:filename: calculator-test.cpp
 #include "calculator.h"
 #include "calculator-test.h"
 #include <iostream>
@@ -144,8 +146,8 @@ void CalculatorTest::divide_ZeroDenominator_ReturnsInvalidArgument() {
 }
 ```
 
-`main.cpp` :
 ```{code} cpp
+:filename: main.cpp
 #include "calculator-test.h"
 
 int main() {
