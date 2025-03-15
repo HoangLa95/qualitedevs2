@@ -44,6 +44,7 @@ Le but de ce TP est de comprendre les points suivants :
 ## Exercice 1 : Magic numbers
 
 ```{code} cpp
+:filename: magic-numbers.cpp
 #include <iostream>
 #include <string>
 
@@ -224,6 +225,7 @@ Avez-vous pensé à maintenir vos dépôts ?
 ## Exercice 2 : Classes et méthodes
 
 ```{code} cpp
+:filename: classes-et-methodes.cpp
 #include <iostream>
 using namespace std;
 
@@ -299,6 +301,7 @@ w2(50.0);
 
 (tp2-ex2-class-example)=
 ```{code} cpp
+:filename: classes-et-methodes.cpp
 #include <iostream>
 using namespace std;
 
