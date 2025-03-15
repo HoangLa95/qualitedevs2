@@ -4,7 +4,12 @@
 Le but de ce TP est de comprendre les points suivants :
 - [ ] [La structure du projet et des tests](#exercice-1--fizzbuzz)
 - [ ] [La syntaxe des tests unitaires](../Cours/cm6.md/#tests-unitaires)
-- [ ] [Le cycle de développement du TDD](../Cours/cm6.md/#test-driven-development-(tdd))
+- [ ] [Le cycle de développement du TDD](../Cours/cm6.md/#test-driven-development-tdd)
+
+:::{seealso} WSL
+:class: dropdown
+Si vous avez besoin de finir les TPs à la maison et que vous avez seulement accès à un environnement Windows, vous pouvez utiliser le WSL (Windows Subsystem for Linux) avec Ubuntu (guide plus détaillé [ici](../TechSupport/wsl.md)).
+:::
 
 ## Rappel dépôt GitLab
 

@@ -49,3 +49,4 @@ parts:
   chapters:
     - file: TechSupport/internetProblem.md
     - file: TechSupport/vscodium.md
+    - file: TechSupport/wsl.md
