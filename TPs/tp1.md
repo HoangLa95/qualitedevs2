@@ -399,6 +399,7 @@ Les fichiers de configurations peuvent également provoquer des problèmes de co
 2. Ouvrez `hello-world.cpp` dans votre éditeur de code préféré et recopiez le code suivant.
 
 ```{code} cpp
+:filename: hello-world.cpp
 #include <iostream>
 using namespace std;
 int main() {
