@@ -71,6 +71,8 @@ Lorsque le projet devient plus complexe qu'un simple exercice de code, la sépar
 
 3. Recopiez les codes suivants dans les fichiers correspondant.
 
+::::{tab-set}
+:::{tab-item} `product.h`
 ```{code} cpp
 :filename: product.h
 #ifndef PRODUCT_H
@@ -94,6 +96,108 @@ public:
 
 #endif
 ```
+:::
+:::{tab-item} `product.cpp`
+```{code} cpp
+:filename: product.cpp
+#include "product.h"
+#include <string>
+
+Product::Product(const std::string& name, double price, int quantity) 
+    : mName(name), mPrice(price), mQuantity(quantity) {}
+    
+std::string Product::getName() const { 
+    return mName; 
+}
+        
+double Product::getPrice() const { 
+    return mPrice; 
+}
+
+int Product::getQuantity() const { 
+    return mQuantity; 
+}
+
+bool Product::operator<(const Product& other) const {
+    return mPrice < other.mPrice;
+}   
+```
+:::
+:::{tab-item} `display-prices.h`
+```{code} cpp
+:filename: display-prices.h
+#ifndef DISPLAY_PRICE_H
+#define DISPLAY_PRICE_H
+
+#include "product.h"
+
+void displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice();
+
+#endif
+```
+:::
+:::{tab-item} `display-prices.cpp`
+```{code} cpp
+:filename: display-prices.cpp
+#include "product.h"
+#include "display-prices.h"
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+void displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice(){
+	
+    // Fetching products data
+    std::vector<Product> products;
+    // Our current products
+    products.push_back(Product("Laptop", 1000, 5));
+    products.push_back(Product("Smartphone", 700, 0));
+    products.push_back(Product("Tablet", 500, 2));
+    products.push_back(Product("Headphones", 150, 10));
+    products.push_back(Product("Smartwatch", 200, 0));
+
+    // Fetching available products data
+	std::vector<Product> availableProducts;
+    for (const Product& product : products) {
+        if (product.getQuantity() > 0) {
+            availableProducts.push_back(product);
+        }
+    }
+
+    // Sorting available products by non-decreasing price
+	sort(availableProducts.begin(), availableProducts.end());
+
+    // Calculating total price
+    double totalPrice = 0;
+    for (const Product& product : availableProducts) {
+        totalPrice += product.getPrice() * product.getQuantity();
+    }
+
+    // Displaying available products by non-decreasing price
+	std::cout << "Sorted Available Products (by non-decreasing price):" << std::endl;
+    for (const Product& product : availableProducts) {
+        std::cout << "Name: " << product.getName() << " - Price: " << product.getPrice() 
+             << " - Quantity: " << product.getQuantity() << std::endl;
+    }
+
+    // Displaying total price
+    std::cout << "Total Price of Available Products: " << totalPrice << std::endl;
+}
+```
+:::
+:::{tab-item} `main.cpp`
+```{code} cpp
+:filename: main.cpp
+#include "display-prices.h"
+
+int main() {
+    displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice();
+    return 0;
+}
+```
+:::
+::::
+
 
 :::{important} Où est `using namespace std` ?
 :class: dropdown
@@ -167,31 +271,6 @@ Une autre directive est parfois utilisée à la place des include guards, mais e
 Les bonnes pratiques standard en C++ recommandent l'utilisation des include guards.  
 :::
 
-```{code} cpp
-:filename: product.cpp
-#include "product.h"
-#include <string>
-
-Product::Product(const std::string& name, double price, int quantity) 
-    : mName(name), mPrice(price), mQuantity(quantity) {}
-    
-std::string Product::getName() const { 
-    return mName; 
-}
-        
-double Product::getPrice() const { 
-    return mPrice; 
-}
-
-int Product::getQuantity() const { 
-    return mQuantity; 
-}
-
-bool Product::operator<(const Product& other) const {
-    return mPrice < other.mPrice;
-}   
-```
-
 :::{important} Pourquoi `#include <string>` une "deuxième" fois ?
 :class: dropdown
 Si `product.h` inclut `<string>` et que `product.cpp` inclut `product.h`, pourquoi devons-nous inclure `<string>` une deuxième fois ?  
@@ -212,80 +291,11 @@ Cela signifie que les objets `Product` ne peuvent pas être comparés avec `<` d
 Cela permettra de trier les produits en fonction de leur prix plus tard.
 :::
 
-```{code} cpp
-:filename: display-prices.h
-#ifndef DISPLAY_PRICE_H
-#define DISPLAY_PRICE_H
-
-#include "product.h"
-
-void displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice();
-
-#endif
-```
-
-```{code} cpp
-:filename: display-prices.cpp
-#include "product.h"
-#include "display-prices.h"
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-void displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice(){
-	
-    // Fetching products data
-    std::vector<Product> products;
-    // Our current products
-    products.push_back(Product("Laptop", 1000, 5));
-    products.push_back(Product("Smartphone", 700, 0));
-    products.push_back(Product("Tablet", 500, 2));
-    products.push_back(Product("Headphones", 150, 10));
-    products.push_back(Product("Smartwatch", 200, 0));
-
-    // Fetching available products data
-	std::vector<Product> availableProducts;
-    for (const Product& product : products) {
-        if (product.getQuantity() > 0) {
-            availableProducts.push_back(product);
-        }
-    }
-
-    // Sorting available products by non-decreasing price
-	sort(availableProducts.begin(), availableProducts.end());
-
-    // Calculating total price
-    double totalPrice = 0;
-    for (const Product& product : availableProducts) {
-        totalPrice += product.getPrice() * product.getQuantity();
-    }
-
-    // Displaying available products by non-decreasing price
-	std::cout << "Sorted Available Products (by non-decreasing price):" << std::endl;
-    for (const Product& product : availableProducts) {
-        std::cout << "Name: " << product.getName() << " - Price: " << product.getPrice() 
-             << " - Quantity: " << product.getQuantity() << std::endl;
-    }
-
-    // Displaying total price
-    std::cout << "Total Price of Available Products: " << totalPrice << std::endl;
-}
-```
-
 :::{note} `for (const Product& product : products)`
 :class: dropdown
 Il est possible de faire une boucle `for` avec la syntaxe `for (ElementType element : vectorOfElements)`.
 :::
 
-```{code} cpp
-:filename: main.cpp
-#include "display-prices.h"
-
-int main() {
-    displayAvailableProductsByNonDecreasingPriceAndDisplayTotalPrice();
-    return 0;
-}
-```
 :::{important} Découpage du code
 :class: dropdown
 C'est une bonne pratique de découper le code en classes, fonctions externes liées et le main (chacun ayant son propre header, à l'exception de `main`).  
