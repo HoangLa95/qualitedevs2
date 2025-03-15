@@ -69,9 +69,10 @@ IN THE SOFTWARE.
 
 ### Documentation du code
 
-Example de documentation de `temperature.h` en Doxygen (qui est très similaire à Javadoc) :
+Example de documentation en Doxygen (qui est très similaire à Javadoc) :
 
 ```{code} cpp
+:filename: temperature.h
 #ifndef TEMPERATURE_H
 #define TEMPERATURE_H
 
@@ -284,7 +285,7 @@ float Q_rsqrt( float number )
 
 Une version améliorée :
 ```{code} cpp
-#include <stdint.h>
+#include <csdtint>
 
 /**
  * Computes an approximation of 1 / sqrt(number) using the Fast Inverse Square Root method.
@@ -424,7 +425,7 @@ response.setBody(formatter.getResultStream(), formatter.getByteCount());
 //response.setContent(reader.read(formatter.getByteCount()));
 ```
 
-:::{note} Note
+:::{danger}
 :class: dropdown
 Il arrive souvent de commenter des lignes de code pendant le développement. Cependant, ces commentaires ne doivent pas rester sans explication. Si un autre programmeur lit ce code sans comprendre l'objectif des lignes commentées, il n'osera probablement pas les supprimer. Ainsi, elles risquent de demeurer dans le code, sans justification, et d'induire les futurs développeurs en erreur.
 
@@ -443,7 +444,7 @@ Avec les outils de versionnage comme Git, il est presque impossible de perdre du
 */
 ```
 
-:::{note} Note
+:::{danger}
 :class: dropdown
 Certains pourraient penser qu'il est utile de laisser des notes sur l'évolution du code dans les commentaires pour les autres développeurs.
 
