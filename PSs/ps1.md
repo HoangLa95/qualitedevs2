@@ -28,12 +28,13 @@ These points are essential for the rest of the course, so **you must master them
 
 As a student at the IUT of Orsay, you already have an account on the [IUT GitLab](https://git.iut-orsay.fr/).
 
-```{image} ../images/git-iut-orsay.jpg
+```{figure} ../images/git-iut-orsay.jpg
 :alt: git.iut-orsay.fr
 :align: center
-```
+:link: https://git.iut-orsay.fr/
 
 To log in, use your department username and password.
+```
 
 ## Personal Access Token
 
