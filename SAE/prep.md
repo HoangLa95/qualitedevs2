@@ -68,6 +68,7 @@ Utilisez un découpage de code modulaire, que vous pourrez fusionner ultérieure
 
 Par exemple, ici nous avons un fichier `Car.java`
 ```{code} java
+:filename: Car.java
 public class Car {
     private String make;
     private String model;
@@ -85,6 +86,7 @@ public class Car {
 ```
 qui est utilisé par le fichier `Main.java` dans le même répertoire.
 ```{code} java
+:filename: Main.java
 public class Main {
     public static void main(String[] args) {
         Car myCar = new Car("Toyota", "Corolla");
@@ -138,9 +140,10 @@ Lors du push de vos modifications, Git détecte les différences et vous demande
 Des conflits peuvent également survenir lorsque plusieurs personnes modifient le même fichier simultanément.
 :::
 
-1. Pour commencer, créez un fichier `conflict.md` contenant le texte suivant.
+1. Pour commencer, créez le fichier suivant.
 
 ```{code} md
+:filename: conflict.md
 # Git Conflict Resolution
 
 Let's explore how to resolve conflicts in Git.
