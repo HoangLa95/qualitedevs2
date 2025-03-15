@@ -26,7 +26,7 @@ These points are essential for the rest of the course, so **you must master them
 
 ## Activating your GitLab account
 
-As a student at the IUT of Orsay, you already have an account on the {button}`IUT Orsay GitLab <https://git.iut-orsay.fr/>`.
+As a student at the IUT of Orsay, you already have an account on the [IUT Orsay GitLab](https://git.iut-orsay.fr/).
 
 ```{image} ../images/git-iut-orsay.jpg
 :alt: git.iut-orsay.fr
