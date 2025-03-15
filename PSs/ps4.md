@@ -22,7 +22,7 @@ The goal of this session is to understand the following points:
 ## Exercise 1: Makefile
 
 Here is a minimal example of a C++ project:
-```{code} md
+```{code}
 minimal-project/
     hello.h
     hello.cpp
@@ -48,8 +48,8 @@ If you are using your own machine, you can install [**Windows Subsystem for Linu
 
 1. Create the directory and files listed above in `PS4/` with the corresponding code.
 
-`hello.h`
 ```{code} cpp
+:filename: hello.h
 #ifndef HELLO_H
 #define HELLO_H
 
@@ -58,8 +58,8 @@ void sayHello();
 #endif
 ```
 
-`hello.cpp`
 ```{code} cpp
+:filename: hello.cpp
 #include <iostream>
 #include "hello.h"
 
@@ -68,8 +68,8 @@ void sayHello() {
 }
 ```
 
-`main.cpp`
 ```{code} cpp
+:filename: main.cpp
 #include "hello.h"
 
 int main() {
@@ -78,8 +78,8 @@ int main() {
 }
 ```
 
-`makefile`
 ```{code} makefile
+:filename: makefile
 all: executable
 
 executable: main.o hello.o
@@ -215,6 +215,7 @@ export LANG=en_US.UTF-8
 
 3. Make the following modifications to the makefile:
 ```{code} makefile
+:filename: makefile
 all: executable
 
 executable: main.o hello.o
@@ -239,6 +240,7 @@ clean:
 
 5. Make the following modifications to the makefile:
 ```{code} makefile
+:filename: makefile
 all: executable
 
 executable: main.o hello.o
@@ -271,6 +273,7 @@ Due to the order of execution, generating `main.d`, for example, occurs after th
 
 7. Make the following modifications to the makefile:
 ```{code} makefile
+:filename: makefile
 all: build build/binaries/executable
 
 build:
@@ -318,7 +321,7 @@ We also add `build` to `.PHONY` in case the `build/` directory exists, but not i
 (ps4-project-organization)=
 :::{important} Large project organization
 Large projects are organized with multiple makefiles (one at the project root and one per module).
-```{code} md
+```{code}
 minimal-project/
     source/
         first-module/
@@ -343,6 +346,7 @@ Finish the rest of the session (Exercise 2) first!
 
 The current makefile code contains a lot of redundancies. We can refactor this code using variables as follows:
 ```{code} makefile
+:filename: makefile
 BUILD_DIRECTORY = build
 DEPENDENCY_DIRECTORY = $(BUILD_DIRECTORY)/dependencies
 OBJECT_DIRECTORY = $(BUILD_DIRECTORY)/objects
@@ -432,7 +436,7 @@ The best practice here is to have multiple makefiles, one for each module, and a
 :::
 
 2. Rearrange your minimal project as follows:
-```{code} md
+```{code}
 minimal-project/
     source/
         first-module/
@@ -457,6 +461,7 @@ For this minimal example, we will use the same makefile in both modules, but we 
 
 6. Modify the module makefiles as follows:
 ```{code} makefile
+:filename: makefile
 BUILD_DIRECTORY = ../../build
 DEPENDENCY_DIRECTORY = $(BUILD_DIRECTORY)/dependencies
 OBJECT_DIRECTORY = $(BUILD_DIRECTORY)/objects
@@ -494,6 +499,7 @@ clean:
 
 7. Modify the root project makefile as follows:
 ```{code} makefile
+:filename: makefile
 BUILD_DIRECTORY = build
 DEPENDENCY_DIRECTORY = $(BUILD_DIRECTORY)/dependencies
 OBJECT_DIRECTORY = $(BUILD_DIRECTORY)/objects
@@ -587,9 +593,10 @@ $(TARGET_VARIABLE): $(PREREQUISITE_VARIABLE)
 
 In class, we saw an example of documentation using Doxygen (very similar to Javadoc syntax). Since Doxygen is not (yet) installed on the IUT machines, we will review the same example in Javadoc.
 
-3. Copy the following code into a `Temperature.java` file.
+3. Create the following file.
 
 ```{code} java
+:filename: Temperature.java
 /**
  * Represents a temperature in Celsius and Fahrenheit.
  *
