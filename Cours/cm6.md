@@ -44,9 +44,9 @@ public :
 private :
     static void factorial_ZeroInput_ReturnsOne();
     static void factorial_PositiveInput_ReturnsFactorial();
-    static void factorial_NegativeInput_ReturnsInvalidArgument();
+    static void factorial_NegativeInput_ThrowsInvalidArgument();
     static void divide_NonZeroDenominator_ReturnsDivision();
-    static void divide_ZeroDenominator_ReturnsInvalidArgument();
+    static void divide_ZeroDenominator_ThrowsInvalidArgument();
 };
 
 #endif
@@ -93,9 +93,9 @@ Exemple de tests :
 void CalculatorTest::runTests() {
     factorial_ZeroInput_ReturnsOne();
     factorial_PositiveInput_ReturnsFactorial();
-    factorial_NegativeInput_ReturnsInvalidArgument();
+    factorial_NegativeInput_ThrowsInvalidArgument();
     divide_NonZeroDenominator_ReturnsDivision();
-    divide_ZeroDenominator_ReturnsInvalidArgument();
+    divide_ZeroDenominator_ThrowsInvalidArgument();
     std::cout << "All tests passed\n";
 }
 
@@ -114,12 +114,12 @@ void CalculatorTest::factorial_PositiveInput_ReturnsFactorial() {
     std::cout << "factorial_PositiveInput_ReturnsFactorial passed\n";
 }
 
-void CalculatorTest::factorial_NegativeInput_ReturnsInvalidArgument() {
+void CalculatorTest::factorial_NegativeInput_ThrowsInvalidArgument() {
     try {
         Calculator::factorial(-1);
         assert(false); // Should not reach this line
     } catch (const std::invalid_argument& error) {
-        std::cout << "factorial_NegativeInput_ReturnsInvalidArgument passed\n";
+        std::cout << "factorial_NegativeInput_ThrowsInvalidArgument passed\n";
     } catch (...) {
         assert(false); // Catch unexpected exceptions
     }
@@ -135,12 +135,12 @@ void CalculatorTest::divide_NonZeroDenominator_ReturnsDivision() {
     std::cout << "divide_NonZeroDenominator_ReturnsDivision passed\n";
 }
 
-void CalculatorTest::divide_ZeroDenominator_ReturnsInvalidArgument() {
+void CalculatorTest::divide_ZeroDenominator_ThrowsInvalidArgument() {
     try {
         Calculator::divide(10, 0);
         assert(false); // Should not reach this line
     } catch (const std::invalid_argument& error) {
-        std::cout << "divide_ZeroDenominator_ReturnsInvalidArgument passed\n";
+        std::cout << "divide_ZeroDenominator_ThrowsInvalidArgument passed\n";
     } catch (...) {
         assert(false); // Catch unexpected exceptions
     }

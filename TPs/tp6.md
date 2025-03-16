@@ -195,8 +195,8 @@ clean:
 #include <stdexcept>
 
 void FizzBuzzTest::runTests() {
-    fizzBuzz_NegativeInput_ReturnsInvalidArgument();
-	fizzBuzz_ZeroInput_ReturnsInvalidArgument();
+    fizzBuzz_NegativeInput_ThrowsInvalidArgument();
+	fizzBuzz_ZeroInput_ThrowsInvalidArgument();
     fizzBuzz_OddInputNonDivisibleBy7DoesNotContain2Or7_ReturnsTheSameNumber();
     fizzBuzz_EvenInputNonDivisibleBy7DoesNotContain2Or7_ReturnsFizz();
     fizzBuzz_EvenInputNonDivisibleBy7Contains2ButNot7_ReturnsFizzFizz();
@@ -214,23 +214,23 @@ void FizzBuzzTest::runTests() {
     std::cout << "All tests passed\n";
 }
 
-void FizzBuzzTest::fizzBuzz_NegativeInput_ReturnsInvalidArgument() {
+void FizzBuzzTest::fizzBuzz_NegativeInput_ThrowsInvalidArgument() {
 	try{
 		FizzBuzz::fizzBuzz(-728);
 		assert(false);
 	} catch (const std::invalid_argument& error) {
-		std::cout << "fizzBuzz_NegativeInput_ReturnsInvalidArgument passed\n";
+		std::cout << "fizzBuzz_NegativeInput_ThrowsInvalidArgument passed\n";
 	} catch (...){
 		assert(false);
 	}
 }
 
-void FizzBuzzTest::fizzBuzz_ZeroInput_ReturnsInvalidArgument() {
+void FizzBuzzTest::fizzBuzz_ZeroInput_ThrowsInvalidArgument() {
 	try{
 		FizzBuzz::fizzBuzz(0);
 		assert(false);
 	} catch (const std::invalid_argument& error) {
-		std::cout << "fizzBuzz_ZeroInput_ReturnsInvalidArgument passed\n";
+		std::cout << "fizzBuzz_ZeroInput_ThrowsInvalidArgument passed\n";
 	} catch (...){
 		assert(false);
 	}
@@ -381,8 +381,8 @@ public:
     static void runTests();
 
 private:
-    static void fizzBuzz_NegativeInput_ReturnsInvalidArgument();
-    static void fizzBuzz_ZeroInput_ReturnsInvalidArgument();
+    static void fizzBuzz_NegativeInput_ThrowsInvalidArgument();
+    static void fizzBuzz_ZeroInput_ThrowsInvalidArgument();
     static void fizzBuzz_OddInputNonDivisibleBy7DoesNotContain2Or7_ReturnsTheSameNumber();
     static void fizzBuzz_EvenInputNonDivisibleBy7DoesNotContain2Or7_ReturnsFizz();
     static void fizzBuzz_EvenInputNonDivisibleBy7Contains2ButNot7_ReturnsFizzFizz();
