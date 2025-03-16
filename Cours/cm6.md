@@ -209,7 +209,7 @@ Les cinq règles du test propre :
 - **Fast**
 - **Independent**
 - **Repeatable**
-- **Self-Validating**
+- **Self-validating**
 - **Targeted**
 :::
 
@@ -239,7 +239,7 @@ void LogTest::produceComplexLog_SomeArgument_ReturnsSomeComplexLog() {
 
 :::{error}
 :class: dropdown
-**not Self-Validating** : Un test est booléen. Soit il passe, soit il échoue. Un test qui passe "à moitié" n'est pas un test. Cela implique que le test doit contenir des assertions.
+**not Self-validating** : Un test est booléen. Soit il passe, soit il échoue. Un test qui passe "à moitié" n'est pas un test. Cela implique que le test doit contenir des assertions.
 :::
 
 ```{code} cpp
