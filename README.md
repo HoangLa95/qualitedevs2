@@ -14,4 +14,3 @@ Vous êtes débutant en code et vous voulez devenir un meilleur développeur.
 
 
 *Credits : Ce cours est inspiré par et suit les principes de "Clean Code, A Handbook of Agile Software Craftsmanship" de Robert C. Martin*
-% comment
