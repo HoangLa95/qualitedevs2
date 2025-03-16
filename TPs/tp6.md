@@ -623,6 +623,10 @@ Les deux répertoires doivent avoir la même structure donc il suffit de remplac
 
 4. Écrivez des tests unitaires pour tester les deux méthodes `getMood` et `assignHouse` de la classe `SortingHat`.
 
+:::{important} Tests pour le constructeur
+Quand un constructeur ne fait qu'initialiser des attributs de la classes, il suffit de tester les getters mais quand le constructeur contient de la logique, il faut tester le constructeur.
+:::
+
 5. Implémentez `getMood` dans `sorting-hat.cpp`.
 
 6. **Bonus**: Implémentez `assignHouse` dans `sorting-hat.cpp`.

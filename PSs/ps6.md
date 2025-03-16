@@ -623,6 +623,10 @@ Both directories should have the same structure, so you just need to replace `fi
 
 4. Write unit tests to test the two methods `getMood` and `assignHouse` of the `SortingHat` class.
 
+:::{important} Testing the constructor
+When the constructor only initializes the class attributes, it is sufficient to test the getters. However, when the constructor contains logic, it is necessary to test the constructor itself.
+:::
+
 5. Implement `getMood` in `sorting-hat.cpp`.
 
 6. **Bonus**: Implement `assignHouse` in `sorting-hat.cpp`.
