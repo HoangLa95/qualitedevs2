@@ -41,7 +41,7 @@ Credits: [Osnews](https://www.osnews.com/story/19266/wtfsm/)
 :::{important} Objectifs
 :class: dropdown
 - Lisible et cohérent.
-- Facile à débugger.
+- Facile à déboguer.
 - Facile à tester.
 - Efficace par rapport à la demande.
 - Évolutif si nécessaire.
@@ -64,9 +64,9 @@ En dehors de la qualité du code, quels sont les besoins de base du développeme
 
 :::{important} Développement en équipe
 :class: dropdown
-Besoins additionels :
+Besoins additionnels :
 - Une communication claire et régulière (cf. cours de gestion).
-- Le partage du code sans conflit (initation dans ce cours).
+- Le partage du code sans conflit (initiation dans ce cours).
 :::
 
 ```{figure} ../images/centralized-workflow.png
@@ -83,7 +83,7 @@ Credits: [Git](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workfl
 :alt: Git, GitHub et GitLab
 :align: center
 
-Git, Bitbucket, GitHub et GitLab (Credits: [Linkedin/PawanV](https://www.linkedin.com/pulse/demystifying-git-vs-github-atlassian-bitbucket-gitlab-pawan-verma))
+Git, Bitbucket, GitHub et GitLab (Credits: [LinkedIn/PawanV](https://www.linkedin.com/pulse/demystifying-git-vs-github-atlassian-bitbucket-gitlab-pawan-verma))
 ```
 
 :::{note} Git
@@ -98,7 +98,7 @@ Des applications web pour héberger des dépôts et faciliter le développement 
 Nous nous limitons à une initialisation aux commandes de bases de Git pour stocker du code personnel et découvrons brièvement l'aspect collaboratif de GitLab.
 :::
 
-:::{important} Principe de Git et une platforme web comme GitLab
+:::{important} Principe de Git et une plateforme web comme GitLab
 - **Répertoire de travail** (*Working directory*) : endroit où nous modifions nos fichiers.
 - **Zone de suivi** (*Staging area*) : endroit temporaire pour les modifications suivies (*Staged changes*).
 - **Dépôt local** (*Local repository*) : endroit contenant le code avec les modifications validées (*Committed changes*).

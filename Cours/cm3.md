@@ -62,10 +62,10 @@ vector<int> generatePrimes(int maxValue) {
 
 Que fait cette fonction ?
 ```{figure} ../images/sieve-animation.gif
-:alt: Crible d'Érastosthènes
+:alt: Crible d’Ératosthène
 :align: center
 
-Crible d'Ératosthènes (Credits: [Wikipedia](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes))
+Crible d’Ératosthène (Credits: [Wikipedia](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes))
 ```
 
 ## Comment écrire une fonction courte ?

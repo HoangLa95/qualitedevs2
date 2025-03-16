@@ -22,7 +22,7 @@ La dernière version de WSL (WSL2 qui est maintenant la version installée par d
 2. Vérifiez que vos packages sont à jour avec `sudo apt update` puis `sudo apt upgrade`.
 
 :::{note} `sudo`
-`sudo` est une abbréviation de **Super User DO** qui vous donner les droits d'administration aussi appelé **root privileges** et permet d'installer des packages.
+`sudo` est une abréviation de **Super User DO** qui vous donner les droits d'administration aussi appelé **root privileges** et permet d'installer des packages.
 :::
 
 3. Vérifiez que vous avez les packages nécessaires pour les TPs avec les commandes suivantes.

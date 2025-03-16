@@ -31,7 +31,7 @@ Therefore, use an IDE (like VSCodium) without its Git integration for now.
 
 Some useful things to know about VSCodium:
 - Open the Git directory (the root of your repository) via **File** > **Open Folder**, and stay on **Explorer** (first icon in the left bar).
-- You can create files and folders using the buttons located to the right of the root folder name.
+- You can create files and directories using the buttons located to the right of the root directory name.
 - Right-clicking on a file opens a terminal in the directory of that file with **Open in Integrated Terminal**.
 - Use {kbd}`Ctrl` + {kbd}`H` on a selection of code to perform a **Search and Replace** in the current file.
 :::

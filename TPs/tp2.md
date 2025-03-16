@@ -289,7 +289,7 @@ w2(50.0);
 
 4. **Quiz** : Maintenant, quel est le compte qui dispose du solde le plus élevé ?
 
-:::{warning} Avez-vous reperé l'erreur ?
+:::{warning} Avez-vous repéré l'erreur ?
 :class: dropdown
 - Le code est-il logique ? 
 - Quelle est l'origine de l'erreur comptable ? 

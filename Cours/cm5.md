@@ -31,7 +31,7 @@ Nous allons apprendre à naviguer ce graphe en TP !
 
 :::{important} Quels sont les différentes catégories d'erreur ?
 - Erreur à la compilation (cf. votre cours d'Anglais et Google).
-- Erreur à l'éxécution.
+- Erreur à l’exécution.
     - Erreur côté développeur (cf. TP debugger en IHM).
     - **Erreur côté utilisateur** (ce cours).
 :::

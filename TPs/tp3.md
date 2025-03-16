@@ -52,7 +52,7 @@ Le but de ce TP est de comprendre les points suivants :
 
 1. Créez un répertoire `short-functions/` dans `TP3/`.
 
-2. Créez les fichiers suivants dans `short-funtions/`.
+2. Créez les fichiers suivants dans `short-functions/`.
 
 ::::{tab-set}
 :::{tab-item} product.h
@@ -327,7 +327,7 @@ g++ -std=c++14 -o short-functions main.cpp display-prices.cpp product.cpp
 - Un fichier (`.cpp` et `.h`) d'une classe porte le nom de la classe, et un fichier (`.cpp` et `.h`) de fonctions externes porte le nom qui les relie.  
 - Les fichiers `.h` doivent contenir uniquement les déclarations, et les fichiers `.cpp` doivent contenir les définitions.  
 - Les fichiers `.h` doivent toujours avoir des **include guards**, c'est-à-dire :  
-```cpp
+```{code} cpp
 #ifndef NOM_DE_HEADER_H
 #define NOM_DE_HEADER_H
 

@@ -13,4 +13,4 @@ Vous êtes débutant en code et vous voulez devenir un meilleur développeur.
 - Découvrir les tests unitaires et le TDD (Test Driven Development).
 
 
-*Credits : Ce cours est inspiré par et suit les principes de "Clean Code, A Handbook of Agile Software Craftmanship" de Robert C. Martin*
+*Credits : Ce cours est inspiré par et suit les principes de "Clean Code, A Handbook of Agile Software Craftsmanship" de Robert C. Martin*

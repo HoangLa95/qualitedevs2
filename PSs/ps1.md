@@ -410,7 +410,7 @@ You are free to use the editor and environment of your choice for now.
 However, it is recommended not to use Git integration **for now**, if your environment offers it, for the same reasons as before.
 
 You should, however, ensure that the editor in use does not generate files that need to be ignored.  
-If this is the case, the names of the relevant folders and files should be added to the `.gitignore` file, which will be discussed in more detail below.  
+If this is the case, the names of the relevant directories and files should be added to the `.gitignore` file, which will be discussed in more detail below.  
 Warning: A file that was already synchronized before being added to `.gitignore` will remain present in the remote repository.
 :::
 
@@ -427,7 +427,7 @@ g++ -o hello-world hello-world.cpp
 Executables are among the files that we want to ignore.
 
 :::{important} `.gitignore`
-The management of ignored files is handled via a `.gitignore` file located at the root of your project. In this file, you can add the names of files and folders you want to ignore permanently.
+The management of ignored files is handled via a `.gitignore` file located at the root of your project. In this file, you can add the names of files and directories you want to ignore permanently.
 
 The presence of a `.gitignore` file is essential in a Git project. Even with a minimalist IDE, certain unnecessary configuration files may be generated and should be ignored. Therefore, it is crucial to create a `.gitignore` for each new project.
 
@@ -441,7 +441,7 @@ An example of a [`.gitignore`](https://github.com/github/gitignore/blob/main/Uni
 Files whose names start with a `.` are hidden files (they do not appear when using a file manager). These are often configuration files.
 
 To display hidden files in a file manager, you can usually press {kbd}`Ctrl` + {kbd}`H` (for 'Hidden').
-The `.git` directory you see in your project contains Git's internal configuration files. It is important not to modify this folder, as it manages the tracking and history of your repository. Additionally, this folder is natively ignored by Git.
+The `.git` directory you see in your project contains Git's internal configuration files. It is important not to modify this directory, as it manages the tracking and history of your repository. Additionally, this directory is natively ignored by Git.
 :::
 
 6. Write the name of the executable `hello-world` in `.gitignore`.
@@ -465,19 +465,19 @@ Normally, since we didn't add the executable `hello-world` with `git add`, `git 
 
 Let's finish this lab with a little reorganization.
 
-1. Create a folder `PS1/` in your project and move everything except for `.git`, `.gitignore`, and `README.md` to this folder.
+1. Create a directory `PS1/` in your project and move everything except for `.git`, `.gitignore`, and `README.md` to this directory.
 
 :::{warning} `.git` and `.gitignore` remain at the root of the project!
-You should **never touch** the `.git` folder.
-The `.gitignore` file should remain at the root of the project, and **not in the `PS1/` folder!**
+You should **never touch** the `.git` directory.
+The `.gitignore` file should remain at the root of the project, and **not in the `PS1/` directory!**
 :::
 
-You will maintain this project throughout the course by creating separate folders for each practical session (PS).
+You will maintain this project throughout the course by creating separate directories for each practical session (PS).
 
 2. Go back to the root of the project and run `git add .`.
 
 :::{important} `git add .`
-You can use `git add .` to track all the new changes made (when creating or modifying multiple files or subfolders) **in the current folder**, which is why it is important to go back to the root of the project here.
+You can use `git add .` to track all the new changes made (when creating or modifying multiple files or subdirectories) **in the current directory**, which is why it is important to go back to the root of the project here.
 :::
 
 3. Commit the staged changes with `git commit`.
@@ -530,7 +530,7 @@ Since we will be ignoring many executables in the future, to avoid modifying `.g
 :::{important} What do these regular expressions do?
 - We begin by using `*` to ignore all files.
 - The expression `!*.*` prevents ignoring files with an extension (in other words, files without extensions, such as executables, will be ignored).
-- The expression `!*/` prevents ignoring subfolders.
+- The expression `!*/` prevents ignoring subdirectories.
 :::
 
 :::{seealso} I need to ignore other types of files...
@@ -542,16 +542,16 @@ For example, if `.o` or `.exe` files have been generated and you want to ignore 
 **/*.exe
 **/*.o
 ```
-- `**/` means the search applies to the root as well as all folders and subfolders.
+- `**/` means the search applies to the root as well as all directories and subdirectories.
 - `*.exe` and `*.o` will ignore all files with these extensions.
 
-Another example: if your editor has generated a `build/` folder, you can add the following line:
+Another example: if your editor has generated a `build/` directory, you can add the following line:
 ```{code} sh
 build/
 ```
-This will exclude all content within folders named `build`, regardless of their location in the project.
+This will exclude all content within directories named `build`, regardless of their location in the project.
 
-You can even combine everything to ignore extensionless files, `.o` files, `.exe` files, and `build/` folders (and their contents) with the following expressions for your `.gitignore`:
+You can even combine everything to ignore extensionless files, `.o` files, `.exe` files, and `build/` directories (and their contents) with the following expressions for your `.gitignore`:
 ```{code} sh
 *
 !*.*
@@ -583,8 +583,8 @@ build/
 
 :::{important} Your remote repository at the end of the session  
 At the end of the session, your remote repository should look like this:  
-- At the root, the `PS1/` folder and the `.gitignore` and `README.md` files. You can also see the configuration folder `.git` if you are displaying hidden folders.  
-- Inside the `PS1/` folder, the `my-first-file.txt` and `hello-world.cpp` files.  
+- At the root, the `PS1/` directory and the `.gitignore` and `README.md` files. You can also see the configuration directory `.git` if you are displaying hidden directories.  
+- Inside the `PS1/` directory, the `my-first-file.txt` and `hello-world.cpp` files.  
 
 **And nothing else!**
 

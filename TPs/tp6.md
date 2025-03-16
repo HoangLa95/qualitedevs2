@@ -29,8 +29,8 @@ Vous devez normalement nommer votre dépôt `qualite-dev-s2-<prenom>-<nom>`.
 Si vous vous êtes trompé et que vous avez changé le nom de votre projet après la création, sachez que seul le nom sur l'interface GitLab sera mis à jour.
 Autrement dit, l'adresse pour cloner votre projet utilisera toujours l'ancien (mauvais) nom.
 
-Vous pouvez changer cette addresse en cliquant sur **Settings** > **General** > **Advanced** puis changer l'adresse dans **Change path**.
-Il faut penser à changer l'adresse de synchronisation de votre dépôt local avec : `git remote set-url origin <nouvelle addresse avec login et PAT>`.
+Vous pouvez changer cette adresse en cliquant sur **Settings** > **General** > **Advanced** puis changer l'adresse dans **Change path**.
+Il faut penser à changer l'adresse de synchronisation de votre dépôt local avec : `git remote set-url origin <nouvelle adresse avec login et PAT>`.
 :::
 
 ## Exercice 1 : FizzBuzz
@@ -452,7 +452,7 @@ Un fichier makefile propre utiliserait des variables pour refactoriser le code.
 Dans ce premier exercice, il s'agit d'implémenter la fonction `fizzBuzz` de la classe `FizzBuzz`.
 Les tests sont fournis dans le fichier `fizz-buzz-test.cpp`.
 
-Les commandes `make` qui vous sont fournises permettent de compiler le code et de lancer les tests.
+Les commandes `make` qui vous sont fournies permettent de compiler le code et de lancer les tests.
 Quand vous vous placez dans le dossier `fizz-buzz/`, vous pouvez lancer les commandes suivantes :
 - `make` pour compiler le code source.
 - `make run` pour lancer l'exécutable de source pour tester le code à travers des entrées dans le terminal.

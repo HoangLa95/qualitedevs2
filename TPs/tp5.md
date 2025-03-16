@@ -67,7 +67,7 @@ Les fichiers `level1`, `level2` et `level3` doivent simplement exister pour cett
 
 4. Dans `getLevelFromUser`, implémentez un validateur d'entrée qui autorise seulement 3 tentatives, avec un entier compris entre `firstLevel` et `lastLevel` (par exemple, de 1 à 5). Après 3 tentatives échouées, la fonction doit lancer une exception.
 
-Nous ne gèrerons pas cette erreur tout de suite car nous souhaitons, dans ce cas, revenir au menu principal du jeu, ce qui ne doit pas être accessible depuis `getLevelFromUser`. La gestion des erreurs sans interrompre le programme est toujours préférable à l'arrêt du programme avec un code d'erreur.
+Nous ne gérerons pas cette erreur tout de suite car nous souhaitons, dans ce cas, revenir au menu principal du jeu, ce qui ne doit pas être accessible depuis `getLevelFromUser`. La gestion des erreurs sans interrompre le programme est toujours préférable à l'arrêt du programme avec un code d'erreur.
 
 5. Attrapez l'erreur dans `play` et simulez un retour au menu principal avec un message dans `cout` indiquant `Returning to main menu.`
 

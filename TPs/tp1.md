@@ -18,7 +18,7 @@ Avant de commencer à coder, il est important de se familiariser avec les outils
 ## Objectifs
 
 Le but de ce TP est de comprendre les points suivants :
-- [ ] `git clone <addresse du dépôt distant avec PAT>` ([Personal Access Token](#personal-access-token) et [Configuration de votre poste de travail](#configuration-de-votre-poste-de-travail))
+- [ ] `git clone <adresse du dépôt distant avec PAT>` ([Personal Access Token](#personal-access-token) et [Configuration de votre poste de travail](#configuration-de-votre-poste-de-travail))
 - [ ] `git status` ([Dépôt local](#d-p-t-local))
 - [ ] `git add <nom du fichier>` ([Dépôt local](#d-p-t-local))
 - [ ] `git commit -m "<message de commit>"` ([Dépôt local](#d-p-t-local))
@@ -307,7 +307,7 @@ La validation a été effectuée. Votre version locale du projet est maintenant 
 
 8. Exécutez `git push`.
 
-9. Retournez sur Gitlab et vérifiez que le dépôt distant correspond bien au dépôt local.
+9. Retournez sur GitLab et vérifiez que le dépôt distant correspond bien au dépôt local.
 
 ## Dépôt distant
 
@@ -531,7 +531,7 @@ Vu que nous allons ignorer beaucoup d'exécutables dans le futur, pour éviter d
 ```
 
 :::{important} Que font ces expressions régulières ?
-- Nous commencons par utiliser `*` pour tout ignorer. 
+- Nous commençons par utiliser `*` pour tout ignorer. 
 - L'expression `!*.*` permet de ne pas ignorer les fichiers avec une extension (autrement dit, les fichiers sans extension, comme les exécutables, seront ignorés). 
 - L'expression `!*/` empêche d'ignorer les dossiers.
 :::

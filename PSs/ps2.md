@@ -18,7 +18,7 @@ Once this skill is mastered, you will be on your own in managing conflicts.
 :::
 
 :::{important} Organization of PSs and exercises
-At the beginning of PSX, create a folder named `PSX` in your repository.  
+At the beginning of PSX, create a directory named `PSX` in your repository.  
 For each exercise titled **"Exercise n: Name of the exercise"**, create a file named `name-of-the-exercise.cpp` (using the **kebab-case** convention) and add the provided code to it.  
 :::
 
@@ -463,9 +463,9 @@ Return to the [objectives](#ps2-objectives) and check the points you have master
 :::{important} Git
 :class: dropdown
 At the end of this assignment, your remote repository should be structured as follows:
-- At the root, you will find the folders `PS1/` and `PS2/`, along with the files `.gitignore` and `README.md`. You can also see the configuration folder `.git` if you are displaying hidden folders.
-- The `PS1/` folder should contain the files `hello-world.cpp` and `my-first-file.txt`.
-- The `PS2/` folder should contain the files `classes-and-methods.cpp` and `magic-numbers.cpp`.
+- At the root, you will find the directories `PS1/` and `PS2/`, along with the files `.gitignore` and `README.md`. You can also see the configuration directory `.git` if you are displaying hidden directories.
+- The `PS1/` directory should contain the files `hello-world.cpp` and `my-first-file.txt`.
+- The `PS2/` directory should contain the files `classes-and-methods.cpp` and `magic-numbers.cpp`.
 
 Your working directory may contain ignored files, but make sure to check that your GitLab repository is clean, as it will be evaluated at the end of the course!
 

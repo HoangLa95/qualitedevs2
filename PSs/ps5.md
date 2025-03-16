@@ -20,7 +20,8 @@ In this exercise, we will focus on writing and understanding error handlers with
 
 2. In `play.cpp`, copy the following code:  
 
-```cpp
+```{code} cpp
+:filename: play.cpp
 #include <iostream>
 #include <string>
 #include <fstream>
