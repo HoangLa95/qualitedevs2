@@ -78,7 +78,7 @@ private :
 
 :::{seealso} Tests paramétrés  
 :class: dropdown  
-Il existe également des tests paramétrés qui peuvent dépendre des instances d'objets, auquel cas la classe de test peut avoir des attributs, d'autres types de méthodes, et les tests ne seront plus statiques. Plus de détails en TP !  
+Il existe également des tests paramétrés qui peuvent dépendre des instances d'objets, auquel cas la classe de test peut avoir des attributs, d'autres types de méthodes, et les tests ne seront plus statiques.
 :::
 
 Exemple de tests :
