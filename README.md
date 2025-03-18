@@ -2,15 +2,12 @@
 
 Cours d'introduction à la Qualité de Développement (Semestre 2 de l'IUT d'Orsay).
 
-## Pourquoi suivre ce cours ?
-
-Vous êtes débutant en code et vous voulez devenir un meilleur développeur.
-
 ## Objectifs du cours
 
-- Savoir utiliser les commandes de bases de Git, un outil de gestion de versions.
+- Maîtriser Git, un outil de versionnage.
 - Connaître les principes de base du code propre.
+- Savoir structurer un projet.
+- Comprendre le fonctionnement d'un build system.
+- Savoir écrire de la documentation.
+- Savoir écrire des gestionnaires d'erreurs.
 - Découvrir les tests unitaires et le TDD (Test Driven Development).
-
-
-*Credits : Ce cours est inspiré par et suit les principes de "Clean Code, A Handbook of Agile Software Craftsmanship" de Robert C. Martin*
