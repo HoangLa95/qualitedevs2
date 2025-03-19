@@ -183,7 +183,7 @@ clean:
 :::
 ::::
 
-4. Recopiez les codes suivants pour les fichiers de `test/`.
+4. Recopiez les codes suivants pour les fichiers de `tests/`.
 
 ::::{tab-set}
 :::{tab-item} fizz-buzz-test.cpp
