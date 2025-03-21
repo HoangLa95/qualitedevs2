@@ -47,6 +47,7 @@ parts:
   chapters:
     - file: SAE/prep.md
     - file: SAE/grading.md
+    - file: SAE/git-branch.md
 - caption: Soutien technique
   chapters:
     - file: TechSupport/internetProblem.md
