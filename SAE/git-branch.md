@@ -84,7 +84,7 @@ Souvent, ce sont des branches `experiment` que vous allez potentiellement abando
 
 ### Éviter les conflits
 - **Branches disjointes** : Les branches ne doivent pas modifier les mêmes fichiers.
-- **Un(e) responsable par branche** : Chaque branche doit avoir un seul responsable, mais les autres membres peuvent contribuer.
+- **Un(e) responsable par branche** : Chaque branche (dont `main`) doit avoir un seul responsable, mais les autres membres peuvent contribuer.
 - `git merge main` : Quand une branche est fusionnée avec la branche principale, les autres branches en cours de travail doivent récupérer ces modifications en utilisant la commande `git merge main`. Cela permet de ne pas avoir à résoudre des conflits complexes lors des merge requests.
 
 ### Merge request
@@ -102,4 +102,33 @@ Pour disable le squash sur GitLab :
 Merge request
 : Demande de fusion d'une branche de travail vers la branche principale.
 
-Vous pouvez créer des merge requests en utilisant l'interface GitLab.
+Le **responsable de la branche** de travail devrait faire le merge request.
+
+:::{attention} Résoudre les conflits avant de soumettre le merge request
+:class: dropdown
+Le responsable de la branche de travail devrait résoudre les conflits avant de soumettre le merge request en faisant `git merge main` dans sa branche.
+:::
+
+Pour soumettre un merge request en utilisant l'interface GitLab.
+1. Allez dans **Code** > **Merge requests**.
+2. Cliquez sur **New merge request**.
+3. Choisissez la branche de travail comme **source branch** et `main` comme **target branch**.
+4. Cliquez sur **Compare branches and continue**.
+5. Écrivez un titre et une description de la demande.
+6. Choisissez **Assignees** : seul le responsable de la branche suffit.
+7. Choisissez **Reviewers** : seul le responsable de la branche `main` suffit.
+8. Dans **Merge options**, cochez **Delete source branch when merge request is accepted**.
+9. Cliquez sur **Create merge request**.
+
+:::{important} Assignee et Reviewer
+:class: dropdown
+Assigne est celui qui va résoudre les problèmes dans le code soumis (typiquement les conflits de fusions).
+Reviewer est celui qui va examiner le code soumis et valider la fusion.
+Le reviewer peut faire des commentaires sur le code que vous avez et demander des changements (à faire par assignee) avant de faire la fusion. 
+:::
+
+:::{seealso} Pull request
+:class: dropdown
+Un pull request est la même chose qu'un merge request.
+Le terme pull request est utilisé par GitHub et le terme merge request est utilisé par GitLab.
+:::
