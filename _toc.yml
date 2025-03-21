@@ -46,6 +46,7 @@ parts:
 - caption: Projet SAÉ 1256
   chapters:
     - file: SAE/prep.md
+    - file: SAE/grading.md
 - caption: Soutien technique
   chapters:
     - file: TechSupport/internetProblem.md
