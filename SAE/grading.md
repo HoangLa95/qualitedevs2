@@ -77,5 +77,6 @@ Si votre apport au projet est jugé insuffisant, votre note sera pondérée en c
 - Quiz SAÉ : 2 %
 - Tests unitaires : 7 %
 - Auto-évaluation : 2 %
+
 **Total : 25 %**
 :::
