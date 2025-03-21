@@ -34,9 +34,7 @@ Si votre apport au projet est jugé insuffisant, votre note sera pondérée en c
     - Utilisation efficace de .gitignore pour éviter la pollution du dépôt.
     - Structure du projet organisée et compréhensible.
     - Commits fréquents et bien ciblés, accompagnés de messages explicites.
-    - Nommage et utilisation appropriés des branches.
-    - Descriptions détaillées et revues approfondies des merge requests.
-    - Utilisation claire et efficace des issues.
+    - Nommage et utilisation appropriés des branches et des merge requests.
 
 ### Qualité du Code
 
