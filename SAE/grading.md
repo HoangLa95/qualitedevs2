@@ -19,7 +19,7 @@ Toute tentative de réécriture de l'historique du projet pour artificiellement 
 Si votre apport au projet est jugé insuffisant, votre note sera pondérée en conséquence (multipliée par un coefficient inférieur à 1).
 :::
 
-#### Qualité du développement
+### Qualité du développement
 
 **La qualité du développement est notée sur 4 %.**
 
@@ -70,11 +70,12 @@ Si votre apport au projet est jugé insuffisant, votre note sera pondérée en c
 ## Récapitulatif
 
 :::{important} Barème de notation
-:::{table} Total : 25 %
-:label: grading-table
-:align: center
-| Qualité du Développement | Qualité du Code | Quiz préparation | Quiz branches Git | Quiz SAÉ | Tests unitaires | Auto-évaluation |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 4 % | 6 % | 2 % | 2 % | 2 % | 2 % | 7 % | 2 % |
-:::
+- Qualité du Développement : 4 %
+- Qualité du Code : 6 %
+- Quiz préparation : 2 %
+- Quiz branches Git : 2 %
+- Quiz SAÉ : 2 %
+- Tests unitaires : 7 %
+- Auto-évaluation : 2 %
+**Total : 25 %**
 :::
