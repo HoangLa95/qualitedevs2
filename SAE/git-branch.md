@@ -132,3 +132,21 @@ Le reviewer peut faire des commentaires sur le code que vous avez et demander de
 Un pull request est la même chose qu'un merge request.
 Le terme pull request est utilisé par GitHub et le terme merge request est utilisé par GitLab.
 :::
+
+### Changer de branches en cours de travail
+
+Si vous êtes en cours de travail et que vous avez besoin de changer de branches pour travailler sur d'autres fonctionnalités, la façon la plus sécurisée pour ne pas accidentellement perdre vos modifications est de **faire un commit de votre travail courant avant de changer de branche**.
+
+Une autre possibilité est de garder ces modifications dans une pile de travail.
+1. Par exemple, vous êtes en train de travailler sur `feature/assign-students-to-houses` et un autre membre du groupe vous demande de l'aide sur `bugfix/crash-on-startup`.
+2. Vous n'êtes pas prêt pour faire un commit de `feature/assign-students-to-houses` parce que vous voulez garder un historique propre.
+3. Vous pouvez utiliser la commande `git stash push -u -m "<message>"` pour mettre toutes les nouvelles modifications (`-u` inclus les nouveaux fichiers crées) depuis le dernier commit dans un élément d'une pile de travail gardé par Git avec un `<message>` explicatif.
+4. Vous pouvez ensuite faire `git checkout bugfix/crash-on-startup` et travailler sur la branche `bugfix/crash-on-startup`.
+5. Une fois que êtes revenu à `feature/assign-students-to-houses`, vous pouvez utiliser la commande `git stash pop` pour remettre vos modifications et enlever l'élément correspondant de la pile.
+
+:::{seealso} `git stash list`
+:class: dropdown
+La commande `git stash list` permet de voir les éléments de la pile de travail.
+Si vous avez plusieurs éléments, `git stash pop` récupère toujours l'élément le plus récent (`stash@{0}`).
+Vous pouvez aussi choisir l'élément que vous voulez récupérer avec `git stash pop stash@{<numéro>}`.
+:::
