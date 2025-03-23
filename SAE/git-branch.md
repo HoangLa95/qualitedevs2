@@ -49,14 +49,14 @@ pour créer et aller sur la branche en une seule commande.
 
 ### Lister les branches
 
-Pour lister toutes les branches (locales et distantes):
+Pour lister toutes les branches locales (et distantes avec l'option `-a`):
 ```{code} sh
 git branch -a
 ```
-Vous pouvez voir les branches qui sont en cours de travail et celles qui sont déjà fusionnées avec les options `--no-merged` et `--merged` respectivement.
+Vous pouvez voir les branches qui sont en cours de travail et celles qui sont déjà fusionnées avec la branche `main` avec les options `--no-merged` et `--merged` respectivement.
 ```{code} sh
-git branch -a --no-merged
-git branch -a --merged
+git branch -a --no-merged main
+git branch -a --merged main
 ```
 
 ### Supprimer une branche
