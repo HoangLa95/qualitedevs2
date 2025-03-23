@@ -150,3 +150,7 @@ La commande `git stash list` permet de voir les éléments de la pile de travail
 Si vous avez plusieurs éléments, `git stash pop` récupère toujours l'élément le plus récent (`stash@{0}`).
 Vous pouvez aussi choisir l'élément que vous voulez récupérer avec `git stash pop stash@{<numéro>}`.
 :::
+
+:::{important} Quiz Git
+N'oubliez pas de faire le Quiz sur le Moodle de la SAÉ, dont la date limite est le dimanche 30/03/2025 à 23h59.
+:::
