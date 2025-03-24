@@ -1,6 +1,6 @@
 # Environnement Linux sous Windows
 
-Si vous êtes sur votre ordinateur personnel qui a seulement accès à un environnement Windows, vous pouvez utiliser le WSL (Windows Subsystem for Linux) avec Ubuntu.
+Si vous êtes sur votre ordinateur personnel qui a seulement accès à un environnement Windows, vous pouvez utiliser le WSL (Windows Subsystem for Linux) avec Ubuntu.  
 Si vous êtes à l'IUT, utilisez simplement Debian.
 
 ## Installation
@@ -36,7 +36,7 @@ java --version
 4. Si un package est manquant, vous pouvez l'installer avec `sudo apt install <package>`. Par exemple, `sudo apt install git` pour installer Git.
 
 :::{note} Java 21
-Vous pouvez installé la version stable la plus récente de Java avec `sudo apt install openjdk-21-jdk-headless`.
+Vous pouvez installer la version stable la plus récente de Java avec `sudo apt install openjdk-21-jdk-headless`.
 :::
 
 ## Utilisation
