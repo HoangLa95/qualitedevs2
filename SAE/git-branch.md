@@ -84,7 +84,7 @@ Souvent, ce sont des branches `experiment` que vous allez potentiellement abando
 
 ### Éviter les conflits
 - **Branches disjointes** : Les branches ne doivent pas modifier les mêmes fichiers.
-- **Un(e) responsable par branche** : Chaque branche (dont `main`) doit avoir un seul responsable, mais les autres membres peuvent contribuer.
+- **Un(e) responsable par branche** : Chaque branche (dont `main`) doit avoir un(e) seul(e) responsable, mais les autres membres peuvent contribuer.
 - `git merge main` : Quand une branche est fusionnée avec la branche principale, les autres branches en cours de travail doivent récupérer ces modifications en utilisant la commande `git merge main`. Cela permet de ne pas avoir à résoudre des conflits complexes lors des merge requests.
 
 ### Merge request
