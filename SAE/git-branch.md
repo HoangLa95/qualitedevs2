@@ -26,7 +26,7 @@ Nous allons adopter les conventions suivantes pour nommer les branches :
 1. Le nom d'une branche est toujours de la forme : `<prefix>/<name>`.
 2. Les `<prefix>` possibles sont :
     - `feature/` : pour les nouvelles fonctionnalités.
-    - `tests/` : pour les tests.
+    - `test/` : pour les tests.
     - `bugfix/` : pour les correctifs de bugs.
     - `experiment/` : pour des essais.
     - `improvement/` : pour des améliorations (qualité du code).
