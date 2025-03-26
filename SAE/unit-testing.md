@@ -171,6 +171,7 @@ Cette façon de définir les tests permet de refactoriser les tests avec `setup`
 ## Instructions pour le projet
 
 - Il est important de se répartir les fonctionnalités à tester entre les membres du groupe.
+- Vous n'avez pas besoin de tester l'affichage et les constructeurs qui ne contiennent pas de logique (en plus d'affecter des valeurs aux attributs), pareil pour les accesseurs qui ne contiennent pas de logique supplémentaire.
 - Idéalement, le membre qui implémente les tests pour une fonctionnalité ne doit pas être le même que celui qui implémente la fonctionnalité.
 - Seulement les méthodes publiques doivent être testées.
 - Remplissez votre fichier README pour expliquer comment ouvrir et lancer le projet Eclipse et les tests une fois que nous avons cloné votre dépôt.
