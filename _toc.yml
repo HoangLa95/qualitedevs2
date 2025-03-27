@@ -34,7 +34,7 @@ parts:
     - file: TPs/tp4
     - file: TPs/tp5
     - file: TPs/tp6
-    # - file: TPs/tp7
+    - file: TPs/tp7
 - caption: Practical Sessions
   chapters: 
     - file: PSs/ps1
@@ -43,6 +43,7 @@ parts:
     - file: PSs/ps4
     - file: PSs/ps5
     - file: PSs/ps6
+    - file: PSs/ps7
 - caption: Projet SAÉ 1256
   chapters:
     - file: SAE/prep.md
